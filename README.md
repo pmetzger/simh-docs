@@ -31,7 +31,14 @@ days, and so this effort is using GitHub Flavored Markdown.
 
 ## Status of Files Being Converted
 
-Files requiring fixes:
+Files requiring fixes but considered in good shape:
+
+| filename                         | status      | comments              |
+| -------------------------------- | ----------- | --------------------- |
+| [simh_faq.md](docs/simh_faq.md)  | unverified | Hand repaired, not proofread |
+
+
+Files that are nearly untouched:
 
 
 | filename                         | status      | comments              |
@@ -72,7 +79,6 @@ Files requiring fixes:
 | [simh.md](docs/simh.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_breakpoints.md](docs/simh_breakpoints.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_doc.md](docs/simh_doc.md) | ❌ raw pandoc | Not yet hand repaired |
-| [simh_faq.md](docs/simh_faq.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_magtape.md](docs/simh_magtape.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_swre.md](docs/simh_swre.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_vmio.md](docs/simh_vmio.md) | ❌ raw pandoc | Not yet hand repaired |
