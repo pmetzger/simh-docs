@@ -73,7 +73,7 @@ X11-style open source license; the precise terms are available at:
 
 [2.12 How can I use my wireless Ethernet card with SIMH?](#how-can-i-use-my-wireless-ethernet-card-with-simh)
 
-[2.13 Why doesn’t simh idling work on my Unix host?](#why-doesnt-simh-idling-work-on-my-unix-host)
+[2.13 Why doesn’t SIMH idling work on my Unix host?](#why-doesnt-simh-idling-work-on-my-unix-host)
 
 [3 Writing and Debugging New Code](#writing-and-debugging-new-code)
 
@@ -252,9 +252,13 @@ and on the SIMH mailing list.
 
 Google is your friend here. For example:
 
-Perform a Google search for: `rsts archive -V9 site:mailman.trailing-edge.com/pipermail/simh/`
+Perform a Google search for:
 
-This finds all messages containint “rsts” “archive” but not “V9”.
+```
+rsts archive -V9 site:mailman.trailing-edge.com/pipermail/simh/
+```
+
+This finds all messages containing “rsts” “archive” but not “V9”.
 
 # Operational Questions
 
@@ -269,7 +273,7 @@ whichever binary that you want.
 The pre-compiled binaries will provide Ethernet support depending on
 whether or not the `Npcap` (or `WinPCAP`) package has been installed
 on the host computer. If you want to run with Ethernet support, you
-must download and install the `Npcap` AutoInstaller from
+must download and install the `Npcap` AutoInstaller from:
 
 <https://nmap.org/npcap/#download>
 
@@ -319,16 +323,16 @@ $ set default [.directory-containing scp.c]
 $ set file/attri=RFM:STM makefile,*.mms,[...]*.c,[...]*.h,[...]*.txt
 ```
 
-Simulators with ethernet network devices (All the VAX simulators and
-the PDP11) can have functioning networking when running on Alpha or
+Simulators with ethernet network devices (all the VAX simulators and
+the PDP-11) can have functioning networking when running on Alpha or
 IA64 OpenVMS. In order to build and run simulators with networking
 support, the VMS-PCAP package must be available while building your
-simulator. The vms-pcap.zip file can be downloaded from
-<https://github.com/downloads/open-simh/simh/vms-pcap.zip>. The vms-pcap.zip
-file should be unpacked as follows:
+simulator. The `vms-pcap.zip` file can be downloaded from
+<https://github.com/downloads/open-simh/simh/vms-pcap.zip>. The
+`vms-pcap.zip` file should be unpacked as follows:
 
 ```
-$ unzip –aa vms-pcap.zip
+$ unzip -aa vms-pcap.zip
 ```
 
 The PCAP-VMS components are presumed (by the `descript.mms` file) to be
@@ -363,7 +367,7 @@ On a Alpha & IA64 hosts use:
 
 ```
 $ MMx                      ! With Ethernet support
-$ MMx/MACRO=(“NONETWORK=1) ! Without Ethernet support
+$ MMx/MACRO=("NONETWORK=1) ! Without Ethernet support
 ```
 
 UNZIP can be found on the VMS freeware CDs, or from
@@ -389,8 +393,8 @@ above.
 ## How do I transcribe a real CD for use with SIMH?
 
 - First, you may be able to access a real CD directly from within a
-  simulator using RAW device mode to access the device. On Linux, and
-  many Unix variants, support direct access to the CD ROM from SIMH:
+  simulator using RAW device mode to access the device. Linux, and
+  many Unix variants, support direct access to the CD-ROM from SIMH:
 
 ```
 sim> set rq1 cdrom
@@ -404,19 +408,11 @@ sim> set rq1 cdrom
 sim> att rq1 //./cdrom0
 ```
 
-- As for actually making an ISO image of a CD to, On UNIX, you can
+- As for actually making an ISO image of a CD, on UNIX, you can
   copy a CD to an ISO file with the dd command:
 
 ```
-$ dd /if=/dev/raw_cd_device /out=/path/cdimage.iso
-```
-
-- Linux, and many Unix variants, support direct access to the CD-ROM
-  from SIMH:
-
-```
-sim> set rq1 cdrom
-sim> att rq1 –f simh /dev/cdrom_drive
+$ dd if=/dev/raw_cd_device of=/path/cdimage.iso
 ```
 
 - On Windows, there are quite a few products that can do this. The two
@@ -433,13 +429,13 @@ sim> att rq1 –f simh /dev/cdrom_drive
     A. EZ-CD Creator 5.x\
        Go to the the Disc menu and select Disc Info (there will be a delay).\
        Select the track shown, then click the Read Track button.\
-       Enter the Save file name, then OK.\
+       Enter the Save file name, then OK.
 
-    B. Easy Media Creator 7.x
-       Go to Creator Classic
-       Select Other Tasks \| Disc and Device Utility
-       Drill down on the device until you find the data track, then select it
-       Click the 'Read Track...' button
+    B. Easy Media Creator 7.x\
+       Go to Creator Classic\
+       Select Other Tasks \| Disc and Device Utility\
+       Drill down on the device until you find the data track, then select it\
+       Click the 'Read Track...' button\
        Enter the save file name, then OK.
 
 2. Nero 5.5\
@@ -467,10 +463,10 @@ labeled tape. If the simulated system’s operating system knows how to
 read ANSI labeled tape this is a good choice.
 
 ```
-sim> att ts0 –f ANSI-VMS file.txt,file.bin,*.c
-sim> att ts0 –f ANSI-RSX11 file.txt,file.bin,*.c
-sim> att ts0 –f ANSI-RSTS file.txt,file.bin,*.c
-sim> att ts0 –f ANSI-RT11 file.txt,file.bin,*.c
+sim> att ts0 -f ANSI-VMS file.txt,file.bin,*.c
+sim> att ts0 -f ANSI-RSX11 file.txt,file.bin,*.c
+sim> att ts0 -f ANSI-RSTS file.txt,file.bin,*.c
+sim> att ts0 -f ANSI-RT11 file.txt,file.bin,*.c
 
 $ MOUNT MSA0: SIMH
 %MOUNT-I-WRITELOCK, volume is write locked
@@ -552,7 +548,7 @@ transfer files.
 
 ## Can I connect real devices on the host computer to SIMH?
 
-Currently Ethernet devices, Serial Ports and physical disks and/or
+Currently Ethernet devices, serial ports and physical disks and/or
 CD-ROMs are the devices which can be accessed directly from SIMH
 simulators.
 
@@ -566,7 +562,7 @@ interface on your host.
 ## My Linux, OSX or other Unix host can't communicate with the PDP-11 or VAX over Ethernet; why?
 
 The network stacks on these systems don’t naturally receive packets
-which are transmitted with the pcap_sendpacket API. This issue can be
+which are transmitted with the `pcap_sendpacket` API. This issue can be
 accommodated in one of four ways:
 
 1. Use NAT mode for your network connection. This mode only allows
@@ -583,10 +579,10 @@ accommodated in one of four ways:
 3. If the host has internal (kernel level) network bridging support,
    then the host’s network configuration can be setup to allow direct
    communication between the host and the simulated system. The SIMH
-   networking layer can accommodate tun/tap and/or vde networking to
-   achieve this. Details of how this is done and which hosts it can
-   work on can be found in the `0readme_ethernet.txt` file in the SIMH
-   zip file.
+   networking layer can accommodate `tun`/`tap` and/or `vde`
+   networking to achieve this. Details of how this is done and which
+   hosts it can work on can be found in the `0readme_ethernet.txt`
+   file in the SIMH zip file.
 
 4. Enable 2 XQ (or XU) devices in the simulator and use one in NAT
    mode to talk to the host system and connect the other to LAN for
@@ -614,7 +610,7 @@ connection will stop working. For example, DECNET Phase IV (or Phase V
 in compatibility mode) tries to change the MAC of the network card to
 AA-00-04-xx-xx-xx. Nor can you preset the wireless MAC address to the
 anticipated target DECNET address using something like SMAC to get
-DECNET to work - DECNET will see the MAC already preset to the
+DECNET to work; DECNET will see the MAC already preset to the
 required DECNET address and generate an invalid media (duplicate
 address) fault.
 
@@ -640,7 +636,7 @@ Ethernet adapter Local Area Connection:
 
   Connection-specific DNS Suffix  . :
   Description . . . . . . . . . . . : D-Link DWL-650+ Wireless Cardbus
-  Physical Address. . . . . . . . . : 00-80-C8-08-CE-DB     <-- MAC address
+  Physical Address. . . . . . . . . : 00-80-C8-08-CE-DB   <-- MAC address
   DHCP Enabled. . . . . . . . . . . : No
   IP Address. . . . . . . . . . . . : 192.168.0.5
   Subnet Mask . . . . . . . . . . . : 255.255.255.0
@@ -651,19 +647,19 @@ Ethernet adapter Local Area Connection:
 
 c:\ VAX
 VAX simulator V3.2-1
-sim> DO VAX_CONFIG.DO              <-- setup VAX as normal
-sim> SET XQ MAC=00-80-C8-08-CE-DB  <-- set XQ MAC to wireless MAC address
-sim> B CPU                         <-- and continue...
+sim> DO VAX_CONFIG.DO               <-- setup VAX as normal
+sim> SET XQ MAC=00-80-C8-08-CE-DB   <-- set XQ MAC to wireless MAC address
+sim> B CPU                          <-- and continue...
 ```
 
-## Why doesn’t simh idling work on my Unix host?
+## Why doesn’t SIMH idling work on my Unix host?
 
 Some host systems have default clock tick sizes which are greater than
-what is required to produce useful SIMH idling behavior. Useful Idling
-depends on a simulators ability to sleep for intervals which are less
+what is required to produce useful SIMH idling behavior. Useful idling
+depends on a simulator's ability to sleep for intervals which are less
 than or equal to the simulated system’s clock tick. Best idling
 behavior is realized when sleep intervals can be as small as 1ms. When
-a simulator starts, simh determines the host system’s clock tick size
+a simulator starts, SIMH determines the host system’s clock tick size
 and based on this determination, idling will be supported or not.
 
 The `SHOW VERSION` command will display (among other things) the host
@@ -700,25 +696,16 @@ simulator writers.
 Most simulators provide the following debugging capabilities:
 
 - Symbolic assembly and disassembly of memory contents.
-
 - Numeric examination and modification of the data store of any
   simulated device.
-
 - Numeric search on both memory and device data.
-
 - Visibility to simulator internal structures, such as the event
   queue.
-
 - An unlimited number of instruction breakpoints.
-
 - Proceed counts on breakpoints.
-
 - Automatic execution of simulator commands on a breakpoint.
-
 - Stepped execution (from single step to 'n' steps).
-
 - A PC change queue, usually 64 instructions deep.
-
 - Instruction execution history recording and display.
 
 Specific simulators may provide additional features, such as an
@@ -737,8 +724,8 @@ queue rather than real-world events.
 
 If the programmer needs to force a simulator stop from the host
 debugger, most simulators provide an "address stop" global
-variable. Setting this variable to 1 will cause the simulator to stop
-after completing the current instruction.
+variable. Setting this variable to `1` will cause the simulator to
+stop after completing the current instruction.
 
 ## What is the release process for SIMH?
 
@@ -773,23 +760,17 @@ found on <https://www.openvmshobbyist.com>.
 To install VMS, you will need a distribution CD-ROM. Any version after
 VMS 5.5-2 should run on the MicroVAX 3900 simulator.
 
-- Transcribe the distribution CD ROM to an ISO-format CD image
+- Transcribe the distribution CD-ROM to an ISO-format CD image
   file. (See question 2.5 for information on how to do this.)
-
-- Set drive RQ1 to be a CD ROM.
-
-- Attach the CD ROM image file to simulated drive RQ1.
-
-- Set drive RQ0 to be the type of disk you want. Be sure that the disk
-  is large enough to hold VMS.
-
-- Attach a blank disk image file to simulated drive RQ0.
-
+- Set drive `RQ1` to be a CD-ROM.
+- Attach the CD-ROM image file to simulated drive `RQ1`.
+- Set drive `RQ0` to be the type of disk you want. Be sure that the
+  disk is large enough to hold VMS.
+- Attach a blank disk image file to simulated drive `RQ0`.
 - Boot the CPU.
-
-- When the self-test code completes, boot the CD ROM.
-
-- Use standalone backup to restore the CD ROM contents to the simulated disk.
+- When the self-test code completes, boot the CD-ROM.
+- Use standalone backup to restore the CD-ROM contents to the
+  simulated disk.
 
 ```
 sim> set rq0 rd54
@@ -807,7 +788,7 @@ A writeup on the procedure can be found on the VMS hobbyist site.
 
 ## How do I install NetBSD?
 
-Directions for installing NetBSD on the NetBSD web site, at
+Directions for installing NetBSD on are the NetBSD web site, at
 <https://www.netbsd.org/Ports/vax/emulator-howto.html>.
 
 ## How do I install Ultrix?
@@ -819,18 +800,12 @@ install Ultrix on the simulator.
 
 - Transcribe the distribution tapes to SIMH-format tape image
   files. (See question 2.6 for information on how to do this.)
-
-- Mount the installation tape image on simulated drive TQ0.
-
-- Set drive RQ0 to be the type of disk you want. Be sure that the disk
-  is large enough to hold Ultrix.
-
-- Mount a blank disk image file on simulated drive RQ0.
-
+- Mount the installation tape image on simulated drive `TQ0`.
+- Set drive `RQ0` to be the type of disk you want. Be sure that the
+  disk is large enough to hold Ultrix.
+- Mount a blank disk image file on simulated drive `RQ0`.
 - Boot the CPU.
-
 - When the self-test code completes, boot the installation tape.
-
 - The installation tape will guide you through the installation of
   Ultrix.
 
@@ -922,13 +897,13 @@ Ethernet Adapter 0 (774440)
 ### The Easy Way
 
 - Present the files to the VMS system using a pseudo tape drive with
-  the ANSIFILES tape format.\
-  This approach is both easy and achieves direct access by the VMS
+  the ANSIFILES tape format.
+- This approach is both easy and achieves direct access by the VMS
   system in a single step.
 
 ```
 c:\simh> vax                        ; run VAX emulator
-sim> attach ts0 –f ansi-vms Hobbyist-USE-ONLY-VA.TXT,*.exe,
+sim> attach ts0 -f ansi-vms Hobbyist-USE-ONLY-VA.TXT,*.exe,
 ```
 
 within the running simulator:
@@ -944,11 +919,8 @@ $ @MSA0:Hobbyist-USE-ONLY-VA.TXT
 - Use a CD burner program, like Easy CD Creator or Nero, to create an
   ISO 9660 CD image containing the files you want to import. Note that
   file names are limited to DOS '8.3' conventions.
-
 - Attach the simulated CD image to a simulated CD drive.
-
 - Mount the simulated CD as an ISO 9660 file system under VMS.
-
 - Copy the files you need from the simulated CD to the simulated disk.
 
 (Thanks to Tim Stark for this suggestion.)
@@ -985,13 +957,12 @@ $ SET FILE/ATTRIBUTE=RFM:STM
 ```
 
 This will work with the latest version of VMS, but earlier versions
-didn’t have the SET FILE/ATTRIBUTE command.
+didn’t have the `SET FILE/ATTRIBUTE` command.
 
 ## How can I export files from a simulated VMS environment?
 
 - Utility ODS2 (available on the Web) can read an ODS-2 disk image and
   copy files from that image to the host file system.
-
 - Text files can be printed to the simulated line printer, as
   described above.
 
