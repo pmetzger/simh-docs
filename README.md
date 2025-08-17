@@ -33,9 +33,10 @@ days, and so this effort is using GitHub Flavored Markdown.
 
 Files requiring fixes but considered in good shape:
 
-| filename                         | status      | comments              |
-| -------------------------------- | ----------- | --------------------- |
-| [simh_faq.md](docs/simh_faq.md)  | unverified | Hand repaired, not proofread |
+| filename                        | status     | comments                     |
+|---------------------------------|------------|------------------------------|
+| [simh_faq.md](docs/simh_faq.md) | unverified | Hand repaired, not proofread |
+| [simh.md](docs/simh.md)         | unverified | Hand repaired, not proofread |
 
 
 Files that are nearly untouched:
@@ -76,7 +77,6 @@ Files that are nearly untouched:
 | [sds_doc.md](docs/sds_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sel32_doc.md](docs/sel32_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sigma_doc.md](docs/sigma_doc.md) | ❌ raw pandoc | Not yet hand repaired |
-| [simh.md](docs/simh.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_breakpoints.md](docs/simh_breakpoints.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_doc.md](docs/simh_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_magtape.md](docs/simh_magtape.md) | ❌ raw pandoc | Not yet hand repaired |
