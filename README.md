@@ -38,6 +38,7 @@ Files requiring fixes but considered in good shape:
 | [simh_faq.md](docs/simh_faq.md) | unverified | Hand repaired, not proofread |
 | [simh.md](docs/simh.md)         | unverified | Hand repaired, not proofread |
 | [ssem_doc.md](docs/ssem_doc.md) | unverified | Hand repaired, not proofread |
+| [gri_doc.md](docs/gri_doc.md)   | unverified | Hand repaired, not proofread |
 
 
 Files that are nearly untouched:
@@ -46,7 +47,6 @@ Files that are nearly untouched:
 | filename                         | status      | comments              |
 | -------------------------------- | ----------- | --------------------- |
 | [b5500_doc.md](docs/b5500_doc.md) | ❌ raw pandoc | Not yet hand repaired |
-| [gri_doc.md](docs/gri_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [h316_doc.md](docs/h316_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [h316_imp.md](docs/h316_imp.md) | ❌ raw pandoc | Not yet hand repaired |
 | [h316_imp_IO_Device_Codes.md](docs/h316_imp_IO_Device_Codes.md) | ❌ raw pandoc | Not yet hand repaired |
