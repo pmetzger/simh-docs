@@ -1,6 +1,6 @@
-**SSEM Simulator Usage**
+# SSEM Simulator Usage
 
-Revised 14-May-2011
+Revised: 14-May-2011
 
 **Copyright Notice**
 
@@ -93,7 +93,7 @@ There is only one instruction format:
 |----|---------|
 | op | address |
 
-Instructions follows the mnemonic style used in the 1998 competition
+Instructions follow the mnemonic style used in the 1998 competition
 reference manual:
 
 "The Manchester University Small Scale Experimental Machine
