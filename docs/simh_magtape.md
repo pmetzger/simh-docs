@@ -33,8 +33,8 @@ end of file:
 Metadata markers are 4 bytes stored in little-endian order.
 
 Metadata markers are distinguished from record lengths because their
-most significant byte is `0xFF` (data record lengths cannot have `0xFF
-as their most significant byte`), or, in the case of a tape mark,
+most significant byte is `0xFF` (data record lengths cannot have `0xFF`
+as their most significant byte), or, in the case of a tape mark,
 because they are all zeros (data record lengths cannot be zero.)
 
 The currently defined metadata markers are:
@@ -103,7 +103,7 @@ Magnetic tape drives can perform the following operations:
 On a real magtape, all operations are implicitly sequential, that is,
 they start from the current position of the tape medium. SIMH
 implements this with the concept of the *current tape position*, kept
-in the pos field of the tape drive’s `UNIT` structure. SIMH starts all
+in the `pos` field of the tape drive’s `UNIT` structure. SIMH starts all
 magtape operations at the current position and updates the current
 position to reflect the results of the operation:
 
@@ -230,15 +230,16 @@ won’t work on a simulated tape.
 For intelligent tapes, like the TK50 and the TS11, this problem is
 handled by reporting “position lost”. This status tells the tape
 driver that tape position is no longer known, and normal error
-recovery isn’t possible. Older tapes do not have this
-status. Accordingly, these tapes implement a limited form of state
-“memory” for error recovery. If an error occurs on a forward
-operation, and the position is not updated, the simulated tape unit
-“remembers” this fact. If the next operation is a backspace record,
-the first backspace is skipped, because the simulated tape is still
-positioned at the start of the erroneous record. If a read is then
-attempted, the tape will read the record that caused the original
-error.
+recovery isn’t possible.
+
+Older tapes do not have this status. Accordingly, these tapes
+implement a limited form of state “memory” for error recovery. If an
+error occurs on a forward operation, and the position is not updated,
+the simulated tape unit “remembers” this fact. If the next operation
+is a backspace record, the first backspace is skipped, because the
+simulated tape is still positioned at the start of the erroneous
+record. If a read is then attempted, the tape will read the record
+that caused the original error.
 
 Magtape Emulation Library
 
