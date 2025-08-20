@@ -128,16 +128,16 @@ new_data = iot_routine (IOT instruction, current AC);
 
 where
 
-|                             |                          |
-|-----------------------------|--------------------------|
-| `new_data<11:0>`            | = new contents of AC     |
-| `new_data<IOT_V_SKP>`       | = 1 if skip, 0 if not    |
-| `new_data<31:IOT_V_REASON>` | = stop code, if non-zero |
+|                             |                        |
+|-----------------------------|------------------------|
+| `new_data<11:0>`            | new contents of AC     |
+| `new_data<IOT_V_SKP>`       | 1 if skip, 0 if not    |
+| `new_data<31:IOT_V_REASON>` | stop code, if non-zero |
 
 ## DEVICE Context and Flags
 
-The `DEVICE ctxt` (context) field must point to the device information
-block (DIB), if one exists. The `DEVICE flags` field must specify
+The `DEVICE` `ctxt` (context) field must point to the device information
+block (`DIB`), if one exists. The `DEVICE` `flags` field must specify
 whether the device supports the `SET ENABLED`/`SET DISABLED` commands
 (`DEV_DISABLE`). If a device can be disabled, the state of the device
 `flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
@@ -183,8 +183,8 @@ accordingly:
 The device information block is declared in the device module, as follows:
 
 ```
-int32 iotrtn1 (int32 instruction, int32 AC);
-int32 iotrtn2 (int32 instruction, int32 AC);
+int32 iotrtn1(int32 instruction, int32 AC);
+int32 iotrtn2(int32 instruction, int32 AC);
 /* ... */
 DIB dev_dib = { DEV_NEW, num_iot_routines, { &iotrtn1, &iotrn2, … } };
 ```
@@ -206,7 +206,7 @@ be zero.
 The interrupt structure is implemented in an array
 `int32 int_hwre[5]`, corresponding to API (automatic priority interrupt)
 levels 0 through 3 and normal program interrupts, if a device doesn’t
-support API. Priority is from level 0 to level “4” (PI); with a level,
+support API. Priority is from level 0 to level “4” (PI); within a level,
 priority is right to left. The API control variables are updated
 centrally; an IO device only deals with `int_hwre`.
 
@@ -251,8 +251,8 @@ where
 
 ##  `DEVICE` Context and Flags
 
-The `DEVICE ctxt` (context) field must point to the device information
-block (`DIB`), if one exists. The `DEVICE flags` field must specify
+The `DEVICE` `ctxt` (context) field must point to the device information
+block (`DIB`), if one exists. The `DEVICE` `flags` field must specify
 whether the device supports the `SET ENABLED`/`SET DISABLED` commands
 (`DEV_DISABLE`). If a device can be disabled, the state of the device
 `flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
@@ -345,7 +345,7 @@ across the three systems, each device `dev` defines three variables:
 |---------------|-------------------------------------------------------|
 | `INT_V_`*dev* | the bit number of the device’s interrupt request flag |
 | `INT_`*dev*   | the mask of the device’s interrupt request flag       |
-| `IPL_`*dev*   | the index into int_req for the device’s priority level (PDP-11, MicroVAX 3900, and VAX-780 only) |
+| `IPL_`*dev*   | the index into `int_req` for the device’s priority level (PDP-11, MicroVAX 3900, and VAX-780 only) |
 
 Four macros allow simulated devices to access and manipulate interrupt
 structures independent of the underlying VM:
@@ -466,15 +466,15 @@ all transfers and reset all device controller state.
 
 ##  `DEVICE` Context and Flags
 
-For the PDP-11, VAX, and PDP-10, the `DEVICE ctxt` (context) field
+For the PDP-11, VAX, and PDP-10, the `DEVICE` `ctxt` (context) field
 must point to the device information block (`DIB`), if one exists.
 
-The `DEVICE flags` field must specify whether the device is a Unibus
+The `DEVICE` `flags` field must specify whether the device is a Unibus
 device (`DEV_UBUS`); a Qbus device with 22b DMA capability, or no DMA
 capability (`DEV_QBUS`); or a Qbus device with 18b DMA capability
 (`DEV_Q18`); a Massbus device (`DEV_MBUS`); or a combination thereof.
 
-The `DEVICE flags` field must also specify whether the device supports
+The `DEVICE` `flags` field must also specify whether the device supports
 the `SET ENABLED`/`SET DISABLED` commands (`DEV_DISABLE`).
 
 Lastly, device addresses and vectors are set in the device’s `DIB` from
@@ -714,8 +714,8 @@ where
 
 ## DEVICE Context and Flags
 
-The `DEVICE ctxt` (context) field must point to the device information
-block (`DIB`), if one exists. The `DEVICE flags` field must specify
+The `DEVICE` `ctxt` (context) field must point to the device information
+block (`DIB`), if one exists. The `DEVICE` `flags` field must specify
 whether the device supports the `SET ENABLED`/`SET DISABLED` commands
 (`DEV_DISABLE`). If a device can be disabled, the state of the device
 `flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
