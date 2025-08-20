@@ -37,6 +37,7 @@ Files requiring fixes but considered in good shape:
 |---------------------------------|------------|------------------------------|
 | [gri_doc.md](docs/gri_doc.md)   | unverified | Hand repaired, not proofread |
 | [simh.md](docs/simh.md)         | unverified | Hand repaired, not proofread |
+| [simh_doc.md](docs/simh_doc.md) | unverified | Hand repaired, not proofread |
 | [simh_faq.md](docs/simh_faq.md) | unverified | Hand repaired, not proofread |
 | [simh_magtape.md](docs/simh_magtape.md) | unverified | Hand repaired, not proofread |
 | [ssem_doc.md](docs/ssem_doc.md) | unverified | Hand repaired, not proofread |
@@ -80,7 +81,6 @@ Files that are nearly untouched:
 | [sel32_doc.md](docs/sel32_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sigma_doc.md](docs/sigma_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_breakpoints.md](docs/simh_breakpoints.md) | ❌ raw pandoc | Not yet hand repaired |
-| [simh_doc.md](docs/simh_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_swre.md](docs/simh_swre.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simh_vmio.md](docs/simh_vmio.md) | ❌ raw pandoc | Not yet hand repaired |
 | [simulators_acm_queue_2004.md](docs/simulators_acm_queue_2004.md) | ❌ raw pandoc | Not yet hand repaired |
