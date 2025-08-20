@@ -1902,7 +1902,7 @@ on error
 Error traps can be taken for any command which returns a status other
 than `SCPE_STEP`, `SCPE_OK`, and `SCPE_EXIT`.
 
-`ON` Traps can specify any of these status values:
+`ON` traps can specify any of these status values:
 
 ```
 NXM, UNATT, IOERR, CSUM, FMT, NOATT, OPENERR, MEM, ARG,
@@ -2040,9 +2040,9 @@ Expression can contain any of these C language operators:
 | `/`  | Division              |
 | `%`  | Modulus               |
 | `&&` | Logical AND           |
-| `||` | Logical OR            |
+| `\|\|` | Logical OR            |
 | `&`  | Bitwise AND           |
-| `|`  | Bitwise Inclusive OR  |
+| `\|`  | Bitwise Inclusive OR  |
 | `^`  | Bitwise Exclusive OR  |
 | `>>` | Bitwise Right Shift   |
 | `<<` | Bitwise Left Shift    |
