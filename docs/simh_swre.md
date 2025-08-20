@@ -497,7 +497,7 @@ You *must* specify the load address.
 
 ```
 sim> ex pc
-PC: 077646
+PC:   077646
 ```
 
 - Change the default line printer to be the LP09 rather than the Type
@@ -524,7 +524,6 @@ sim> run
 
 ```
 KMS9-15 V5B000
-
 $
 ```
 
@@ -810,7 +809,7 @@ prints a listing on LPT and punches an object deck on CDP, ready to
 run.
 
 A UNIX command script to assemble an SPS deck painlessly is in
-"sps". To use the script, enter "sps programname". The script creates
+`sps`. To use the script, enter `sps programname`. The script creates
 `programname.lst` for the listing and `programname.obj` for the object
 deck. Windows users are out of luck, for now.
 
@@ -896,4 +895,4 @@ Boot
 #
 ```
 
-Type ^D to enable multiuser mode. The root password is root.
+Type `^D` to enable multiuser mode. The root password is `root`.
