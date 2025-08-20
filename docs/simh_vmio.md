@@ -1,601 +1,779 @@
 # Adding An I/O Device To A SIMH Virtual Machine
 
-Updated 17-Mar-2016 for SIMH V4.0
+Revision of 17-Mar-2016
 
-This memo provides more detail on adding I/O device simulators to the various virtual machines supported by SIMH.
+This memo provides more detail on adding I/O device simulators to the
+various virtual machines supported by SIMH.
 
-1.  SCP and I/O Device Interactions
+# SCP and I/O Device Interactions
 
-    1.  The SCP Interface
+## The SCP Interface
 
-The simulator control package (SCP) finds devices through the device list, DEVICE \*sim_devices. This list, defined in \<simname\>\_sys.c, must be modified to add the DEVICE data structure(s) of the new device to sim_devices:
+The simulator control package (SCP) finds devices through the device
+list, `DEVICE *sim_devices`. This list, defined in `<simname>_sys.c`,
+must be modified to add the `DEVICE` data structure(s) of the new device
+to sim_devices:
 
-**extern DEVICE new_device;**
+```c
+extern DEVICE new_device;
 
-:
+/* ... */
 
-DEVICE \*sim_devices\[\] = {
+DEVICE *sim_devices[] = {
+    &cpu_dev,
+    /* ... */
+    &new_device,
+    NULL
+};
+```
 
-&cpu_dev,
+The device then defines data structures for `UNIT`s, `REGISTER`s, and, if
+required, options.
 
-> :
+## I/O Interface Requirements
 
-**&new_device,**
+SCP provides interfaces to attach files to, and detach them from, I/O
+devices, and to examine and modify the contents of attached files. SCP
+expects devices to store individual data words right-aligned in
+container words. The container words should be the next largest power
+of 2 in width:
 
-NULL };
+| Data word  | Container word                            |
+|------------|-------------------------------------------|
+| 1b to 8b   | 8b                                        |
+| 9b to 16b  | 16b                                       |
+| 17b to 32b | 32b                                       |
+| 33b to 64b | 64b (requires compile flag `-DUSE_INT64`) |
 
-The device then defines data structures for UNITs, REGISTERs, and, if required, options.
+### Save/Restore Interactions
 
-2.  I/O Interface Requirements
-
-SCP provides interfaces to attach files to, and detach them from, I/O devices, and to examine and modify the contents of attached files. SCP expects devices to store individual data words right-aligned in container words. The container words should be the next largest power of 2 in width:
-
-<u>Data word</u> <u>Container word</u>
-
-1b to 8b 8b
-
-9b to 16b 16b
-
-17b to 32b 32b
-
-33b to 64b 64b (requires compile flag –DUSE_INT64)
-
-3.  Save/Restore Interactions
-
-The Save/Restore capability allows simulations to be stopped, saved, resumed, and repeated. For save and restore to work properly, I/O devices must save and restore all state required for operation. This includes control registers, working registers, intermediate buffers, and mode flags.
+The Save/Restore capability allows simulations to be stopped, saved,
+resumed, and repeated. For save and restore to work properly, I/O
+devices must save and restore all state required for operation. This
+includes control registers, working registers, intermediate buffers,
+and mode flags.
 
 Save and restore automatically handle the following state items:
 
 - Content of declared registers.
-
 - Content of memory-like structures.
-
-- Device user-specific flags and DEV_DIS.
-
+- Device user-specific flags and `DEV_DIS`.
 - Whether each unit is attached to a file and, if so, the file name.
-
 - Whether each unit is active, and, if so, the unit time out.
+- Unit `U3`-`U6` words.
+- Unit user-specific flags and `UNIT_DIS`.
 
-- Unit U3-U6 words.
+There are two methods for handling intermediate buffers. First, the
+buffer can be made accessible as unit memory. This requires
+buffer-specific examine and deposit routines. Alternately, the buffer
+can be declared as an arrayed register.
 
-- Unit user-specific flags and UNIT_DIS.
+# PDP-8
 
-There are two methods for handling intermediate buffers. First, the buffer can be made accessible as unit memory. This requires buffer-specific examine and deposit routines. Alternately, the buffer can be declared as an arrayed register.
+##  CPU and I/O Device Structures
 
-2.  PDP-8
-
-    1.  CPU and I/O Device Structures
-
-Simulated memory is kept in array uint16 M\[MAXMEMSIZE\]. 12b words are right justified in each array entry; the high order 4b must be zero.
+Simulated memory is kept in array `uint16 M[MAXMEMSIZE]`. 12b words
+are right justified in each array entry; the high order 4b must be
+zero.
 
 The interrupt structure is implemented in three parallel variables:
 
-- int32 int_req: interrupt requests. The two high order bits are the interrupt enable flag and the interrupts-not-deferred flag
+- `int32 int_req`: interrupt requests. The two high order bits are the
+  interrupt enable flag and the interrupts-not-deferred flag
+- `int32 dev_done`: device done flags
+- `int32 int_enable`: device interrupt enable flags
 
-- int32 dev_done: device done flags
+A device without interrupt control keeps its interrupt request, which
+is also the device done flag, in `int_req`. A device with interrupt
+control keeps its interrupt request in `dev_done` and its interrupt
+enable flag in `int_enable`. Pictorially,
 
-- int32 int_enable: device interrupt enable flags
+```
+    +----+----+…+----+----+…+----+----+----+
+    |ion |indf| |irq1|irq2| |irqx|irqy|irqz| irq_req
+    +----+----+…+----+----+…+----+----+----+
 
-A device without interrupt control keeps its interrupt request, which is also the device done flag, in int_req. A device with interrupt control keeps its interrupt request in dev_done and its interrupt enable flag in int_enable. Pictorially,
+    +----+----+…+----+----+…+----+----+----+
+    | 0  | 0  | | 0  | 0  | |donx|dony|donz| dev_done
+    +----+----+…+----+----+…+----+----+----+
 
-+----+----+…+----+----+…+----+----+----+
+    +----+----+…+----+----+…+----+----+----+
+    | 0  | 0  | | 0  | 0  | |enbx|enby|enbz| int_enable
+    +----+----+…+----+----+…+----+----+----+
 
-\|ion \|indf\| \|irq1\|irq2\| \|irqx\|irqy\|irqz\| irq_req
+    <- fixed -> <-no enbl-> <- with enable->
+```
 
-+----+----+…+----+----+…+----+----+----+
+Logically, the relationship is:
 
-+----+----+…+----+----+…+----+----+----+
+```
+int_req = (int_req & (OVHD+NOENB)) | (dev_done & dev_enable);
+```
 
-\| 0 \| 0 \| \| 0 \| 0 \| \|donx\|dony\|donz\| dev_done
+Macro `INT_UPDATE` maintains this relationship after a change to any
+of the three variables.
 
-+----+----+…+----+----+…+----+----+----+
+Device enable flags are kept in `dev_enb`. The device enable flag, by
+convention, is the same bit position as device interrupt flag.
 
-+----+----+…+----+----+…+----+----+----+
+I/O dispatching is done by explicit case decoding in the `IOT`
+instruction flow for CPU `IOT`’s, and dispatch through table
+`dev_tab[64]` for devices. Each entry in `dev_tab` is a pointer to a
+device `IOT` processing routine. The calling sequence for the `IOT`
+routine is:
 
-\| 0 \| 0 \| \| 0 \| 0 \| \|enbx\|enby\|enbz\| int_enable
-
-+----+----+…+----+----+…+----+----+----+
-
-\<- fixed -\> \<-no enbl-\> \<- with enable-\>
-
-Logically, the relationship is
-
-int_req = (int_req & (OVHD+NOENB)) \| (dev_done & dev_enable);
-
-Macro INT_UPDATE maintains this relationship after a change to any of the three variables.
-
-Device enable flags are kept in dev_enb. The device enable flag, by convention, is the same bit position as device interrupt flag.
-
-I/O dispatching is done by explicit case decoding in the IOT instruction flow for CPU IOT’s, and dispatch through table dev_tab\[64\] for devices. Each entry in dev_tab is a pointer to a device IOT processing routine. The calling sequence for the IOT routine is:
-
+```
 new_data = iot_routine (IOT instruction, current AC);
+```
 
 where
 
-new_data\<11:0\> = new contents of AC
+|                             |                          |
+|-----------------------------|--------------------------|
+| `new_data<11:0>`            | = new contents of AC     |
+| `new_data<IOT_V_SKP>`       | = 1 if skip, 0 if not    |
+| `new_data<31:IOT_V_REASON>` | = stop code, if non-zero |
 
-new_data\<IOT_V_SKP\> = 1 if skip, 0 if not
+## DEVICE Context and Flags
 
-new_data\<31:IOT_V_REASON\> = stop code, if non-zero
+The `DEVICE ctxt` (context) field must point to the device information
+block (DIB), if one exists. The `DEVICE flags` field must specify
+whether the device supports the `SET ENABLED`/`SET DISABLED` commands
+(`DEV_DISABLE`). If a device can be disabled, the state of the device
+`flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
 
-1.  DEVICE Context and Flags
+## Adding A New I/O Device
 
-The DEVICE **ctxt** (context) field must point to the device information block (DIB), if one exists. The DEVICE **flags** field must specify whether the device supports the “SET ENABLED/SET DISABLED” commands (DEV_DISABLE). If a device can be disabled, the state of the device flag\<DEV_DIS\> must be declared as a register for SAVE/RESTORE.
+### Defining The Device Number and Done/Interrupt Flag
 
-2.  Adding A New I/O Device
+Module `pdp8_defs.h` must be modified to add the device number
+definitions and the device interrupt flag definitions. The device
+number is the lowest device number that the device responds to (e.g,
+`060` for the `RL8A`):
 
-    1.  Defining The Device Number and Done/Interrupt Flag
+```
+#define DEV_NEW        0nn                 /* not 0,010,020-027 */
+```
 
-Module pdp8_defs.h must be modified to add the device number definitions and the device interrupt flag definitions. The device number is the lowest device number that the device responds to (e.g, 060 for the RL8A):
+If the device has a separate interrupt enable, the interrupt flag must
+be added above `INT_V_DIRECT`, and the latter increased accordingly:
 
-\#define DEV_NEW 0nn /\* not 0,010,020-027 \*/
+```
+#define INT_V_TTI4     (INT_V_START+13)    /* clock */
+#define INT_V_NEW      (INT_V_START+14)    /* new */
+#define INT_V_DIRECT   (INT_V_START+15)    /* direct start */
+/*...*/
+#define INT_NEW        (1 << INT_V_NEW)
+```
 
-If the device has a separate interrupt enable, the interrupt flag must be added above INT_V_DIRECT, and the latter increased accordingly:
+If the device has only an interrupt/done flag, it must be added
+between `INT_V_DIRECT` and `INT_V_OVHD`, and the latter increased
+accordingly:
 
-\#define INT_V_TTI4 (INT_V_START+13) /\* clock \*/
+```
+#define INT_V_UF       (INT_V_DIRECT+8)    /* user int */
+#define INT_V_NEW      (INT_V_DIRECT+9)    /* new */
+#define INT_V_OVHD     (INT_V_DIRECT+10)   /* overhead start */
+/*...*/
+#define INT_NEW        (1 << INT_V_NEW)
+```
 
-**\#define INT_V_NEW (INT_V_START+14) /\* new \*/**
-
-\#define INT_V_DIRECT (INT_V_START+**15**) /\* direct start \*/
-
-:
-
-**\#define INT_NEW (1 \<\< INT_V_NEW)**
-
-If the device has only an interrupt/done flag, it must be added between INT_V_DIRECT and INT_V_OVHD, and the latter increased accordingly:
-
-\#define INT_V_UF (INT_V_DIRECT+8) /\* user int \*/
-
-**\#define INT_V_NEW (INT_V_DIRECT+9) /\* new \*/**
-
-\#define INT_V_OVHD (INT_V_DIRECT+**10**) /\* overhead start \*/
-
-:
-
-**\#define INT_NEW (1 \<\< INT_V_NEW)**
-
-2.  Adding The Device Information Block
+### Adding The Device Information Block
 
 The device information block is declared in the device module, as follows:
 
-**int32 iotrtn1 (int32 instruction, int32 AC);**
+```
+int32 iotrtn1 (int32 instruction, int32 AC);
+int32 iotrtn2 (int32 instruction, int32 AC);
+/* ... */
+DIB dev_dib = { DEV_NEW, num_iot_routines, { &iotrtn1, &iotrn2, … } };
+```
 
-**int32 iotrtn2 (int32 instruction, int32 AC);**
+`DEV_NEW` is the device number, and num_iot_routines is the number of
+`IOT` dispatch routines (allocated contiguously starting at
+`DEV_NEW`). If a device number in the range defined by \[`DEV_NEW`,
+`DEV_NEW + num_iot_routines - 1`\] is not needed, the corresponding
+dispatch address should be `NULL`.
 
-:
+# PDP-4/7/9/15
 
-**DIB dev_dib = { DEV_NEW, num_iot_routines, { &iotrtn1, &iotrn2, … } };**
+## CPU and I/O Device Structures
 
-DEV_NEW is the device number, and num_iot_routines is the number of IOT dispatch routines (allocated contiguously starting at DEV_NEW). If a device number in the range defined by \[DEV_NEW, DEV_NEW + num_iot_routines - 1\] is not needed, the corresponding dispatch address should be NULL.
+Simulated memory is kept in an array `*M`, dynamically allocated. 18b
+words are right justified in each array entry; the high order 14b must
+be zero.
 
-3.  PDP-4/7/9/15
+The interrupt structure is implemented in an array
+`int32 int_hwre[5]`, corresponding to API (automatic priority interrupt)
+levels 0 through 3 and normal program interrupts, if a device doesn’t
+support API. Priority is from level 0 to level “4” (PI); with a level,
+priority is right to left. The API control variables are updated
+centrally; an IO device only deals with `int_hwre`.
 
-    1.  CPU and I/O Device Structures
+Device enable flags are kept in `dev_enb`. The device enable flag, by
+convention, is the same bit position as device interrupt flag.
 
-Simulated memory is kept in an array \*M, dynamically allocated. 18b words are right justified in each array entry; the high order 14b must be zero.
+I/O dispatching is done by explicit case decoding in the `IOT`
+instruction flow for CPU `IOT`’s, and dispatch through table
+`dev_tab[64]` for devices. Each entry in `dev_tab` is a pointer to a
+device `IOT` processing routine. The calling sequence for the `IOT`
+routine is:
 
-The interrupt structure is implemented in an array int32 int_hwre\[5\], corresponding to API (automatic priority interrupt) levels 0 through 3 and normal program interrupts, if a device doesn’t support API. Priority is from level 0 to level “4” (PI); with a level, priority is right to left. The API control variables are updated centrally; an IO device only deals with int_hwre.
-
-Device enable flags are kept in dev_enb. The device enable flag, by convention, is the same bit position as device interrupt flag.
-
-I/O dispatching is done by explicit case decoding in the IOT instruction flow for CPU IOT’s, and dispatch through table dev_tab\[64\] for devices. Each entry in dev_tab is a pointer to a device IOT processing routine. The calling sequence for the IOT routine is:
-
-new_data = iot_routine (device, pulse, current AC);
+```
+new_data = iot_routine(device, pulse, current AC);
+```
 
 where
 
-device = instruction\<6:11\>
+|                             |                                |
+|-----------------------------|--------------------------------|
+| `device`                    | = `instruction<6:11>`          |
+| `pulse`                     | = `instruction<12:13’0’15:17>` |
+| `new_data<17:0>`            | = new contents of `AC`         |
+| `new_data<IOT_V_SKP>`       | = 1 if skip, 0 if not          |
+| `new_data<31:IOT_V_REASON>` | = stop code, if non-zero       |
 
-pulse = instruction\<12:13’0’15:17\>
+Note that instruction `bit<14>` (clear `AC`) has been processed by the
+time the `IOT` routine is called and is always cleared.
 
-new_data\<17:0\> = new contents of AC
+If the device responds to the IORS instructions, it must also have an
+IORS response routine:
 
-new_data\<IOT_V_SKP\> = 1 if skip, 0 if not
-
-new_data\<31:IOT_V_REASON\> = stop code, if non-zero
-
-Note that instruction bit\<14\> (clear AC) has been processed by the time the IOT routine is called and is always cleared.
-
-If the device responds to the IORS instructions, it must also have an IORS response routine:
-
-IORS_response = iors_routine (void);
+```
+IORS_response = iors_routine(void);
+```
 
 where
 
-IORS response = bit(s) to set in IORS, or 0
+|                 |                                 |
+|-----------------|---------------------------------|
+| `IORS_response` | = bit(s) to set in `IORS`, or 0 |
 
-2.  DEVICE Context and Flags
+##  `DEVICE` Context and Flags
 
-The DEVICE **ctxt** (context) field must point to the device information block (DIB), if one exists. The DEVICE **flags** field must specify whether the device supports the “SET ENABLED/SET DISABLED” commands (DEV_DISABLE). If a device can be disabled, the state of the device flag\<DEV_DIS\> must be declared as a register for SAVE/RESTORE.
+The `DEVICE ctxt` (context) field must point to the device information
+block (`DIB`), if one exists. The `DEVICE flags` field must specify
+whether the device supports the `SET ENABLED`/`SET DISABLED` commands
+(`DEV_DISABLE`). If a device can be disabled, the state of the device
+`flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
 
-3.  Adding A New I/O Device
+##  Adding A New I/O Device
 
-    1.  Defining The Device Number and Interrupt Information
+### Defining The Device Number and Interrupt Information
 
-Module pdp18b_defs.h must be modified to add the device number definitions, the device interrupt flag definitions, and the IORS response (if any). The device number is the lowest device number that the device responds to (e.g, 063 for the RP15):
+Module `pdp18b_defs.h` must be modified to add the device number
+definitions, the device interrupt flag definitions, and the `IORS`
+response (if any). The device number is the lowest device number that
+the device responds to (e.g, 063 for the RP15):
 
-\#define DEV_NEW 0nn /\* not 0,033,055 \*/
+```
+#define DEV_NEW        0nn                   /* not 0,033,055 */
+```
 
-The device must be assigned to an interrupt level and, if it supports API, an API channel. Use the next unassigned bit number at the desired API level:
+The device must be assigned to an interrupt level and, if it supports
+API, an API channel. Use the next unassigned bit number at the desired
+API level:
 
-**\#define INT_V_dev_new n /\* V -\> a bit number \*/**
+```
+#define INT_V_dev_new  n                     /* V -> a bit number */
+#define INT_dev_new    (1u << INT_V_new_dev)
+#define API_dev_new    0, 1, 2, 3, or 4      /* 4 means PI */
+#define ACH_dev_new    0mm                   /* only if API */
+```
 
-**\#define INT_dev_new (1u \<\< INT_V_new_dev)**
+If a device requires multiple interrupts, this set of definitions must
+be repeated for each interrupt.
 
-**\#define API_dev_new 0, 1, 2, 3, or 4 /\* 4 means PI \*/**
+With these definitions, IO devices can manipulate the interrupt system
+with simple macros:
 
-**\#define ACH_dev_new 0mm /\* only if API \*/**
+```
+SET_INT(dev_new)       /* set device interrupt */
+CLR_INT(dev_new)       /* clr device interrupt */
+TST_INT(dev_new)       /* test device interrupt */
+```
 
-If a device requires multiple interrupts, this set of definitions must be repeated for each interrupt.
+If the device responds to `IORS`, an `IORS` response bit (or bits)
+should also be defined.
 
-With these definitions, IO devices can manipulate the interrupt system with simple macros:
-
-SET_INT (dev_new) /\* set device interrupt \*/
-
-CLR_INT (dev_new) /\* clr device interrupt \*/
-
-TST_INT (dev_new) /\* test device interrupt \*/
-
-If the device responds to IORS, an IORS response bit (or bits) should also be defined.
-
-2.  Adding The Device Information Block
+### Adding The Device Information Block
 
 The device information block is declared in the device module, as follows:
 
-**int32 iotrtn1 (int32 instruction, int32 AC);**
+```
+int32 iotrtn1(int32 instruction, int32 AC);
+int32 iotrtn2(int32 instruction, int32 AC);
+int32 iorsrtn(void);
+/* ... */
+DIB dev_dib = { DEV_NEW, num_iot_routines, iorsrtn, { &iotrtn1, &iotrn2, … } };
+```
 
-**int32 iotrtn2 (int32 instruction, int32 AC);**
+`DEV_NEW` is the device number, and `num_iot_routines` is the number
+of `IOT` dispatch routines (allocated contiguously starting at
+`DEV_NEW`). If a device number in the range defined by \[`DEV_NEW`,
+`DEV_NEW + num_iot_routines - 1`\] is not needed, the corresponding
+dispatch address should be `NULL`. If the device does not respond to
+`IORS`, then `iorsrtn` should be `NULL`.
 
-**int32 iorsrtn (void);**
+# PDP-11, MicroVAX 3900, VAX-780, and PDP-10
 
-:
+## Memory
 
-**DIB dev_dib = { DEV_NEW, num_iot_routines, iorsrtn, { &iotrtn1, &iotrn2, … } };**
+For the PDP-11, simulated memory is kept in array `uint16 *M`,
+dynamically allocated.
 
-DEV_NEW is the device number, and num_iot_routines is the number of IOT dispatch routines (allocated contiguously starting at DEV_NEW). If a device number in the range defined by \[DEV_NEW, DEV_NEW + num_iot_routines - 1\] is not needed, the corresponding dispatch address should be NULL. If the device does not respond to IORS, then iorsrtn should be NULL.
+For the MicroVAX 3900 and VAX-780, simulated memory is kept in array
+`uint32 *M`, dynamically allocated.
 
-4.  PDP-11, MicroVAX 3900, VAX-780, and PDP-10
+For the PDP-10, simulated memory is kept in array `t_uint64 *M`,
+dynamically allocated.
 
-    1.  Memory
+Because the three systems use different memory widths and different
+I/O mapping schemes, DMA peripherals that are shared among them use
+interface routines to access memory.
 
-For the PDP-11, simulated memory is kept in array uint16 \*M, dynamically allocated. For the MicroVAX 3900 and VAX-780, simulated memory is kept in array uint32 \*M, dynamically allocated. For the PDP-10, simulated memory is kept in array t_uint64 \*M, dynamically allocated. Because the three systems use different memory widths and different I/O mapping schemes, DMA peripherals that are shared among them use interface routines to access memory.
+## Interrupt Structure
 
-2.  Interrupt Structure
+The interrupt structure is implemented by array `int_req`, indexed by
+priority level (except on the PDP-10, where all levels are kept in one
+word). Each device is assigned a request flag in
+`int_req[device_IPL]`, according to its priority, with highest
+priority at the right (low order bit). To facilitate access to `int_req`
+across the three systems, each device `dev` defines three variables:
 
-The interrupt structure is implemented by array int_req, indexed by priority level (except on the PDP-10, where all levels are kept in one word). Each device is assigned a request flag in int_req\[device_IPL\], according to its priority, with highest priority at the right (low order bit). To facilitate access to int_req across the three systems, each device *dev* defines three variables:
+|               |                                                       |
+|---------------|-------------------------------------------------------|
+| `INT_V_`*dev* | the bit number of the device’s interrupt request flag |
+| `INT_`*dev*   | the mask of the device’s interrupt request flag       |
+| `IPL_`*dev*   | the index into int_req for the device’s priority level (PDP-11, MicroVAX 3900, and VAX-780 only) |
 
-> INT_V\_*dev* – the bit number of the device’s interrupt request flag
->
-> INT\_*dev* – the mask of the device’s interrupt request flag
->
-> IPL\_*dev* – the index into int_req for the device’s priority level (PDP-11, MicroVAX 3900, and VAX-780 only)
+Four macros allow simulated devices to access and manipulate interrupt
+structures independent of the underlying VM:
 
-Four macros allow simulated devices to access and manipulate interrupt structures independent of the underlying VM:
+|                |                                                  |
+|----------------|--------------------------------------------------|
+| `IVCL(dev)`    | vector locator for DIB (`IPL * 32 +` bit number) |
+| `IREQ(dev)`    | resolves to `int_req[device_IPL]`                |
+| `CLR_INT(dev)` | clears the device’s interrupt request flag       |
+| `SET_INT(dev)` | sets the device’s interrupt request flag         |
 
-IVCL (dev) – vector locator for DIB (IPL \* 32 + bit number)
+## I/O Dispatching
 
-IREQ (dev) – resolves to int_req\[device_IPL\]
+### Unibus/Qbus Devices
 
-CLR_INT (dev) – clears the device’s interrupt request flag
+For Unibus and Qbus devices, I/O dispatching is done by table-driven
+address decoding in the I/O page read and write routines. Interrupt
+handling is done by table driven processing of vector and interrupt
+handling tables. These tables are constructed at run time from device
+information blocks (`DIB`’s). Each I/O device has a `DIB` with the
+following information:
 
-SET_INT (dev) – sets the device’s interrupt request flag
-
-3.  I/O Dispatching
-
-    1.  Unibus/Qbus Devices
-
-For Unibus and Qbus devices, I/O dispatching is done by table-driven address decoding in the I/O page read and write routines. Interrupt handling is done by table driven processing of vector and interrupt handling tables. These tables are constructed at run time from device information blocks (DIB’s). Each I/O device has a DIB with the following information:
-
+```
 { IO page base address, IO page length, read_routine, write_routine,
-
-num_vectors, vector_locator, vector, { &iack_rtn1, &iack_rtn2, … } }
+  num_vectors, vector_locator, vector, { &iack_rtn1, &iack_rtn2, … } }
+```
 
 The calling sequence for an I/O read is:
 
-t_stat read_routine (int32 \*data, int32 pa, int32 access)
+```
+t_stat read_routine(int32 *data, int32 pa, int32 access)
+```
 
 The calling sequence for an I/O write is:
 
-t_stat write_routine (int32 data, int32 pa, int32 access)
+```
+t_stat write_routine(int32 data, int32 pa, int32 access)
+```
 
-For both, the access parameter can have one of the following values:
+For both, the `access` parameter can have one of the following values:
 
-READ normal read
+|          |                                  |
+|----------|----------------------------------|
+| `READ`   | normal read                      |
+| `READC`  | console read (PDP-11 only)       |
+| `WRITE`  | word write                       |
+| `WRITEC` | console word write (PDP-11 only) |
+| `WRITEB` | byte write                       |
 
-READC console read (PDP-11 only)
+I/O read and I/O word write use word (even) addresses; the low order
+bit of the address should be ignored. I/O byte write uses byte
+addresses, and the data byte to be written is right-justified in the
+calling argument.
 
-WRITE word write
+If the device has vectors, the `vector_locator` field specifies the
+position of the vector in the interrupt tables, using macro
+`IVCL(dev)`. If the device has static interrupt vectors, they are
+specified by the `DIB` vector field and by the `DIB` `num_vectors`
+field. The device is assumed to have vectors at `vector, …, vector +
+((num_vectors -1) * 4)`. If the device has dynamic interrupt
+acknowledge routines, they are specified by the `DIB` interrupt
+acknowledge routines. An calling sequence for an interrupt acknowledge
+routine is:
 
-WRITEC console word write (PDP-11 only)
+```
+int32 iack_rtn(void)
+```
 
-WRITEB byte write
+It returns the interrupt vector for the device, or 0 if there is no
+interrupt (passive release).
 
-I/O read and I/O word write use word (even) addresses; the low order bit of the address should be ignored. I/O byte write uses byte addresses, and the data byte to be written is right-justified in the calling argument.
+### Massbus Devices (PDP-11, VAX-780 only)
 
-If the device has vectors, the vector_locator field specifies the position of the vector in the interrupt tables, using macro IVCL (dev). If the device has static interrupt vectors, they are specified by the DIB vector field and by the DIB num_vectors field. The device is assumed to have vectors at vector, …, vector + ((num_vectors –1) \* 4). If the device has dynamic interrupt acknowledge routines, they are specified by the DIB interrupt acknowledge routines. An calling sequence for an interrupt acknowledge routine is:
+For Massbus devices, I/O dispatching is done by table-driven address
+decoding in the Massbus adapter (RH for the PDP11, MBA for the
+VAX-780). These tables are constructed at run time from device
+information blocks (`DIB`’s). Each Massbus device has a `DIB` with the
+following information:
 
-int32 iack_rtn (void)
-
-It returns the interrupt vector for the device, or 0 if there is no interrupt (passive release).
-
-2.  Massbus Devices (PDP-11, VAX-780 only)
-
-For Massbus devices, I/O dispatching is done by table-driven address decoding in the Massbus adapter (RH for the PDP11, MBA for the VAX-780). These tables are constructed at run time from device information blocks (DIB’s). Each Massbus device has a DIB with the following information:
-
+```
 { Massbus number, 0, mb_read_routine, mb_write_routine,
-
-0, 0, 0, { &abort_routine } }
+  0, 0, 0, { &abort_routine } }
+```
 
 The calling sequence for a Massbus register read is:
 
-t_stat mb_read_routine (int32 \*data, int32 offset, int32 drive)
+```
+t_stat mb_read_routine(int32 *data, int32 offset, int32 drive)
+```
 
 The calling sequence for a Massbus register write is:
 
-t_stat mb_write_routine (int32 data, int32 offset, int32 drive)
+```
+t_stat mb_write_routine(int32 data, int32 offset, int32 drive)
+```
 
-For both, offset is the internal register offset of the Massbus register being accessed, and drive is the unit number of the Massbus controller being accessed. These routines can return the following status values:
+For both, offset is the internal register offset of the Massbus
+register being accessed, and drive is the unit number of the Massbus
+controller being accessed. These routines can return the following
+status values:
 
-SCPE_OK access ok
+|           |                                       |
+|-----------|---------------------------------------|
+| `SCPE_OK` | access ok                             |
+| `MBE_NXD` | non-existent drive                    |
+| `MBE_NXR` | non-existent register                 |
+| `MBE_GOE` | error attempting to initiate function |
 
-MBE_NXD non-existent drive
+The abort routine is called if the Massbus adapter must stop a data
+transfer or reset the associated controllers. Its calling sequence is:
 
-MBE_NXR non-existent register
+```
+t_stat mba_abort(void)
+```
 
-MBE_GOE error attempting to initiate function
+The abort routine typically invokes the device reset routine to stop
+all transfers and reset all device controller state.
 
-The abort routine is called if the Massbus adapter must stop a data transfer or reset the associated controllers. Its calling sequence is:
+##  `DEVICE` Context and Flags
 
-t_stat mba_abort (void)
+For the PDP-11, VAX, and PDP-10, the `DEVICE ctxt` (context) field
+must point to the device information block (`DIB`), if one exists.
 
-The abort routine typically invokes the device reset routine to stop all transfers and reset all device controller state.
+The `DEVICE flags` field must specify whether the device is a Unibus
+device (`DEV_UBUS`); a Qbus device with 22b DMA capability, or no DMA
+capability (`DEV_QBUS`); or a Qbus device with 18b DMA capability
+(`DEV_Q18`); a Massbus device (`DEV_MBUS`); or a combination thereof.
 
-4.  DEVICE Context and Flags
+The `DEVICE flags` field must also specify whether the device supports
+the `SET ENABLED`/`SET DISABLED` commands (`DEV_DISABLE`).
 
-For the PDP-11, VAX, and PDP-10, the DEVICE **ctxt** (context) field must point to the device information block (DIB), if one exists. The DEVICE **flags** field must specify whether the device is a Unibus device (DEV_UBUS); a Qbus device with 22b DMA capability, or no DMA capability (DEV_QBUS); or a Qbus device with 18b DMA capability (DEV_Q18); a Massbus device (DEV_MBUS); or a combination thereof. The DEVICE **flags** field must also specify whether the device supports the “SET ENABLED/SET DISABLED” commands (DEV_DISABLE). Lastly, device addresses and vectors are set in the device’s DIB from the table information in the pdp11_io_lib.c module. This is true for BOTH static and floating addresses and vectors.
+Lastly, device addresses and vectors are set in the device’s `DIB` from
+the table information in the `pdp11_io_lib.c` module. This is true for
+*both* static and floating addresses and vectors.
 
-Most devices do not care whether the I/O bus is Unibus or Qbus. Those that do can use macro UNIBUS to see if the host bus is Unibus (true) or Qbus (false). On the PDP-11, UNIBUS is derived from the CPU model; on the PDP-10 and VAX-11/780, VAX-11/750 and VAX-11/730, it is always true; and for the MicroVAX models, it is always false.
+Most devices do not care whether the I/O bus is Unibus or Qbus. Those
+that do can use macro `UNIBUS` to see if the host bus is Unibus (true)
+or Qbus (false). On the PDP-11, `UNIBUS` is derived from the CPU
+model; on the PDP-10 and VAX-11/780, VAX-11/750 and VAX-11/730, it is
+always true; and for the MicroVAX models, it is always false.
 
-5.  Memory Access Routines
+## Memory Access Routines
 
-    1.  Unibus/Qbus Devices
+### Unibus/Qbus Devices
 
 Unibus/Qbus DMA devices access memory through four interface routines:
 
-> int32 Map_ReadB (t_addr ba, int32 bc, uint8 \*buf);
->
-> int32 Map_ReadW (t_addr ba, int32 bc, uint16 \*buf);
->
-> int32 Map_WriteB (t_addr ba, int32 bc, uint8 \*buf);
->
-> int32 Map_WriteW (t_addr ba, int32 bc, uint16 \*buf);
+```
+int32 Map_ReadB(t_addr ba, int32 bc, uint8 *buf);
+int32 Map_ReadW(t_addr ba, int32 bc, uint16 *buf);
+int32 Map_WriteB(t_addr ba, int32 bc, uint8 *buf);
+int32 Map_WriteW(t_addr ba, int32 bc, uint16 *buf);
+```
 
 The arguments to these routines are:
 
-ba starting memory address
+|        |                          |
+|--------|--------------------------|
+| `ba`   | starting memory address  |
+| `bc`   | byte count               |
+| `*buf` | pointer to device buffer |
 
-bc byte count
+Note that the PDP-10 can only share a small number of PDP-11
+peripherals, because of its dependence on 18b transfers on the Unibus;
+and that all non-Massbus peripherals are on Unibus.
 
-\*buf pointer to device buffer
+The routines return the number of bytes not transferred: 0 indicates a
+successful transfer. Transfer failures can occur if the mapped address
+uses an invalid mapping register or maps to non-existent memory.
 
-Note that the PDP-10 can only share a small number of PDP-11 peripherals, because of its dependence on 18b transfers on the Unibus; and that all non-Massbus peripherals are on Unibus 3.
+###  Massbus Devices
 
-The routines return the number of bytes not transferred: 0 indicates a successful transfer. Transfer failures can occur if the mapped address uses an invalid mapping register or maps to non-existent memory.
+Massbus devices access memory through three interface routines, for
+read, write, and write check respectively:
 
-2.  Massbus Devices
-
-Massbus devices access memory through three interface routines, for read, write, and write check respectively:
-
-> int32 mba_rdbufW (uint32 mbus, int32 bc, uint16 \*buf);
->
-> int32 mba_wrbufW (uint32 mbus, int32 bc, uint16 \*buf);
->
-> int32 mba_chbufW (uint32 mbus, int32 bc, uint16 \*buf);
+```
+int32 mba_rdbufW(uint32 mbus, int32 bc, uint16 *buf);
+int32 mba_wrbufW(uint32 mbus, int32 bc, uint16 *buf);
+int32 mba_chbufW(uint32 mbus, int32 bc, uint16 *buf);
+```
 
 The arguments to these routines are:
 
-mbus Massbus adapter number
+|        |                          |
+|--------|--------------------------|
+| `mbus` | Massbus adapter number   |
+| `bc`   | byte count               |
+| `*buf` | pointer to device buffer |
 
-bc byte count
+The routines the number of bytes successfully transferred. Transfer
+failures can occur if a mapped address uses an invalid mapping
+register, maps to non-existent memory, or on a write-check, if a
+miscompare occurs.
 
-\*buf pointer to device buffer
+## Adding A New I/O Device
 
-The routines the number of bytes successfully transferred. Transfer failures can occur if a mapped address uses an invalid mapping register, maps to non-existent memory, or on a write-check, if a miscompare occurs.
 
-6.  Adding A New I/O Device
+### Defining The Device Parameters
 
-.
+If the device can interrupt, `pdp11_defs.h` (`vaxmod_defs.h`,
+`vax780_moddefs.h`, `pdp10_defs.h`) must be modified to add the device
+interrupt flag(s) and priority level. The device flag(s) should be
+inserted using a spare bit (or bits) at the appropriate priority
+level. On the PDP-11, the PIRQ interrupt flags (PIR) must always be
+the last (lowest priority) device in the level.
 
-1.  Defining The Device Parameters
+```
+/* IPL 4 devices */
 
-If the device can interrupt, pdp11_defs.h (vaxmod_defs.h, vax780_moddefs.h, pdp10_defs.h) must be modified to add the device interrupt flag(s) and priority level. The device flag(s) should be inserted using a spare bit (or bits) at the appropriate priority level. On the PDP-11, the PIRQ interrupt flags (PIR) must always be the last (lowest priority) device in the level.
+#define INT_V_LPT      4
+#define INT_V_NEW      5                     /* new IPL 4 dev */
+#define INT_V_PIR4     6                     /* used to be 4 */
+/* ... */
+#define INT_NEW        (1u << INT_V_NEW)
+/* ... */
+#define IPL_NEW        4
+```
 
-/\* IPL 4 devices \*/
+### Defining The I/O Page Region Size
 
-\#define INT_V_LPT 4
+The size of the devices I/O page footprint should be defined as
+follows:
 
-**\#define INT_V_NEW 5 /\* new IPL 4 dev \*/**
+```
+#define IOLN_NEW       010                   /* length = 8 bytes */
+```
 
-\#define INT_V_PIR4 6 /\* used to be 4 \*/
+This definition should appear in your device simulator code just
+before it is referenced to fill in the Device Information Block.
 
-:
+### Adding The Device Information Block
 
-**\#define INT_NEW (1u \<\< INT_V_NEW)**
+The device information block is declared in the device module, as
+follows:
 
-**:**
+```
+t_stat new_rd(int32 *data, int32 addr, int32 access);
+t_stat new_wr(int32 data, int32 addr, int32 access);
+int32 new_iack1(void);
+int32 new_iack2(void);
 
-**\#define IPL_NEW 4**
+#define IOLN_NEW       010                   /* length = 8 bytes */
 
-2.  Defining The I/O Page Region Size
+DIB new_dib = { IOBA_AUTO, IOLN_NEW, &new_rd, &new_wr,
+      num_vectors, IVLC (NEW), VEC_AUTO, { &new_iack1, &new_iack2, … };
+```
 
-The size of the devices I/O page footprint should be defined as follows:
+### Proper setting of your I/O page base address in the Device Information Block.
 
-**\#define IOLN_NEW 010 /\* length = 8 bytes \*/**
+All Unibus and Qbus devices have some registers present in the I/O
+page. The size of the device’s register footprint is mentioned
+above. The address of the device’s base address in the I/O page can
+either be a fixed or a floating address. The vector used by the device
+can either be a fixed or a floating vector. The details for all known
+Unibus and Qbus devices are present in the entries of auto configure
+table (`auto_tab`). Any device you may wish to simulate is likely
+already present in this table, you usually need only add your device
+name to the existing entry for the device you are simulating.
 
-This definition should appear in your device simulator code just before it is referenced to fill in the Device Information Block.
+For example, if you were going to simulate a DPV11, and your device
+name is DPV you would find the DPV11 entry in the `auto_tab` table
+which looks like:
 
-3.  Adding The Device Information Block
-
-The device information block is declared in the device module, as follows:
-
-**t_stat new_rd (int32 \*data, int32 addr, int32 access);**
-
-**t_stat new_wr (int32 data, int32 addr, int32 access);**
-
-**int32 new_iack1 (void);**
-
-**int32 new_iack2 (void);**
-
-**\#define IOLN_NEW 010 /\* length = 8 bytes \*/**
-
-**DIB new_dib = { IOBA_AUTO, IOLN_NEW, &new_rd, &new_wr,**
-
-**num_vectors, IVLC (NEW), VEC_AUTO, { &new_iack1, &new_iack2, … };**
-
-4.  Proper setting of your I/O page base address in the Device Information Block.
-
-All Unibus and Qbus devices have some registers present in the I/O page. The size of the device’s register footprint is mentioned above. The address of the device’s base address in the I/O page can either be a fixed or a floating address. The vector used by the device can either be a fixed or a floating vector. The details for all known Unibus and Qbus devices are present in the entries of auto configure table (auto_tab). Any device you may wish to simulate is likely already present in this table, you usually need only add your device name to the existing entry for the device you are simulating.
-
-For example, if you were going to simulate a DPV11, and your device name is DPV you would find the DPV11 entry in the **auto_tab** table which looks like:
-
-{ { NULL }, 1, 2, 8, 8 }, /\* DPV11 \*/
+```
+{ { NULL },            1, 2, 8, 8 },             /* DPV11 */
+```
 
 You would revise it to look like:
 
-{ { “DPV” }, 1, 2, 8, 8 }, /\* DPV11 \*/
+```
+{ { “DPV” },           1, 2, 8, 8 },             /* DPV11 */
+```
 
-It is a good idea to actively call auto_config (0, 0) as the last line in your device reset routine. This will assure that both the address and vector will be properly inserted into your Device Information Block for proper system execution.
+It is a good idea to actively call `auto_config(0, 0)` as the last line
+in your device reset routine. This will assure that both the address
+and vector will be properly inserted into your Device Information
+Block for proper system execution.
 
-5.  Adding The Device To Autoconfiguration (PDP-11, VAX-11, and Micro VAX only)
+### Adding The Device To Autoconfiguration (PDP-11, VAX-11, and Micro VAX only)
 
-If the device is not presently included in the autoconfiguration table, it must be added to table **auto_tab** in pdp11_io_lib.c. Entries are in rank order (with the exception of devices which have only fixed addresses AND vectors). The fields for each entry are:
+If the device is not presently included in the autoconfiguration
+table, it must be added to table `auto_tab` in `pdp11_io_lib.c`. Entries
+are in rank order (with the exception of devices which have only fixed
+addresses AND vectors). The fields for each entry are:
 
-char \***dnam**\[32\] list of controller names for this device type, maximum 32
+|                  |                                                           |
+|------------------|-----------------------------------------------------------|
+| `char *dnam[32]` | list of controller names for this device type, maximum 32 |
+| `int32 numc` | number of controllers per device name (used by terminal multiplexers) |
+| `int32 numv`      | number of vectors per controller                 |
+| `int32 amod`      | address modulus                                  |
+| `uint32 vmod`     | vector modulus                                   |
+| `uint32 fix[32]`  | fixed CSR addresses, maximum 32; 0 = end of list |
+| `uint32 fixv[32]` | fixed vectors, maximum 32; 0 = end of list       |
 
-int32 **numc**; number of controllers per device name (used by
+An `amod` value of 0 indicates that the addresses for this device
+entry are only fixed. A `vmod` value of 0 indicates that all the
+vectors for this entry are fixed. A negative `numv` value indicates that
+the `abs(numv)` should be the number of vectors used/reserved, but they
+should not be updated in the `DIB` by the auto configure process since
+they are set by software.
 
-terminal multiplexers)
+# Nova
 
-int32 **numv**; number of vectors per controller
+## CPU and I/O Device Structures
 
-uint32 **amod** address modulus
-
-uint32 **vmod** vector modulus
-
-uint32 **fix\[32\]** fixed CSR addresses, maximum 32; 0 = end of list
-
-uint32 fixv\[32\] fixed vectors, maximum 32; 0 = end of list
-
-An amod value of 0 indicates that the addresses for this device entry are only fixed. A vmod value of 0 indicates that all the vectors for this entry are fixed. A negative numv value indicates that the abs(numv) should be the number of vectors used/reserved, but they should not be updated in the DIB by the auto configure process since they are set by software.
-
-3.  Nova
-
-    5.  CPU and I/O Device Structures
-
-Simulated memory is kept in array uint16 M\[MAXMEMSIZE\].
+Simulated memory is kept in array `uint16 M[MAXMEMSIZE]`.
 
 The interrupt structure is implemented in three parallel variables:
 
-- int32 int_req: interrupt requests. The two high order bits are the interrupt enable flag and the interrupts-not-deferred flag
-
-- int32 dev_done: device done flags
-
-- int32 dev_disable: device interrupt disable flags
+- `int32 int_req`: interrupt requests. The two high order bits are the
+  interrupt enable flag and the interrupts-not-deferred flag
+- `int32 dev_done`: device done flags
+- `int32 dev_disable`: device interrupt disable flags
 
 Pictorially,
 
+```
 +----+----+…+----+----+…+----+----+----+
-
-\|ion \|indf\| \|irqa\|irqb\| \|irqx\|irqy\|irqz\| irq_req
-
-+----+----+…+----+----+…+----+----+----+
-
-+----+----+…+----+----+…+----+----+----+
-
-\| 0 \| 0 \| \|dona\|donb\| \|donx\|dony\|donz\| dev_done
-
+|ion |indf| |irqa|irqb| |irqx|irqy|irqz| irq_req
 +----+----+…+----+----+…+----+----+----+
 
 +----+----+…+----+----+…+----+----+----+
-
-\| 0 \| 0 \| \|disa\|disb\| \|disx\|disy\|disz\| dev_disable
-
+| 0  | 0  | |dona|donb| |donx|dony|donz| dev_done
 +----+----+…+----+----+…+----+----+----+
 
-\<- fixed -\> \<------- I/O devices ------\>
++----+----+…+----+----+…+----+----+----+
+| 0  | 0  | |disa|disb| |disx|disy|disz| dev_disable
++----+----+…+----+----+…+----+----+----+
+
+<- fixed -> <------- I/O devices ------>
+```
 
 Logically, the relationship is
 
-int_req = (int_req & ~INT_DEV) \| (dev_done & ~dev_disable);
+```
+int_req = (int_req & ~INT_DEV) | (dev_done & ~dev_disable);
+```
 
-Device enable flags are kept in iot_enb. The device enable flag, by convention, is the same bit position as device interrupt flag.
+Device enable flags are kept in `iot_enb`. The device enable flag, by
+convention, is the same bit position as device interrupt flag.
 
-I/O dispatching is indirectly through dispatch table dev_table, which has one entry for each possible I/O device. Each entry is a structure of the form:
+I/O dispatching is indirectly through dispatch table `dev_table`, which
+has one entry for each possible I/O device. Each entry is a structure
+of the form:
 
-int32 mask; /\* interrupt/done mask bit \*/
-
-int32 pi; /\* PI out mask bit \*/
-
-t_stat (\*iot_routine)(); /\* addr of I/O routine \*/
+```
+int32    mask;               /* interrupt/done mask bit */
+int32    pi;                 /* PI out mask bit */
+t_stat   (*iot_routine)();   /* addr of I/O routine */
+```
 
 The I/O routine is called by
 
-new_data = iot_routine (IOT pulse, IOT subopcode, AC value);
+```
+new_data = iot_routine(IOT pulse, IOT subopcode, AC value);
+```
 
 where
 
-new_data\<15:0\> = new contents of AC, if DIA/DIB/DIC
+|                             |                                    |
+|-----------------------------|------------------------------------|
+| `new_data<15:0>`            | new contents of AC, if DIA/DIB/DIC |
+| `new_data<IOT_V_SKP>`       | 1 if skip, 0 if not                |
+| `new_data<31:IOT_V_REASON>` | stop code, if non-zero             |
 
-new_data\<IOT_V_SKP\> = 1 if skip, 0 if not
+## DEVICE Context and Flags
 
-new_data\<31:IOT_V_REASON\> = stop code, if non-zero
+The `DEVICE ctxt` (context) field must point to the device information
+block (`DIB`), if one exists. The `DEVICE flags` field must specify
+whether the device supports the `SET ENABLED`/`SET DISABLED` commands
+(`DEV_DISABLE`). If a device can be disabled, the state of the device
+`flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
 
-5.  DEVICE Context and Flags
+## Memory Mapping
 
-The DEVICE **ctxt** (context) field must point to the device information block (DIB), if one exists. The DEVICE **flags** field must specify whether the device supports the “SET ENABLED/SET DISABLED” commands (DEV_DISABLE). If a device can be disabled, the state of the device flag\<DEV_DIS\> must be declared as a register for SAVE/RESTORE.
+On mapped Novas and on Eclipses, DMA transfers use a memory map to
+translate 15b virtual addresses to physical addresses. The mapping
+function is called by:
 
-6.  Memory Mapping
-
-On mapped Nova’s and on Eclipse’s, DMA transfers use a memory map to translate 15b virtual addresses to physical addresses. The mapping function is called by:
-
-> int32 MapAddr(int32 map, int32 addr)
+```
+int32 MapAddr(int32 map, int32 addr)
+```
 
 with the following arguments:
 
-map map number, usually 0
-
-addr virtual address
+|        |                       |
+|--------|-----------------------|
+| `map`  | map number, usually 0 |
+| `addr` | virtual address       |
 
 The routine returns the physical address to be used for the transfer.
 
-7.  Adding A New I/O Device
+## Adding A New I/O Device
 
-    1.  Defining The Device Number And The Done/Interrupt Flag
+### Defining The Device Number And The Done/Interrupt Flag
 
-Module nova_defs.h must be modified to add the device number definitions and the device interrupt flag definitions.
+Module `nova_defs.h` must be modified to add the device number
+definitions and the device interrupt flag definitions.
 
-**\#define DEV_NEW 0nn /\* can’t be 00, 01 \*/**
+```
+#define DEV_NEW        0nn               /* can’t be 00, 01 */
+```
 
 Device flags are kept as a bit vector. If priority is unimportant, the device flag can be defined as one of the currently unused bits:
 
-**\#define INT_V_NEW 1 /\* new \*/**
+```
+#define INT_V_NEW      1                 /* new */
+/*...*/
+#define INT_NEW        (1 << INT_V_NEW)
+```
 
-**:**
-
-**\#define INT_NEW (1 \<\< INT_V_NEW)**
-
-If the device requires a specific priority with respect to existing devices, it must be assigned the appropriate flag bit, and the other device flag bits moved up or down.
+If the device requires a specific priority with respect to existing
+devices, it must be assigned the appropriate flag bit, and the other
+device flag bits moved up or down.
 
 The device’s PI mask bit must also be defined:
 
-**\#define PI_NEW 000200**
+```
+#define PI_NEW         000200
+```
 
-2.  Adding The Device Information Block
+### Adding The Device Information Block
 
 The device information block is declared in the device module, as follows:
 
-**int32 iot (int32 pulse, int32 code, int32 AC);**
-
-:
-
-**DIB new_dib = { DEV_NEW, INT_new, PI_new, &iot };**
+```
+int32 iot(int32 pulse, int32 code, int32 AC);
+/* ... */
+DIB new_dib = { DEV_NEW, INT_new, PI_new, &iot };
+```
