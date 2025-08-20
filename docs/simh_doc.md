@@ -11,141 +11,141 @@ X11-style open source license; the precise terms are available at:
 
 # Table of Contents
 
-[Introduction 4](#introduction)
+[Introduction](#introduction)
 
-[1 Running A Simulator 4](#running-a-simulator)
+[1 Running A Simulator](#running-a-simulator)
 
-[2 Compiling A Simulator 4](#compiling-a-simulator)
+[2 Compiling A Simulator](#compiling-a-simulator)
 
-[2.1 Compiling Under UNIX/Linux/Mac OS-X 5](#compiling-under-unixlinuxmac-os-x)
+[2.1 Compiling Under UNIX/Linux/Mac OS-X](#compiling-under-unixlinuxmac-os-x)
 
-[2.2 Compiling Under Windows 6](#compiling-under-windows)
+[2.2 Compiling Under Windows](#compiling-under-windows)
 
-[2.2.1 Compiling with Ethernet Support 6](#compiling-with-ethernet-support)
+[2.2.1 Compiling with Ethernet Support](#compiling-with-ethernet-support)
 
-[2.2.2 Compiling Under Visual C++ 6](#compiling-under-visual-c)
+[2.2.2 Compiling Under Visual C++](#compiling-under-visual-c)
 
-[2.2.3 Compiling Under MinGW 7](#compiling-under-mingw)
+[2.2.3 Compiling Under MinGW](#compiling-under-mingw)
 
-[2.3 Compiling Under OpenVMS 7](#compiling-under-openvms)
+[2.3 Compiling Under OpenVMS](#compiling-under-openvms)
 
-[3 Simulator Conventions 8](#simulator-conventions)
+[3 Simulator Conventions](#simulator-conventions)
 
-[4 Commands 8](#commands)
+[4 Commands](#commands)
 
-[4.1 Loading and Saving Programs 8](#loading-and-saving-programs)
+[4.1 Loading and Saving Programs](#loading-and-saving-programs)
 
-[4.2 Saving and Restoring State 8](#saving-and-restoring-state)
+[4.2 Saving and Restoring State](#saving-and-restoring-state)
 
-[4.3 Resetting Devices 9](#resetting-devices)
+[4.3 Resetting Devices](#resetting-devices)
 
-[4.4 Connecting and Disconnecting Devices 9](#connecting-and-disconnecting-devices)
+[4.4 Connecting and Disconnecting Devices](#connecting-and-disconnecting-devices)
 
-[4.5 Examining and Changing State 10](#examining-and-changing-state)
+[4.5 Examining and Changing State](#examining-and-changing-state)
 
-[4.6 Evaluating Instructions 12](#evaluating-instructions)
+[4.6 Evaluating Instructions](#evaluating-instructions)
 
-[4.7 Running a Simulated Program 13](#running-a-simulated-program)
+[4.7 Running a Simulated Program](#running-a-simulated-program)
 
-[4.7.1 Controlling the Simulation Rate 13](#controlling-the-simulation-rate)
+[4.7.1 Controlling the Simulation Rate](#controlling-the-simulation-rate)
 
-[4.8 Stopping the Simulator 14](#stopping-the-simulator)
+[4.8 Stopping the Simulator](#stopping-the-simulator)
 
-[4.8.1 Simulator Detected Stop Conditions 14](#simulator-detected-stop-conditions)
+[4.8.1 Simulator Detected Stop Conditions](#simulator-detected-stop-conditions)
 
-[4.8.2 User Specified Stop Conditions 14](#user-specified-stop-conditions)
+[4.8.2 User Specified Stop Conditions](#user-specified-stop-conditions)
 
-[4.8.3 Breakpoints 14](#breakpoints)
+[4.8.3 Breakpoints](#breakpoints)
 
-[4.8.4 Execution Time Limits 15](#execution-time-limits)
+[4.8.4 Execution Time Limits](#execution-time-limits)
 
-[4.9 Halt on Output Data 15](#halt-on-output-data)
+[4.9 Halt on Output Data](#halt-on-output-data)
 
-[4.9.1 Switches 16](#switches)
+[4.9.1 Switches](#switches)
 
-[4.9.2 Determining which output matched 17](#determining-which-output-matched)
+[4.9.2 Determining which output matched](#determining-which-output-matched)
 
-[4.10 Injecting Input Data 17](#injecting-input-data)
+[4.10 Injecting Input Data](#injecting-input-data)
 
-[4.10.1 Delay 18](#delay)
+[4.10.1 Delay](#delay)
 
-[4.10.2 After 18](#after)
+[4.10.2 After](#after)
 
-[4.10.3 Escaping String Data 18](#escaping-string-data-1)
+[4.10.3 Escaping String Data](#escaping-string-data-1)
 
-[4.11 Setting Device Parameters 19](#setting-device-parameters)
+[4.11 Setting Device Parameters](#setting-device-parameters)
 
-[4.12 Displaying Parameters and Status 19](#displaying-parameters-and-status)
+[4.12 Displaying Parameters and Status](#displaying-parameters-and-status)
 
-[4.13 Altering the Simulated Configuration 20](#altering-the-simulated-configuration)
+[4.13 Altering the Simulated Configuration](#altering-the-simulated-configuration)
 
-[4.14 Console Options 21](#console-options)
+[4.14 Console Options](#console-options)
 
-[4.15 Remote Console 22](#remote-console)
+[4.15 Remote Console](#remote-console)
 
-[4.15.1 Master Mode 23](#master-mode)
+[4.15.1 Master Mode](#master-mode)
 
-[4.16 Executing Command Files 24](#executing-command-files)
+[4.16 Executing Command Files](#executing-command-files)
 
-[4.16.1 Default Command File executed on Simulator Startup 24](#default-command-file-executed-on-simulator-startup)
+[4.16.1 Default Command File executed on Simulator Startup](#default-command-file-executed-on-simulator-startup)
 
-[4.16.2 Change Command Execution Flow 25](#change-command-execution-flow)
+[4.16.2 Change Command Execution Flow](#change-command-execution-flow)
 
-[4.16.3 Subroutine Calls 25](#subroutine-calls)
+[4.16.3 Subroutine Calls](#subroutine-calls)
 
-[4.16.4 Pausing Command Execution 25](#pausing-command-execution)
+[4.16.4 Pausing Command Execution](#pausing-command-execution)
 
-[4.16.5 Displaying Arbitrary Text 25](#displaying-arbitrary-text)
+[4.16.5 Displaying Arbitrary Text](#displaying-arbitrary-text)
 
-[4.16.6 Testing Simulator State 26](#testing-simulator-state)
+[4.16.6 Testing Simulator State](#testing-simulator-state)
 
-[4.16.7 Trapping on command completion conditions 29](#trapping-on-command-completion-conditions)
+[4.16.7 Trapping on command completion conditions](#trapping-on-command-completion-conditions)
 
-[4.16.8 Command arguments 31](#command-arguments)
+[4.16.8 Command arguments](#command-arguments)
 
-[4.16.9 Command Aliases 33](#command-aliases)
+[4.16.9 Command Aliases](#command-aliases)
 
-[4.17 Executing System Commands 33](#executing-system-commands)
+[4.17 Executing System Commands](#executing-system-commands)
 
-[4.18 Getting Help 33](#getting-help)
+[4.18 Getting Help](#getting-help)
 
-[4.19 Recording Simulator activities 34](#recording-simulator-activities)
+[4.19 Recording Simulator activities](#recording-simulator-activities)
 
-[4.19.1 Switches 34](#switches-1)
+[4.19.1 Switches](#switches-1)
 
-[4.20 Controlling Debugging 34](#controlling-debugging)
+[4.20 Controlling Debugging](#controlling-debugging)
 
-[*4.20.1* *Switches* 34](#switches-2)
+[4.20.1 Switches](#switches-2)
 
-[*4.20.2* *Device Debug options* 35](#device-debug-options)
+[4.20.2 Device Debug options](#device-debug-options)
 
-[*4.20.3* *Displaying Debug settings* 35](#displaying-debug-settings)
+[4.20.3 Displaying Debug settings](#displaying-debug-settings)
 
-[4.21 Exiting the Simulator 35](#exiting-the-simulator)
+[4.21 Exiting the Simulator](#exiting-the-simulator)
 
-[4.22 Manipulating Files within the Simulator 36](#manipulating-files-within-the-simulator)
+[4.22 Manipulating Files within the Simulator](#manipulating-files-within-the-simulator)
 
-[4.22.1 Manipulating File Archives 36](#manipulating-file-archives)
+[4.22.1 Manipulating File Archives](#manipulating-file-archives)
 
-[4.22.2 Transferring data from the web 36](#transferring-data-from-the-web)
+[4.22.2 Transferring data from the web](#transferring-data-from-the-web)
 
-[Appendix 1: File Representations 36](#appendix-1-file-representations)
+[Appendix 1: File Representations](#appendix-1-file-representations)
 
-[A.1 Hard Disks 36](#a.1-hard-disks)
+[A.1 Hard Disks](#a.1-hard-disks)
 
-[A.2 Floppy Disks 36](#a.2-floppy-disks)
+[A.2 Floppy Disks](#a.2-floppy-disks)
 
-[A.3 Magnetic Tapes 37](#a.3-magnetic-tapes)
+[A.3 Magnetic Tapes](#a.3-magnetic-tapes)
 
-[A.4 Line Printers 38](#a.4-line-printers)
+[A.4 Line Printers](#a.4-line-printers)
 
-[A.5 DECtapes 38](#a.5-dectapes)
+[A.5 DECtapes](#a.5-dectapes)
 
-[Appendix 2: Debug Status 39](#appendix-2-debug-status)
+[Appendix 2: Debug Status](#appendix-2-debug-status)
 
-[Revision History (covering Rev 2.0 to Rev 3.5) 41](#revision-history-covering-rev-2.0-to-rev-3.5)
+[Revision History (covering Rev 2.0 to Rev 3.5)](#revision-history-covering-rev-2.0-to-rev-3.5)
 
-[Acknowledgements 47](#acknowledgements)
+[Acknowledgements](#acknowledgements)
 
 # Introduction
 
@@ -173,7 +173,7 @@ and are described in Section 3.13.
 The simulator interprets the arguments on the command line, if any, as
 the file name and arguments for a `DO` command:
 
-```sh
+```
 $ pdp10 {switches} {<startup file> {arg,arg,...}}
 ```
 
@@ -189,7 +189,7 @@ After initializing its internal structures and processing the startup
 file (if any), the simulator types out its name and version and then
 prompts for input with:
 
-```dcl
+```
 sim>
 ```
 
@@ -255,8 +255,8 @@ The simulators recognize or require a few compile-time `#define`s:
 
 The sources originate on a Windows system and have CR-LF line
 endings. For use on other systems, the sources may need to be
-converted to LF line endings. This can be done with the UNZIP utility
-(unzip -a).
+converted to LF line endings. This can be done with the `unzip`
+utility (`unzip -a`).
 
 The supplied `Makefile` will compile the simulators for Unix and
 Unix-like systems. The VAX and PDP-11 can be compiled with or without
@@ -270,7 +270,7 @@ level directory of the SIMH source.
 
 To compile with or without Ethernet support:
 
-```sh
+```
 gmake {target|ALL|clean}
 ```
 
@@ -289,19 +289,19 @@ Examples:
 
 - PDP-11 under TERMIOS Unix:
 
-```sh
+```
 $ cc -DVM_PDP11 pdp11_*.c scp.c sim_*.c -lm -o pdp11
 ```
 
 - PDP-9 under TERMIOS Unix:
 
-```sh
+```
 $ cc -DPDP9 pdp18b_*.c scp.c sim_*.c -lm -o pdp9
 ```
 
 - PDP-10 under BSD terminal Unix:
 
-```sh
+```
 $ cc -DVM_PDP10 -DUSE_INT64 -DBSDTTY pdp10_*.c scp.c sim_*.c -lm -o pdp10
 ```
 
@@ -377,7 +377,7 @@ processing. You will also have to turn off warning 4996 (“deprecated”
 string functions), or lower the warning level to `/W1`. Otherwise, the
 compilations will generate a lot of spurious conversion warnings.
 
-Alternatively, you can ‘start’ from a preexisting Visual Studio
+Alternatively, you can start from a preexisting Visual Studio
 project which may have similar components to the project you are
 trying to create. Starting from such a project is done by copying the
 existing `.vcproj` file to a project file with a new name. The MOST
@@ -430,7 +430,7 @@ $ link/exec=pdp8 scp.obj,sim_*.obj,[.pdp8]pdp8*.obj
 A simulator consists of a series of devices, the first of which is
 always the CPU. A device consists of named registers and one or more
 numbered units. Registers correspond to device state, units to device
-address spaces. Thus, the CPU device might have registers like `PC`,
+address spaces. Thus, the `CPU` device might have registers like `PC`,
 `ION`, etc., and a unit corresponding to main memory; a disk device
 might have registers like `BUSY`, `DONE`, etc., and units
 corresponding to individual disk drives. Except for main memory,
@@ -458,7 +458,7 @@ optional arguments. Switches take the form:
 
 Multiple switches may be specified separately or together: `-abcd` and
 `-a -b -c -d` are treated identically. Verbs, switches, and other input
-(except for file names) are case insensitive.
+(except for file names) are *case insensitive*.
 
 Any command beginning with semicolon (`;`) is considered a comment and
 ignored.
@@ -576,12 +576,12 @@ ATTACH -f <tape_unit> <format> <filename>
 
 The currently supported tape image file formats are:
 
-|      |                                 |
-|------|---------------------------------|
-| SIMH | SIMH simulator format           |
-| E11  | E11 simulator format            |
-| TPC  | TPC format                      |
-| P7B  | Pierce simulator 7-track format |
+|        |                                 |
+|--------|---------------------------------|
+| `SIMH` | SIMH simulator format           |
+| `E11`  | E11 simulator format            |
+| `TPC`  | TPC format                      |
+| `P7B`  | Pierce simulator 7-track format |
 
 The tape format can also be set with the SET command prior to `ATTACH`:
 
@@ -646,7 +646,7 @@ There are four kinds of modifiers: switches, device/unit name, search
 specifier, and for `EXAMINE`, output file. Switches have been
 described previously. A device/unit name identifies the device and
 unit whose address space is to be examined or modified. If no device
-is specified, the CPU (main memory)is selected; if a device but no
+is specified, the CPU (main memory) is selected; if a device but no
 unit is specified, unit 0 of the device is selected.
 
 The search specifier provides criteria for testing addresses or
