@@ -799,7 +799,7 @@ running the CPU and is the usual way of resuming execution after a
 programmed halt. If an I/O reset is required before resuming
 execution, the `RESET` and `GO` commands are recommended instead of
 `RUN`. If `RUN` is entered a second time without an explicit `RESET`
-preceding it, a warning is printed on the simulation console:
+preceding it, a warning is printed on the simulation console...:
 
 ```
 Resetting all devices... This may not have been your intention.
@@ -881,9 +881,9 @@ simulators support only `E` (execution) breakpoints.
 
 Associated with a breakpoint are a count and, optionally, one or more
 actions. Each time the breakpoint is taken, the associated count is
-decremented. If the count is less than or equal to 0, the breakpoint
-occurs; otherwise, it is deferred. When the breakpoint occurs, the
-optional actions are automatically executed.
+decremented. If the count is less than or equal to zero, the
+breakpoint occurs; otherwise, it is deferred. When the breakpoint
+occurs, the optional actions are automatically executed.
 
 A breakpoint is set by the `BREAK` command:
 
@@ -901,10 +901,10 @@ Examples:
 
 |                          |                                                  |
 |--------------------------|--------------------------------------------------|
-| `BREAK`                  | set E break at current PC                        |
-| `BREAK -e 200`           | set E break at 200                               |
-| `BREAK 2000/2[2]`        | set E breaks at 2000,2001 with count = 2         |
-| `BREAK 100;EX AC;D MQ 0` | set E break at 100 with actions EX AC and D MQ 0 |
+| `BREAK`                  | set `E` break at current PC                      |
+| `BREAK -e 200`           | set `E` break at 200                             |
+| `BREAK 2000/2[2]`        | set `E` breaks at 2000,2001 with `count = 2`     |
+| `BREAK 100;EX AC;D MQ 0` | set `E` break at 100 with actions `EX AC` and `D MQ 0` |
 | `BREAK 100;`             | delete action on break at 100                    |
 
 Currently set breakpoints can be displayed with the `SHOW BREAK` command:
@@ -1713,9 +1713,9 @@ parenthesis.
 | `/`  | Division              |
 | `%`  | Modulus               |
 | `&&` | Logical AND           |
-| `||` | Logical OR            |
+| `\|\|` | Logical OR          |
 | `&`  | Bitwise AND           |
-| `|`  | Bitwise Inclusive OR  |
+| `\|` | Bitwise Inclusive OR  |
 | `^`  | Bitwise Exclusive OR  |
 | `>>` | Bitwise Right Shift   |
 | `<<` | Bitwise Left Shift    |
