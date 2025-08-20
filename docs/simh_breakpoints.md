@@ -23,7 +23,7 @@ If debugging is going to be a major activity on a simulator,
 implementation of a full-featured breakpoint facility will be of
 immense help to users.
 
-\[\* Breakpoint type C should probably be avoided since the `–C` switch
+\[\* Breakpoint type `C` should probably be avoided since the `–C` switch
 is used by the `SHOW BREAK –C` command to display currently defined
 breakpoints as commands which can be entered in a subsequent
 invocation of the simulator to recreate the same breakpoint set.\]
@@ -50,7 +50,7 @@ two variables:
 
 - `sim_brk_types` – initialized by the VM (usually in the CPU reset
   routine) to a mask of all supported breakpoints; bit 0 (low order
-  bit) corresponds to type ‘A’, bit 1 to type ‘B’, etc.
+  bit) corresponds to type `A`, bit 1 to type `B`, etc.
 
 - `sim_brk_dflt` – initialized by the VM to the mask for the default
   breakpoint type.
