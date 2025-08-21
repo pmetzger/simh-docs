@@ -86,125 +86,73 @@ To compile the VAX-11/780, you must define `VM_VAX`, `VAX780`, and
 file support (files greater than 2GB), you must define `USE_ADDR64` as
 part of the command line as well.
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_disk.h
-
-sim_ether.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_serial.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_disk.c
-
-sim_ether.c
-
-sim_fio.c
-
-sim_serial.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/vax/ vax_defs.h
-
-vax780_defs.h
-
-vax_vmb_exe.h
-
-vax_cis.c
-
-vax_cmode.c
-
-vax_cpu.c
-
-vax_cpu1.c
-
-vax_fpa.c
-
-vax_mmu.c
-
-vax_octa.c
-
-vax_sys.c
-
-vax_syscm.c
-
-vax7x0_mba.c
-
-vax780_mem.c
-
-vax780_sbi.c
-
-vax780_stddev.c
-
-vax780_syslist.c
-
-vax780_uba.c
-
-sim/pdp11/ pdp11_cr_dat.h
-
-> pdp11_mscp.h
-
-pdp11_uqssp.h
-
-pdp11_xu.h
-
-pdp11_cr.c
-
-pdp11_dmc.c
-
-pdp11_dz.c
-
-pdp11_hk.c
-
-pdp11_lp.c
-
-pdp11_rl.c
-
-pdp11_rp.c
-
-pdp11_rq.c
-
-pdp11_ry.c
-
-pdp11_tq.c
-
-pdp11_ts.c
-
-pdp11_tu.c
-
-pdp11_vh.c
-
-pdp11_xu.c
+| directory    | file               |
+|--------------|--------------------|
+| `sim/`       | scp.h              |
+|              | `sim_console.h`    |
+|              | `sim_defs.h`       |
+|              | `sim_disk.h`       |
+|              | `sim_ether.h`      |
+|              | `sim_fio.h`        |
+|              | `sim_rev.h`        |
+|              | `sim_serial.h`     |
+|              | `sim_sock.h`       |
+|              | `sim_tape.h`       |
+|              | `sim_timer.h`      |
+|              | `sim_tmxr.h`       |
+|              | `scp.c`            |
+|              | `sim_console.c`    |
+|              | `sim_disk.c`       |
+|              | `sim_ether.c`      |
+|              | `sim_fio.c`        |
+|              | `sim_serial.c`     |
+|              | `sim_sock.c`       |
+|              | `sim_tape.c`       |
+|              | `sim_timer.c`      |
+|              | `sim_tmxr.c`       |
+|              |                    |
+| `sim/vax/`   | `vax_defs.h`       |
+|              | `vax780_defs.h`    |
+|              | `vax_vmb_exe.h`    |
+|              | `vax_cis.c`        |
+|              | `vax_cmode.c`      |
+|              | `vax_cpu.c`        |
+|              | `vax_cpu1.c`       |
+|              | `vax_fpa.c`        |
+|              | `vax_mmu.c`        |
+|              | `vax_octa.c`       |
+|              | `vax_sys.c`        |
+|              | `vax_syscm.c`      |
+|              | `vax7x0_mba.c`     |
+|              | `vax780_mem.c`     |
+|              | `vax780_sbi.c`     |
+|              | `vax780_stddev.c`  |
+|              | `vax780_syslist.c` |
+|              | `vax780_uba.c`     |
+|              |                    |
+| `sim/pdp11/` | `pdp11_cr_dat.h`   |
+|              | `pdp11_mscp.h`     |
+|              | `pdp11_uqssp.h`    |
+|              | `pdp11_xu.h`       |
+|              | `pdp11_cr.c`       |
+|              | `pdp11_dmc.c`      |
+|              | `pdp11_dz.c`       |
+|              | `pdp11_hk.c`       |
+|              | `pdp11_lp.c`       |
+|              | `pdp11_rl.c`       |
+|              | `pdp11_rp.c`       |
+|              | `pdp11_rq.c`       |
+|              | `pdp11_ry.c`       |
+|              | `pdp11_tq.c`       |
+|              | `pdp11_ts.c`       |
+|              | `pdp11_tu.c`       |
+|              | `pdp11_vh.c`       |
+|              | `pdp11_xu.c`       |
 
 Additional files are:
 
-sim/vax/ vmb.exe standard boot code
+| directory  | file      | description        |
+| `sim/vax/` | `vmb.exe` | standard boot code |
 
 # VAX780 Features
 
