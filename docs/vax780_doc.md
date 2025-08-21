@@ -1,96 +1,90 @@
-**VAX-11/780 Simulator Usage**
+# VAX-11/780 Simulator Usage
 
-**8-Aug-2021**
+Revision of 8-Aug-2021
 
-**COPYRIGHT NOTICE**
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-> Original code published in 1993-2016, written by Robert M Supnik
->
-> Copyright (c) 1993-2016, Robert M Supnik
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
->
-> CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-> Except as contained in this notice, the name of Robert M Supnik shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Robert M Supnik.
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-[1 Simulator Files 3](#simulator-files)
+# Table of Contents
 
-[2 VAX780 Features 4](#vax780-features)
+[1 Simulator Files](#simulator-files)
 
-[2.1 CPU and System Devices 5](#cpu-and-system-devices)
+[2 VAX780 Features](#vax780-features)
 
-[2.1.1 CPU 5](#cpu)
+[2.1 CPU and System Devices](#cpu-and-system-devices)
 
-[2.1.2 Translation Buffer (TLB) 7](#translation-buffer-tlb)
+[2.1.1 CPU](#cpu)
 
-[2.1.3 SBI Controller (SBI) 7](#sbi-controller-sbi)
+[2.1.2 Translation Buffer (TLB)](#translation-buffer-tlb)
 
-[2.1.4 Memory Controllers (MCTL0, MCTL1) 8](#memory-controllers-mctl0-mctl1)
+[2.1.3 SBI Controller (SBI)](#sbi-controller-sbi)
 
-[2.1.5 Time-Of-Day Clock (TODR) 8](#time-of-day-clock-todr)
+[2.1.4 Memory Controllers (MCTL0, MCTL1)](#memory-controllers-mctl0-mctl1)
 
-[2.1.6 Interval Timer (TMR) 8](#interval-timer-tmr)
+[2.1.5 Time-Of-Day Clock (TODR)](#time-of-day-clock-todr)
 
-[2.1.7 Unibus Adapter (UBA) 9](#unibus-adapter-uba)
+[2.1.6 Interval Timer (TMR)](#interval-timer-tmr)
 
-[2.1.8 Massbus Adapters (MBA0, MBA1) 10](#massbus-adapters-mba0-mba1)
+[2.1.7 Unibus Adapter (UBA)](#unibus-adapter-uba)
 
-[2.2 I/O Device Addressing 10](#io-device-addressing)
+[2.1.8 Massbus Adapters (MBA0, MBA1)](#massbus-adapters-mba0-mba1)
 
-[2.3 Programmed I/O Devices 11](#programmed-io-devices)
+[2.2 I/O Device Addressing](#io-device-addressing)
 
-[2.3.1 Console Input (TTI) 11](#console-input-tti)
+[2.3 Programmed I/O Devices](#programmed-io-devices)
 
-[2.3.2 Console Output (TTO) 11](#console-output-tto)
+[2.3.1 Console Input (TTI)](#console-input-tti)
 
-[2.3.3 RX01 Console Floppy Disk (RXC) 11](#rx01-console-floppy-disk-rxc)
+[2.3.2 Console Output (TTO)](#console-output-tto)
 
-[2.3.4 Line Printer (LPT) 12](#line-printer-lpt)
+[2.3.3 RX01 Console Floppy Disk (RXC)](#rx01-console-floppy-disk-rxc)
 
-[2.4 Disks 13](#disks)
+[2.3.4 Line Printer (LPT)](#line-printer-lpt)
 
-[2.4.1 RP04/05/06/07, RM02/03/05/80 Disk Pack Drives (RP) 13](#rp04050607-rm02030580-disk-pack-drives-rp)
+[2.4 Disks](#disks)
 
-[2.4.2 RL11/RL01/RL02 Cartridge Disk (RL) 14](#rl11rl01rl02-cartridge-disk-rl)
+[2.4.1 RP04/05/06/07, RM02/03/05/80 Disk Pack Drives (RP)](#rp04050607-rm02030580-disk-pack-drives-rp)
 
-[2.4.3 RK611/RK06/RK07 Cartridge Disk (HK) 15](#rk611rk06rk07-cartridge-disk-hk)
+[2.4.2 RL11/RL01/RL02 Cartridge Disk (RL)](#rl11rl01rl02-cartridge-disk-rl)
 
-[2.4.4 UDA50 MSCP Disk Controllers (RQ, RQB, RQC, RQD) 16](#uda50-mscp-disk-controllers-rq-rqb-rqc-rqd)
+[2.4.3 RK611/RK06/RK07 Cartridge Disk (HK)](#rk611rk06rk07-cartridge-disk-hk)
 
-[2.5 Tapes 17](#tapes)
+[2.4.4 UDA50 MSCP Disk Controllers (RQ, RQB, RQC, RQD)](#uda50-mscp-disk-controllers-rq-rqb-rqc-rqd)
 
-[2.5.1 TM03/TE16/TU45/TU77 Magnetic Tapes (TU) 17](#tm03te16tu45tu77-magnetic-tapes-tu)
+[2.5 Tapes](#tapes)
 
-[2.5.2 TS11 Magnetic Tape (TS) 18](#ts11-magnetic-tape-ts)
+[2.5.1 TM03/TE16/TU45/TU77 Magnetic Tapes (TU)](#tm03te16tu45tu77-magnetic-tapes-tu)
 
-[2.5.3 TUK50 TMSCP Tape Controller (TQ) 19](#tuk50-tmscp-tape-controller-tq)
+[2.5.2 TS11 Magnetic Tape (TS)](#ts11-magnetic-tape-ts)
 
-[2.6 Communications Devices 21](#communications-devices)
+[2.5.3 TUK50 TMSCP Tape Controller (TQ)](#tuk50-tmscp-tape-controller-tq)
 
-[2.6.1 DZ11 Terminal Multiplexer (DZ) 21](#dz11-terminal-multiplexer-dz)
+[2.6 Communications Devices](#communications-devices)
 
-[2.6.2 DHU11 Terminal Multiplexer (VH) 22](#dhu11-terminal-multiplexer-vh)
+[2.6.1 DZ11 Terminal Multiplexer (DZ)](#dz11-terminal-multiplexer-dz)
 
-[2.6.3 DELUA/DEUNA Unibus Ethernet Controllers (XU, XUB) 23](#deluadeuna-unibus-ethernet-controllers-xu-xub)
+[2.6.2 DHU11 Terminal Multiplexer (VH)](#dhu11-terminal-multiplexer-vh)
 
-[2.6.4 DMC11/DMR11 Unibus DDCMP Controllers 24](#dmc11dmr11-unibus-ddcmp-controllers)
+[2.6.3 DELUA/DEUNA Unibus Ethernet Controllers (XU, XUB)](#deluadeuna-unibus-ethernet-controllers-xu-xub)
 
-[2.7 CR11 Card Reader (CR) 29](#cr11-card-reader-cr)
+[2.6.4 DMC11/DMR11 Unibus DDCMP Controllers](#dmc11dmr11-unibus-ddcmp-controllers)
 
-[3 Symbolic Display and Input 30](#symbolic-display-and-input)
+[2.7 CR11 Card Reader (CR)](#cr11-card-reader-cr)
+
+[3 Symbolic Display and Input](#symbolic-display-and-input)
 
 This memorandum documents the DEC VAX-11/780 simulator.
 
 # Simulator Files
 
-To compile the VAX-11/780, you must define VM_VAX, VAX780, and USE_INT64 as part of the compilation command line. To enable extended file support (files greater than 2GB), you must define USE_ADDR64 as part of the command line as well.
+To compile the VAX-11/780, you must define `VM_VAX`, `VAX780`, and
+`USE_INT64` as part of the compilation command line. To enable extended
+file support (files greater than 2GB), you must define `USE_ADDR64` as
+part of the command line as well.
 
 sim/ scp.h
 
