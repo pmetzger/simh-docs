@@ -267,59 +267,59 @@ command is not implemented.
 The CPU options include CPU type, CPU instruction set options for the
 specified type, and the size of main memory.
 
-| command                 | effect                    |
-|-------------------------|---------------------------|
-| `SET CPU 11/03`         | set CPU type to 11/03     |
-| `SET CPU 11/04`         | set CPU type to 11/04     |
-| `SET CPU 11/05`         | set CPU type to 11/05     |
-| `SET CPU 11/20`         | set CPU type to 11/20     |
-| `SET CPU 11/23`         | set CPU type to 11/23     |
-| `SET CPU 11/23+`        | set CPU type to 11/23+    |
-| `SET CPU 11/24`         | set CPU type to 11/24     |
-| `SET CPU 11/34`         | set CPU type to 11/34     |
-| `SET CPU 11/40`         | set CPU type to 11/40     |
-| `SET CPU 11/44`         | set CPU type to 11/44     |
-| `SET CPU 11/45`         | set CPU type to 11/45     |
-| `SET CPU 11/53`         | set CPU type to 11/53     |
-| `SET CPU 11/60`         | set CPU type to 11/60     |
-| `SET CPU 11/70`         | set CPU type to 11/70     |
-| `SET CPU 11/73`         | set CPU type to 11/73     |
-| `SET CPU 11/73B`        | set CPU type to 11/73B    |
-| `SET CPU 11/83`         | set CPU type to 11/83     |
-| `SET CPU 11/84`         | set CPU type to 11/84     |
-| `SET CPU 11/93`         | set CPU type to 11/93     |
-| `SET CPU 11/94`         | set CPU type to 11/94     |
-| `SET CPU U18`           | deprecated; same as 11/45 |
-| `SET CPU URH11`         | deprecated; same as 11/84 |
-| `SET CPU URH70`         | deprecated; same as 11/70 |
-| `SET CPU Q22`           | deprecated; same as 11/73 |
-| `SET CPU NOEIS`         | disable EIS instructions  |
-| `SET CPU EIS`           | enable EIS instructions   |
-| `SET CPU NOFIS`         | disable FIS instructions  |
-| `SET CPU FIS`           | enable FIS instructions   |
-| `SET CPU NOFPP`         | disable FPP instructions  |
-| `SET CPU FPP`           | enable FPP instructions   |
-| `SET CPU NOCIS`         | disable CIS instructions  |
-| `SET CPU CIS`           | enable CIS instructions   |
-| `SET CPU NOBEVENT`      | disable BEVENT interrupt  |
-| `SET CPU BEVENT`        | enable BEVENT interrupt   |
-| `SET CPU NOMMU`         | disable MMU functionality |
-| `SET CPU MMU`           | enable MMU functionality  |
-| `SET CPU 16K`           | set memory size = 16KB    |
-| `SET CPU 32K`           | set memory size = 32KB    |
-| `SET CPU 48K`           | set memory size = 48KB    |
-| `SET CPU 64K`           | set memory size = 64KB    |
-| `SET CPU 96K`           | set memory size = 96KB    |
-| `SET CPU 128K`          | set memory size = 128KB   |
-| `SET CPU 192K`          | set memory size = 192KB   |
-| `SET CPU 256K`          | set memory size = 256KB   |
-| `SET CPU 384K`          | set memory size = 384KB   |
-| `SET CPU 512K`          | set memory size = 512KB   |
-| `SET CPU 768K`          | set memory size = 768KB   |
-| `SET CPU 1024K (or 1M)` | set memory size = 1024KB  |
-| `SET CPU 2048K (or 2M)` | set memory size = 2048KB  |
-| `SET CPU 3072K (or 3M)` | set memory size = 3072KB  |
-| `SET CPU 4096K (or 4M)` | set memory size = 4096KB  |
+| command                 | effect                      |
+|-------------------------|-----------------------------|
+| `SET CPU 11/03`         | set CPU type to `11/03`     |
+| `SET CPU 11/04`         | set CPU type to `11/04`     |
+| `SET CPU 11/05`         | set CPU type to `11/05`     |
+| `SET CPU 11/20`         | set CPU type to `11/20`     |
+| `SET CPU 11/23`         | set CPU type to `11/23`     |
+| `SET CPU 11/23+`        | set CPU type to `11/23+`    |
+| `SET CPU 11/24`         | set CPU type to `11/24`     |
+| `SET CPU 11/34`         | set CPU type to `11/34`     |
+| `SET CPU 11/40`         | set CPU type to `11/40`     |
+| `SET CPU 11/44`         | set CPU type to `11/44`     |
+| `SET CPU 11/45`         | set CPU type to `11/45`     |
+| `SET CPU 11/53`         | set CPU type to `11/53`     |
+| `SET CPU 11/60`         | set CPU type to `11/60`     |
+| `SET CPU 11/70`         | set CPU type to `11/70`     |
+| `SET CPU 11/73`         | set CPU type to `11/73`     |
+| `SET CPU 11/73B`        | set CPU type to `11/73B`    |
+| `SET CPU 11/83`         | set CPU type to `11/83`     |
+| `SET CPU 11/84`         | set CPU type to `11/84`     |
+| `SET CPU 11/93`         | set CPU type to `11/93`     |
+| `SET CPU 11/94`         | set CPU type to `11/94`     |
+| `SET CPU U18`           | deprecated; same as `11/45` |
+| `SET CPU URH11`         | deprecated; same as `11/84` |
+| `SET CPU URH70`         | deprecated; same as `11/70` |
+| `SET CPU Q22`           | deprecated; same as `11/73` |
+| `SET CPU NOEIS`         | disable EIS instructions    |
+| `SET CPU EIS`           | enable EIS instructions     |
+| `SET CPU NOFIS`         | disable FIS instructions    |
+| `SET CPU FIS`           | enable FIS instructions     |
+| `SET CPU NOFPP`         | disable FPP instructions    |
+| `SET CPU FPP`           | enable FPP instructions     |
+| `SET CPU NOCIS`         | disable CIS instructions    |
+| `SET CPU CIS`           | enable CIS instructions     |
+| `SET CPU NOBEVENT`      | disable BEVENT interrupt    |
+| `SET CPU BEVENT`        | enable BEVENT interrupt     |
+| `SET CPU NOMMU`         | disable MMU functionality   |
+| `SET CPU MMU`           | enable MMU functionality    |
+| `SET CPU 16K`           | set memory size = 16KB      |
+| `SET CPU 32K`           | set memory size = 32KB      |
+| `SET CPU 48K`           | set memory size = 48KB      |
+| `SET CPU 64K`           | set memory size = 64KB      |
+| `SET CPU 96K`           | set memory size = 96KB      |
+| `SET CPU 128K`          | set memory size = 128KB     |
+| `SET CPU 192K`          | set memory size = 192KB     |
+| `SET CPU 256K`          | set memory size = 256KB     |
+| `SET CPU 384K`          | set memory size = 384KB     |
+| `SET CPU 512K`          | set memory size = 512KB     |
+| `SET CPU 768K`          | set memory size = 768KB     |
+| `SET CPU 1024K (or 1M)` | set memory size = 1024KB    |
+| `SET CPU 2048K (or 2M)` | set memory size = 2048KB    |
+| `SET CPU 3072K (or 3M)` | set memory size = 3072KB    |
+| `SET CPU 4096K (or 4M)` | set memory size = 4096KB    |
 
 The CPU types and their capabilities are shown in the following table:
 
@@ -2552,47 +2552,47 @@ sixteen instruction classes:
 
 | class        | operands               | examples           | comments   |
 |--------------|------------------------|--------------------|------------|
-| no operands  | none                   | HALT, RESET        |            |
-| 3b literal   | literal [0 to 7]       | SPL                |            |
-| 6b literal   | literal [0-077]        | MARK               |            |
-| 8b literal   | literal [0-0377]       | EMT, TRAP          |            |
-| register     | register               | RTS                |            |
-| sop          | specifier              | SWAB, CLR, ASL     |            |
-| reg-sop      | register, specifier    | JSR, XOR, MUL      |            |
-| fop          | flt specifier          | ABSf, NEGf         |            |
-| ac-fop       | flt reg, flt specifier | LDf, MULf          |            |
-| ac-sop       | flt reg, specifier     | LDEXP, STEXP       |            |
-| ac-moded sop | flt reg, specifier     | LDCif, STCfi       |            |
-| dop          | specifier, specifier   | MOV, ADD, BIC      |            |
-| cond branch  | address                | BR, BCC, BNE       |            |
-| sob          | register, address      | SOB                |            |
-| cc clear     | cc clear instructions  | CLC, CLV, CLZ, CLN | combinable |
-| cc set       | cc set instructions    | SEC, SEV, SEZ, SEN | combinable |
+| no operands  | none                   | `HALT`, `RESET`    |            |
+| 3b literal   | literal [0 to 7]       | `SPL`              |            |
+| 6b literal   | literal [0-077]        | `MARK`             |            |
+| 8b literal   | literal [0-0377]       | `EMT`, `TRAP`      |            |
+| register     | register               | `RTS`               |           |
+| sop          | specifier              | `SWAB`, `CLR`, `ASL` |          |
+| reg-sop      | register, specifier    | `JSR`, `XOR`, `MUL`  |            |
+| fop          | flt specifier          | `ABSf`, `NEGf`       |            |
+| ac-fop       | flt reg, flt specifier | `LDf`, `MULf`        |            |
+| ac-sop       | flt reg, specifier     | `LDEXP`, `STEXP`     |            |
+| ac-moded sop | flt reg, specifier     | `LDCif`, `STCfi`     |            |
+| dop          | specifier, specifier   | `MOV`, `ADD`, `BIC`  |            |
+| cond branch  | address                | `BR`, `BCC`, `BNE`   |            |
+| sob          | register, address      | `SOB`                |            |
+| cc clear     | cc clear instructions  | `CLC`, `CLV`, `CLZ`, `CLN` | combinable |
+| cc set       | cc set instructions    | `SEC`, `SEV`, `SEZ`, `SEN` | combinable |
 
 
-For floating point opcodes, F and D variants, and I and L variants,
-may be specified regardless of the state of FPS.
+For floating point opcodes, `F` and `D` variants, and `I` and `L`
+variants, may be specified regardless of the state of `FPS`.
 
 The syntax for specifiers is as follows:
 
-| syntax        | specifier | displacement      | comments                |
-|---------------|-----------|-------------------|-------------------------|
-| `Rn`          | `0n`      | -                 |                         |
-| `Fn`          | `0n`      | -                 | only in flt reg classes |
-| `(Rn)`        | `1n`      | -                 |                         |
-| `@(Rn)`       | `7n`      | 0                 | equivalent to @0(Rn)    |
-| `(Rn)+`       | `2n`      | -                 |                         |
-| `@(Rn)+`      | `3n`      | -                 |                         |
-| `-(Rn)`       | `4n`      | -                 |                         |
-| `@-(Rn)`      | `5n`      | -                 |                         |
-| `{+/-}d(Rn)`  | `6n`      | `{+/-}d`          |                         |
-| `@{+/-}d(Rn)` | `7n`      | `{+/-}d`          |                         |
-| `#n`          | `27`      | `n`               |                         |
-| `@#n`         | `37`      | `n`               |                         |
-| `.+/-n`       | `67`      | `+/-n - 4`        |                         |
-| `@.+/-n`      | `77`      | `+/-n - 4`        |                         |
-| `{+/-}n`      | `67`      | `{+/-}n - PC - 4` | if on disk, 37 and n    |
-| `@{+/-}n`     | `77`      | `{+/-}n - PC - 4` | if on disk, invalid     |
+| syntax        | specifier | displacement      | comments                 |
+|---------------|-----------|-------------------|--------------------------|
+| `Rn`          | `0n`      | -                 |                          |
+| `Fn`          | `0n`      | -                 | only in flt reg classes  |
+| `(Rn)`        | `1n`      | -                 |                          |
+| `@(Rn)`       | `7n`      | 0                 | equivalent to `@0(Rn)`   |
+| `(Rn)+`       | `2n`      | -                 |                          |
+| `@(Rn)+`      | `3n`      | -                 |                          |
+| `-(Rn)`       | `4n`      | -                 |                          |
+| `@-(Rn)`      | `5n`      | -                 |                          |
+| `{+/-}d(Rn)`  | `6n`      | `{+/-}d`          |                          |
+| `@{+/-}d(Rn)` | `7n`      | `{+/-}d`          |                          |
+| `#n`          | `27`      | `n`               |                          |
+| `@#n`         | `37`      | `n`               |                          |
+| `.+/-n`       | `67`      | `+/-n - 4`        |                          |
+| `@.+/-n`      | `77`      | `+/-n - 4`        |                          |
+| `{+/-}n`      | `67`      | `{+/-}n - PC - 4` | if on disk, `37` and `n` |
+| `@{+/-}n`     | `77`      | `{+/-}n - PC - 4` | if on disk, invalid      |
 
 # The UC15
 
