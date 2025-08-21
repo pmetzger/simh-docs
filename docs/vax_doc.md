@@ -1,192 +1,141 @@
-**VAX (MicroVAX 3900) Simulator Usage**
+# VAX (MicroVAX 3900) Simulator Usage
 
-**23-Apr-2018**
+Revision of 23-Apr-2018
 
-**COPYRIGHT NOTICE**
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-> Original code published in 1993-2016, written by Robert M Supnik
->
-> Copyright (c) 1993-2016, Robert M Supnik
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
->
-> CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-> Except as contained in this notice, the name of Robert M Supnik shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Robert M Supnik.
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-[1 Simulator Files 3](#simulator-files)
+# Table of Contents
 
-[2 VAX Features 4](#vax-features)
+[1 Simulator Files](#simulator-files)
 
-[2.1 CPU and System Devices 5](#cpu-and-system-devices)
+[2 VAX Features](#vax-features)
 
-[2.1.1 CPU 5](#cpu)
+[2.1 CPU and System Devices](#cpu-and-system-devices)
 
-[2.1.2 Translation Buffer (TLB) 7](#translation-buffer-tlb)
+[2.1.1 CPU](#cpu)
 
-[2.1.3 Qbus Adapter (QBA) 7](#qbus-adapter-qba)
+[2.1.2 Translation Buffer (TLB)](#translation-buffer-tlb)
 
-[2.1.4 Read-only memory (ROM) 8](#read-only-memory-rom)
+[2.1.3 Qbus Adapter (QBA)](#qbus-adapter-qba)
 
-[2.1.5 Non-volatile Memory (NVR) 8](#non-volatile-memory-nvr)
+[2.1.4 Read-only memory (ROM)](#read-only-memory-rom)
 
-[2.1.6 System Devices (SYSD) 8](#system-devices-sysd)
+[2.1.5 Non-volatile Memory (NVR)](#non-volatile-memory-nvr)
 
-[2.2 I/O Device Addressing 9](#io-device-addressing)
+[2.1.6 System Devices (SYSD)](#system-devices-sysd)
 
-[2.3 Programmed I/O Devices 10](#programmed-io-devices)
+[2.2 I/O Device Addressing](#io-device-addressing)
 
-[2.3.1 Terminal Input (TTI) 10](#terminal-input-tti)
+[2.3 Programmed I/O Devices](#programmed-io-devices)
 
-[2.3.2 Terminal Output (TTO) 10](#terminal-output-tto)
+[2.3.1 Terminal Input (TTI)](#terminal-input-tti)
 
-[2.3.3 LPV11 Line Printer (LPT) 11](#lpv11-line-printer-lpt)
+[2.3.2 Terminal Output (TTO)](#terminal-output-tto)
 
-[2.3.4 Real-Time Clock (CLK) 11](#real-time-clock-clk)
+[2.3.3 LPV11 Line Printer (LPT)](#lpv11-line-printer-lpt)
 
-[2.4 Disks 12](#disks)
+[2.3.4 Real-Time Clock (CLK)](#real-time-clock-clk)
 
-[2.4.1 RLV12/RL01,RL02 Cartridge Disk (RL) 12](#rlv12rl01rl02-cartridge-disk-rl)
+[2.4 Disks](#disks)
 
-[2.4.2 RQDX3 MSCP Disk Controllers (RQ, RQB, RQC, RQD) 13](#rqdx3-mscp-disk-controllers-rq-rqb-rqc-rqd)
+[2.4.1 RLV12/RL01,RL02 Cartridge Disk (RL)](#rlv12rl01rl02-cartridge-disk-rl)
 
-[2.5 Tapes 14](#tapes)
+[2.4.2 RQDX3 MSCP Disk Controllers (RQ, RQB, RQC, RQD)](#rqdx3-mscp-disk-controllers-rq-rqb-rqc-rqd)
 
-[2.5.1 TSV11/TSV05 Magnetic Tape (TS) 14](#tsv11tsv05-magnetic-tape-ts)
+[2.5 Tapes](#tapes)
 
-[2.5.2 TQK50 TMSCP Tape Controller (TQ) 15](#tqk50-tmscp-tape-controller-tq)
+[2.5.1 TSV11/TSV05 Magnetic Tape (TS)](#tsv11tsv05-magnetic-tape-ts)
 
-[2.6 Communications Devices 17](#communications-devices)
+[2.5.2 TQK50 TMSCP Tape Controller (TQ)](#tqk50-tmscp-tape-controller-tq)
 
-[2.6.1 DZV11 Terminal Multiplexer (DZ) 17](#dzv11-terminal-multiplexer-dz)
+[2.6 Communications Devices](#communications-devices)
 
-[2.6.2 DHQ11 Terminal Multiplexer (VH) 18](#dhq11-terminal-multiplexer-vh)
+[2.6.1 DZV11 Terminal Multiplexer (DZ)](#dzv11-terminal-multiplexer-dz)
 
-[2.6.3 DELQA-T/DELQA/DEQNA Qbus Ethernet Controllers (XQ, XQB) 20](#delqa-tdelqadeqna-qbus-ethernet-controllers-xq-xqb)
+[2.6.2 DHQ11 Terminal Multiplexer (VH)](#dhq11-terminal-multiplexer-vh)
 
-[2.7 CR11 Card Reader (CR) 21](#cr11-card-reader-cr)
+[2.6.3 DELQA-T/DELQA/DEQNA Qbus Ethernet Controllers (XQ, XQB)](#delqa-tdelqadeqna-qbus-ethernet-controllers-xq-xqb)
 
-[3 Symbolic Display and Input 23](#symbolic-display-and-input)
+[2.7 CR11 Card Reader (CR)](#cr11-card-reader-cr)
 
-[Appendix - The KA655"X" 24](#appendix---the-ka655x)
+[3 Symbolic Display and Input](#symbolic-display-and-input)
+
+[Appendix - The KA655"X"](#appendix---the-ka655x)
 
 This memorandum documents the DEC VAX (MicroVAX 3900) simulator.
 
 # Simulator Files
 
-To compile the VAX, you must define VM_VAX and USE_INT64 as part of the compilation command line. To enable extended file support (files greater than 2GB), you must define USE_ADDR64 as part of the command line as well.
+To compile the VAX, you must define `VM_VAX` and `USE_INT64` as part of
+the compilation command line. To enable extended file support (files
+greater than 2GB), you must define `USE_ADDR64` as part of the command
+line as well.
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_disk.h
-
-sim_ether.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_serial.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_disk.c
-
-sim_ether.c
-
-sim_fio.c
-
-sim_serial.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/vax/ vax_defs.h
-
-vax_ka655x_bin.h
-
-vaxmod_defs.h
-
-vax_cis.c
-
-vax_cmode.c
-
-vax_cpu.c
-
-vax_cpu1.c
-
-vax_fpa.c
-
-vax_io.c
-
-vax_mmu.c
-
-vax_octa.c
-
-vax_stddev.c
-
-vax_sys.c
-
-vax_syscm.c
-
-vax_sysdev.c
-
-vax_syslist.c
-
-sim/pdp11/ pdp11_cr_dat.h
-
-> pdp11_mscp.h
-
-pdp11_uqssp.h
-
-pdp11_xq.h
-
-pdp11_xq_bootrom.h
-
-pdp11_cr.c
-
-pdp11_lp.c
-
-pdp11_rl.c
-
-pdp11_rq.c
-
-pdp11_tq.c
-
-pdp11_ts.c
-
-pdp11_vh.c
-
-pdp11_xq.c
+| directory    | file                 |
+|--------------|----------------------|
+| `sim/`       | `scp.h`              |
+|              | `sim_console.h`      |
+|              | `sim_defs.h`         |
+|              | `sim_disk.h`         |
+|              | `sim_ether.h`        |
+|              | `sim_fio.h`          |
+|              | `sim_rev.h`          |
+|              | `sim_serial.h`       |
+|              | `sim_sock.h`         |
+|              | `sim_tape.h`         |
+|              | `sim_timer.h`        |
+|              | `sim_tmxr.h`         |
+|              | `scp.c`              |
+|              | `sim_console.c`      |
+|              | `sim_disk.c`         |
+|              | `sim_ether.c`        |
+|              | `sim_fio.c`          |
+|              | `sim_serial.c`       |
+|              | `sim_sock.c`         |
+|              | `sim_tape.c`         |
+|              | `sim_timer.c`        |
+|              | `sim_tmxr.c`         |
+|              |                      |
+| `sim/vax/`   | `vax_defs.h`         |
+|              | `vax_ka655x_bin.h`   |
+|              | `vaxmod_defs.h`      |
+|              | `vax_cis.c`          |
+|              | `vax_cmode.c`        |
+|              | `vax_cpu.c`          |
+|              | `vax_cpu1.c`         |
+|              | `vax_fpa.c`          |
+|              | `vax_io.c`           |
+|              | `vax_mmu.c`          |
+|              | `vax_octa.c`         |
+|              | `vax_stddev.c`       |
+|              | `vax_sys.c`          |
+|              | `vax_syscm.c`        |
+|              | `vax_sysdev.c`       |
+|              | `vax_syslist.c`      |
+|              |                      |
+| `sim/pdp11/` | `pdp11_cr_dat.h`     |
+|              | `pdp11_mscp.h`       |
+|              | `pdp11_uqssp.h`      |
+|              | `pdp11_xq.h`         |
+|              | `pdp11_xq_bootrom.h` |
+|              | `pdp11_cr.c`         |
+|              | `pdp11_lp.c`         |
+|              | `pdp11_rl.c`         |
+|              | `pdp11_rq.c`         |
+|              | `pdp11_tq.c`         |
+|              | `pdp11_ts.c`         |
+|              | `pdp11_vh.c`         |
+|              | `pdp11_xq.c`         |
 
 Additional files are:
 
-sim/vax/ ka655x.bin extended memory boot ROM code
+| directory  | file         | description                   |
+| `sim/vax/` | `ka655x.bin` | extended memory boot ROM code |
 
 # VAX Features
 
