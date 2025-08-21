@@ -198,44 +198,44 @@ command line.
 
 The PDP-11 simulator is configured as follows:
 
-| device name(s) | simulates                                             |
-|----------------|-------------------------------------------------------|
-| `CPU`          | PDP-11 CPU with 256KB of memory                       |
-| `PTR,PTP`      | PC11 paper tape reader/punch                          |
-| `TTI,TTO`      | DL11 console terminal                                 |
-| `CR`           | CR11/CD11 card reader                                 |
-| `LPT`          | LP11 line printer                                     |
-| `CLK`          | KW11-L line frequency clock                           |
-| `PCLK`         | KW11-P programmable clock                             |
-| `DCI,DCO`      | DC11 additional serial lines (up to 16)               |
-| `DLI,DLO`      | KL11/DL11 additional serial lines (up to 16)          |
-| `DZ`           | DZ11 8-line terminal multiplexer (up to 4)            |
-| `VH`           | DHU11/DHQ11 8-line terminal multiplexer (up to 4)     |
-| `RK`           | RK11/RK05 cartridge disk controller with eight drives |
-| `HK`       RK611/RK06,RK07 cartridge disk controller with eight drives |
+| device name(s) | simulates                                                   |
+|----------------|-------------------------------------------------------------|
+| `CPU`          | PDP-11 CPU with 256KB of memory                             |
+| `PTR,PTP`      | PC11 paper tape reader/punch                                |
+| `TTI,TTO`      | DL11 console terminal                                       |
+| `CR`           | CR11/CD11 card reader                                       |
+| `LPT`          | LP11 line printer                                           |
+| `CLK`          | KW11-L line frequency clock                                 |
+| `PCLK`         | KW11-P programmable clock                                   |
+| `DCI,DCO`      | DC11 additional serial lines (up to 16)                     |
+| `DLI,DLO`      | KL11/DL11 additional serial lines (up to 16)                |
+| `DZ`           | DZ11 8-line terminal multiplexer (up to 4)                  |
+| `VH`           | DHU11/DHQ11 8-line terminal multiplexer (up to 4)           |
+| `RK`           | RK11/RK05 cartridge disk controller with eight drives       |
+| `HK`           | RK611/RK06,RK07 cartridge disk controller with eight drives |
 | `RC` | RC11 fixed head disk      |
 | `RF` | RF11/RS11 fixed head disk |
-|`RL` | RL11(RLV12)/RL01,RL02 cartridge disk controller with four drives |
-| `RH`  | RH11/RH70 Massbus adapter (up to 3)                          |
-| `RP`  | RP04/05/06/07, RM02/03/05/80 Massbus disks with eight drives |
-| `RQ`  | RQDX3/UDA50 MSCP controller with four drives                 |
-| `RQB` | second RQDX3/UDA50 MSCP controller with four drives          |
-| `RQC` | third RQDX3/UDA50 MSCP controller with four drives           |
-| `RQD` | fourth RQDX3/UDA50 MSCP controller with four drives          |
-| `RX`  | RX11/RX01 floppy disk controller with two drives             |
-| `RY`  | RX211/RX01 floppy disk controller with two drives            |
-| `TA`  | TA11/TU60 cassette controller with two drives                |
-| `TC`  | TC11/TU56 DECtape controller with eight drives               |
-| `TM`  | TM11/TU10 magnetic tape controller with eight drives         |
-| `TS`  | TS11/TSV05 magnetic tape controller with one drive           |
-| `TQ`  | TQK50/TU81 TMSCP magnetic tape controller with four drives   |
-| `TU`  | TM02/TM03 magnetic tape formatter with eight drives          |
-| `XQ`  | DELQA/DEQNA Qbus Ethernet controller                         |
-| `XQB` | second DELQA/DEQNA Qbus Ethernet controller                  |
-| `XU`  | DELUA/DEUNA Unibus Ethernet controller                       |
-| `XUB` | Second DELUA/DEUNA Unibus Ethernet controller                |
-| `KE`  | KE11A extended arithmetic option                             |
-| `KG`  | KG11A communications arithmetic option                       |
+| `RL`  | RL11(RLV12)/RL01,RL02 cartridge disk controller with four drives |
+| `RH`  | RH11/RH70 Massbus adapter (up to 3)                              |
+| `RP`  | RP04/05/06/07, RM02/03/05/80 Massbus disks with eight drives     |
+| `RQ`  | RQDX3/UDA50 MSCP controller with four drives                     |
+| `RQB` | second RQDX3/UDA50 MSCP controller with four drives              |
+| `RQC` | third RQDX3/UDA50 MSCP controller with four drives               |
+| `RQD` | fourth RQDX3/UDA50 MSCP controller with four drives              |
+| `RX`  | RX11/RX01 floppy disk controller with two drives                 |
+| `RY`  | RX211/RX01 floppy disk controller with two drives                |
+| `TA`  | TA11/TU60 cassette controller with two drives                    |
+| `TC`  | TC11/TU56 DECtape controller with eight drives                   |
+| `TM`  | TM11/TU10 magnetic tape controller with eight drives             |
+| `TS`  | TS11/TSV05 magnetic tape controller with one drive               |
+| `TQ`  | TQK50/TU81 TMSCP magnetic tape controller with four drives       |
+| `TU`  | TM02/TM03 magnetic tape formatter with eight drives              |
+| `XQ`  | DELQA/DEQNA Qbus Ethernet controller                             |
+| `XQB` | second DELQA/DEQNA Qbus Ethernet controller                      |
+| `XU`  | DELUA/DEUNA Unibus Ethernet controller                           |
+| `XUB` | Second DELUA/DEUNA Unibus Ethernet controller                    |
+| `KE`  | KE11A extended arithmetic option                                 |
+| `KG`  | KG11A communications arithmetic option                           |
 
 
 The `DZ`, `VH`, `CR`, `LPT`, `DCI`/`DCO`, `DLI`/`DLO`, `RK`, `HK`,
@@ -251,7 +251,7 @@ The PDP-11 simulator implements several unique stop conditions:
 
 - Abort during exception vector fetch, and register `STOP_VEC` is set
 - Abort during exception stack push, and register `STOP_SPA` is set
-- Trap condition 'n' occurs, and register `STOP_TRAP<n>` is set
+- Trap condition `n` occurs, and register `STOP_TRAP<n>` is set
 - Wait state entered, and no I/O operations outstanding (i.e., no
   interrupt can ever occur)
 - A simulated DECtape runs off the end of its reel, and flag
@@ -378,7 +378,7 @@ CPU registers include the architectural state of the PDP-11 processor
 as well as the control registers for the interrupt system.
 
 | name                          | size | comments                            |
-|-------------------------------|------|-------------------------------------|
+|-------------------------------|-----:|-------------------------------------|
 | `PC`                          | 16   | program counter                     |
 | `R0..R5`                      | 16   | R0..R5, current register set        |
 | `SP`                          | 16   | stack pointer, current mode         |
@@ -648,7 +648,7 @@ by changing `POS`, the user can backspace or advance the reader.
 The paper tape reader implements these registers:
 
 | name       | size | comments                              |
-|------------|------|---------------------------------------|
+|------------|-----:|---------------------------------------|
 | `BUF`      | 8    | last data item processed              |
 | `CSR`      | 16   | control/status register               |
 | `INT`      | 1    | interrupt pending flag                |
@@ -684,7 +684,7 @@ the `-N` switch.
 The paper tape punch implements these registers:
 
 | name       | size | comments                              |
-|------------|------|---------------------------------------|
+|------------|-----:|---------------------------------------|
 | `BUF`      | 8    | last data item processed              |
 | `CSR`      | 16   | control/status register               |
 | `INT`      | 1    | interrupt pending flag                |
@@ -725,7 +725,7 @@ The terminal input (`TTI`) polls the console keyboard for input. It
 implements these registers:
 
 | name   | size | comments                         |
-|--------|------|----------------------------------|
+|--------|-----:|----------------------------------|
 | `BUF`  | 8    | last data item processed         |
 | `CSR`  | 16   | control/status register          |
 | `INT`  | 1    | interrupt pending flag           |
@@ -739,7 +739,7 @@ The terminal output (`TTO`) writes to the simulator console window. It
 implements these registers:
 
 | name   | size | comments                              |
-|--------|------|---------------------------------------|
+|--------|-----:|---------------------------------------|
 | `BUF`  | 8    | last data item processed              |
 | `CSR`  | 16   | control/status register               |
 | `INT`  | 1    | interrupt pending flag                |
@@ -761,7 +761,7 @@ the `-N` switch.
 The line printer implements these registers:
 
 | name       | size | comments                              |
-|------------|------|---------------------------------------|
+|------------|-----:|---------------------------------------|
 | `BUF`      | 8    | last data item processed              |
 | `CSR`      | 16   | control/status register               |
 | `INT`      | 1    | interrupt pending flag                |
@@ -795,7 +795,7 @@ The default is 60Hz.
 The line-time clock implements these registers:
 
 | name   | size | comments                         |
-|--------|------|----------------------------------|
+|--------|-----:|----------------------------------|
 | `CSR`  | 16   | control/status register          |
 | `INT`  | 1    | interrupt pending flag           |
 | `DONE` | 1    | device done flag (`CSR<7>`)      |
@@ -819,7 +819,7 @@ The default is 60Hz.
 The programmable clock implements these registers:
 
 | name           | size | comments                        |
-|----------------|------|---------------------------------|
+|----------------|-----:|---------------------------------|
 | `CSR`          | 16   | control/status register         |
 | `CSB`          | 16   | count set buffer                |
 | `CNT`          | 16   | current count                   |
@@ -861,7 +861,7 @@ the `BOOT` command.
 The TA11 controller implements these registers:
 
 | name       | size | comments                  |
-|------------|------|---------------------------|
+|------------|-----:|---------------------------|
 | `TACS`     | 16   | control/status register   |
 | `TAIDB`    | 8    | input data buffer         |
 | `TAODB`    | 8    | output data buffer        |
@@ -902,7 +902,7 @@ The RX11 supports the `BOOT` command.
 The RX11 implements these registers:
 
 | name          | size | comments                         |
-|---------------|------|----------------------------------|
+|---------------|-----:|----------------------------------|
 | `RXCS`        | 12   | status                           |
 | `RXDB`        | 8    | data buffer                      |
 | `RXES`        | 8    | error status                     |
@@ -950,7 +950,7 @@ system with more than 256KB of memory.
 The RX211 implements these registers:
 
 | name          | size | comments                         |
-|---------------|------|----------------------------------|
+|---------------|-----:|----------------------------------|
 | `RYCS`        | 16   | status                           |
 | `RYBA`        | 16   | buffer address                   |
 | `RYWC`        | 8    | word count                       |
@@ -999,7 +999,7 @@ Units can also be set `ENABLED` or `DISABLED`. The RK11 supports the
 The RK11 implements these registers:
 
 | name       | size | comments                         |
-|------------|------|----------------------------------|
+|------------|-----:|----------------------------------|
 | `RKCS`     | 16   | control/status                   |
 | `RKDA`     | 16   | disk address                     |
 | `RKBA`     | 16   | memory address                   |
@@ -1052,7 +1052,7 @@ than 256KB of memory.
 The RK611 implements these registers:
 
 | name        | size | comments                              |
-|-------------|------|---------------------------------------|
+|-------------|-----:|---------------------------------------|
 | `HKCS1`     | 16   | control/status 1                      |
 | `HKWC`      | 16   | word count                            |
 | `HKBA`      | 16   | bus address                           |
@@ -1113,7 +1113,7 @@ RLV12 with 22b addressing.
 The RL11 implements these registers:
 
 | name               | size | comments                         |
-|--------------------|------|----------------------------------|
+|--------------------|-----:|----------------------------------|
 | `RLCS`             | 16   | control/status                   |
 | `RLDA`             | 16   | disk address                     |
 | `RLBA`             | 16   | memory address                   |
@@ -1155,7 +1155,7 @@ system, the RH adapters always implement 22b addressing.
 Each RH adapter implements these registers:
 
 | name   | size | comments                                 |
-|--------|------|------------------------------------------|
+|--------|-----:|------------------------------------------|
 | `CS1`  | 16   | control/status register 1                |
 | `WC`   | 16   | word count                               |
 | `BA`   | 16   | bus address                              |
@@ -1201,7 +1201,7 @@ The `RP` controller implements the registers listed below. Registers
 suffixed with `[0:7]` are replicated per drive.
 
 | name       | size | comments                           |
-|------------|------|------------------------------------|
+|------------|-----:|------------------------------------|
 | `CS1[0:7]` | 16   | current operation                  |
 | `DA[0:7]`  | 16   | desired surface, sector            |
 | `DS[0:7]`  | 16   | drive status                       |
@@ -1261,7 +1261,7 @@ the `BOOT` command.
 The `TU` controller implements the following registers:
 
 | name       | size | comments                   |
-|------------|------|----------------------------|
+|------------|-----:|----------------------------|
 | `CS1`      | 6    | current operation          |
 | `FC`       | 16   | frame count                |
 | `FS`       | 16   | formatter status           |
@@ -1304,7 +1304,7 @@ The `RS` controller implements the registers listed below. Registers
 suffixed with `[0:7]` are replicated per drive.
 
 | name       | size | comments                           |
-|------------|------|------------------------------------|
+|------------|-----:|------------------------------------|
 | `CS1[0:7]` | 16   | current operation                  |
 | `DA[0:7]`  | 16   | desired track, sector              |
 | `DS[0:7]`  | 16   | drive status                       |
@@ -1396,7 +1396,7 @@ Each `RQ` controller implements the following special `SHOW` commands:
 Each `RQ` controller implements these registers:
 
 | name        | size | comments                      |
-|-------------|------|-------------------------------|
+|-------------|-----:|-------------------------------|
 | `SA`        | 16   | status/address register       |
 | `S1DAT`     | 16   | step 1 init host data         |
 | `CQBA`      | 22   | command queue base address    |
@@ -1461,7 +1461,7 @@ transfer.
 The RC11 implements these registers:
 
 | name       | size | comments                   |
-|------------|------|----------------------------|
+|------------|-----:|----------------------------|
 | `RCLA`     | 16   | look ahead register        |
 | `RCDA`     | 16   | current disk address       |
 | `RCER`     | 16   | error register             |
@@ -1512,7 +1512,7 @@ system.
 The RF11 implements these registers:
 
 | name       | size | comments                   |
-|------------|------|----------------------------|
+|------------|-----:|----------------------------|
 | `RFCS`     | 16   | control/status             |
 | `RFWC`     | 16   | word count                 |
 | `RFCMA`    | 16   | current memory address     |
@@ -1579,7 +1579,7 @@ bit bucket.
 The TC controller implements these registers:
 
 | name         | size | comments                          |
-|--------------|------|-----------------------------------|
+|--------------|-----:|-----------------------------------|
 | `TCST`       | 16   | status register                   |
 | `TCCM`       | 16   | command register                  |
 | `TCWC`       | 16   | word count register               |
@@ -1639,7 +1639,7 @@ memory.
 The TM controller implements these registers:
 
 | name       | size | comments                  |
-|------------|------|---------------------------|
+|------------|-----:|---------------------------|
 | `MTS`      | 16   | status                    |
 | `MTC`      | 16   | command                   |
 | `MTCMA`    | 16   | memory address            |
@@ -1689,7 +1689,7 @@ TSV05 and implements 22b addresses.
 The `TS` controller implements these registers:
 
 | name    | size | comments                            |
-|---------|------|-------------------------------------|
+|---------|-----:|-------------------------------------|
 | `TSSR`  | 16   | status register                     |
 | `TSBA`  | 16   | bus address register                |
 | `TSDBX` | 16   | data buffer extension register      |
@@ -1779,7 +1779,7 @@ The `TQ` controller implements the following special `SHOW` commands:
 The `TQ` controller implements these registers:
 
 | name        | size | comments                      |
-|-------------|------|-------------------------------|
+|-------------|-----:|-------------------------------|
 | `SA`        | 16   | status/address register       |
 | `S1DAT`     | 16   | step 1 init host data         |
 | `CQBA`      | 22   | command queue base address    |
@@ -1893,7 +1893,7 @@ Other special commands:
 The input device (`DCI`) implements these registers:
 
 | name        | size | comments                                    |
-|-------------|------|---------------------------------------------|
+|-------------|-----:|---------------------------------------------|
 | `CSR[0:15]` | 16   | input control/stats register, lines 0 to 15 |
 | `BUF[0:15]` | 16   | input buffer, lines 0 to 15                 |
 | `IREQ`      | 16   | interrupt requests, lines 0 to 15           |
@@ -1901,7 +1901,7 @@ The input device (`DCI`) implements these registers:
 The output device (`DCO`) implements these registers:
 
 | name        | size | comments                                    |
-|-------------|------|---------------------------------------------|
+|-------------|-----:|---------------------------------------------|
 | `CSR[0:15]` | 16   | input control/stats register, lines 0 to 15 |
 | `BUF[0:15]` | 8    | input buffer, lines 0 to 15                 |
 | `IREQ`      | 16   | interrupt requests, lines 0 to 15           |
@@ -1990,7 +1990,7 @@ Other special commands:
 The input device (`DLI`) implements these registers:
 
 | name        | size | comments                                    |
-|-------------|------|---------------------------------------------|
+|-------------|-----:|---------------------------------------------|
 | `CSR[0:15]` | 16   | input control/stats register, lines 0 to 15 |
 | `BUF[0:15]` | 16   | input buffer, lines 0 to 15                 |
 | `IREQ`      | 16   | receive interrupt requests, lines 0 to 15   |
@@ -1999,7 +1999,7 @@ The input device (`DLI`) implements these registers:
 The output device (`DLO`) implements these registers:
 
 | name        | size | comments                                    |
-|-------------|------|---------------------------------------------|
+|-------------|-----:|---------------------------------------------|
 | `CSR[0:15]` | 16   | input control/stats register, lines 0 to 15 |
 | `BUF[0:15]` | 8    | input buffer, lines 0 to 15                 |
 | `IREQ`      | 16   | interrupt requests, lines 0 to 15           |
@@ -2021,10 +2021,11 @@ The line count must be a multiple of 8, with a maximum of 32.
 
 The DZ11 supports three character processing modes, `7P`, `7B`, and `8B`:
 
-| mode | input characters | output characters |
+| mode | input characters       | output characters     |
+|------|------------------------|-----------------------|
 | `7P` | high-order bit cleared | high-order bit cleared,<br>non-printing characters suppressed |
 | `7B` | high-order bit cleared | high-order bit cleared |
-| `8B` | no changes | no changes |
+| `8B` | no changes             | no changes |
 
 The default is `8B`.
 
@@ -2083,7 +2084,7 @@ Other special `DZ` commands:
 The DZ11 implements these registers:
 
 | name         | size | comments                                     |
-|--------------|------|----------------------------------------------|
+|--------------|-----:|----------------------------------------------|
 | `CSR[0:3]`   | 16   | control/status register, boards 0 to 3       |
 | `RBUF[0:3]`  | 16   | receive buffer, boards 0 to 3                |
 | `LPR[0:3]`   | 16   | line parameter register, boards 0 to 3       |
@@ -2186,7 +2187,7 @@ Other special `VH` commands:
 The DHQ11 implements these registers, though not all can be examined from SCP:
 
 | name        | size | comments                               |
-|-------------|------|----------------------------------------|
+|-------------|-----:|----------------------------------------|
 | `CSR[0:3]`  | 16   | control/status register, boards 0 to 3 |
 | `RBUF[0:3]` | 16   | receive buffer, boards 0 to 3          |
 | `LPR[0:3]`  | 16   | line parameter register, boards 0 to 3 |
@@ -2284,7 +2285,7 @@ cable were unplugged.
 `XQ` and `XQB` have the following registers:
 
 | name   | size | comments                           |
-|--------|------|------------------------------------|
+|--------|-----:|------------------------------------|
 | `SA0`  | 16   | station address word 0             |
 | `SA1`  | 16   | station address word 1             |
 | `SA2`  | 16   | station address word 2             |
@@ -2454,7 +2455,7 @@ check to the CPU.
 The `CR` controller implements these registers:
 
 | name     | size | comments                             |
-|----------|------|--------------------------------------|
+|----------|-----:|--------------------------------------|
 | `BUF`    | 8    | ASCII value of last column processed |
 | `CRS`    | 16   | CR11 status register                 |
 | `CRB1`   | 16   | CR11 12-bit Hollerith character      |
@@ -2487,7 +2488,7 @@ PDP-11/20. The `KE` is disabled by default.
 The `KE` implements these registers:
 
 | name | size | comments            |
-|------|------|---------------------|
+|------|-----:|---------------------|
 | `AC` | 16   | accumulator         |
 | `MQ` | 16   | multiplier-quotient |
 | `SC` | 6    | shift count         |
@@ -2520,7 +2521,7 @@ The KG11 supports the following options:
 The KG11 implements the following registers, replicated for each unit:
 
 | name           | size | comments                          |
-|----------------|------|-----------------------------------|
+|----------------|-----:|-----------------------------------|
 | `SR[0:7]`      | 16   | control and status register; R/W  |
 | `BCC[0:7]`     | 16   | result block check character; R/O |
 | `DR[0:7]`      | 16   | input data register; W/O          |
@@ -2625,7 +2626,7 @@ The UC15 talks to the PDP-15’s DR15 interface over a pair of DR11-C
 interfaces called UCA and UCB. UCA implements these registers:
 
 | name   | size | comments                   |
-|--------|------|----------------------------|
+|--------|-----:|----------------------------|
 | `CSR`  | 16   | control/status register    |
 | `BUF`  | 16   | input buffer               |
 | `APID` | 1    | `CSR<7>`, API done         |
@@ -2635,7 +2636,7 @@ interfaces called UCA and UCB. UCA implements these registers:
 `UCB` implements these registers:
 
 | name   | size | comments                         |
-|--------|------|----------------------------------|
+|--------|-----:|----------------------------------|
 | `CSR`  | 16   | control/status register          |
 | `BUF`  | 16   | input buffer                     |
 | `NTCB` | 1    | `CSR<7>`, new task control block |
