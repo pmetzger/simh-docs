@@ -135,6 +135,7 @@ line as well.
 Additional files are:
 
 | directory  | file         | description                   |
+|------------|--------------|-------------------------------|
 | `sim/vax/` | `ka655x.bin` | extended memory boot ROM code |
 
 # VAX Features
@@ -279,7 +280,7 @@ CPU registers include the visible state of the processor as well as
 the control registers for the interrupt system.
 
 | name        | size | comments                            |
-|-------------|------|-------------------------------------|
+|-------------|-----:|-------------------------------------|
 | `PC`        | 32   | program counter                     |
 | `R0 .. R14` | 32   | `R0` to `R14`                       |
 | `AP`        | 32   | alias for `R12`                     |
@@ -539,6 +540,7 @@ The terminal interfaces (`TTI`, `TTO`) can be set to one of three
 modes, `7P`, `7B` or `8B`:
 
 | mode | input characters | output characters |
+|------|------------------|-------------------|
 | `7P` | high-order bit cleared | high-order bit cleared,<br>non-printing characters suppressed |
 | `7B` | high-order bit cleared | high-order bit cleared |
 | `8B` | no changes             | no changes             |
@@ -1070,8 +1072,8 @@ default, the DHV11 mode is selected, though DHU11 mode is recommended
 for applications that can support it. The `VH` controller may be
 adjusted on a per controller basis as follows:
 
-|   |   |
-|---|---|
+|               |                                            |
+|---------------|--------------------------------------------|
 | `SET VHn DHU` | use the DHU programming mode and registers |
 | `SET VHn DHV` | use the DHV programming mode and registers |
 

@@ -45,6 +45,7 @@ Files requiring fixes but considered in good shape:
 | [simh_swre.md](docs/simh_swre.md) | unverified | Hand repaired, not proofread |
 | [simh_vmio.md](docs/simh_vmio.md) | unverified | Hand repaired, not proofread |
 | [ssem_doc.md](docs/ssem_doc.md) | unverified | Hand repaired, not proofread |
+| [vax_doc.md](docs/vax_doc.md) |  unverified | Hand repaired, not proofread |
 
 
 Files that are nearly untouched:
@@ -87,4 +88,3 @@ Files that are nearly untouched:
 | [swtp6800_doc.md](docs/swtp6800_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [tx0_doc.md](docs/tx0_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [vax780_doc.md](docs/vax780_doc.md) | ❌ raw pandoc | Not yet hand repaired |
-| [vax_doc.md](docs/vax_doc.md) | ❌ raw pandoc | Not yet hand repaired |
