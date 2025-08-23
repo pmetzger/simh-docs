@@ -1326,12 +1326,12 @@ conventions for signaling end of deck:
 | VMS    | 12-11-0-1-6-7-8-9 punch in first 8 columns       |
 | TOPS   | 12-11-0-1 or 12-11-0-1-6-7-8-9 punch in column 1 |
 
-Using the `AUTOEOF` setting, the card reader can be set to automatically
-generate an `EOF` card consisting of the `12-11-0-1-6-7-8-9` punch in
-columns 1-8. When set to CD11 mode, this switch also enables automatic
-setting of the `EOF` bit in the controller after the `EOF` card has been
-processed. \[The CR11 does not have a similar capability.\] By default
-`AUTOEOF` is enabled.
+Using the `AUTOEOF` setting, the card reader can be set to
+automatically generate an `EOF` card consisting of the
+`12-11-0-1-6-7-8-9` punch in columns 1-8. When set to CD11 mode, this
+switch also enables automatic setting of the `EOF` bit in the
+controller after the `EOF` card has been processed. \[The CR11 does
+not have a similar capability.\] By default `AUTOEOF` is enabled.
 
 ```
 SET CR AUTOEOF
