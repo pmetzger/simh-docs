@@ -152,6 +152,7 @@ part of the command line as well.
 Additional files are:
 
 | directory  | file      | description        |
+|------------|-----------|--------------------|
 | `sim/vax/` | `vmb.exe` | standard boot code |
 
 # VAX780 Features
@@ -197,7 +198,7 @@ disabled by default.
 The VAX780 simulator implements several unique stop conditions:
 
 - Change mode to interrupt stack
-- Illegal vector (`bits<1:0>` = 2 or 3)
+- Illegal vector (`bits<1:0> = 2` or `3`)
 - Unexpected exception during interrupt or exception
 - Process `PTE` in `P0` or `P1` space instead of system space
 - Unknown `IPL`
@@ -281,7 +282,7 @@ the control registers for the interrupt system.
 | name        | size | comments                            |
 |-------------|-----:|-------------------------------------|
 | `PC`        |   32 | program counter                     |
-| `R0 .. R14` |   32 | `R0` to `R14`                       |
+| `R0`…`R14`  |   32 | `R0` to `R14`                       |
 | `AP`        |   32 | alias for `R12`                     |
 | `FP`        |   32 | alias for `R13`                     |
 | `SP`        |   32 | alias for `R14`                     |
@@ -519,8 +520,8 @@ The `UBA` has these registers:
 ### Massbus Adapters (`MBA0`, `MBA1`)
 
 The Massbus adapters (`MBA0`, `MBA1`) simulate RH780's. `MBA0` is
-assigned to the RP disk drives, `MBA1` to the TU tape drives. Each MBA
-has these registers:
+assigned to the RP disk drives, `MBA1` to the TU tape drives. Each
+`MBA` has these registers:
 
 | name         | size | comments                    |
 |--------------|-----:|-----------------------------|
@@ -1394,10 +1395,10 @@ lost when the simulator shuts down or the `VH` is detached.
 
 ### DELUA/DEUNA Unibus Ethernet Controllers (`XU`, `XUB`)
 
-The simulator implements two DELUA/DEUNA Unibus Ethernet controllers
-(`XU`, `XUB`). Initially, both `XU` and `XUB` are disabled. Options
-allow control of the MAC address, the controller mode, and the sanity
-timer.
+The simulator implements two `DELUA`/`DEUNA` Unibus Ethernet
+controllers (`XU`, `XUB`). Initially, both `XU` and `XUB` are
+disabled. Options allow control of the MAC address, the controller
+mode, and the sanity timer.
 
 ```
 SET XU MAC=<mac-address>                    ex. 08-00-2B-CC-DD-EE
@@ -1452,9 +1453,10 @@ you do not attach the device, the controller will behave as though the
 Ethernet cable were unplugged.
 
 One final note: because of its asynchronous nature, the `XU`
-controller is not limited to the ~1.5Mbit/sec of the real DEUNA/DELUA
-controllers, nor the 10Mbit/sec of a standard Ethernet. Attach it to a
-Fast Ethernet (100 Mbit/sec) card, and "Feel the Power!" :smile:
+controller is not limited to the ~1.5Mbit/sec of the real
+`DEUNA`/`DELUA` controllers, nor the 10Mbit/sec of a standard
+Ethernet. Attach it to a Fast Ethernet (100 Mbit/sec) card, and "Feel
+the Power!" :smile:
 
 ###  DMC11/DMR11 Unibus DDCMP Controllers
 
@@ -1532,7 +1534,7 @@ A `DMC` device is configured with various SIMH `SET` and `ATTACH` commands.
 | `SET DMC DISABLE`     | DISABLES device `DMC`               |
 | `SET DMC DEBUG  `     | ENABLES debugging for device `DMC`  |
 | `SET DMC NODEBUG`     | DISABLES debugging for device `DMC` |
-|` SET DMC DEBUG=TRACE;WARN;REG;INTREG;INFO;DATA;DATASUM;MODEM;CONNECT;INT` |    Enables specific debugging for device `DMC` |
+| `SET DMC DEBUG=TRACE;WARN;REG;INTREG;INFO;DATA;DATASUM;MODEM;CONNECT;INT` |    Enables specific debugging for device `DMC` |
 | `SET DMC NODEBUG=TRACE;WARN;REG;INTREG;INFO;DATA;DATASUM;MODEM;CONNECT;INT` | Disables specific debugging for device `DMC` |
 | `SET DMCn PEER=address:port` |                          |
 | `SET DMCn SPEED=bits/sec`    | speed 0=unrestricted     |
@@ -1717,14 +1719,15 @@ following:
 | `DMP11`  | Unibus PDP11 simulators and Unibus VAX simulators |
 | `DMV11`  | Qbus VAX simulators                               |
 
-\* Indicates systems which have OS provided DDCMP implementations.The
-DMC11 is a synchronous serial point-to-point communications device. A
-real DMC11 transports data using DDCMP, the emulated device makes a
-TCP/IP connection to another emulated device and sends length-prefixed
-messages across the connection, each message representing a single
-buffer passed to the DMC11. The DMC11 can be used for point-to-point
-DDCMP connections carrying DECnet and other types of networking,
-e.g. from ULTRIX or DSM.
+\* indicates systems which have OS provided DDCMP implementations.
+
+The DMC11 is a synchronous serial point-to-point communications
+device. A real DMC11 transports data using DDCMP, the emulated device
+makes a TCP/IP connection to another emulated device and sends
+length-prefixed messages across the connection, each message
+representing a single buffer passed to the DMC11. The DMC11 can be
+used for point-to-point DDCMP connections carrying DECnet and other
+types of networking, e.g. from ULTRIX or DSM.
 
 <!-- XXX -->
 
