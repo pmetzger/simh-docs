@@ -1150,9 +1150,9 @@ The DHQ11 implements these registers, though not all can be examined from SCP:
 The DHQ11 does not support save and restore. All open connections are
 lost when the simulator shuts down or the `VH` is detached.
 
-### DELQA-T/DELQA/DEQNA Qbus Ethernet Controllers (`XQ`, `XQB`)
+### `DELQA-T`/`DELQA`/`DEQNA` Qbus Ethernet Controllers (`XQ`, `XQB`)
 
-The simulator implements two DELQA-T/DELQA/DEQNA Qbus Ethernet
+The simulator implements two `DELQA-T`/`DELQA`/`DEQNA` Qbus Ethernet
 controllers (`XQ`, `XQB`). Initially, `XQ` is enabled, and `XQB` is
 disabled. Options allow control of the MAC address, the controller
 mode, and the sanity timer.
@@ -1175,12 +1175,12 @@ SHOW XQ TYPE
 ```
 
 These commands are used to change or display the controller
-mode. DELQA mode is better and faster but may not be usable by older
-or non-DEC OS's. Also, be aware that DEQNA mode is not supported by
-many modern OS's. The DEQNA-LOCK mode of the DELQA card is emulated by
-setting the the controller to DEQNA -- there is no need for a separate
-mode. DEQNA-LOCK mode behaves exactly like a DEQNA, except for the
-operation of the VAR and MOP processing.
+mode. `DELQA` mode is better and faster but may not be usable by older
+or non-DEC OS's. Also, be aware that `DEQNA` mode is not supported by
+many modern OS's. The DEQNA-LOCK mode of the `DELQA` card is emulated
+by setting the the controller to `DEQNA` -- there is no need for a
+separate mode. DEQNA-LOCK mode behaves exactly like a `DEQNA`, except
+for the operation of the VAR and MOP processing.
 
 ```
 SET XQ SANITY={ON|[OFF]}
@@ -1188,12 +1188,12 @@ SHOW XQ SANITY
 ```
 
 These commands change or display the INITIALIZATION sanity timer
-(DEQNA jumper W3/DELQA switch S4). The INITIALIZATION sanity timer has
-a default timeout of 4 minutes, and cannot be turned off, just
+(`DEQNA` jumper W3/`DELQA` switch S4). The INITIALIZATION sanity timer
+has a default timeout of 4 minutes, and cannot be turned off, just
 reset. The normal sanity timer can be set by operating system software
-regardless of the state of this switch. Note that only the DEQNA (or
-the DELQA in DEQNA-LOCK mode (=DEQNA)) supports the sanity timer -- it
-is ignored by a DELQA in Normal mode, which uses switch S4 for a
+regardless of the state of this switch. Note that only the `DEQNA` (or
+the `DELQA` in DEQNA-LOCK mode (=DEQNA)) supports the sanity timer --
+it is ignored by a `DELQA` in Normal mode, which uses switch S4 for a
 different purpose.
 
 ```
@@ -1222,13 +1222,13 @@ SHOW XQ ETH
 ```
 
 where `X` in `ethX` is the number of the Ethernet controller to
-attach, or the real device name. The `X` number is system-dependant. If
-you only have one Ethernet controller, the number will probably
-be 0. To find out what your system thinks the Ethernet numbers are,
-use the `SHOW XQ ETH` command. The device list can be quite cryptic,
-depending on the host system, but is probably better than guessing. If
-you do not attach the device, the controller will behave as though the
-Ethernet cable were unplugged.
+attach, or the real device name. The `X` number is
+system-dependant. If you only have one Ethernet controller, the number
+will probably be 0. To find out what your system thinks the Ethernet
+numbers are, use the `SHOW XQ ETH` command. The device list can be
+quite cryptic, depending on the host system, but is probably better
+than guessing. If you do not attach the device, the controller will
+behave as though the Ethernet cable were unplugged.
 
 `XQ` and `XQB` have the following registers:
 
@@ -1246,10 +1246,11 @@ Ethernet cable were unplugged.
 | `VAR`  |   16 | vector address register            |
 | `INT`  |    1 | interrupt request flag             |
 
-One final note: because of its asynchronous nature, the `XQ` controller
-is not limited to the ~1.5Mbit/sec of the real DEQNA/DELQA
-controllers, nor the 10Mbit/sec of a standard Ethernet. Attach it to a
-Fast Ethernet (100 Mbit/sec) card, and "Feel the Power!" :smile:
+One final note: because of its asynchronous nature, the `XQ`
+controller is not limited to the ~1.5Mbit/sec of the real
+`DEQNA`/`DELQA` controllers, nor the 10Mbit/sec of a standard
+Ethernet. Attach it to a Fast Ethernet (100 Mbit/sec) card, and "Feel
+the Power!" :smile:
 
 ## CR11 Card Reader (`CR`)
 
