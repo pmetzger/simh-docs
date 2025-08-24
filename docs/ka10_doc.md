@@ -147,7 +147,7 @@ was a bit-slice version of the PDP-10 which used Unibus devices which
 were cheaper then the KL10 devices.
 
 The original operating system for the PDP-6/PDP-10 was just called
-"Monitor". It was designed to fit into 6K words. Around the 3rd
+"Monitor". It was designed to fit into 6K words. Around the third
 release swapping was added. The sixth release saw the addition of
 virtual memory. Around the fourth release it was given the name
 "TOPS-10". Around this time BBN was working on a paging system and
@@ -163,12 +163,12 @@ IBM 7090 as an experimental system that allowed multiple time sharing
 users to co-exist on the same machine running batch processing, hence
 the term "Compatible".
 
-Also during the mid 60's a group at Stanford Artificial Intelligence
+Also during the mid 1960s a group at Stanford Artificial Intelligence
 Laboratory (SAIL), started with a version of TOPS-10 and heavily
 modified it to become WAITS.
 
 During the 1970s, Tymshare modified TOPS-10 to support random access
-files, paging with working sets and spawnable processes. This ran on
+files, paging with working sets, and spawnable processes. This ran on
 the KI10, KL10, and KS10.
 
 The PDP-10 was ultimately replaced by the VAX.
@@ -238,10 +238,10 @@ The KA10 simulator is configured as follows:
 | `LPT`             | LP10 Line Printer                             |
 | `CR`              | CR10 Card reader.                             |
 | `CP`              | CP10 Card punch                               |
-| `MTA,DPA`         | TM10A/B Tape controller.                      |
-| `DPB`             | RP10 Disk controller                          |
-| `FSA,RPA,RPB,RPC` | RS04 Disk controller via RH10                 |
-| `RPD`             | RH10 Disk controllers via RH10                |
+| `MTA`             | TM10A/B Tape controller.                      |
+| `DPA,DPB`         | RP10 Disk controller                          |
+| `FSA`             | RS04 Disk controller via RH10                 |
+| `RPA,RPB,RPC,RPD` | RH10 Disk controllers via RH10                |
 | `PMP`             | PMP IBM 3330 disk controller                  |
 | `AI`              | System Concepts DC10 IBM 2314 disk controller |
 | `TUA`             | TM02 Tape controller via RH10                 |
