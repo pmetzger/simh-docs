@@ -61,7 +61,7 @@ The DEC PDP-10/KA10 simulator was written by Richard Cornwell.
 
 [3.3.4 Systems Concepts DC-10 Disk Controller (Device 610/614)](#systems-concepts-dc-10-disk-controller-device-610614)
 
-[3.3.5 DDC10 Drum controller for Tenex](#ddc10-drum-controller-for-tenex)
+[3.3.5 DDC10 Drum controller for TENEX](#ddc10-drum-controller-for-tenex)
 
 [3.4 Massbus Devices](#massbus-devices)
 
@@ -293,7 +293,7 @@ The CPU options include setting memory size and O/S customization.
 | `SET CPU MPX`     | Enables MPX interrupt support for ITS        | ITS       |
 | `SET CPU WAITS`   | Add support for special WAITS instructions   | WAITS     |
 | `SET CPU NOWAITS` | Disables special WAITS instructions.         |           |
-| `SET CPU BBN`     | Enables BBN pager and Tenex support          | TENEX     |
+| `SET CPU BBN`     | Enables BBN pager and TENEX support          | TENEX     |
 | `SET CPU NOIDLE`  | Disables Idle detection                      |           |
 | `SET CPU IDLE`    | Enables Idle detection                       |           |
 
@@ -629,7 +629,7 @@ an example.
 
 ###  Systems Concepts DC-10 Disk Controller (Device 610/614)
 
-Systems Concepts DC-10 disk controller allowed IBM 2314 compatible
+The Systems Concepts DC-10 disk controller allowed IBM 2314 compatible
 disk drives to be attached to the MIT AI Lab PDP-10 running ITS. This
 device is disabled by default.
 
@@ -744,10 +744,10 @@ groups.
 | `SET DC LINES=n` | Set the number of lines on the DC10, multiple of 8. |
 | `SET DC MODEM=n` | Set the start of where the modem control DEC10E lines begins. |
 
-###  `TK` Knight Kludge, TTY Scanner (Device 0600)
+###  `TK` Knight Kludge TTY Scanner (Device 0600)
 
 This is a device with 16 terminal ports. It's specific to the MIT AI
-lab and Dynamic Modeling PDP-10s. By default this device is disabled.
+Lab and Dynamic Modeling PDP-10s. By default this device is disabled.
 
 ###  `MTY` Morton Terminal Multiplexer (Device 400)
 
@@ -789,7 +789,7 @@ to the address that is provided. DHCP is enabled by default.
 | `SET IMP MPX=#` | For ITS set the MPX interrupt to channel `#` |
 | `SET IMP BBN` | Sets the `IMP` to behave like generic BBN `IMP`. (Not implemented yet). |
 | `SET IMP WAITS` | Sets the `IMP` for Stanford style `IMP` for WAITS. |
-| `SHOW `IMP` ARP` | Displays the IP address to MAC address table. |
+| `SHOW IMP ARP` | Displays the IP address to MAC address table. |
 
 The `IMP` device must be attached to an available Ethernet
 interface. To determine which devices are available use the `SHOW

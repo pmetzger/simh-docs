@@ -80,10 +80,10 @@ which were cheaper then the KL10 devices.
 
 The original operating system for the PDP-6/PDP-10 was just called
 "Monitor". It was designed to fit into 6K words. Around the 3rd
-release Swapping was added. The 6'th release saw the addition of
-virtual memory. Around the 4'th release it was given the name
+release Swapping was added. The sixth release saw the addition of
+virtual memory. Around the fourth release it was given the name
 "TOPS-10". Around this time BBN was working on a paging system and
-implemented it on the PDP-10. This was called "Tenex". This was later
+implemented it on the PDP-10. This was called "TENEX". This was later
 adopted by DEC and became "TOPS-20".
 
 During the mid 1960s a group at MIT, who where not happy with how
@@ -107,8 +107,8 @@ The PDP-10 was ultimately replaced by the VAX.
 
 #  Simulator Files
 
-To compile the DEC PDP-6 simulator, you must define USE_INT64 as part
-of the compilation command line.
+To compile the DEC PDP-6 simulator, you must define `USE_INT64` as
+part of the compilation command line.
 
 | Subdirectory | File          | Contains                      |
 |--------------|---------------|-------------------------------|
