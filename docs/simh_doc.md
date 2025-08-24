@@ -1,4 +1,4 @@
-# SIMH Users’ Guide, V4.0
+# SIMH User’s Guide
 
 Revision of 14-Feb-2022
 
