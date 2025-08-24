@@ -36,10 +36,8 @@ contain proofreading errors:
 | [vax_doc.md](docs/vax_doc.md) | DEC VAX simulator |
 | [vax780_doc.md](docs/vax780_doc.md) | DEC VAX 11/780 simulator |
 
-
-Files that are nearly untouched. Generally, anything that is the raw
-output of Pandoc is unlikely to be readable:
-
+Files that are nearly untouched. Generally, the raw output of Pandoc
+is unlikely to be readable:
 
 | filename                          | status        |
 |-----------------------------------|---------------|
@@ -103,8 +101,8 @@ days, and so this effort is using GitHub Flavored Markdown.
 ### Why not use another format such as...
 
 Markdown is imperfect, and there are certainly better formats that
-allow greater degrees of semantic markup and control over the
-appearance of the output.
+allow better semantic markup and better control over the appearance of
+the output.
 
 However, Markdown works well enough, is very readable even without
 formatting, can be viewed in its formatted form directly on GitHub
