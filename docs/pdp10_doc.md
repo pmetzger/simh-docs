@@ -336,7 +336,7 @@ memory. This is used by some versions of the OS to obtain crash dumps.
 
 If a reload request fails (e.g. because the boot disk has been
 detached in the interim, or because the original boot was from tape),
-the processor halt with the stop code `Console FE halt`.
+the processor halts with the stop code `Console FE halt`.
 
 The front end has the following registers:
 
@@ -557,7 +557,7 @@ The `KDP` is emulated by SIMH as two devices. Both must be enabled for
 networking to function.
 
 In standard configurations, the `KMC` requires no attention; the
-UNIBUS address is fixed and only one `KDP` is supported by DEC
+Unibus address is fixed and only one `KDP` is supported by DEC
 software. The only commands are:
 
 ```
@@ -757,7 +757,7 @@ Additionally:
 | `SET LP20 VFUTYPE=DAVFU` | (Default) Printer has an electronic `VFU` |
 | `SET LP20 VFUTYPE=OPTICAL` | Printer has an optically-read paper tape `VFU` |
 | `SET LP20 VFUTYPE=OPTICAL=file` | Specifies an ASCII `VFU` file that defines the paper tape. |
-| `SET LP20 LPI={6-LPI|8-LPI}` | Specifies the vertical pitch of the printer (6 is default) |
+| `SET LP20 LPI={6-LPI\|8-LPI}` | Specifies the vertical pitch of the printer (6 is default) |
 | `SET LP20 TOPOFFORM` | Advances the `VFU` to the top-of-form channel, aligning it with the output. |
 | `SHOW VFU` | Displays the currently loaded `VFU` (electronic or optical) |
 
