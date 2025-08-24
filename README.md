@@ -45,6 +45,7 @@ Files requiring fixes but considered in good shape:
 | [simh_magtape.md](docs/simh_magtape.md) | unverified | Hand repaired, not proofread |
 | [simh_swre.md](docs/simh_swre.md) | unverified | Hand repaired, not proofread |
 | [simh_vmio.md](docs/simh_vmio.md) | unverified | Hand repaired, not proofread |
+| [simulators_acm_queue_2004.md](docs/simulators_acm_queue_2004.md) | unverified | Hand repaired, not proofread |
 | [ssem_doc.md](docs/ssem_doc.md) | unverified | Hand repaired, not proofread |
 | [vax_doc.md](docs/vax_doc.md) | unverified | Hand repaired, not proofread |
 | [vax780_doc.md](docs/vax780_doc.md) | unverified | Hand repaired, not proofread |
@@ -85,6 +86,5 @@ Files that are nearly untouched:
 | [sds_doc.md](docs/sds_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sel32_doc.md](docs/sel32_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sigma_doc.md](docs/sigma_doc.md) | ❌ raw pandoc | Not yet hand repaired |
-| [simulators_acm_queue_2004.md](docs/simulators_acm_queue_2004.md) | ❌ raw pandoc | Not yet hand repaired |
 | [swtp6800_doc.md](docs/swtp6800_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [tx0_doc.md](docs/tx0_doc.md) | ❌ raw pandoc | Not yet hand repaired |
