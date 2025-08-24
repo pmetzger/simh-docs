@@ -1084,7 +1084,7 @@ out from the address what mode to use. However, when referencing
 memory outside the CPU (eg, disks), there is no valid `PC`, and `C`
 must be used to specify current page addressing.
 
-`IOT` instructions consist of single mnemonics, eg, `KRB`, or
+`IOT` instructions consist of single mnemonics, eg, `KRB` or
 `TLS`. `IOT` instructions may be or'd together
 
 ```
