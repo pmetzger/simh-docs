@@ -1,4 +1,4 @@
-# SimH Sample Software Packages
+# SIMH Sample Software Packages
 
 Revision of 20-Jun-2006
 
