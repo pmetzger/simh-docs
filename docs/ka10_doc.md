@@ -370,7 +370,7 @@ contents the memory location referenced by `EA`. `RES` is the result
 of the instruction. `FLAGS` shows the flags after the instruction is
 executed. `IR` shows the instruction being executed.
 
-##  Unit record I/O Devices
+##  Unit Record I/O Devices
 
 ###  Console Teletype (`CTY`) (Device 120)
 
@@ -468,7 +468,7 @@ These characters control the skipping of various number of lines.
 | `022`     | Skip to every 3 line                       |
 | `023`     | Same as line feed (12), but ignore margin. |
 
-###  Type 340 Graphics display (`DPY`) (Device 130)
+###  Type 340 Graphics Display (`DPY`) (Device 130)
 
 Primarily useful under ITS, TOPS-10 does have some limited support for
 this device. By default this device is not enabled. When enabled and
@@ -479,7 +479,7 @@ commands are sent to it a graphics windows will display.
 Primarily useful under WAITS. By default this device is not
 enabled. Used `DBK` device for keyboard input.
 
-###  DBK Stanford microswitch keyboard scanner (`DKB`) (Device 310)
+###  DBK Stanford Microswitch Keyboard Scanner (`DKB`) (Device 310)
 
 Used by `III` to handle input. Currently only one keyboard is supported.
 
@@ -499,8 +499,8 @@ intervention of the CPU. The device has 2 options.
 | `SET MTA TYPE=t` | Sets the type of the controller to `A` or `B` |
 | `SET MTA MPX=#`  | For ITS set the MPX interrupt to channel \#   |
 
-Each individual tape drive support several options: `MTA` used as an
-example.
+Each individual tape drive supports several options: `MTA` is used as
+an example.
 
 |                        |                                           |
 |------------------------|-------------------------------------------|
@@ -520,8 +520,8 @@ handle I/O.
 |----------------|---------------------------------------------|
 | `SET DT MPX=#` | For ITS set the MPX interrupt to channel \# |
 
-Each individual tape drive support several options: DT used as an
-example.
+Each individual tape drive supports several options: `DT` is used as
+an example.
 
 |                       |                                                  |
 |-----------------------|--------------------------------------------------|
@@ -537,7 +537,7 @@ This device keeps track of time and date for WAITS. It was custom
 designed by Peter Petit. The device supports two settings `ON` and
 `OFF`. By default this device is disabled.
 
-### `PD` DeCoriolis clock (Device 500)
+### `PD` DeCoriolis Clock (Device 500)
 
 This is a device which keeps track of the time and date. An access
 will return the number of ticks since the beginning of the year. There
@@ -569,7 +569,8 @@ memory. There were two types of disks that could be connected to the
 `RC10`, the `RD10` and `RM10`. The `RD10` could hold up to 512K words
 of data. The `RM10` could hold up to 345K words of data.
 
-Each individual disk drive support several options: FHA used as an example.
+Each individual disk drive supports several options: `FHA` is used as
+an example.
 
 |                        |                                 |
 |------------------------|---------------------------------|
@@ -588,8 +589,8 @@ controller is `DPB`. Disks can be stored in one of several file
 formats, SIMH, `DBD9` and `DLD9`. The later two are for compatibility
 with other simulators.
 
-Each individual disk drive support several options: `DPA` used as an
-example.
+Each individual disk drive supports several options: `DPA` is used as
+an example.
 
 |                 |                                 |
 |-----------------|---------------------------------|
@@ -617,7 +618,8 @@ The `PMP` disk controller allowed for IBM type drives to be connected
 to the PDP-10. This is the controller used by WAITS. This devices is
 disabled by default.
 
-Each individual disk drive support several options: DPA used as an example.
+Each individual disk drive supports several options: `PMP` is used as
+an example.
 
 |                      |                                                       |
 |----------------------|-------------------------------------------------------|
@@ -631,9 +633,9 @@ Systems Concepts DC-10 disk controller allowed IBM 2314 compatible
 disk drives to be attached to the MIT AI Lab PDP-10 running ITS. This
 device is disabled by default.
 
-###  DDC10 Drum controller for TENEX
+###  DDC10 Drum Controller for TENEX
 
-DEC RES-10 drum controller, is used by TENEX for swapping. This device
+DEC's RES-10 drum controller is used by TENEX for swapping. This device
 is disabled by default.
 
 ##  Massbus Devices
@@ -709,13 +711,13 @@ Once attached and the simulator is running, the multiplexer listens
 for connections on the specified port. It assumes that any incoming
 connection is a Telnet connections. The connections remain open until
 disconnected either by the Telnet client, a `SET <device> DISCONNECT`
-command,or a `DETACH <device>` command.
+command, or a `DETACH <device>` command.
 
 |                             |                     |
 |-----------------------------|---------------------|
 | `SET <device> DISCONNECT=n` | Disconnect line `n` |
 
-The `<device>` implements the following special SHOW commands
+The `<device>` implements the following special `SHOW` commands:
 
 |                             |                                                |
 |-----------------------------|------------------------------------------------|
@@ -742,18 +744,18 @@ groups.
 | `SET DC LINES=n` | Set the number of lines on the DC10, multiple of 8. |
 | `SET DC MODEM=n` | Set the start of where the modem control DEC10E lines begins. |
 
-###  `TK` Knight kludge, TTY scanner (Device 0600)
+###  `TK` Knight Kludge, TTY Scanner (Device 0600)
 
 This is a device with 16 terminal ports. It's specific to the MIT AI
 lab and Dynamic Modeling PDP-10s. By default this device is disabled.
 
-###  `MTY` Morton terminal multiplexer (Device 400)
+###  `MTY` Morton Terminal Multiplexer (Device 400)
 
 This is a device with 32 high-speed terminal lines. It's specific to
 the MIT Mathlab and Dynamic Modeling PDP-10s. By default this device
 is disabled.
 
-###  `DPK` DK-10 Datapoint kludge (Device 604)
+###  `DPK` DK-10 Datapoint Kludge (Device 604)
 
 The System Concepts DK-10, also known as the Datapoint Kludge is a
 device with 16 terminal ports. This device is specific to ITS, and is
@@ -820,7 +822,7 @@ When running under a `TUN` interface, `IMP` is on a virtual `10.0.2.0`
 network. The default gateway is `10.0.2.1`, with the default `IMP` at
 `10.0.2.15`. For this mode DHCP can be used.
 
-###  `CH` Chaosnet interface (Device 470)
+###  `CH` Chaosnet Interface (Device 470)
 
 Chaos net was another methods of network access for ITS. Chaosnet can
 be connected to another ITS system or a VAX/PDP-11 running BSD Unix or
@@ -861,7 +863,7 @@ connected to.
 |------------------|------------------------------------------------------|
 | `SET DTC DCT=uc` | Sets the `DTC` to connect to `DCT` unit and channel. |
 
-Each individual tape drive support several options:
+Each individual tape drive supports several options:
 
 |                        |                                                  |
 |------------------------|--------------------------------------------------|
@@ -882,7 +884,7 @@ specify which `DCT` unit and channel the tape is connected to.
 |------------------|------------------------------------------------------|
 | `SET MTC DCT=uc` | Sets the `MTC` to connect to `DCT` unit and channel. |
 
-Each individual tape drive support several options:
+Each individual tape drive supports several options:
 
 |                   |                                 |
 |-------------------|---------------------------------|
@@ -901,7 +903,7 @@ connected to a type 136 Data Controller. You need to specify which
 |------------------|------------------------------------------------------|
 | `SET DSK DCT=uc` | Sets the `DSK` to connect to `DCT` unit and channel. |
 
-Each individual disk drive support several options:
+Each individual disk drive supports several options:
 
 |                        |                                 |
 |------------------------|---------------------------------|
