@@ -36,6 +36,7 @@ Files requiring fixes but considered in good shape:
 | filename                        | status     | comments                     |
 |---------------------------------|------------|------------------------------|
 | [gri_doc.md](docs/gri_doc.md)   | unverified | Hand repaired, not proofread |
+| [pdp8_doc.md](docs/pdp8_doc.md) | unverified | Hand repaired, not proofread |
 | [pdp10_doc.md](docs/pdp10_doc.md) | unverified | Hand repaired, not proofread |
 | [pdp11_doc.md](docs/pdp11_doc.md) | unverified | Hand repaired, not proofread |
 | [simh.md](docs/simh.md)         | unverified | Hand repaired, not proofread |
@@ -82,7 +83,6 @@ Files that are nearly untouched:
 | [pdp18b_doc.md](docs/pdp18b_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [pdp1_doc.md](docs/pdp1_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [pdp6_doc.md](docs/pdp6_doc.md) | ❌ raw pandoc | Not yet hand repaired |
-| [pdp8_doc.md](docs/pdp8_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sds_doc.md](docs/sds_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sel32_doc.md](docs/sel32_doc.md) | ❌ raw pandoc | Not yet hand repaired |
 | [sigma_doc.md](docs/sigma_doc.md) | ❌ raw pandoc | Not yet hand repaired |
