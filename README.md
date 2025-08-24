@@ -22,7 +22,7 @@ contain proofreading errors:
 |-------------------------------|---------------------------------|
 | [gri_doc.md](docs/gri_doc.md) | GRI-909 simulator |
 | [pdp8_doc.md](docs/pdp8_doc.md) | DEC PDP-8 simulator |
-| [pdp10_doc.md](docs/pdp10_doc.md) | DEC PDP-10 simulator |
+| [pdp10_doc.md](docs/pdp10_doc.md) | DEC PDP-10 (KS10) simulator |
 | [pdp11_doc.md](docs/pdp11_doc.md) | DEC PDP-11 simulator |
 | [simh.md](docs/simh.md)         | Writing a SIMH simulator |
 | [simh_breakpoints.md](docs/simh_breakpoints.md) | SIMH Breakpoints |
