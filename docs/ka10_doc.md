@@ -154,14 +154,14 @@ virtual memory. Around the fourth release it was given the name
 implemented it on the PDP-10. This was called "TENEX". This was later
 adopted by DEC and became "TOPS-20".
 
-During the mid 60's a group at MIT, who where not happy with how
+During the mid 1960s a group at MIT, who where not happy with how
 Multics was being developed, decided to create their own operating
 system, which they called Incompatible Timesharing System, or
 "ITS". The name was a play on an earlier project called the Compatible
 Timesharing System, or "CTSS". CTSS was implemented by MIT on their
 IBM 7090 as an experimental system that allowed multiple time sharing
 users to co-exist on the same machine running batch processing, hence
-the term "Compatable".
+the term "Compatible".
 
 Also during the mid 60's a group at Stanford Artificial Intelligence
 Laboratory (SAIL), started with a version of TOPS-10 and heavily
@@ -175,12 +175,12 @@ The PDP-10 was ultimately replaced by the VAX.
 
 #  Simulator Files
 
-To compile the DEC 10/KA10 simulator, you must define `USE_INT64` as
-part of the compilation command line.
+To compile the DEC PDP-10/KA10 simulator, you must define `USE_INT64`
+as part of the compilation command line.
 
 | Subdirectory | File | Contains |
 |--------------|------|----------|
-| PDP10        |      |          |
+| `PDP10/`     |      |          |
 |   | `kx10_defs.h`   | KA10 simulator definitions                    |
 |   | `kx10_cpu.c`    | KA10 CPU.                                     |
 |   | `kx10_df.c`     | DF10/C controller.                            |
@@ -364,7 +364,7 @@ commands:
 | `SHOW CPU HISTORY`   | print CPU history                      |
 | `SHOW CPU HISTORY=n` | print first `n` entries of CPU history |
 
-Instruction tracing shows the Program counter, the contents of `AC`
+Instruction tracing shows the Program Counter, the contents of `AC`
 selected, the computed effective address. `AR` is generally the
 contents the memory location referenced by `EA`. `RES` is the result
 of the instruction. `FLAGS` shows the flags after the instruction is
@@ -709,7 +709,7 @@ used other TCP/IP activities.
 
 Once attached and the simulator is running, the multiplexer listens
 for connections on the specified port. It assumes that any incoming
-connection is a Telnet connections. The connections remain open until
+connection is a Telnet connection. The connections remain open until
 disconnected either by the Telnet client, a `SET <device> DISCONNECT`
 command, or a `DETACH <device>` command.
 
@@ -846,8 +846,8 @@ default these devices are disabled.
 
 ###  `DCT` Type 136 Data Control (Device 200/204)
 
-This device acted as a data multiplexer for the DECtape/magtape and
-disk. Individual devices could be assigned channels on this
+This device acted as a data multiplexer for the DECtapes/magtapes and
+disks. Individual devices could be assigned channels on this
 device. Devices which use the `DCT` include a `DCT` option with takes
 two octal digits, the first is the `DCT` device 0 or 1, the second is
 the channel 1 to 7.
@@ -895,9 +895,9 @@ Each individual tape drive supports several options:
 
 ###  `DSK` Type 270 Disk controller (Device 270)
 
-The 270 disk could support up to 4 units. The controller had to be
-connected to a type 136 Data Controller. You need to specify which
-`DCT` unit and channel the disk is connected to.
+The 270 disk controller could support up to 4 units. The controller
+had to be connected to a type 136 Data Controller. You need to specify
+which `DCT` unit and channel the disk is connected to.
 
 |                  |                                                      |
 |------------------|------------------------------------------------------|
@@ -917,7 +917,7 @@ See section on terminal multiplexers on generic setup.
 #  Symbolic Display and Input
 
 The KA10 simulator implements symbolic display and input. These are
-controlled by the following switches to the EXAMINE and DEPOSIT
+controlled by the following switches to the `EXAMINE` and `DEPOSIT`
 commands:
 
 
@@ -930,9 +930,6 @@ commands:
 | `-c` | Display/Enter Sixbit Character data. |
 | `-m` | Display/Enter Symbolic instructions  |
 |      | Display/Enter Octal data.            |
-
-\[Note: the flag for octal data entry was missing from the Microsoft
-Word document when it was converted to Markdown.\]
 
 Symbolic instructions can be of the formats:
 
@@ -947,12 +944,12 @@ Operands can be one or more of the following in order:
 - Octal number
 - Optional `(AC)` for indexing
 
-Breakpoints can be set at real memory address. The PDP-10 supports 3
-types of breakpoints. Execution, Memory Access and Memory Modify. The
-default is Execution. Adding `-R` to the breakpoint command will stop
-the simulator on access to that memory location, either via fetch,
-indirection or operand access. Adding `-w` will stop the simulator when
-the location is modified.
+Breakpoints can be set at real memory address. The PDP-10 supports
+three types of breakpoints. Execution, Memory Access and Memory
+Modify. The default is Execution. Adding `-R` to the breakpoint
+command will stop the simulator on access to that memory location,
+either via fetch, indirection or operand access. Adding `-w` will stop
+the simulator when the location is modified.
 
 The simulator can load `RIM` files, `SAV` files, `EXE` files, Waits
 Octal `DMP` files, MIT `SBLK` files.
