@@ -18,13 +18,15 @@ These documentation files are considered to be in good shape. They
 have been hand fixed following the Pandoc conversion but might still
 contain proofreading errors:
 
-| filename                      | documentation contents          |
-|-------------------------------|---------------------------------|
-| [gri_doc.md](docs/gri_doc.md) | GRI-909 simulator |
-| [pdp8_doc.md](docs/pdp8_doc.md) | DEC PDP-8 simulator |
+| filename                          | documentation contents      |
+|-----------------------------------|-----------------------------|
+| [gri_doc.md](docs/gri_doc.md)     | GRI-909 simulator           |
+| [ka10_doc.md](docs/ka10_doc.md)   | DEC PDP-10 (KA10) simulator |
+| [pdp8_doc.md](docs/pdp8_doc.md)   | DEC PDP-8 simulator         |
+| [pdp6_doc.md](docs/pdp6_doc.md)   | DEC PDP-6 simulator         |
 | [pdp10_doc.md](docs/pdp10_doc.md) | DEC PDP-10 (KS10) simulator |
-| [pdp11_doc.md](docs/pdp11_doc.md) | DEC PDP-11 simulator |
-| [simh.md](docs/simh.md)         | Writing a SIMH simulator |
+| [pdp11_doc.md](docs/pdp11_doc.md) | DEC PDP-11 simulator        |
+| [simh.md](docs/simh.md)           | Writing a SIMH simulator    |
 | [simh_breakpoints.md](docs/simh_breakpoints.md) | SIMH Breakpoints |
 | [simh_doc.md](docs/simh_doc.md) | SIMH User’s Guide |
 | [simh_faq.md](docs/simh_faq.md) | SIMH FAQ |
@@ -58,7 +60,6 @@ is unlikely to be readable:
 | [i7094_doc.md](docs/i7094_doc.md)       | ❌ raw pandoc |
 | [ibm1130.md](docs/ibm1130.md)           | ❌ raw pandoc |
 | [id_doc.md](docs/id_doc.md)             | ❌ raw pandoc |
-| [ka10_doc.md](docs/ka10_doc.md)         | ❌ raw pandoc |
 | [ki10_doc.md](docs/ki10_doc.md)         | ❌ raw pandoc |
 | [kl10_doc.md](docs/kl10_doc.md)         | ❌ raw pandoc |
 | [ks10_doc.md](docs/ks10_doc.md)         | ❌ raw pandoc |
@@ -66,7 +67,6 @@ is unlikely to be readable:
 | [nova_doc.md](docs/nova_doc.md)         | ❌ raw pandoc |
 | [pdp18b_doc.md](docs/pdp18b_doc.md)     | ❌ raw pandoc |
 | [pdp1_doc.md](docs/pdp1_doc.md)         | ❌ raw pandoc |
-| [pdp6_doc.md](docs/pdp6_doc.md)         | ❌ raw pandoc |
 | [sds_doc.md](docs/sds_doc.md)           | ❌ raw pandoc |
 | [sel32_doc.md](docs/sel32_doc.md)       | ❌ raw pandoc |
 | [sigma_doc.md](docs/sigma_doc.md)       | ❌ raw pandoc |
