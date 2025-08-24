@@ -1,4 +1,4 @@
- PDP-6 Simulator Usage
+# PDP-6 Simulator Usage
 
 **Copyright Notice**
 
