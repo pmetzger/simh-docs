@@ -1,4 +1,4 @@
-# VAX-11/780 Simulator Usage
+# VAX-11/780 Simulator User's Guide
 
 Revision of 8-Aug-2021
 

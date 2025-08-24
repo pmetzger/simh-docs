@@ -1,4 +1,4 @@
-# SSEM Simulator Usage
+# SSEM Simulator User's Guide
 
 Revised: 14-May-2011
 

@@ -1,4 +1,4 @@
-# PDP-10 KA10 Processor Simulator Usage
+# PDP-10 KA10 Processor Simulator User's Guide
 
 **Copyright Notice**
 

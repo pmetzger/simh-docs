@@ -1,4 +1,4 @@
-# PDP-10 Simulator Usage
+# PDP-10 Simulator User's Guide
 
 Revision of 28-Apr-2020
 

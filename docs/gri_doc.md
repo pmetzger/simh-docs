@@ -1,4 +1,4 @@
-# GRI-909/GRI-99 Simulator Usage
+# GRI-909/GRI-99 Simulator User's Guide
 
 Revised: 01-Dec-2008
 

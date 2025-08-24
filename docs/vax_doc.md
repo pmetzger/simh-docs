@@ -1,4 +1,4 @@
-# VAX (MicroVAX 3900) Simulator Usage
+# VAX (MicroVAX 3900) Simulator User's Guide
 
 Revision of 23-Apr-2018
 

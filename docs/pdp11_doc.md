@@ -1,4 +1,4 @@
-# PDP-11 Simulator Usage
+# PDP-11 Simulator User's Guide
 
 Revision of 15-Aug-2021
 

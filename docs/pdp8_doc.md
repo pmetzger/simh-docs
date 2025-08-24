@@ -1,4 +1,4 @@
-# PDP-8 Simulator Usage
+# PDP-8 Simulator User's Guide
 
 Revision of 1-May-2020
 
