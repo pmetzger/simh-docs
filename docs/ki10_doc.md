@@ -41,7 +41,7 @@ The DEC PDP-10/KI10 simulator was written by Richard Cornwell.
 
 [3.2.9 TM10 Magnetic Tape (MTA) (Device 340,344)](#tm10-magnetic-tape-mta-device-340344)
 
-[3.2.10 TD10 DECTape (DT) (Device 320,324)](#td10-dectape-dt-device-320324)
+[3.2.10 TD10 DECtape (DT) (Device 320,324)](#td10-dectape-dt-device-320324)
 
 [3.3 Disk I/O Devices](#disk-io-devices)
 
@@ -136,9 +136,9 @@ The PDP-10 was ultimately replaced by the VAX.
 To compile the DEC PDP-10/KI10 simulator, you must define `USE_INT64`
 as part of the compilation command line.
 
-| `Subdirectory` | `File` | `Contains` |
-|----------------|--------|------------|
-| `PDP10/`       |        |            |
+| Subdirectory | File | Contains |
+|--------------|------|----------|
+| `PDP10/`     |      |          |
 |   | `kx10_defs.h`   | KA10 simulator definitions                  |
 |   | `kx10_cpu.c`    | KI10 CPU.                                   |
 |   | `kx10_df.c`     | DF10/C controller.                          |
@@ -152,7 +152,7 @@ as part of the compilation command line.
 |   | `kx10_dp.c`     | RP10 Disk controller, RP01/2/3 Disks.       |
 |   | `kx10_rp.c`     | RH10 Disk controller, RP04/5/6 Disks.       |
 |   | `kx10_rs.c`     | RH10 Disk controller RS04 Fixed head Disks. |
-|   | `kx10_dt.c`     | TD10 Dectape controller.                    |
+|   | `kx10_dt.c`     | TD10 DECtape controller.                    |
 |   | `kx10_mt.c`     | TM10A/B Magnetic tape controller.           |
 |   | `kx10_tu.c`     | RH10/TM03 Magnetic tape controller.         |
 |   | `kx10_lp.c`     | Line printer.                               |
@@ -185,7 +185,7 @@ The KI10 simulator is configured as follows:
 | `TUA`             | TM02 Tape controller via RH10   |
 | `FHA`             | RC10 Disk controller.           |
 | `DDC`             | DDC10 Disk controller.          |
-| `DT`              | TD10 Dectape Controller.        |
+| `DT`              | TD10 DECtape Controller.        |
 | `DC`              | DC10 Communications controller. |
 | `DK`              | Clock timer module.             |
 | `IMP`             | IMP network interface           |
@@ -218,42 +218,42 @@ The CPU options include setting memory size.
 
 CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
 
-| `Name`        | `Size` | `Comments`                 |
-|---------------|-------:|----------------------------|
-| `PC`          |     18 | Program Counter            |
-| `FLAGS`       |     18 | Flags                      |
-| `FM0-FM17`    |     36 | Fast Memory                |
-| `SW`          |     36 | Console SW Register        |
-| `MI`          |     36 | Memory Indicators          |
-| `AS`          |     18 | Console AS register        |
-| `ABRK`        |      1 | Address break              |
-| `ACOND`       |      5 | Address Condition switches |
-| `PIR`         |      8 | Priority Interrupt Request |
-| `PIH`         |      8 | Priority Interrupt Hold    |
-| `PIE`         |      8 | Priority Interrupt Enable  |
-| `PIENB`       |      1 | Enable Priority System     |
-| `BYF5`        |      1 | Byte Flag                  |
-| `UUO`         |      1 | UUO Cycle                  |
-| `PUSHOVER`    |      1 | Push overflow flag         |
-| `MEMPROT`     |      1 | Memory protection flag     |
-| `NXM`         |      1 | Non-existing memory access |
-| `CLK`         |      1 | Clock interrupt            |
-| `OV`          |      1 | Overflow enable            |
-| `FOV`         |      1 | Floating overflow enable   |
-| `APRIRQ`      |      3 | APR Interrupt number       |
-| `CLKIRQ`      |      3 | CLK Interrupt number       |
-| `UB`          |     18 | User Base Pointer          |
-| `EB`          |     18 | Executive Base Pointer     |
-| `FMSEL`       |      8 | Register set select        |
-| `SERIAL`      |     10 | System Serial Number       |
-| `INOUT`       |      1 |                            |
-| `SMALL`       |      1 |                            |
-| `PAGE_ENABLE` |      1 | Paging enabled             |
-| `PAGE_FAULT`  |      1 | Page fault                 |
-| `AC_STACK`    |     18 | AC Stack                   |
-| `PAGE_RELOAD` |     18 | Page reload                |
-| `FAULT_DATA`  |     36 | Page fault data            |
-| `TRP_FLG`     |      1 | Trap flag                  |
+| Name          | Size | Comments                   |
+|---------------|-----:|----------------------------|
+| `PC`          |   18 | Program Counter            |
+| `FLAGS`       |   18 | Flags                      |
+| `FM0-FM17`    |   36 | Fast Memory                |
+| `SW`          |   36 | Console SW Register        |
+| `MI`          |   36 | Memory Indicators          |
+| `AS`          |   18 | Console AS register        |
+| `ABRK`        |    1 | Address break              |
+| `ACOND`       |    5 | Address Condition switches |
+| `PIR`         |    8 | Priority Interrupt Request |
+| `PIH`         |    8 | Priority Interrupt Hold    |
+| `PIE`         |    8 | Priority Interrupt Enable  |
+| `PIENB`       |    1 | Enable Priority System     |
+| `BYF5`        |    1 | Byte Flag                  |
+| `UUO`         |    1 | UUO Cycle                  |
+| `PUSHOVER`    |    1 | Push overflow flag         |
+| `MEMPROT`     |    1 | Memory protection flag     |
+| `NXM`         |    1 | Non-existing memory access |
+| `CLK`         |    1 | Clock interrupt            |
+| `OV`          |    1 | Overflow enable            |
+| `FOV`         |    1 | Floating overflow enable   |
+| `APRIRQ`      |    3 | APR Interrupt number       |
+| `CLKIRQ`      |    3 | CLK Interrupt number       |
+| `UB`          |   18 | User Base Pointer          |
+| `EB`          |   18 | Executive Base Pointer     |
+| `FMSEL`       |    8 | Register set select        |
+| `SERIAL`      |   10 | System Serial Number       |
+| `INOUT`       |    1 |                            |
+| `SMALL`       |    1 |                            |
+| `PAGE_ENABLE` |    1 | Paging enabled             |
+| `PAGE_FAULT`  |    1 | Page fault                 |
+| `AC_STACK`    |   18 | AC Stack                   |
+| `PAGE_RELOAD` |   18 | Page reload                |
+| `FAULT_DATA`  |   36 | Page fault data            |
+| `TRP_FLG`     |    1 | Trap flag                  |
 
 The CPU can maintain a history of the most recently executed instructions.
 
@@ -403,9 +403,9 @@ an example.
 | `SET MTAn LOCKED`      | Sets the mag tape to be read only.        |
 | `SET MTAn WRITEENABLE` | Sets the mag tape to be writable.         |
 
-###  TD10 DECTape (`DT`) (Device 320,324)
+###  TD10 DECtape (`DT`) (Device 320,324)
 
-The TD10 was the standard Dectape controller for KA and KI’s. This
+The TD10 was the standard DECtape controller for KA and KI’s. This
 controller loads the tape into memory and uses the buffered
 version. Each individual tape drive supports several options: `DT` is
 used as an example.
@@ -523,7 +523,7 @@ fixed head swapping disks. By default they are disabled.
 
 ### `TU` Tape Drives
 
-The TUA is a Mass bus tape controller using a TM03 formatter. There
+The TUA is a Massbus tape controller using a TM03 formatter. There
 can be one per RH10 and it can support up to 8 drives.
 
 |                        |                                    |
@@ -563,7 +563,7 @@ command, or a `DETACH <device>` command.
 |-----------------------------|---------------------|
 | `SET <device> DISCONNECT=n` | Disconnect line `n` |
 
-The <device> implements the following special SHOW commands
+The `<device>` implements the following special `SHOW` commands:
 
 |                             |                                              |
 |-----------------------------|----------------------------------------------|
@@ -595,16 +595,16 @@ to the address that is given. By default this device is not enabled.
 
 |   |   |
 |---|---|
-| `SET IMP MAC=xx:xx:xx:xx:xx:xx` | Set the MAC address of the `IMP` to the value given. |
-| `SET IMP IP=ddd.ddd.ddd.ddd/dd` | Set the external IP address of the `IMP` along with the net mask in bits. |
+| `SET IMP MAC=xx:xx:xx:xx:xx:xx` | Set the `MAC` address of the `IMP` to the value given. |
+| `SET IMP IP=ddd.ddd.ddd.ddd/dd` | Set the external `IP` address of the `IMP` along with the net mask in bits. |
 | `SET IMP GW=ddd.ddd.ddd.ddd` | Set the Gateway address for the `IMP`. |
 | `SET IMP HOST=ddd.ddd.ddd.ddd` | Sets the IP address of the PDP-10 system. |
-| `SET IMP DHCP` | Allows the `IMP` to acquire an IP address from the local network via DHCP. Only HOST must be set if this feature is used. |
+| `SET IMP DHCP` | Allows the `IMP` to acquire an IP address from the local network via `DHCP`. Only `HOST` must be set if this feature is used. |
 | `SET IMP NODHCP` | Disables the `IMP` from making DHCP queries |
-| `SET IMP DHCPIP=ddd.ddd.ddd.ddd` | The address of the DHCP server, generally this is for display only. |
-| `SET IMP MIT` | Sets the `IMP` to look like the `IMP` used by MIT for ITS. |
-| `SET IMP BBN` | Sets the `IMP` to behave like generic BBN `IMP`. (Not implemented yet). |
-| `SET IMP WAITS` | Sets the `IMP` for Stanford style `IMP` for WAITS. |
+| `SET IMP DHCPIP=ddd.ddd.ddd.ddd` | The address of the `DHCP` server, generally this is for display only. |
+| `SET IMP MIT` | Sets the `IMP` to look like the `IMP` used by `MIT` for ITS. |
+| `SET IMP BBN` | Sets the `IMP` to behave like generic `BBN` `IMP`. (Not implemented yet). |
+| `SET IMP WAITS` | Sets the `IMP` for Stanford style `IMP` for `WAITS`. |
 
 The `IMP` device must be attached to a `TAP` or `NAT` interface. To
 determine which devices are available use the `SHOW ETHERNET` to list
