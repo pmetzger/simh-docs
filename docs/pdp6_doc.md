@@ -55,32 +55,38 @@ in 1964. The original goal of the machine was to allow for processing
 of many 6 bit characters at a time. 36 bits were also common in
 machines like the IBM 7090, GE 645, and Univac 11xx lines. Several
 systems influenced the design of the PDP-6, like CTSS, Lisp, support
-for larger memory. The PDP-6 was canceled by DEC due to production
-problems. The engineers designed a smaller replacement, which happened
-to be a 36 bit computer that looked very much like the PDP-6. This was
-called the PDP-10. Later renamed to "DECSystem-10". The system
-supported up to 256K words of memory.
+for larger memory.
+
+The PDP-6 was canceled by DEC due to production problems. The
+engineers designed a smaller replacement, which happened to be a 36
+bit computer that looked very much like the PDP-6. This was called the
+PDP-10, later renamed to "DECSystem-10". The system supported up to
+256K words of memory.
 
 The first PDP-10 was labeled KA10, and added a few instructions to the
 PDP-6. Both the PDP-6 and PDP-10 used a base and limit relocation
 scheme. The KA10 generally offered two registers, one of user data and
 the second for user shared code. These were referred to the
 Low-Segment and High-Segment, the High-Segment could be shared with
-several jobs. The next version was called KI10 for Integrated. This
-added support for paging and double precision floating point
-instructions. It also added 4 sets of registers to improve context
-switching time. It could also support up to 4Mega words of
-memory. Following the KI10 was the KL10 (for Low-Cost). The KL10 added
-double precision integer instructions and instructions to improve
-COBOL performance. This was the first version which was
-microcoded. The KL10 was extended to support user programs larger then
-256k. The final version to make it to market was the KS10 (for Small),
-this was a bit-slice version of the PDP-10 which used UNIBUS devices
-which were cheaper then the KL10 devices.
+several jobs.
+
+The next version was called KI10 for Integrated. This added support
+for paging and double precision floating point instructions. It also
+added 4 sets of registers to improve context switching time. It could
+also support up to 4Mega words of memory.
+
+Following the KI10 was the KL10 (for Low-Cost). The KL10 added double
+precision integer instructions and instructions to improve COBOL
+performance. This was the first version which was microcoded. The KL10
+was extended to support user programs larger then 256k.
+
+The final version to make it to market was the KS10 (for Small), this
+was a bit-slice version of the PDP-10 which used Unibus devices which
+were cheaper then the KL10 devices.
 
 The original operating system for the PDP-6/PDP-10 was just called
-"Monitor". It was designed to fit into 6K words. Around the 3rd
-release Swapping was added. The sixth release saw the addition of
+"Monitor". It was designed to fit into 6K words. Around the third
+release swapping was added. The sixth release saw the addition of
 virtual memory. Around the fourth release it was given the name
 "TOPS-10". Around this time BBN was working on a paging system and
 implemented it on the PDP-10. This was called "TENEX". This was later
@@ -88,20 +94,20 @@ adopted by DEC and became "TOPS-20".
 
 During the mid 1960s a group at MIT, who where not happy with how
 Multics was being developed, decided to create their own operating
-system which they called Incompatible Timesharing System "ITS". The
-name was a play on the original project called Compatible Timesharing
-System "CTSS". CTSS was implemented by MIT on their IBM 7090 as an
-experimental system that allowed multiple time sharing users to
-co-exist on the same machine running batch processing, hence the term
-"Compatible".
+system, which they called Incompatible Timesharing System, or
+"ITS". The name was a play on an earlier project called the Compatible
+Timesharing System, or "CTSS". CTSS was implemented by MIT on their
+IBM 7090 as an experimental system that allowed multiple time sharing
+users to co-exist on the same machine running batch processing, hence
+the term "Compatible".
 
 Also during the mid 1960s a group at Stanford Artificial Intelligence
 Laboratory (SAIL), started with a version of TOPS-10 and heavily
 modified it to become WAITS.
 
 During the 1970s, Tymshare modified TOPS-10 to support random access
-files, paging with working sets and spawnable processes. This ran on
-the KI10, KL10 and KS10.
+files, paging with working sets, and spawnable processes. This ran on
+the KI10, KL10, and KS10.
 
 The PDP-10 was ultimately replaced by the VAX.
 
