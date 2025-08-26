@@ -23,6 +23,7 @@ contain proofreading errors:
 | [gri_doc.md](docs/gri_doc.md)     | GRI-909 simulator           |
 | [ka10_doc.md](docs/ka10_doc.md)   | DEC PDP-10 (KA10) simulator |
 | [ki10_doc.md](docs/ki10_doc.md)   | DEC PDP-10 (KI10) simulator |
+| [ks10_doc.md](docs/ks10_doc.md)   | DEC PDP-10 (KS10) simulator |
 | [pdp8_doc.md](docs/pdp8_doc.md)   | DEC PDP-8 simulator         |
 | [pdp6_doc.md](docs/pdp6_doc.md)   | DEC PDP-6 simulator         |
 | [pdp10_doc.md](docs/pdp10_doc.md) | DEC PDP-10 (KS10) simulator |
@@ -62,7 +63,6 @@ is unlikely to be readable:
 | [ibm1130.md](docs/ibm1130.md)           | ❌ raw pandoc |
 | [id_doc.md](docs/id_doc.md)             | ❌ raw pandoc |
 | [kl10_doc.md](docs/kl10_doc.md)         | ❌ raw pandoc |
-| [ks10_doc.md](docs/ks10_doc.md)         | ❌ raw pandoc |
 | [lgp_doc.md](docs/lgp_doc.md)           | ❌ raw pandoc |
 | [nova_doc.md](docs/nova_doc.md)         | ❌ raw pandoc |
 | [pdp18b_doc.md](docs/pdp18b_doc.md)     | ❌ raw pandoc |
