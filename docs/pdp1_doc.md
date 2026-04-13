@@ -691,7 +691,7 @@ also applies to `ASCII` mode for the paper tape reader and punch.
 | `'` | `UC+002` | `none` |
 | `(` | `057` | `057` |
 | `)` | `055` | `055` |
-| `*` | `{TIMES} UC+073` | `072` |
+| `*` | `× ({TIMES}) UC+073` | `072` |
 | `+` | `UC+054` | `074` |
 | `,` | `033` | `033` |
 | `-` | `054` | `054` |
