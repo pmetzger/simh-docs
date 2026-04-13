@@ -24,6 +24,7 @@ contain proofreading errors:
 | [ka10_doc.md](docs/ka10_doc.md)   | DEC PDP-10 (KA10) simulator |
 | [ki10_doc.md](docs/ki10_doc.md)   | DEC PDP-10 (KI10) simulator |
 | [ks10_doc.md](docs/ks10_doc.md)   | DEC PDP-10 (KS10) simulator |
+| [pdp1_doc.md](docs/pdp1_doc.md)   | DEC PDP-1 simulator         |
 | [pdp8_doc.md](docs/pdp8_doc.md)   | DEC PDP-8 simulator         |
 | [pdp6_doc.md](docs/pdp6_doc.md)   | DEC PDP-6 simulator         |
 | [pdp10_doc.md](docs/pdp10_doc.md) | DEC PDP-10 (KS10) simulator |
@@ -67,7 +68,6 @@ is unlikely to be readable:
 | [lgp_doc.md](docs/lgp_doc.md)           | ❌ raw pandoc |
 | [nova_doc.md](docs/nova_doc.md)         | ❌ raw pandoc |
 | [pdp18b_doc.md](docs/pdp18b_doc.md)     | ❌ raw pandoc |
-| [pdp1_doc.md](docs/pdp1_doc.md)         | ❌ raw pandoc |
 | [sds_doc.md](docs/sds_doc.md)           | ❌ raw pandoc |
 | [sel32_doc.md](docs/sel32_doc.md)       | ❌ raw pandoc |
 | [sigma_doc.md](docs/sigma_doc.md)       | ❌ raw pandoc |
