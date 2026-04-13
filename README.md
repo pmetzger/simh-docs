@@ -45,6 +45,7 @@ is unlikely to be readable:
 
 | filename                          | status        |
 |-----------------------------------|---------------|
+| [altairz80_doc.md](docs/altairz80_doc.md) | ❌ raw pandoc |
 | [b5500_doc.md](docs/b5500_doc.md) | ❌ raw pandoc |
 | [h316_doc.md](docs/h316_doc.md)   | ❌ raw pandoc |
 | [h316_imp.md](docs/h316_imp.md)   | ❌ raw pandoc |
