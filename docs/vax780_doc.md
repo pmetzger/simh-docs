@@ -164,7 +164,7 @@ The VAX780 simulator is configured as follows:
 | `CPU`          | VAX-11/780 CPU        |
 | `TLB`          | translation buffer    |
 | `SBI`          | system bus controller |
-| `MCTL0,MTCL1` | memory controllers, MS780C with 4MB memory each,<br>or MS780E with 8MB-64MB each |
+| `MCTL0,MCTL1` | memory controllers, MS780C with 4MB memory each,<br>or MS780E with 8MB-64MB each |
 | `UBA`       | DW780 Unibus adapter                                      |
 | `MBA0,MBA1` | RH780 Massbus adapters                                    |
 | `TODR`      | time-of-day clock                                         |
@@ -1447,7 +1447,7 @@ where `X` in `ethX` is the number of the Ethernet controller to
 attach, or the real device name. The `X` number is system dependent. If
 you only have one Ethernet controller, the number will probably
 be 0. To find out what your system thinks the Ethernet numbers are,
-use the `SHOW XQ ETH` command. The device list can be quite cryptic,
+use the `SHOW XU ETH` command. The device list can be quite cryptic,
 depending on the host system, but is probably better than guessing. If
 you do not attach the device, the controller will behave as though the
 Ethernet cable were unplugged.
@@ -1729,9 +1729,6 @@ representing a single buffer passed to the DMC11. The DMC11 can be
 used for point-to-point DDCMP connections carrying DECnet and other
 types of networking, e.g. from ULTRIX or DSM.
 
-<!-- XXX -->
-
-
 ## CR11 Card Reader (`CR`)
 
 The card reader (`CR`) implements a single controller (the CR11) and
@@ -1869,8 +1866,6 @@ The `CR` controller implements these registers:
 | `IE`     |    1 | interrupt enable flag (`CRS<6>`)     |
 | `POS`    |   32 | file position - do not alter         |
 | `TIME`   |   24 | delay time between columns           |
-
-<!-- XXX -->
 
 # Symbolic Display and Input
 
