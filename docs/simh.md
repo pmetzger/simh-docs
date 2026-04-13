@@ -214,8 +214,8 @@ A virtual machine (VM) is a collection of devices bound together
 through their internal logic. Each device is named and corresponds
 more or less to a hunk of hardware on the real machine; for example:
 
-| VM    | device Real machine hardware                       |
-|-------|----------------------------------------------------|
+| VM device | Real machine hardware                       |
+|-----------|---------------------------------------------|
 | `CPU` | central processor and main memory                  |
 | `PTR` | paper tape reader controller and paper tape reader |
 | `TTI` | console keyboard                                   |
@@ -623,7 +623,7 @@ Command decoding is fairly obvious. At least one section of the
 peripheral code module will be devoted to processing directives issued
 by the CPU. Typically, the command decoder will be responsible for
 register and flag manipulation, and for issuing or canceling I/O
-requests. The former is easy, but the later requires a thorough
+requests. The former is easy, but the latter requires a thorough
 understanding of device timing.
 
 ### Device Timing
@@ -900,7 +900,7 @@ In order for idling to be well behaved on the host system, simulated
 devices which poll for input (console and terminal multiplexors are
 examples), the polling that these devices perform should be done at
 the same time as when the simulator will unavoidably be executing
-instructions. The most common time this happens is when click tick
+instructions. The most common time this happens is when clock tick
 interrupts are generated. As such, these devices should schedule their
 polling activities to be aligned with the clock ticks which are
 happening anyway or some multiple of the clock tick value.
@@ -1733,7 +1733,7 @@ macro is invoked by:
 
 The location should be an offset in the `UNIT` structure for
 unit 0. The width should be 32 for an `int32` or `uint32` field, and
-`T_ADDR_W` for a `t_addr` filed. The flags can be any of the normal
+`T_ADDR_W` for a `t_addr` field. The flags can be any of the normal
 register flags; `REG_UNIT` will be OR’d in automatically. For example,
 the following declares an arrayed register of all the `UNIT` position
 fields in a device with 4 units:
@@ -1752,7 +1752,7 @@ trample over memory. The macro is invoked by:
 
 The location should be the address in the structure for the first
 element (0) of the structure array. The width should be 32 for an
-`int32` or `uint32` field, and `T_ADDR_W` for a `t_addr` filed. The
+`int32` or `uint32` field, and `T_ADDR_W` for a `t_addr` field. The
 flags can be any of the normal register flags; `REG_STRUCT` will be OR’d
 in automatically. For example, the following declares an arrayed
 register of all the `UNIT` position fields in a device with 4 units:
@@ -1771,7 +1771,7 @@ the `REG` structure.
 
 Macro `SAVEDATA` defines an object which will be store and restored
 from a saved simulator image without any consideration for the format
-it contains. `SAVEDATA` REGisters can not be examined or deposited
+it contains. `SAVEDATA` REGisters cannot be examined or deposited
 to. This macro must be used with great care. The data being saved and
 restored is may not be meaningfully correct if the save environment
 has a different host architecture than the restoring one. The macro is
@@ -2178,7 +2178,6 @@ assumed to represent `aincr` addressing units, starting at `addr`:
 | `val[1]` | `addr + aincr`       |
 | `val[2]` | `addr + (2 * aincr)` |
 | `val[3]` | `addr + (3 * aincr)` |
-|----------|----------------------|
 
 Because `val` is typically filled in and stored by calls on the
 device’s examine and deposit routines, respectively, the examine and
@@ -2251,7 +2250,7 @@ The special initialization routine could perform any actions required
 by the VM. If the other optional interfaces are to be used, the
 initialization routine could also fill in the appropriate pointers.
 
-Due to the lack reliable functionality across all different supported
+Due to the lack of reliable functionality across all different supported
 host platforms, this “weak global” paradigm has been removed. These
 activities must now be done in the CPU reset routine (since that is
 called during SCP initialization, as well as when a `RESET` command is
@@ -2635,7 +2634,7 @@ The fields are the following:
 | `lnorder` | array of line numbers in order of connection sequence,<br>or `NULL` if user-defined connection order is not required |
 | `dptr` | pointer to the multiplexer’s DEVICE structure,<br>or `NULL` if the device is to be derived from the UNIT passed to the attach call. |
 | `uptr` | the UNIT passed to the attach call. |
-| `logfiletmpl` | template logfile name used to create names for per line log filesl. |
+| `logfiletmpl` | template logfile name used to create names for per-line log files. |
 | `buffered` | Buffered line behaviors enabled flag and the size of the line buffer. |
 | `sessions` | count of tcp connections received on the master socket. |
 | `last_poll_time` | time of last connection poll. |
@@ -3091,7 +3090,7 @@ emulated magnetic tapes. These are declared in header file
    write-protected.
 
 - `t_bool sim_tape_eot(UNIT *uptr)` – Return `TRUE` if unit `uptr` has
-  exceed the capacity specified of the specified unit (kept in
+  exceeded the capacity specified for the unit (kept in
   uptr-\>capac).
 
 The library supports reading and writing erase gaps in standard (SIMH)
@@ -3121,7 +3120,7 @@ for the tape format currently selected by the user.
 `sim_tape_attach`, `sim_tape_detach`, `sim_tape_set_fmt`,
 `sim_tape_show_fmt`, `sim_tape_set_capac`, `sim_tape_show_capac`,
 `sim_tape_set_dens`, and `sim_tape_show_dens` return standard SCP
-status codes; the other magtape library routines return return private
+status codes; the other magtape library routines return private
 codes for success and failure. The currently defined magtape status
 codes are:
 
