@@ -70,7 +70,7 @@ can be declared as an arrayed register.
 
 # PDP-8
 
-##  CPU and I/O Device Structures
+## CPU and I/O Device Structures
 
 Simulated memory is kept in array `uint16 M[MAXMEMSIZE]`. 12b words
 are right justified in each array entry; the high order 4b must be
@@ -249,7 +249,7 @@ where
 |-----------------|---------------------------------|
 | `IORS_response` | = bit(s) to set in `IORS`, or 0 |
 
-##  `DEVICE` Context and Flags
+## `DEVICE` Context and Flags
 
 The `DEVICE` `ctxt` (context) field must point to the device information
 block (`DIB`), if one exists. The `DEVICE` `flags` field must specify
@@ -257,7 +257,7 @@ whether the device supports the `SET ENABLED`/`SET DISABLED` commands
 (`DEV_DISABLE`). If a device can be disabled, the state of the device
 `flag<DEV_DIS>` must be declared as a register for `SAVE`/`RESTORE`.
 
-##  Adding A New I/O Device
+## Adding A New I/O Device
 
 ### Defining The Device Number and Interrupt Information
 
@@ -284,7 +284,7 @@ API level:
 If a device requires multiple interrupts, this set of definitions must
 be repeated for each interrupt.
 
-With these definitions, IO devices can manipulate the interrupt system
+With these definitions, I/O devices can manipulate the interrupt system
 with simple macros:
 
 ```
@@ -407,7 +407,7 @@ specified by the `DIB` vector field and by the `DIB` `num_vectors`
 field. The device is assumed to have vectors at `vector, …, vector +
 ((num_vectors -1) * 4)`. If the device has dynamic interrupt
 acknowledge routines, they are specified by the `DIB` interrupt
-acknowledge routines. An calling sequence for an interrupt acknowledge
+acknowledge routines. A calling sequence for an interrupt acknowledge
 routine is:
 
 ```
@@ -464,7 +464,7 @@ t_stat mba_abort(void)
 The abort routine typically invokes the device reset routine to stop
 all transfers and reset all device controller state.
 
-##  `DEVICE` Context and Flags
+## `DEVICE` Context and Flags
 
 For the PDP-11, VAX, and PDP-10, the `DEVICE` `ctxt` (context) field
 must point to the device information block (`DIB`), if one exists.
@@ -516,7 +516,7 @@ The routines return the number of bytes not transferred: 0 indicates a
 successful transfer. Transfer failures can occur if the mapped address
 uses an invalid mapping register or maps to non-existent memory.
 
-###  Massbus Devices
+### Massbus Devices
 
 Massbus devices access memory through three interface routines, for
 read, write, and write check respectively:
@@ -535,7 +535,7 @@ The arguments to these routines are:
 | `bc`   | byte count               |
 | `*buf` | pointer to device buffer |
 
-The routines the number of bytes successfully transferred. Transfer
+The routines return the number of bytes successfully transferred. Transfer
 failures can occur if a mapped address uses an invalid mapping
 register, maps to non-existent memory, or on a write-check, if a
 miscompare occurs.
@@ -566,7 +566,7 @@ the last (lowest priority) device in the level.
 
 ### Defining The I/O Page Region Size
 
-The size of the devices I/O page footprint should be defined as
+The size of the device's I/O page footprint should be defined as
 follows:
 
 ```
@@ -590,14 +590,14 @@ int32 new_iack2(void);
 #define IOLN_NEW       010                   /* length = 8 bytes */
 
 DIB new_dib = { IOBA_AUTO, IOLN_NEW, &new_rd, &new_wr,
-      num_vectors, IVLC (NEW), VEC_AUTO, { &new_iack1, &new_iack2, … };
+      num_vectors, IVCL (NEW), VEC_AUTO, { &new_iack1, &new_iack2, … };
 ```
 
 ### Proper setting of your I/O page base address in the Device Information Block.
 
 All Unibus and Qbus devices have some registers present in the I/O
 page. The size of the device’s register footprint is mentioned
-above. The address of the device’s base address in the I/O page can
+above. The device's base address in the I/O page can
 either be a fixed or a floating address. The vector used by the device
 can either be a fixed or a floating vector. The details for all known
 Unibus and Qbus devices are present in the entries of auto configure
