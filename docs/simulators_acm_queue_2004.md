@@ -25,7 +25,7 @@ different types of computer programs:
 
 1. The virtualized computer operating system (hypervisor) pioneered by
    VM/370 and today commercialized through such products as
-   VMWare. Virtual hypervisors allow a single system to run multiple
+   VMware. Virtual hypervisors allow a single system to run multiple
    operating environments simultaneously.
 
 2. The abstract computer system produced by interpreted environments
@@ -102,7 +102,7 @@ research:
   to historical computing or particular systems of interest.
 
 - Documentation and occasionally complete systems are offered for sale
-  on Ebay.
+  on eBay.
 
 - Several newsgroups are devoted to obsolete systems and emulation.
 
@@ -110,7 +110,7 @@ Nonetheless, even for the most popular systems, survival of hardware
 and software is chancy. For example, Unix V1-V4 appears to be
 irrevocably lost. On the other hand, the sources for PDP-15 XVM/DOS –
 not exactly a widely used operating system – turned up in a collection
-of DECtapes on Ebay.
+of DECtapes on eBay.
 
 ### <u>Step 2: Software Engineering</u>
 
@@ -145,7 +145,7 @@ SIMH handles these issues as follows:
   execute the asynchronous operation.
 
 Once the high-level design issues are decided, the simulator can be
-detailed designed and coded, usually from the CPU out to the
+detailed, designed, and coded, usually from the CPU out to the
 peripherals. The CPU design has the most complexity: how will
 instructions be decoded and executed; how will the CPU communicate
 with I/O devices; how are exceptions and interrupts handled; what
@@ -375,8 +375,8 @@ down simulated execution to real world rates.
 Simulators typically take a large number of instructions to execute
 one simulated instruction: up to 1000:1 for a complex simulator like
 the VAX. On modern computers, the disparity in clock rates between
-simulator host and simulated target (3Ghz for a modern PC versus .8Mhz
-for a PDP-8 or 5Mhz for a MicroVAX II) is usually more than sufficient
+simulator host and simulated target (3GHz for a modern PC versus 0.8MHz
+for a PDP-8 or 5MHz for a MicroVAX II) is usually more than sufficient
 to overcome the adverse simulation ratio. In addition, I/O on a modern
 computer is much faster than on historic systems, due to improvements
 in peripherals and the copious use of memory for caches and
@@ -395,8 +395,6 @@ level-one instruction stream caches, and large level-two data stream
 caches.
 
 ### Scale
-
-####
 
 For historic systems, simulator scale is not an issue, because the
 scale is bounded by real system limits. Simulating a 512MB PDP-11 is
