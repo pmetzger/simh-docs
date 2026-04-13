@@ -242,7 +242,7 @@ on the PDP-11. UNIX provides a program development and execution
 environment for assembler and C programs.
 
 UNIX V5, V6, V7 for the PDP-11 is provided under license, as is,
-without fee, by Caldera Corportion, for non-commercial use
+without fee, by Caldera Corporation, for non-commercial use
 only. Please read the enclosed license agreement for full terms and
 conditions. This license must be reproduced with any copy of the UNIX
 V5, V6, V7 disk images.
@@ -334,7 +334,7 @@ sim> boot rk0
 
 For RL, HK, RM, and RP series disks, RT-11 expects to find a
 manufacturer's bad block table in the last track of the
-disk. Therefore, INITialization of a new (all zero's) disk fails,
+disk. Therefore, INITialization of a new (all zeros) disk fails,
 because there is no valid bad block table. To create a minimal bad
 block table, use the `SET <unit> BADBLOCK` command.
 
@@ -413,7 +413,7 @@ debugged DDT.
 
 # PDP-7
 
-##  SIM8
+## SIM8
 
 PDP-7 SIM8 is a PDP-8 simulator for the PDP-7. It implements an 8K
 PDP-8/I with keyboard, teleprinter, reader, punch, and line
@@ -445,7 +445,7 @@ almost forty years made possible the recovery of this software.
 To load and run DECsys:
 
 ```
-sim> att –e dt2 decsys.dtp
+sim> att -e dt2 decsys.dtp
 sim> att dt3 scratch.dtp
 sim> load decsys.rim 17640
 sim> run
@@ -701,7 +701,7 @@ This 1401 Diagnostics tape is a bootable tape containing a series of
 1401 diagnostics dating from about 1962. The 1407 Inquiry console is
 not used; all control is via the front panel.
 
-To run in the simulator, attach thusly:
+To run in the simulator, attach as follows:
 
 ```
 sim> attach mt1 1401diag.mt
@@ -721,7 +721,7 @@ options through the sense switches and memory.
 | `D SSE 1`    | Halt if any error is detected, otherwise continue. |
 
 When you continue from this halt (use `C` to CON), the simulator will
-halt at 3001. Enter `C` again and the tape will spin thru a series of
+halt at 3001. Enter `C` again and the tape will spin through a series of
 basic CPU diagnostics.
 
 ## SPS
@@ -739,14 +739,14 @@ free-format, but operands must be placed in columns:
 ```
  1 – 5      Line Count (optional)
  6 -        Count (number of characters when defining a constant).
- 8 – 13     Label (six characters must start with alphabetic).
+ 8 – 13     Label (six characters must start with an alphabetic character).
 14 – 16     Opcode: Examples:
             A = Add
             B = Branch (must be d-mod for conditional)
             BWZ = Branch if Wordmark or Zone
             C = Compare
             CC = Carriage Control (printer)
-            CS = CLear Storage
+            CS = Clear Storage
             CU = Control Unit (e.g. tape)
             CW = Clear Workmark
             D = Divide
@@ -757,7 +757,7 @@ free-format, but operands must be placed in columns:
             H = Halt
             M = Multiply
             MCE = Move and Edit
-            MCS = Move and Supress Zeros
+            MCS = Move and Suppress Zeros
             MCW = Move Characters
             MN = Move Numeric
             MZ = Move Zone
@@ -779,14 +779,14 @@ free-format, but operands must be placed in columns:
             CU %UX E        Skip and Blank Tape
             CU %UX B        Backspace Record
             CU %UX R        Rewind Tape
-            CU %UX U        Rewind and Unlaod tape
+            CU %UX U        Rewind and Unload tape
 17 – 22     Address for A-operand (label or 4-digit actual address)
 23 – 23     blank, + or - to adjust A-operand by a constant
 24 – 26     3-digit number to adjust A-operand by if 23 is + or -
 27 – 27     Index (?)
 28 – 33     Address for B-operand
 34 – 34     Blank, + or -
-35 – 37     3-digit number of adjust B-address by if 34 is + or -
+35 – 37     3-digit number to adjust B-address by if 34 is + or -
 38 – 38     Index (?)
 39 – 39     D-modifier for this instruction.  Notes:
             / = Compare is unequal
@@ -848,7 +848,7 @@ system. Installation and distribution tapes for TOPS-10 7.03, TOPS-10
 7.04, and TOPS-20 4.1 are available at
 <https://pdp-10.trailing-edge.com>.
 
-#  Interdata 32b Systems
+# Interdata 32b Systems
 
 ## Interdata 7/32 UNIX
 
