@@ -247,7 +247,7 @@ The paper tape reader implements these registers:
 
 Error handling is as follows:
 
-| error | `STOP_IOE` | processed as |
+| error | STOP_IOE | processed as |
 |-------|------------|--------------|
 | not attached | 1 | report error and stop |
 | not attached | 0 | out of tape |
@@ -285,7 +285,7 @@ The paper tape punch implements these registers:
 
 Error handling is as follows:
 
-| error | `STOP_IOE` | processed as |
+| error | STOP_IOE | processed as |
 |-------|------------|--------------|
 | not attached | 1 | report error and stop |
 | not attached | 0 | out of tape |
@@ -361,7 +361,7 @@ The line printer implements these registers:
 
 Error handling is as follows:
 
-| error | `STOP_IOE` | processed as |
+| error | STOP_IOE | processed as |
 |-------|------------|--------------|
 | not attached | 1 | report error and stop |
 | not attached | 0 | out of tape or paper |
@@ -550,7 +550,7 @@ The serial drum (DRM) implements these registers:
 
 Error handling is as follows:
 
-| error | `STOP_IOE` | processed as |
+| error | STOP_IOE | processed as |
 |-------|------------|--------------|
 | not attached | 1 | report error and stop |
 | not attached | 0 | drum not ready |
@@ -578,7 +578,7 @@ The parallel drum (DRP) implements these registers:
 
 Error handling is as follows:
 
-| error | `STOP_IOE` | processed as |
+| error | STOP_IOE | processed as |
 |-------|------------|--------------|
 | not attached | 1 | report error and stop |
 | not attached | 0 | drum not ready |
