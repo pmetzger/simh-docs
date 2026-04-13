@@ -258,7 +258,7 @@ Perform a Google search for:
 rsts archive -V9 site:mailman.trailing-edge.com/pipermail/simh/
 ```
 
-This finds all messages containing “rsts” “archive” but not “V9”.
+This finds all messages containing `rsts` `archive` but not `V9`.
 
 # Operational Questions
 
@@ -266,7 +266,7 @@ This finds all messages containing “rsts” “archive” but not “V9”.
 
 The simplest way is to download the pre-compiled binaries. Unzip these
 into the directory where you want to run SIMH. You can then run
-whichever binary that you want.
+whichever binary you want.
 
 ## How do I install SIMH with Ethernet support on Windows?
 
@@ -294,11 +294,11 @@ FreeBSD and Solaris.
   the `-a` switch to unzip for proper conversion of Windows cr-lf
   sequences to UNIX newline sequences.
 
-- The Makefile included in the simh source distribution is a GNU make
+- The Makefile included in the SIMH source distribution is a GNU make
   Makefile. Some systems have GNU make as the default make
   (i.e. Linux). If your system’s make is not GNU make, then be sure to
-  install the GNU make package first and then use the ‘gmake’ command
-  instead of ‘make’:
+  install the GNU make package first and then use the `gmake` command
+  instead of `make`:
 
 ```
 $ make all
@@ -367,7 +367,7 @@ On a Alpha & IA64 hosts use:
 
 ```
 $ MMx                      ! With Ethernet support
-$ MMx/MACRO=("NONETWORK=1) ! Without Ethernet support
+$ MMx/MACRO=("NONETWORK=1") ! Without Ethernet support
 ```
 
 UNZIP can be found on the VMS freeware CDs, or from
@@ -655,8 +655,8 @@ sim> B CPU                          <-- and continue...
 ## Why doesn’t SIMH idling work on my Unix host?
 
 Some host systems have default clock tick sizes which are greater than
-what is required to produce useful SIMH idling behavior. Useful idling
-depends on a simulator's ability to sleep for intervals which are less
+those required to produce useful SIMH idling behavior. Useful idling
+depends on a simulator's ability to sleep for intervals that are less
 than or equal to the simulated system’s clock tick. Best idling
 behavior is realized when sleep intervals can be as small as 1ms. When
 a simulator starts, SIMH determines the host system’s clock tick size
@@ -669,7 +669,7 @@ changed by non-privileged user mode code.
 
 On Windows systems, SIMH sets the OS clock tick size to 1ms so that
 idling can be supported. Changing the OS tick size on other platforms
-may be achieved in some system specific way.
+may be achieved in some system-specific way.
 
 On Solaris, the file /etc/system contains parameters used to adjust
 various operating system details. Adding the following lines to this
