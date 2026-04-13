@@ -682,12 +682,12 @@ also applies to `ASCII` mode for the paper tape reader and punch.
 | `cr` | `077` | `none` |
 | `016 - 037` | `none` | `none` |
 | `space` | `000` | `000` |
-| `!` | `{OR} UC+005` | `none` |
+| `!` | `∨ ({OR}) UC+005` | `none` |
 | `"` | `UC+001` | `none` |
-| `#` | `{IMPLIES} UC+004` | `none` |
+| `#` | `⊃ ({IMPLIES}) UC+004` | `none` |
 | `$` | `none` | `none` |
 | `%` | `none` | `none` |
-| `&` | `{AND} UC+006` | `none` |
+| `&` | `∧ ({AND}) UC+006` | `none` |
 | `'` | `UC+002` | `none` |
 | `(` | `057` | `057` |
 | `)` | `055` | `055` |
@@ -713,7 +713,7 @@ also applies to `ASCII` mode for the paper tape reader and punch.
 | `=` | `UC+033` | `053` |
 | `>` | `UC+010` | `034` |
 | `?` | `UC+021` | `037` |
-| `@` | `{MID DOT} 040` | `{MID DOT} 040` |
+| `@` | `· ({MID DOT}) 040` | `· ({MID DOT}) 040` |
 | `A` | `UC+061` | `061` |
 | `B` | `UC+062` | `062` |
 | `C` | `UC+063` | `063` |
@@ -743,9 +743,9 @@ also applies to `ASCII` mode for the paper tape reader and punch.
 | `[` | `UC+057` | `none` |
 | `\` | `{OVERLINE} 056` | `{OVERLINE} 056` |
 | `]` | `UC+055` | `none` |
-| `^` | `{UP ARROW} UC+011` | `{UP ARROW} 035` |
+| `^` | `↑ ({UP ARROW}) UC+011` | `↑ ({UP ARROW}) 035` |
 | `_` | `UC+040` | `UC+040` |
-| `` ` `` | `{RT ARROW} UC+020` | `036` |
+| `` ` `` | `→ ({RT ARROW}) UC+020` | `036` |
 | `a` | `061` | `none` |
 | `b` | `062` | `none` |
 | `c` | `063` | `none` |
