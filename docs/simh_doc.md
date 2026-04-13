@@ -489,7 +489,7 @@ may not be meaningful or supported at all in some simulators.
 
 ## Saving and Restoring State
 
-The `SAVE` command (abbreviation `SA`) save the complete state of the
+The `SAVE` command (abbreviation `SA`) saves the complete state of the
 simulator to a file. This includes the contents of main memory and all
 registers, and the I/O connections of devices:
 
@@ -562,10 +562,10 @@ with write lock switches, such as disks and tapes, support read only
 operation; other devices do not. If a file is attached read only, its
 contents can be examined but not modified.
 
-If the `-a` switch is specified, is a sequential output only device
-(like a line printer, paper tape punch, etc.), the file being attached
-will be opened in append mode thus adding to any existing file data
-beyond what may have already been there.
+If the `-a` switch is specified, and the unit is a sequential
+output-only device (like a line printer, paper tape punch, etc.), the
+file being attached will be opened in append mode thus adding to any
+existing file data beyond what may have already been there.
 
 For simulated magnetic tapes, the `ATTACH` command can specify the
 format of the attached tape image file:
@@ -675,7 +675,7 @@ valid file name.
 Modifiers may be specified in any order. If multiple modifiers of the
 same type are specified, later modifiers override earlier
 modifiers. Note that if the device/unit name comes after the search
-specifier, the search values will interpreted in the radix of the CPU,
+specifier, the search values will be interpreted in the radix of the CPU,
 rather than of the device/unit.
 
 The "object list" consists of one or more of the following, separated
@@ -690,7 +690,7 @@ by commas:
 | register1-register2 | all the registers starting at register1 up to and including register2 |
 | address | the specified location |
 | address1-address2 | all locations starting at address1 up to and including address2 |
-| address/length | all location starting at address up to but not including address+length |
+| address/length | all locations starting at address up to but not including address+length |
 | `STATE` | all registers in the device |
 | `ALL` | all locations in the unit |
 | `$` | use the most recently referenced value as an address to reference (indirect) |
@@ -795,7 +795,7 @@ unit 0 is bootstrapped. The specified unit must be attached.
 As it initializes all of the I/O devices, the `RUN` command is almost
 never the proper command to use after a program has been started. The
 `GO` or `CONTINUE` commands are generally equivalent in hardware to
-running the CPU and is the usual way of resuming execution after a
+running the CPU and are the usual way of resuming execution after a
 programmed halt. If an I/O reset is required before resuming
 execution, the `RESET` and `GO` commands are recommended instead of
 `RUN`. If `RUN` is entered a second time without an explicit `RESET`
@@ -967,7 +967,7 @@ NOEXPECT {dev:line}
 SHOW EXPECT {dev:line}
 ```
 
-`<dev:line>` specifies a particular device a line in that simulated
+`<dev:line>` specifies a particular device or a line in that simulated
 device. If it is not specified, the simulated system’s console device
 is the default device.
 
@@ -1088,7 +1088,7 @@ matched the respective sub-groups.
 
 ## Injecting Input Data
 
-The `SEND` command provides a way to insert input data in to the
+The `SEND` command provides a way to insert input data into the
 console device of a simulated system as if it were entered by a user:
 
 ```
@@ -1106,7 +1106,7 @@ The `SEND` command can also insert input into any serial device on a
 simulated system as if it was entered by a user.
 
 ```
-SEND <dev>:line {AFTER=n,}{DELAY=n,}|<string>"
+SEND <dev>:line {AFTER=n,}{DELAY=n,}"<string>"
 NOSEND <dev>:line
 SHOW SEND <dev>:line
 ```
@@ -1476,7 +1476,7 @@ A remote console session will close when a `EOF` character is entered
 ### Master Mode
 
 Remote Console Master mode allows full control of simulator operation
-to performed over a remote TCP session. This mode is potentially
+to be performed over a remote TCP session. This mode is potentially
 useful for applications like a simulated CPU front panel interface or
 remote debugging with a GDB “Serial Stub”.
 
@@ -1490,7 +1490,7 @@ following command:
 Operation in Remote Console Master mode requires that the simulator’s
 console port be serviced via a telnet connect with a `SET CONSOLE
 TELNET=port` command. Both a telnet connection to the console port AND
-to the Remote Console port is required be a simulator will enter
+to the Remote Console port is required before a simulator will enter
 Master Mode.
 
 A Master Mode session can return control to the initiating simulator
@@ -1604,7 +1604,7 @@ arbitrary floating point number.
 Given two or more arguments, pause for the amount of time specified by
 the sum of their values.
 
-Note: A `SLEEP` command is interruptable with `SIGINT` (`^C`).
+Note: A `SLEEP` command is interruptible with `SIGINT` (`^C`).
 
 ### Displaying Arbitrary Text
 
@@ -1692,7 +1692,7 @@ used for "search specifiers" by the `EXAMINE` and `DEPOSIT` commands
 If the `<logical-op>` and `<value>` are specified, the target register
 value is first altered as indicated. The result is then compared to
 the `<value>` via the `<conditional-op>`. If the `NOT` unary operator
-precedes the expression, the results value is inverted.
+precedes the expression, the resulting value is inverted.
 
 ##### C Style Expressions
 
@@ -1814,7 +1814,7 @@ will be echoed, the command file will be aborted with an "Assertion
 failed" message. Otherwise, the command file will continue to bring up
 the operating system.
 
-Alternative, the `IF` command could be used to solve the same problem:
+Alternatively, the `IF` command could be used to solve the same problem:
 
 ```
 ; OS bootstrap command file
@@ -1828,7 +1828,7 @@ ATTACH MT1 user.tape
 RUN
 ```
 
-Alternative, the `IF` command could have an arbitrarily complex C
+Alternatively, the `IF` command could have an arbitrarily complex C
 expression syntax to solve the same problem:
 
 ```
@@ -1944,7 +1944,7 @@ Note 2: The `ON CONTROL_C` trapping is not affected by the `SET ON` and
 
 Token `%0` expands to the command file name.
 
-Token `%n` (n being a single digit) expands to the n'th argument
+Token `%n` (n being a single digit) expands to the nth argument
 
 Token `%*` expands to the whole set of arguments (`%1` to `%9`)
 
@@ -2071,11 +2071,11 @@ A=8
 
 ### Command Aliases
 
-Commands can be aliases with environment variables. For example:
+Commands can be aliased with environment variables. For example:
 
 ```
 sim> set env echo=echof
-sim> echo “Hello there”
+sim> echo "Hello there"
 Hello there
 ```
 
@@ -2127,9 +2127,9 @@ with:
 
 <!-- Is this correct??? -->
 
-|                              |                               |
-|------------------------------|-------------------------------|
-| `SET CONSOLE TELNET=LOG=LOG` | direct log output to log file |
+|                                     |                               |
+|-------------------------------------|-------------------------------|
+| `SET CONSOLE TELNET=LOG=<filename>` | direct log output to log file |
 
 ### Switches
 
