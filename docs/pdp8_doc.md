@@ -106,37 +106,37 @@ This memorandum documents the PDP-8 simulator.
 
 The PDP-8 simulator is configured as follows:
 
-| device names(s) | simulates                                              |
-|-----------------|--------------------------------------------------------|
-| `CPU`           | PDP-8/E CPU with 4KW-32KW of memory                    |
-| `-`             | KE8E extended arithmetic element (EAE)                 |
-| `-`             | KM8E memory management and timeshare control           |
-| `TSC`           | TSC8-75 ETOS operating system timeshare control        |
-| `FPP`           | FPP8A floating point unit                              |
-| `PTR,PTP`       | PC8E paper tape reader/punch                           |
-| `TTI,TTO`       | KL8E console terminal                                  |
-| `TTIX,TTOX`     | KL8JA additional terminals, up to 16                   |
-| `LPT`           | LE8E line printer                                      |
-| `CLK`           | DK8E line frequency clock (also PDP-8/A compatible)    |
-| `RK`            | RK8E/RK05 cartridge disk controller with four drives   |
-| `RF`            | RF08/RS08 fixed head disk controller with 1-4 platters |
-| `DF`            | DF32/DS32 fixed head disk controller with 1-4 platters |
-| `RL`            | RL8A/RL01 cartridge disk controller with four drives   |
-| `RX`            | RX8E/RX01, RX28/RX02 floppy disk controller with<br>two drives |
-| `DT` | TC08/TU56 DECtape controller with eight drives       |
-| `TD` | TD8E/TU56 DECtape controller with two drives         |
-| `MT` | TM8E/TU10 magnetic tape controller with eight drives |
-| `CT` | TA8E/TU60 cassette tape controller with two drives   |
+| device name(s) | simulates                                               |
+|----------------|---------------------------------------------------------|
+| `CPU`          | PDP-8/E CPU with 4KW to 32KW of memory                  |
+| `-`            | KE8E extended arithmetic element (EAE)                  |
+| `-`            | KM8E memory management and timeshare control            |
+| `TSC`          | TSC8-75 ETOS operating system timeshare control         |
+| `FPP`          | FPP8A floating point unit                               |
+| `PTR,PTP`      | PC8E paper tape reader/punch                            |
+| `TTI,TTO`      | KL8E console terminal                                   |
+| `TTIX,TTOX`    | KL8JA additional terminals, up to 16                    |
+| `LPT`          | LE8E line printer                                       |
+| `CLK`          | DK8E line frequency clock (also PDP-8/A compatible)     |
+| `RK`           | RK8E/RK05 cartridge disk controller with four drives    |
+| `RF`           | RF08/RS08 fixed head disk controller with 1-4 platters  |
+| `DF`           | DF32/DS32 fixed head disk controller with 1-4 platters  |
+| `RL`           | RL8A/RL01 cartridge disk controller with four drives    |
+| `RX`           | RX8E/RX01, RX28/RX02 floppy disk controller with<br>two drives |
+| `DT`           | TC08/TU56 DECtape controller with eight drives          |
+| `TD`           | TD8E/TU56 DECtape controller with two drives            |
+| `MT`           | TM8E/TU10 magnetic tape controller with eight drives    |
+| `CT`           | TA8E/TU60 cassette tape controller with two drives      |
 
 
-Most devices can be disabled or enabled, by the commands:
+Most devices can be disabled or enabled by the commands:
 
 ```
 SET <dev> DISABLED
 SET <dev> ENABLED
 ```
 
-The simulator allows most device numbers to be changed, by the command:
+The simulator allows most device numbers to be changed by the command:
 
 ```
 SET <dev> DEV=<number>
@@ -147,7 +147,7 @@ using the default device numbers, since they all use device numbers
 60-61. The default is the `RF08`. To change the disk at device numbers
 60-61:
 
-|                   |                |
+| command           | action         |
 |-------------------|----------------|
 | `SET RF DISABLED` | disable RF08   |
 | `SET DF ENABLED`  | or enable DF32 |
@@ -157,7 +157,7 @@ The PDP-8 can only support one of the set {`TC08`, `TD8E`} using the
 default device numbers, since both use device number 77. The default
 is the `TC08`. To change the DECtape controller to the TD8E:
 
-|                   |                |
+| command           | action         |
 |-------------------|----------------|
 | `SET DT DISABLED` | disable `TC08` |
 | `SET TD ENABLED`  | enable `TD8E`  |
@@ -166,7 +166,7 @@ The PDP-8 can only support one of the set {`TM8E`, `TA8E`} using the
 default device numbers, since both use device number 70. The default
 is the `TM8E`. To change the device at device number 70:
 
-|                   |                |
+| command           | action         |
 |-------------------|----------------|
 | `SET MT DISABLED` | disable `TM8E` |
 | `SET CT ENABLED`  | enable `TA8E`  |
@@ -192,12 +192,12 @@ The PDP-8 simulator implements several unique stop conditions:
 - If a simulated DECtape runs off the end of its reel
 
 The `LOAD` command supports both `RIM` format and `BIN` format
-tapes. If the file extension is `.RIM`, or the r switch is specified
+tapes. If the file extension is `.RIM`, or the `-r` switch is specified
 with `LOAD`, the file is assumed to be `RIM` format; if the file
 extension is not `.RIM`, or the `-b` switch is specified, the file is
 assumed to be `BIN` format. For `BIN` format tape loading will stop at
 the first trailer code (`0x80`). If the tape contains multiple
-sections specify the `-a` flag to load all sections on the tape. The
+sections, specify the `-a` flag to load all sections on the tape. The
 number of sections loaded will be printed. If the tape had non-`BIN`
 format data following the last valid leader it may cause checksum
 errors or load unwanted data into memory.
@@ -208,7 +208,7 @@ The only CPU options are the presence of the `EAE` and the size of
 main memory; the memory extension and time-share control is always
 included, even if memory size is 4K.
 
-|                 |                       |
+| command         | action                |
 |-----------------|-----------------------|
 | `SET CPU EAE`   | enable `EAE`          |
 | `SET CPU NOEAE` | disable `EAE`         |
@@ -261,7 +261,7 @@ The CPU attempts to detect when the simulator is idle. When idle, the
 simulator does not use any resources on the host system. Idle
 detection is controlled by the `SET IDLE` and `SET NOIDLE` commands:
 
-|                  |                        |
+| command          | action                 |
 |------------------|------------------------|
 | `SET CPU IDLE`   | enable idle detection  |
 | `SET CPU NOIDLE` | disable idle detection |
@@ -274,7 +274,7 @@ The CPU can maintain a history of the most recently executed
 instructions. This is controlled by the `SET CPU HISTORY` and `SHOW
 CPU HISTORY` commands:
 
-|                      |                                        |
+| command              | action                                 |
 |----------------------|----------------------------------------|
 | `SET CPU HISTORY`    | clear history buffer                   |
 | `SET CPU HISTORY=0`  | disable history                        |
@@ -368,10 +368,8 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | out of tape           |
-|              |            |                       |
 | end of file  | 1          | report error and stop |
 |              | 0          | out of tape           |
-|              |            |                       |
 | OS I/O error | x          | report error and stop |
 
 ### PC8E Paper Tape Punch (`PTP`)
@@ -401,13 +399,12 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | out of tape           |
-|              |            |                       |
 | OS I/O error | x          | report error and stop |
 
 ### KL8E Terminal Input (`TTI`)
 
 The terminal interfaces (`TTI`, `TTO`) can be set to one of four
-modes, `KSR`, `7B`, `7B`, or `8B`:
+modes, `KSR`, `7P`, `7B`, or `8B`:
 
 | mode |  input characters       | output characters      |
 |------|-------------------------|------------------------|
@@ -475,7 +472,6 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | out of paper          |
-|              |            |                       |
 | OS I/O error | x          | report error and stop |
 
 ### DK8E Line-Frequency Clock (`CLK`)
@@ -511,13 +507,13 @@ independent devices, `TTIX` and `TTOX`. The entire set is modeled as a
 terminal multiplexer, with `TTIX` as the master controller. The number
 of lines is specified with a `SET` command:
 
-|                    |                                              |
+| command            | action                                       |
 |--------------------|----------------------------------------------|
 | `SET TTIX LINES=n` | set number of additional lines to `n` [1-16] |
 
 The `ATTACH` command specifies the port to be used:
 
-|                      |                       |
+| command              | action                |
 |----------------------|-----------------------|
 | `ATTACH TTIX <port>` | set up listening port |
 
@@ -540,7 +536,7 @@ The default mode is `UC`.
 Finally, each line supports output logging. The `SET TTOXn LOG`
 command enables logging on a line:
 
-|                          |                                    |
+| command                  | action                             |
 |--------------------------|------------------------------------|
 | `SET TTOXn LOG=filename` | log output of line `n` to filename |
 
@@ -555,7 +551,7 @@ DISCONNECT` command, or a `DETACH TTIX` command.
 
 Other special commands:
 
-|                         |                                        |
+| command                 | action                                 |
 |-------------------------|----------------------------------------|
 | `SHOW TTIX CONNECTIONS` | show current connections               |
 | `SHOW TTIX STATISTICS`  | show statistics for active connections |
@@ -598,7 +594,7 @@ used to simulate DECtapes. The TD8E is disabled by default.
 TD8E options include the ability to make units write enabled or write
 locked.
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET TDn LOCKED`       | set unit `n` write locked  |
 | `SET TDn WRITEENABLED` | set unit `n` write enabled |
@@ -606,15 +602,15 @@ locked.
 Units can also be set `ENABLED` or `DISABLED`. The TD8E supports the
 `BOOT` command, but only for unit 0.
 
-The TD8E supports supports PDP-8 format, PDP-11 format, and 18b format
+The TD8E supports PDP-8 format, PDP-11 format, and 18b format
 DECtape images. `ATTACH` assumes the image is in PDP-8 format; the
 user can force other choices with switches:
 
-|      |                                       |
-|------|---------------------------------------|
-| `-s` | PDP-11 format                         |
-| `-f` | 18b format                            |
-| `-a` | autoselect based on file on file size |
+| switch | action                        |
+|--------|-------------------------------|
+| `-s`   | PDP-11 format                 |
+| `-f`   | 18b format                    |
+| `-a`   | autoselect based on file size |
 
 The TD8E controller is a data-only simulator; the timing and mark
 track, and block header and trailer, are not stored. Thus, read always
@@ -654,7 +650,7 @@ always SIMH standard. The TA8E is disabled by default.
 TA8E options include the ability to make units write enabled or write
 locked.
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET CTn LOCKED`       | set unit `n` write locked  |
 | `SET CTn WRITEENABLED` | set unit `n` write enabled |
@@ -696,7 +692,7 @@ Error handling is as follows:
 RK8E options include the ability to make units write enabled or write
 locked:
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET RKn LOCKED`       | set unit `n` write locked  |
 | `SET RKn WRITEENABLED` | set unit `n` write enabled |
@@ -724,9 +720,7 @@ Error handling is as follows:
 |--------------|------------|-----------------------------|
 | not attached | 1          | report error and stop       |
 |              | 0          | disk not ready              |
-|              |            |                             |
 | end of file  | x          | assume rest of disk is zero |
-|              |            |                             |
 | OS I/O error | x          | report error and stop       |
 
 ### RL8A Cartridge Disk (RL)
@@ -734,7 +728,7 @@ Error handling is as follows:
 RL8A options include the ability to make units write enabled or write
 locked:
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET RLn LOCKED`       | set unit `n` write locked  |
 | `SET RLn WRITEENABLED` | set unit `n` write enabled |
@@ -769,9 +763,7 @@ Error handling is as follows:
 |--------------|------------|-----------------------------|
 | not attached | 1          | report error and stop       |
 |              | 0          | disk not ready              |
-|              |            |                             |
 | end of file  | x          | assume rest of disk is zero |
-|              |            |                             |
 | OS I/O error | x          | report error and stop       |
 
 ## RX8E/RX01, RX28/RX02 Floppy Disk (`RX`)
@@ -779,7 +771,7 @@ Error handling is as follows:
 The `RX` can be configured as an RX8E with two RX01 drives, or an RX28
 with two RX02 drives:
 
-|               |                             |
+| command       | action                      |
 |---------------|-----------------------------|
 | `SET RX RX8E` | set controller to RX8E/RX01 |
 | `SET RX RX28` | set controller to RX28/RX02 |
@@ -788,9 +780,10 @@ The controller is set to the RX8E by default. The RX28 is not
 backwards-compatible with the RX8E and will not work with the standard
 OS/8 V3D floppy disk driver.
 
-RX8E options include the ability to set units write enabled or write locked:
+RX8E options include the ability to set units write enabled or write
+locked:
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET RXn LOCKED`       | set unit `n` write locked  |
 | `SET RXn WRITEENABLED` | set unit `n` write enabled |
@@ -799,7 +792,7 @@ RX28 options include, in addition, the ability to set the unit density
 to single density, double density, or autosized; autosizing is the
 default:
 
-|                    |                             |
+| command            | action                      |
 |--------------------|-----------------------------|
 | `SET RXn SINGLE`   | set unit `n` single density |
 | `SET RXn DOUBLE`   | set unit `n` double density |
@@ -849,7 +842,7 @@ present in a configuration, but not both.
 RF08 options include the ability to set the number of platters to a
 fixed value between 1 and 4, or to autosize the number of platters:
 
-|                   |                       |
+| command           | action                |
 |-------------------|-----------------------|
 | `SET RF 1P`       | one platter (256K)    |
 | `SET RF 2P`       | two platters (512K)   |
@@ -896,7 +889,7 @@ I/O errors cannot occur.
 DF32 options include the ability to set the number of platters to a
 fixed value between 1 and 4, or to autosize the number of platters:
 
-|                   |                       |
+| command           | action                |
 |-------------------|-----------------------|
 | `SET DF 1P`       | one platter (32K)     |
 | `SET DF 2P`       | two platters (64K)    |
@@ -938,13 +931,13 @@ Error handling is as follows:
 DF32 data files are buffered in memory; therefore, end of file and OS
 I/O errors cannot occur.
 
-##  TC08/TU56 DECtape (`DT`)
+## TC08/TU56 DECtape (`DT`)
 
 `DT` implements the TC08 DECtape controller and TU56 drives. TC08
 options include the ability to make units write enabled or write
 locked.
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET DTn LOCKED`       | set unit `n` write locked  |
 | `SET DTn WRITEENABLED` | set unit `n` write enabled |
@@ -952,15 +945,15 @@ locked.
 Units can also be set `ENABLED` or `DISABLED`. The TC08 supports the
 `BOOT` command, but only for unit 0.
 
-The TC08 supports supports PDP-8 format, PDP-11 format, and 18b format
+The TC08 supports PDP-8 format, PDP-11 format, and 18b format
 DECtape images. `ATTACH` assumes the image is in PDP-8 format; the
 user can force other choices with switches:
 
-|      |                                       |
-|------|---------------------------------------|
-| `-s` | PDP-11 format                         |
-| `-f` | 18b format                            |
-| `-a` | autoselect based on file on file size |
+| switch | action                        |
+|--------|-------------------------------|
+| `-s`   | PDP-11 format                 |
+| `-f`   | 18b format                    |
+| `-a`   | autoselect based on file size |
 
 The TC08 controller is a data-only simulator; the timing and mark
 track, and block header and trailer, are not stored. Thus, the `WRITE
@@ -997,12 +990,12 @@ operate correctly.
 
 Acceleration time is set to 75% of deceleration time.
 
-##  TM8E Magnetic Tape (`MT`)
+## TM8E Magnetic Tape (`MT`)
 
 Magnetic tape options include the ability to make units write enabled
 or write locked.
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET MTn LOCKED`       | set unit `n` write locked  |
 | `SET MTn WRITEENABLED` | set unit `n` write enabled |
@@ -1010,7 +1003,7 @@ or write locked.
 Magnetic tape units can be set to a specific reel capacity in MB, or
 to unlimited capacity:
 
-|                   |                                                 |
+| command           | action                                          |
 |-------------------|-------------------------------------------------|
 | `SET MTn CAPAC=m` | set unit `n` capacity to `m` MB (0 = unlimited) |
 | `SHOW MTn CAPAC`  | show unit `n` capacity in MB                    |
@@ -1048,21 +1041,21 @@ Error handling is as follows:
 The PDP-8 simulator implements symbolic display and input. Display is
 controlled by command line switches:
 
-|      |                                               |
-|------|-----------------------------------------------|
-| `-a` | display as ASCII character                    |
-| `-c` | display as two packed sixbit characters       |
-| `-t` | display as two packed TSS/8 sixbit characters |
-| `-m` | display instruction mnemonics                 |
+| switch | action                                      |
+|--------|---------------------------------------------|
+| `-a`   | display as ASCII character                  |
+| `-c`   | display as two packed six-bit characters    |
+| `-t`   | display as two packed TSS/8 six-bit characters |
+| `-m`   | display instruction mnemonics               |
 
 Input parsing is controlled by the first character typed in or by
 command line switches:
 
-|             |                                    |
+| input       | parsed as                          |
 |-------------|------------------------------------|
 | `'` or `-a` | ASCII character                    |
-| `"` or `-c` | two packed sixbit characters       |
-| `#` or `-t` | two packed TSS/8 sixbit characters |
+| `"` or `-c` | two packed six-bit characters      |
+| `#` or `-t` | two packed TSS/8 six-bit characters |
 | alphabetic  | instruction mnemonic               |
 | numeric     | octal number                       |
 
@@ -1081,11 +1074,11 @@ zero page reference. The address is an octal number in the range
 `0-07777`; if `C` or `Z` is specified, the address is a page offset in
 the range `0-177`. Normally, `C` is not needed; the simulator figures
 out from the address what mode to use. However, when referencing
-memory outside the CPU (eg, disks), there is no valid `PC`, and `C`
+memory outside the CPU (e.g., disks), there is no valid `PC`, and `C`
 must be used to specify current page addressing.
 
-`IOT` instructions consist of single mnemonics, eg, `KRB` or
-`TLS`. `IOT` instructions may be or'd together
+`IOT` instructions consist of single mnemonics, e.g., `KRB` or
+`TLS`. `IOT` instructions may be ORed together
 
 ```
 iot iot iot...
@@ -1102,7 +1095,7 @@ fldchg field
 ```
 
 where field is an octal number in the range `0-7`. Field change
-instructions may be or'd together.
+instructions may be ORed together.
 
 Operate instructions have the format
 
