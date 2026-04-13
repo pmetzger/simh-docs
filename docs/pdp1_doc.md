@@ -94,12 +94,12 @@ The PDP-1 is configured as follows:
 
 The PDP-1 simulator implements the following unique stop conditions:
 
-- An unimplemented instruction is decoded, and register STOP_INST is set
+- An unimplemented instruction is decoded, and register `STOP_INST` is set
 
-- More than IND_MAX indirect addresses are detected during memory
+- More than `IND_MAX` indirect addresses are detected during memory
   reference address decoding
 
-- More than XCT_MAX nested executes are detected during instruction execution
+- More than `XCT_MAX` nested executes are detected during instruction execution
 
 - I/O wait, and no I/O operations outstanding (i.e., no I/O completion
   will ever occur)
@@ -118,7 +118,7 @@ starting address of the field to be loaded:
 | `LOAD ddt.rim 70000` | load RIM format file `ddt.rim` into the field starting at `70000` |
 | `LOAD -B macro.blk` | load BLK format file `macro.blk` |
 
-The DUMP command is not implemented.
+The `DUMP` command is not implemented.
 
 ## CPU
 
@@ -203,10 +203,11 @@ instructions. This is controlled by the `SET CPU HISTORY` and
 The maximum length for the history is 65536 entries.
 
 If the 16-channel sequence break system is enabled, devices can be
-assigned to any break level between 0 (the default) and 15, with the
-following command:
+assigned to any break level between 0 (the default) and 15:
 
-`SET <dev> SBSLVL=n` assigns a device to sequence break level `n`.
+| command | action |
+|---------|--------|
+| `SET <dev> SBSLVL=n` | assign a device to sequence break level `n` |
 
 Because each PDP-1 configuration was unique, there are no default
 assignments for the 16-channel sequence break system.
@@ -215,23 +216,23 @@ assignments for the 16-channel sequence break system.
 
 ### Paper Tape Reader (PTR)
 
-The paper tape reader (PTR) reads data from a disk file. The POS
+The paper tape reader (`PTR`) reads data from a disk file. The `POS`
 register specifies the number of the next data item to be read. Thus,
-by changing POS, the user can backspace or advance the reader.
+by changing `POS`, the user can backspace or advance the reader.
 
-The paper tape reader supports the BOOT command. `BOOT PTR` copies the
-RIM loader into memory and starts it running. `BOOT PTR` loads into the
-field selected by `TA<0:3>` (the high order four bits of the address
+The paper tape reader supports the `BOOT` command. `BOOT PTR` copies
+the RIM loader into memory and starts it running. `BOOT PTR` loads into
+the field selected by `TA<0:3>` (the high order four bits of the
+address switches).
 
-switches).
-
-The paper tape reader recognizes one switch at ATTACH time:
+The paper tape reader recognizes one switch at `ATTACH` time:
 
 | command | action |
 |---------|--------|
 | `ATT -A PTR <file>` | convert input characters from ASCII |
 
-By default, the paper tape reader does no conversions on input characters.
+By default, the paper tape reader does no conversions on input
+characters.
 
 The paper tape reader implements these registers:
 
@@ -256,12 +257,13 @@ Error handling is as follows:
 
 ### Paper Tape Punch (PTP)
 
-The paper tape punch (PTP) writes data to a disk file. The POS register
-specifies the number of the next data item to be written. Thus, by
-changing POS, the user can backspace or advance the punch. The default
-position after ATTACH is to position at the end of an existing file.
+The paper tape punch (`PTP`) writes data to a disk file. The `POS`
+register specifies the number of the next data item to be written.
+Thus, by changing `POS`, the user can backspace or advance the punch.
+The default position after `ATTACH` is to position at the end of an
+existing file.
 
-The paper tape punch recognizes two switches at ATTACH time:
+The paper tape punch recognizes two switches at `ATTACH` time:
 
 | command | action |
 |---------|--------|
@@ -294,9 +296,9 @@ Error handling is as follows:
 The Typewriter is a half-duplex electric typewriter (originally a
 Friden Flexowriter, later a Sorobon-modified IBM B). It has only a
 single buffer and a single carriage state but distinct input and
-output done and interrupt flags. The typewriter input (TTI) polls the
-console keyboard for input. The typewriter output (TTO) writes to the
-simulator console window.
+output done and interrupt flags. The typewriter input (`TTI`) polls
+the console keyboard for input. The typewriter output (`TTO`) writes
+to the simulator console window.
 
 The Typewriter recognizes one option:
 
@@ -333,11 +335,12 @@ The typewriter output implements these registers:
 
 ### Type 62 Line Printer (LPT)
 
-The line printer (LPT) writes data to a disk file. The POS register
-specifies the number of the next data item to be written. Thus, by
-changing POS, the user can backspace or advance the printer. The
-default position after ATTACH is to position at the end of an existing
-file. A new file can be created if you attach with the `-N` switch.
+The line printer (`LPT`) writes data to a disk file. The `POS`
+register specifies the number of the next data item to be written.
+Thus, by changing `POS`, the user can backspace or advance the
+printer. The default position after `ATTACH` is to position at the end
+of an existing file. A new file can be created if you attach with the
+`-N` switch.
 
 The line printer can be disabled and enabled with the `SET LPT
 DISABLED` and `SET LPT ENABLED` commands, respectively.
@@ -379,13 +382,13 @@ write locked.
 | `SET DTn WRITEENABLED` | set unit `n` write enabled |
 | `SET DTn LOCKED` | set unit `n` write locked |
 
-Units can also be set ENABLED or DISABLED.
+Units can also be set `ENABLED` or `DISABLED`.
 
 The DECtape controller can be disabled and enabled with the `SET DT
 DISABLED` and `SET DT ENABLED` commands, respectively.
 
 The Type 550 supports PDP-8 format, PDP-11 format, and 18b format
-DECtape images. ATTACH assumes the image is in 18b format; the user
+DECtape images. `ATTACH` assumes the image is in 18b format; the user
 can specify other choices with switches:
 
 | switch | meaning |
@@ -421,9 +424,9 @@ It is critically important to maintain certain timing relationships
 among the DECtape parameters, or the DECtape simulator will fail to
 operate correctly.
 
-- LTIME must be at least 6
+- `LTIME` must be at least 6
 
-- DCTIME needs to be at least 100 times LTIME
+- `DCTIME` needs to be at least 100 times `LTIME`
 
 Acceleration time is set to 75% of deceleration time.
 
@@ -452,16 +455,16 @@ to two different SBS levels:
 
 The Type 630 Data Communications Subsystem provides up to 32
 asynchronous interfaces. The Type 630 consists of two independent
-devices: DCS for the scanner, and DCSL for the individual lines. The
-terminal multiplexer performs input and output through Telnet sessions
-connected to a user-specified port. The ATTACH command specifies the
-port to be used:
+devices: `DCS` for the scanner, and `DCSL` for the individual lines.
+The terminal multiplexer performs input and output through Telnet
+sessions connected to a user-specified port. The `ATTACH` command
+specifies the port to be used:
 
 | command | action |
 |---------|--------|
 | `ATTACH DCS <port>` | set up listening port |
 
-where port is a decimal number between 1 and 65535 that is not being
+where `port` is a decimal number between 1 and 65535 that is not being
 used for other TCP/IP activities. The number of lines can be changed
 with the `SET DCS LINES` command:
 
@@ -469,8 +472,8 @@ with the `SET DCS LINES` command:
 |---------|--------|
 | `SET DCS LINES=n` | set number of lines to `n`, where `n` is 1-32 |
 
-Each line (each unit of DCSL) can be set to one of four modes: UC,
-7P, 7B, or 8B.
+Each line (each unit of `DCSL`) can be set to one of four modes: `UC`,
+`7P`, `7B`, or `8B`.
 
 | mode | input characters | output characters |
 |------|------------------|-------------------|
@@ -479,8 +482,8 @@ Each line (each unit of DCSL) can be set to one of four modes: UC,
 | `7B` | high-order bit cleared | high-order bit cleared |
 | `8B` | no changes | no changes |
 
-The default mode is UC. Finally, each line supports output logging. The
-`SET DCSLn LOG` command enables logging on a line:
+The default mode is `UC`. Finally, each line supports output logging.
+The `SET DCSLn LOG` command enables logging on a line:
 
 | command | action |
 |---------|--------|
@@ -489,13 +492,13 @@ The default mode is UC. Finally, each line supports output logging. The
 The `SET DCSLn NOLOG` command disables logging and closes the open log
 file, if any.
 
-Once DCS is attached and the simulator is running, the multiplexer
+Once `DCS` is attached and the simulator is running, the multiplexer
 listens for connections on the specified port. It assumes that the
 incoming connections are Telnet connections. The connections remain
 open until disconnected either by the Telnet client, a `SET DCS
 DISCONNECT` command, or a `DETACH DCS` command.
 
-Other special commands:
+Other special commands include:
 
 | command | action |
 |---------|--------|
@@ -503,7 +506,7 @@ Other special commands:
 | `SHOW DCS STATISTICS` | show statistics for active connections |
 | `SET DCSLn DISCONNECT` | disconnect the specified line |
 
-The multiplexer scanner (DCS) implements these registers:
+The multiplexer scanner (`DCS`) implements these registers:
 
 | name | size | comments |
 |------|------|----------|
@@ -513,19 +516,20 @@ The multiplexer scanner (DCS) implements these registers:
 | `SCAN` | 5 | scanner line number |
 | `SEND` | 5 | output line number |
 
-The individual lines (DCSL) implement these registers:
+The individual lines (`DCSL`) implement these registers:
 
 | name | size | comments |
 |------|------|----------|
 | `TIME[0:31]` | 24 | time from I/O initiation to interrupt, lines 0 to 31 |
 
 The multiplexer does not support save and restore. All open
-connections are lost when the simulator shuts down or DCS is detached.
+connections are lost when the simulator shuts down or `DCS` is
+detached.
 
 ## Drums
 
-The PDP-1 supports two drums: the Type 23 parallel drum (DRP) and the
-Type 24 serial drum (DRM). Both use device addresses 061-064;
+The PDP-1 supports two drums: the Type 23 parallel drum (`DRP`) and
+the Type 24 serial drum (`DRM`). Both use device addresses `061-064`;
 accordingly, only one can be enabled at a time. By default, the Type
 24 serial drum is enabled, and the Type 23 parallel drum is disabled.
 The PDP-1D requires the Type 23 parallel drum.
@@ -604,55 +608,69 @@ command line switches:
 | numeric | octal number |
 
 Instruction input uses modified PDP-1 assembler syntax. There are six
-instruction classes: memory reference, shift, skip, operate, IOT, and
-LAW.
+instruction classes: memory reference, shift, skip, operate, `IOT`,
+and `LAW`.
 
-Memory reference instructions have the format
+Memory reference instructions have the format:
 
-`memref {I} address`
+```
+memref {I} address
+```
 
 where `I` signifies indirect reference. The address is an octal number
-in the range 0 - 0177777.
+in the range `0-0177777`.
 
-Shift instructions have the format
+Shift instructions have the format:
 
-`shift shift_count`
+```
+shift shift_count
+```
 
-The shift count is an octal number in the range 0-9.
+The shift count is an octal number in the range `0-9`.
 
-Skip instructions consist of single mnemonics, eg, SZA, SZS4. Skip
-instructions may be or'd together
+Skip instructions consist of single mnemonics, e.g., `SZA`, `SZS4`.
+Skip instructions may be ORed together:
 
-`skip skip skip...`
+```
+skip skip skip...
+```
 
-The sense of a skip can be inverted by including the mnemonic I.
+The sense of a skip can be inverted by including the mnemonic `I`.
 
-Operate instructions consist of single mnemonics, eg, CLA, CLI.
-Operate instructions may be or'd together
+Operate instructions consist of single mnemonics, e.g., `CLA`, `CLI`.
+Operate instructions may be ORed together:
 
-`opr opr opr...`
+```
+opr opr opr...
+```
 
-IOT instructions consist of single mnemonics, eg, TYI, TYO. IOT
-instructions may include an octal numeric modifier or the modifier `I`:
+`IOT` instructions consist of single mnemonics, e.g., `TYI`, `TYO`.
+`IOT` instructions may include an octal numeric modifier or the
+modifier `I`:
 
-`iot modifier`
+```
+iot modifier
+```
 
-The simulator does not check the legality of skip, operate, or IOT combinations.
+The simulator does not check the legality of skip, operate, or `IOT`
+combinations.
 
-Finally, the LAW instruction has the format
+Finally, the `LAW` instruction has the format:
 
-`LAW {I} immediate`
+```
+LAW {I} immediate
+```
 
 where immediate is in the range 0 to 07777.
 
 # Character Sets
 
 The PDP-1's first console was a Friden Flexowriter; its character
-encoding was known as FIODEC. The PDP-1's line printer used a modified
-Hollerith character set. The following table provides equivalences
-between ASCII characters and the PDP-1's I/O devices. In the console
-table, UC stands for upper case. The console table also applies to
-ASCII mode for the paper tape reader and punch.
+encoding was known as `FIODEC`. The PDP-1's line printer used a
+modified Hollerith character set. The following table provides
+equivalences between `ASCII` characters and the PDP-1's I/O devices.
+In the console table, `UC` stands for upper case. The console table
+also applies to `ASCII` mode for the paper tape reader and punch.
 
 | ASCII | PDP-1 console | PDP-1 line printer |
 |-------|---------------|--------------------|
