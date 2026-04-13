@@ -23,8 +23,8 @@ If debugging is going to be a major activity on a simulator,
 implementation of a full-featured breakpoint facility will be of
 immense help to users.
 
-\[\* Breakpoint type `C` should probably be avoided since the `–C` switch
-is used by the `SHOW BREAK –C` command to display currently defined
+\[\* Breakpoint type `C` should probably be avoided since the `-C` switch
+is used by the `SHOW BREAK -C` command to display currently defined
 breakpoints as commands which can be entered in a subsequent
 invocation of the simulator to recreate the same breakpoint set.\]
 
@@ -71,8 +71,8 @@ execution breakpoint:
 ```
 /* Test for breakpoint before fetching next instruction */
 
-if ((sim_brk_summ & SWMASK (‘E’)) &&
-     sim_brk_test (PC, SWMASK (‘E’))) /* <execution break> */
+if ((sim_brk_summ & SWMASK ('E')) &&
+     sim_brk_test (PC, SWMASK ('E'))) /* <execution break> */
 ```
 
 If the virtual machine implements only one kind of breakpoint, then
@@ -131,8 +131,8 @@ return reason;
 ```
 `sim_messagef` produces a message which contains either the breakpoint
 type and the matched breakpoint address (if `sim_brk_type_desc` is not
-set), or the type mapped to it related description as indicated in the
-BRKTYPTAB pointed to by `sim_brk_typ_desc`.
+set), or the type mapped to its related description as indicated in the
+BRKTYPTAB pointed to by `sim_brk_type_desc`.
 
 ## Testing For Breakpoints
 
@@ -154,11 +154,11 @@ read (often required for memory protection):
 #define RD 2 /* data read */
 #define WR 3 /* data write */
 
-t_statRead (uint32 addr, uint32 *dat, uint32 acctyp)
+t_stat Read (uint32 addr, uint32 *dat, uint32 acctyp)
 {
     static uint32 bkpt_type[4] = {
-        SWMASK (‘E’), SWMASK (‘N’),
-        SWMASK (‘R’), SWMASK (‘W’)
+        SWMASK ('E'), SWMASK ('N'),
+        SWMASK ('R'), SWMASK ('W')
     };
 
     if ((sim_brk_summ & bkpt_type[acctyp]) &&
@@ -250,8 +250,8 @@ set for a memory mapped I/O device register for which reads have a
 side effect.
 
 If history recording is implemented, the instruction stopped by the
-breakpoint should not appear in the history because it is supposed to
-appear not to have executed yet. Depending on the flow of the
+breakpoint should not appear in the history because it is supposed not
+to have executed yet. Depending on the flow of the
 simulation, the history may already include that instruction by the
 time some of the possible breakpoints are recognized. If so, the
 history buffer pointer should be backed up and that record marked as
