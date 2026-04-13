@@ -1625,7 +1625,8 @@ to unlimited capacity:
 |----------------------------|-------------------------------------------------|
 | `SET TMn CAPAC=m`          | set unit `n` capacity to `m` MB (0 = unlimited) |
 | `SHOW TMn CAPAC`           | show unit `n` capacity in MB                    |
-| Units can be set `ENABLED` | or `DISABLED`.                                  |
+
+Units can be set `ENABLED` or `DISABLED`.
 
 The TM11 supports the `BOOT` command. The bootstrap supports both
 original and DEC standard boot formats. Originally, a tape bootstrap
