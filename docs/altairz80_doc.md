@@ -1186,7 +1186,6 @@ It is possible to attach host serial ports to the M2SIO ports using the
 
 ```
 sim> set m2sio1 enable
-
 sim> attach m2sio1 connect=/dev/cu.USA19H14411P1.1
 ```
 
@@ -1209,9 +1208,7 @@ show how to attach the second 88-2SIO port to a socket listening on port
 
 ```
 sim> set m2sio1 enable ;Enable M2SIO1 device
-
 sim> set m2sio1 dtr ;TMXR sockets require DTR
-
 sim> attach m2sio1 -U :8800 ;Bind to all interfaces on port 8800
 ```
 
@@ -1270,37 +1267,21 @@ MEM Provides a HEX and ASCII dump of memory
 
 ```
 sim> mem
-
 DF00 C3 5C E2 C3 58 E2 7F 00 43 6F 70 79 72 69 67 68 .\..X...Copyrigh
-
 DF10 74 20 31 39 37 39 20 28 63 29 20 62 79 20 44 69 t 1979 (c) by Di
-
-DF20 67 69 74 61 6C 20 52 65 73 65 61 72 63 68 20 20 gital Research
-
-DF30 20 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00 ............
-
+DF20 67 69 74 61 6C 20 52 65 73 65 61 72 63 68 20 20 gital Research  
+DF30 20 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00     ............
 DF40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................
-
 DF50 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................
-
 DF60 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................
-
 DF70 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................
-
 DF80 00 00 00 00 00 00 00 00 08 DF 00 00 5F 0E 02 C3 ............_...
-
 DF90 05 00 C5 CD 8C DF C1 C9 3E 0D CD 92 DF 3E 0A C3 ........>....>..
-
 DFA0 92 DF 3E 20 C3 92 DF C5 CD 98 DF E1 7E B7 C8 23 ..> ........~..#
-
 DFB0 E5 CD 8C DF E1 C3 AC DF 0E 0D C3 05 00 5F 0E 0E ............._..
-
 DFC0 C3 05 00 CD 05 00 32 EE E6 3C C9 0E 0F C3 C3 DF ......2..<......
-
 DFD0 AF 32 ED E6 11 CD E6 C3 CB DF 0E 10 C3 C3 DF 0E .2..............
-
 DFE0 11 C3 C3 DF 0E 12 C3 C3 DF 11 CD E6 C3 DF DF 0E ................
-
 DFF0 13 C3 05 00 CD 05 00 B7 C9 0E 14 C3 F4 DF 11 CD ................
 ```
 
@@ -1308,31 +1289,18 @@ REG Displays a DDT-formatted dump of 8080/Z80 registers
 
 ```
 sim> reg
-
 C0Z1M0E1I1 A=00 B=007F D=DF06 H=EA0E S=EA37 P=FA6D NOP
-
 sim> set on
-
 sim> on error reg ;Display registers upon STOP, STEP, and BREAKs
-
 sim> s
-
 Step expired, PC: 0FA69 (IN 10h)
-
 C0Z1M0E1I1 A=00 B=007F D=DF06 H=EA0E S=EA37 P=FA69 IN 10h
-
 sim> s
-
 Step expired, PC: 0FA6B (ANI 01h)
-
 C0Z1M0E1I1 A=02 B=007F D=DF06 H=EA0E S=EA37 P=FA6B ANI 01h
-
 sim> s
-
 Step expired, PC: 0FA6D (JZ 0FA69h)
-
 C0Z1M0E1I1 A=00 B=007F D=DF06 H=EA0E S=EA37 P=FA6D JZ 0FA69h
-
 sim>
 ```
 
@@ -1563,7 +1531,6 @@ To boot CP/M:
 
 ```
 sim> attach dsk cpm2.dsk
-
 sim> boot dsk
 ```
 
@@ -1688,13 +1655,9 @@ Running CP/M 3 with banked memory:
 
 ```
 sim> attach dsk cpm3.dsk
-
 sim> reset cpu
-
 sim> set cpu banked
-
 sim> set cpu itrap
-
 sim> boot dsk
 ```
 
@@ -1787,19 +1750,12 @@ version supports four terminals available via Telnet. To boot:
 
 ```
 sim> attach dsk mpm.dsk
-
 sim> set cpu itrap
-
 sim> set cpu z80
-
 sim> set cpu altairrom
-
 sim> set cpu banked
-
 sim> attach sio 23
-
 sim> d common b000
-
 sim> boot dsk
 ```
 
@@ -1899,27 +1855,16 @@ up the server component:
 
 ```
 sim> attach dsk cpnetserver.dsk
-
 sim> d common ab00
-
 sim> set cpu 64k
-
 sim> set cpu itrap
-
 sim> set cpu z80
-
 sim> set cpu altairrom
-
 sim> set cpu banked
-
 sim> set simh timeroff
-
 sim> attach sio 23
-
 sim> set net server
-
 sim> at net 127.0.0.1:4000
-
 sim> boot dsk
 ```
 
@@ -1934,25 +1879,15 @@ following at the command prompt:
 
 ```
 sim> attach dsk cpnetclient.dsk
-
 sim> set cpu 64k
-
 sim> set cpu noitrap
-
 sim> set cpu z80
-
 sim> set cpu altairrom
-
 sim> set cpu nonbanked
-
 sim> reset cpu
-
 sim> set sio ansi
-
 sim> set net client
-
 sim> at net 127.0.0.1:4000
-
 sim> boot dsk
 ```
 
@@ -1961,11 +1896,8 @@ You can also execute “AltairZ80 cpnetclient” for the same effect or type
 
 ```
 A>cpnetldr<return> ; loads CP/NET client
-
 A>login<return> ; to login
-
 A>network b:=a: ; to map server drive A: to client drive B:
-
 A>dir b: ; shows the contents of the server drive A:
 ```
 
@@ -1987,25 +1919,15 @@ Then for the client, start another instance of AltairZ80:
 
 ```
 sim> set cpu 64k
-
 sim> set cpu noitrap
-
 sim> set cpu z80
-
 sim> set cpu noaltairrom
-
 sim> set cpu nonbanked
-
 sim> reset cpu
-
 sim> set sio ansi
-
 sim> set net client
-
 sim> at net 127.0.0.1:4000
-
 sim> load cpnos.com f000
-
 sim> g f000
 ```
 
@@ -2120,37 +2042,21 @@ boot:
 
 ```
 sim> set cpu 8080 ;Z80 will not work
-
 sim> attach dsk mbasic.dsk
-
 sim> set sio upper
-
 sim> go ff00
-
 MEMORY SIZE? [return]
-
 LINEPRINTER? [C return]
-
 HIGHEST DISK NUMBER? [0 return] (0 here = 1 drive system)
-
 NUMBER OF FILES? [3 return]
-
 NUMBER OF RANDOM FILES? [2 return]
-
 44041 BYTES FREE
-
 ALTAIR BASIC REV. 4.1
-
 [DISK EXTENDED VERSION]
-
 COPYRIGHT 1977 BY MITS INC.
-
 OK
-
 [MOUNT 0]
-
 OK
-
 [FILES]
 ```
 
@@ -2162,27 +2068,16 @@ This software is part of the archive **altsw.zip**. To boot:
 
 ```
 sim> d tracks[0-7] 77 ;set to Altair settings
-
 sim> set cpu altairrom
-
 sim> attach dsk altdos.dsk
-
 sim> set sio upper
-
 sim> go ff00
-
 MEMORY SIZE? [return]
-
 INTERRUPTS? N [return]
-
 HIGHEST DISK NUMBER? [0 return] (3 here = 4 drive system)
-
 HOW MANY DISK FILES? [3 return]
-
 HOW MANY RANDOM FILES? [2 return]
-
 056449 BYTES AVAILABLE
-
 DOS MONITOR VER 1.0
 ```
 
@@ -2202,31 +2097,18 @@ to cancel the last character entered, i.e. “PRINT 199_8” will print 198.
 
 ```
 sim> set cpu 8080 ;note 4k Basic will not run on a Z80 CPU
-
 sim> set sio upper ;4k Basic does not like lower case letters as input
-
 sim> set cpu noitrap ;4k Basic likes to execute non 8080 instructions-ignore
-
 sim> set sio ansi ;4k Basic produces 8-bit output, strip to seven bits
-
 sim> d sr 8 ;good setting for the Switch Register
-
 sim> load 4kbas32.bin;load it at 0
-
 sim> g ;and start it
-
 MEMORY SIZE? [return]
-
 TERMINAL WIDTH? [return]
-
 WANT SIN? [Y]
-
 61911 BYTES FREE
-
 BASIC VERSION 3.2
-
 [4K VERSION]
-
 OK
 ```
 
@@ -2237,31 +2119,18 @@ can also use “altairz80 bas440” to run this version of Basic.
 
 ```
 sim> set cpu 8080 ;note 4k Basic will not run on a Z80 CPU
-
 sim> set sio upper ;4k Basic does not like lower case letters as input
-
 sim> set cpu noitrap ;4k Basic likes to execute non 8080 instructions-ignore
-
 sim> set sio ansi ;4k Basic produces 8-bit output, strip to seven bits
-
 sim> d sr 8 ;good setting for the Switch Register
-
 sim> load 4kbas40.bin;load it at 0
-
 sim> g ;and start it
-
 MEMORY SIZE? [return]
-
 TERMINAL WIDTH? [return]
-
 WANT SIN? [Y]
-
 61900 BYTES FREE
-
 4K BASIC 4.0
-
 COPYRIGHT MITS 1976
-
 OK
 ```
 
@@ -2272,35 +2141,20 @@ part of the archive **altsw.zip**.
 
 ```
 sim> set cpu 8080 ;note 8k Basic will not run on a Z80 CPU
-
 sim> set sio upper ;8k Basic does not like lower case letters as input
-
 sim> set sio ansi ;8k Basic produces 8-bit output, strip to seven bits
-
 sim> d sr 8 ;good setting for the Switch Register
-
 sim> load 8kbas.bin 0 ;load it at 0
-
 sim> go 0 ;and start it
-
 MEMORY SIZE? [A]
-
 WRITTEN FOR ROYALTIES BY MICRO-SOFT
-
 MEMORY SIZE? [return]
-
 TERMINAL WIDTH? [return]
-
 WANT SIN-COS-TAN-ATN? [Y]
-
 58756 BYTES FREE
-
 ALTAIR BASIC REV. 4.0
-
 [EIGHT-K VERSION]
-
 COPYRIGHT 1976 BY MITS INC.
-
 OK
 ```
 
@@ -2311,29 +2165,17 @@ following commands to run Altair Extended Basic:
 
 ```
 sim> set sio upper ;Extended Basic requires upper case input
-
 sim> set sio ansi ;Extended Basic produces 8-bit output, strip to 7 bits
-
 sim> d sr 8 ;good setting for the Switch Register
-
 sim> load exbas.bin 0 ;load it at 0
-
 sim> go 0 ;and start it
-
 16384 Bytes loaded at 0.
-
 MEMORY SIZE? [return]
-
 WANT SIN-COS-TAN-ATN? [Y]
-
 50606 BYTES FREE
-
 ALTAIR BASIC REV. 4.0
-
 [EXTENDED VERSION]
-
 COPYRIGHT 1977 BY MITS INC.
-
 OK
 ```
 
@@ -2345,29 +2187,17 @@ commands:
 
 ```
 sim> d tracks[0-7] 77 ;set to Altair settings
-
 sim> at dsk extbas5.dsk
-
 sim> g 0
-
 MEMORY SIZE? [return]
-
 LINEPRINTER? [C]
-
 HIGHEST DISK NUMBER? [0]
-
 HOW MANY FILES? [3]
-
 HOW MANY RANDOM FILES? [3]
-
 42082 BYTES FREE
-
 ALTAIR DISK EXTENDED BASIC
-
 VERSION 300-5-C [01NOV78]
-
 COPYRIGHT 1978 BY MITS INC.
-
 OK
 ```
 
@@ -2381,33 +2211,19 @@ execute use the following commands:
 
 ```
 sim> d tracks[0-7] 77 ;set to Altair settings
-
 sim> at dsk disbas50.dsk
-
 sim> d sr 8
-
 sim> load disbas50.bin 0
-
 sim> g 0
-
 MEMORY SIZE? [return]
-
 LINEPRINTER? [C]
-
 HIGHEST DISK NUMBER? [return]
-
 HOW MANY FILES? [3]
-
 HOW MANY RANDOM FILES? [3]
-
 41695 BYTES FREE
-
 ALTAIR BASIC 5.0 [14JUL78]
-
 [DISK EXTENDED VERSION]
-
 COPYRIGHT 1978 BY MITS INC.
-
 OK
 ```
 
@@ -2420,29 +2236,17 @@ device contributed by Mike Douglas. This software is part of the archive
 
 ```
 sim> set sio ansi
-
 sim> set sio nobell ;avoid problems with accounting software
-
 sim> attach mhdsk0 hdbasic-300-5-c-acct.dsk
-
 sim> attach mhdsk1 hdbasic-300-5-f.dsk
-
 sim> attach dsk0 fdbasic-300-5-f.dsk ;floppy disk for copying
-
 sim> boot mhdsk
-
 HDBL 1.01
-
 LOADING
-
 MEMORY SIZE? [return]
-
 LINEPRINTER? [C]
-
 HIGHEST DISK NUMBER? [2]
-
 HOW MANY FILES? [4]
-
 CURRENT DAY? [4]
 ```
 
@@ -2579,27 +2383,16 @@ being accessed:
 
 ```
 sim> break –m 5c00
-
 sim> set cpu history=32
-
 sim> g ff00
-
 Memory access breakpoint [05c00h], PC: 0FF29 (MOV M,A)
-
 sim> show cpu history=10
-
 CPU: C0Z1M0E1I0 A=16 B=0000 D=0000 H=0000 S=0000 P=FF0D OUT 0FEh
-
 CPU: C0Z1M0E1I0 A=12 B=0000 D=0000 H=0000 S=0000 P=FF0F MVI A,12h
-
 CPU: C0Z1M0E1I0 A=12 B=0000 D=0000 H=0000 S=0000 P=FF11 OUT 0FEh
-
 CPU: C0Z1M0E1I0 A=00 B=0000 D=0000 H=0000 S=0000 P=FF13 IN 0FEh
-
 CPU: C0Z1M0E1I0 A=00 B=0000 D=0000 H=0000 S=0000 P=FF15 ORA A
-
 CPU: C0Z1M0E1I0 A=00 B=0000 D=0000 H=0000 S=0000 P=FF16 JZ 0FF20h
-
 CPU: C0Z1M0E1I0 A=00 B=0000 D=0000 H=5C00 S=0000 P=FF20 LXI H,5C00h
 ```
 
@@ -3606,7 +3399,6 @@ memory map with:
 
 ```
 sim> set <device> ena – to enable the device.
-
 sim> set <device> dis – to disable the device.
 ```
 
@@ -3652,13 +3444,9 @@ Here are some sample configurations for 48K, 56K, and HD-FD Systems:
 
 ```
 sim> load MON40C.BIN e000 ; load Vector 4.0C Monitor
-
 sim> load MONC000.BIN c000 ; load “Helper” ROM at 0xC000
-
 sim> set mdsk membase=D800 ; set Micropolis disk controller base address
-
 sim> set mdsk enabled ; enable Micropolis disk controller
-
 sim> attach mfdc0 VG02.VGI ; attach disk to MDSK0 drive
 ```
 
@@ -3675,9 +3463,7 @@ and at the `Mon>` prompt, you can boot from the disk controller by doing
 
 ```
 sim> load MON40C.BIN e000 ; load Vector 4.0C Monitor
-
 sim> set mdsk enabled ; enable Micropolis disk controller
-
 sim> attach mfdc0 VG00.VGI ; attach disk to MDSK0 drive
 ```
 
@@ -3694,13 +3480,9 @@ the **B** (boot) command.
 
 ```
 sim> set vfdhd enabled ; enable HD-FD controller
-
 sim> load MON43B.BIN e000 ; load Vector 4.3 Monitor
-
 sim> att fwii0 f000 ; enable the Flashwriter2 at F000.
-
 sim> set telnet 23 ; set up telnet port for Flashwriter2
-
 sim> attach vfdhd1 VGBOOT.VGI ; attach disk to VFDHD1 drive
 ```
 
@@ -3785,7 +3567,6 @@ the HDSK must be disabled before enabling the FIF:
 
 ```
 sim> set hdsk dis ; disable the AltairZ80 HDSK device.
-
 sim> set fif ena ; enable the IMSAI FIF device.
 ```
 
@@ -3801,11 +3582,8 @@ configuration file is:
 
 ```
 sim> set hdsk dis ; disable AltairZ80 HDSK Controller
-
 sim> set fif ena ; enable IMSAI FIF Controller
-
 sim> load IMSAI.BIN d800 ; load IMSAI Monitor at 0xD800
-
 sim> attach fif0 IMDOS_A.DSK ; attach disk to FIF0 drive
 ```
 
@@ -3858,9 +3636,7 @@ Horizon computer.
 
 ```
 sim> set mdsa enabled ; enable MDS-A Controller
-
 sim> attach mdsa0 CPM22b14-48K-SDC-HORIZON.NSI ; attach CP/M boot disk
-
 sim> boot mdsa0 (or go e900) ; boot the disk
 ```
 
@@ -3887,9 +3663,7 @@ Horizon computer.
 
 ```
 sim> set mdsad enable ; enable NorthStar MDS-AD Controller
-
 sim> attach mdsad0 D01B01.NSI ; attach CP/M boot disk to MDSAD0 drive
-
 sim> boot mdsad0(or go e800) ; boot the disk
 ```
 
@@ -4197,7 +3971,6 @@ space. The Cromemco 68000 CPU card has a 256-byte I/O window from
 
 ```
 sim> d MMIOBASE FFFF00
-
 sim> d MMIOSIZE 100
 ```
 
@@ -4596,24 +4369,15 @@ and then
 
 ```
 sim> set cpu 48k
-
 sim> set cpu 8080
-
 sim> set cpu noaltairrom
-
 sim> set sio ansi
-
 sim> set sio sleep
-
 sim> set tarbell enable ; enable Tarbell Controller
-
 sim> set tarbell model=sd ; single density controller
-
 sim> set tarbell debug=ERROR ; show debug ERROR messages
-
 sim> attach tarbell0 CPM22-48K-SSSD.DSK ; attach CP/M boot disk to
 TARBELL0 drive
-
 sim> boot tarbell0 ; boot CPM22.DSK (or “g 0”)it
 ```
 
@@ -4697,9 +4461,7 @@ file will be created.
 
 ```
 sim> set jadedd ena ; enable JADE DD Controller
-
 sim> attach jadedd0 jadedd-sd-sim-56k.dsk ; attach 56K CP/M disk image
-
 sim> boot jadedd0 ; boot jade56k.dsk (or “g f000”)
 ```
 
@@ -4812,11 +4574,8 @@ will be created.
 
 ```
 sim> set icom ena ; enable iCOM Disk System
-
 sim> set icom type=3812 ; simulate iCOM/Pertec 3812
-
 sim> attach icom0 CPM141-48K-DD.DSK ; attach iCOM CP/M disk image
-
 sim> boot icom ; boot disk (or “g f000”)
 ```
 
@@ -4907,23 +4666,14 @@ a non-existent disk file, the disk file will be created.
 
 ```
 sim> ;Boot 56K CP/M 2.2
-
 sim> set dj2d ena ; enable DJ2D disk controller
-
 sim> attach dj2d0 CPM22-56K-E000.DSK ; attach DJ2D CP/M disk image
-
 sim> boot dj2d ; boot disk (or “g e000”)
-
 sim> ;Boot 56K CP/M 2.2 with serial port attached to socket
-
 sim> set dj2d ena ; enable DJ2D disk controller
-
 sim> attach dj2d0 CPM22-56K-E000.DSK ; attach DJ2D CP/M disk image
-
 sim> attach -u dj2d4 127.0.0.1:8800 ; attach DJ2D serial port to socket
-
 sim> boot dj2d ; boot disk (or “g e000”)
-
 sim> ;telnet localhost 8800 ; telnet to simulator on port 8800
 ```
 
@@ -5291,15 +5041,10 @@ R.COM and W.COM will not work.
 
 ```
 sim> ;Boot 64K CP/M 2.2
-
 sim> set cpu z80 ; Z80 required
-
 sim> set noaltairrom ; disable Altair ROM
-
 sim> set mmd ena ; enable MMD system
-
 sim> attach mmd0 MORR_01_CPM22R31_DS.DSK ; attach MMD CP/M disk image
-
 sim> boot mmd ; boot disk
 ```
 
@@ -5416,25 +5161,17 @@ F10 - Reboot System
 
 ```
 sim> ; Enter SOLOS
-
 sim> set sol20 ena ; enable SOL20 device
-
 sim> set throttle 220k ; simulate 2MHz 8080
-
 sim> boot sol20 ; enter SOLOS
 ```
 
 ```
 sim> ; Load Air Traffic Controller from cassette tape
-
 sim> set sol20 ena ; enable SOL20 device
-
 sim> set throttle 220k ; simulate 2MHz 8080
-
 sim> attach sol20t atc.cas ; insert ATC cassette in tape deck
-
 sim> set sol20t tape=fast ; fast tape reads
-
 sim> boot sol20 ; enter SOLOS
 ```
 
@@ -5443,15 +5180,10 @@ the program.
 
 ```
 sim> ; Boot CP/M 2.2 using NorthStar disk controller
-
 sim> set sol20 ena ; enable SOL20 device
-
 sim> set sol20 ver=13c ; SOLOS 1.3 modified for CP/M
-
 sim> set mdsa ena ; enable MDSA disk controller
-
 sim> attach mdsa0 CPM22b14-48K-SDC-SOL.NSI ; insert CP/M disk in drive 0
-
 sim> boot sol20 ; enter SOLOS
 ```
 
@@ -5559,11 +5291,8 @@ RXDP – Parallel port receive data register
 
 ```
 sim> set JAIR ena ; enable JAIR devices
-
 sim> set throttle 300/1 ; simulate approximate 2MHz 8080
-
 sim> attach JAIR0 jaircpm.img ; attach JAIR CP/M SD card image
-
 sim> boot JAIR0 ; Enter JAIR BOOT ROM
 ```
 
@@ -5639,19 +5368,12 @@ transmitted data to the receiver:
 
 ```
 sim> dep CLOCK 2000 ; simulate 2MHz clock speed
-
 sim> set SIO nosleep ; disable console sleeps
-
 sim> set PMMI ena ; enable PMMI device
-
 sim> attach PMMI connect=/dev/ttyUSB0 ; Attach host serial port
-
 sim> attach dsk0 cpm56k.dsk ; attach CP/M boot disk
-
 sim> attach dsk1 MEXPMMI.DSK ; attach MEX disk
-
 sim> load dbl.bin ff00 ; load Disk Boot Loader
-
 sim> go ff00 ; boot the disk
 ```
 
@@ -5700,61 +5422,33 @@ system over Telnet:
 
 ```
 sim> dep CLOCK 2000 ; simulate 2MHz clock speed
-
 sim> set SIO nosleep ; disable console sleeps
-
 sim> set PMMI ena ; enable PMMI device
-
 sim> attach pmmi connect=67.164.159.109:4667 ; attach to IP:PORT
-
 sim> attach dsk0 cpm56k.dsk ; attach CP/M boot disk
-
 sim> attach dsk1 MEXPMMI.DSK ; attach MEX disk
-
 sim> load dbl.bin ff00 ; load Disk Boot Loader
-
 sim> go ff00 ; boot the disk
-
 56K CP/M
-
 Version 2.2mits (07/28/80)
-
 Copyright 1980 by Burcon Inc.
-
 A>b:
-
 B>mexpmmi
-
 MEX (Modem Executive) V1.14
-
 Clone Level 1
-
 (for aid, type HELP or "?")
-
 Copyright (C) 1984, 1985
-
 by NightOwl Software, Inc.
-
 ********************************
-
 * PMMI overlay version - 2.2c *
-
 * Base port = C0 hex. *
-
 * No carrier present. *
-
 ********************************
-
 [MEX] B0>>set online
-
 .on-line.
-
 [MEX] B0>>t
-
 [MEX] [Term: CTL-J + "?" for help]
-
 HOW MANY NULLS (0-9) DO YOU NEED? 0
-
 Welcome to the virtualaltair.com Remote CP/M System!
 ```
 
@@ -5835,69 +5529,37 @@ will drive DCD:
 
 ```
 sim> dep CLOCK 2000 ; simulate 2MHz clock speed
-
 sim> set SIO nosleep ; disable console sleeps
-
 sim> set HAYES ena ; enable HAYES device
-
 sim> attach HAYES connect=/dev/ttyUSB0 ; Attach host serial port
-
 sim> attach dsk0 CPM56K.DSK ; attach CP/M boot disk
-
 sim> attach dsk1 MM100.DSK ; attach MM100 disk
-
 sim> load DBL.BIN ff00 ; load Disk Boot Loader
-
 sim> go ff00 ; boot the disk
-
 56K CP/M
-
 Version 2.2mits (07/28/80)
-
 Copyright 1980 by Burcon Inc.
-
 A>b:
-
 B>mm100
-
 Hayes Microcomputer Products, Inc.
-
 Micromodem 100 Terminal program ver. 1.2
-
 8 DATA BITS
-
 1 STOP BITS
-
 NO PARITY
-
 300 BAUD
-
 FULL DUPLEX
-
 CAPTURE BUFFER CLEARED
-
 DEBUG MODE OFF
-
 COMMAND:D 555-1212
-
 DIALING-555-1212
-
 WAITING FOR CARRIER, PRESS ANY KEY TO ABORT.
-
 CONNECTION ESTABLISHED
-
 Hello, world!
-
 [^A]
-
 COMMAND:G
-
 [ HUNG UP ]
-
 [* LOST CARRIER *]
-
 [ HUNG UP ]
-
 COMMAND:X
 ```
 
@@ -5952,21 +5614,13 @@ altairz80 cpm68k or the following commands at the simh prompt:
 
 ```
 sim> set cpu m68k
-
 sim> attach hdsk2 diskc.cpm.fs
-
 sim> boot hdsk2
-
 CP/M-68K(tm) Version 1.2 03/20/84
-
 Copyright (c) 1984 Digital Research, Inc.
-
 CP/M-68K BIOS Version 1.0
-
 Simulated system of April 2014
-
 TPA =16251 K
-
 C>AUTOST.SUB
 ```
 
