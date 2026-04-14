@@ -16,7 +16,6 @@ Harte, Ernie Price, Mike Douglas, and Patrick Linstruth.
 # Table of Contents
 
 [1 Simulator Files](#simulator-files)
-[2 Revision History](#revision-history)
 [3 Background](#background)
 [4 Hardware](#hardware)
 [4.1 CPU](#cpu)
@@ -178,6 +177,7 @@ Harte, Ernie Price, Mike Douglas, and Patrick Linstruth.
 [28.1 Overview](#overview-17)
 [28.2 References](#references)
 [CP/M-68K Simulation](#cpm-68k-simulation)
+[2 Revision History](#revision-history)
 
 This memorandum documents the Altair 8800 Simulator.
 
@@ -276,128 +276,6 @@ This memorandum documents the Altair 8800 Simulator.
 |                   | `m68kopnz.c`         | Motorola MC68000 CPU by Karl Stenerud |
 |                   | `m68kops.c`          | Motorola MC68000 CPU by Karl Stenerud |
 |                   | `m68kops.h`          | Motorola MC68000 CPU by Karl Stenerud |
-
-# Revision History
-
-- 13-Jul-2024 Peter Schorn (fixed some 8080 and Z80 instructions based on Thomas Eberhardt’s work)
-
-- 31-Dec-2023 Patrick Linstruth (added support for Josh Bensadon’s JAIR Single Board Computer)
-
-- 30-Jul-2023 Patrick Linstruth (added CTS command for M2SIO)
-
-- 17-Jul-2023 Peter Schorn (corrections, formatting)
-
-- 20-Mar-2023 Patrick Linstruth (added support for Processor Technology VDM-1 Video Display Module and Sol-20 Terminal Computer.)
-
-- 16-Jan-2022 Howard Harte (updated ADC, CompuPro documentation, added Seattle Computer Products documentation.)
-
-- 22-Nov-2022 Patrick Linstruth (added MEM and REG commands)
-
-- 19-Nov-2022 Patrick Linstruth (added support for Morrow Micro Decision)
-
-- 18-Jan-2021 Patrick Linstruth (added support for Morrow Disk Jockey 2D original disk controller)
-
-- 10-Jan-2021 Peter Schorn (corrections)
-
-- 01-Jan-2021 Patrick Linstruth (added support for Morrow Disk Jockey 2D Model B disk controller)
-
-- 27-Nov-2020, Peter Schorn (added port command for PTP/PTR)
-
-- 27-Nov-2020, Patrick Linstruth (added support for iCOM FD3712/FD3812 FDS)
-
-- 14-Aug-2020, Patrick Linstruth (added support for Hayes S-100 modems)
-
-- 02-Jul-2020, Patrick Linstruth (added support for PMMI MM-103 MODEM),
-
-- 30-Jun-2020 Patrick Linstruth (added DSDD support to Tarbell disk controller)
-
-- 29-Jun-2020 Patrick Linstruth (added support for MITS 88-2SIO)
-
-- 10-Jun-2020, Mike Douglas (added documentation for North Star MDS-A (single density FDC))
-
-- 05-Jun-2020, Peter Schorn (additional documentation for CPU SET commands and CPU pseudo registers)
-
-- 04-Jun-2020, Patrick Linstruth (added support for the JADE Double D disk controller)
-
-- 24-May-2020, Peter Schorn (added M68000 assembler based on Holger Veit’s Bison code)
-
-- 28-Apr-2020, Patrick Linstruth (added support for CPU instruction history)
-
-- 09-Dec-2019, Peter Schorn (small updates)
-
-- 05-Dec-2019, Patrick Linstruth (added support for the Altair Tarbell SSSD disk controller)
-
-- 27-Dec-2015, Peter Schorn (updated SIO device documentation)
-
-- 24-May-2014, Peter Schorn (added support for the Altair Mini-Disk contributed by Mike Douglas)
-
-- 6-May-2014, Peter Schorn (added Motorola MC68000 CPU, updated HDSK and added a driver for CP/M-68K simulation)
-
-- 21-Apr-2014, Peter Schorn (added debug flags for the MHDSK device and support for the NEXT command)
-
-- 29-Mar-2014, Peter Schorn (added support for the MITS/Pertec 88-HDSK hard disk contributed by Mike Douglas)
-
-- 15-Apr-2013, Peter Schorn (added correct cycle count timing for 8080 CPU, improved .IMD file processing, SIO ‘C’ switch was renamed to ‘N’)
-
-- 24-Aug-2012, Peter Schorn (added capability to HDSK device for IMD disk processing)
-
-- 01-Aug-2011, Peter Schorn (added some explanation to Altair Basic)
-
-- 29-Sep-2009, Peter Schorn (added debug flags to SIO, PTR and PTP)
-
-- 18-Apr-2009, Peter Schorn (fixed some errata in the manual found by Kim Sparre and added additional disk layouts to HDSK)
-
-- 17-Aug-2008, Peter Schorn (moved VERBOSE/QUIET for DSK and HDSK to debug flags)
-
-- 03-Jul-2008, Howard M. Harte (added support for hardware modules from Cromemco, Advanced Digital Corporation, Seattle Computer Products and N8VEM)
-
-- 29-Feb-2008, Howard M. Harte / Peter Schorn (added support for additional S100 and CompuPro hardware modules, added 8086 CPU)
-
-- 29-Dec-2007, Howard M. Harte / Peter Schorn (added support for Vector Graphic Flashwriter II, Micropolis FDC, ImageDisk disk image File, IMSAI FIF disk controller, North Star MDS-AD disk controller)
-
-- 21-Apr-2007, Peter Schorn (added documentation for UCSD Pascal II.0)
-
-- 14-Apr-2007, Peter Schorn (added documentation for Howard M. Harte’s hard disk extensions)
-
-- 05-Jan-2007, Peter Schorn (added networking capability, included CP/NET and CPNOS)
-
-- 26-Nov-2006, Peter Schorn (SIO can now be attached to a file, SIO rewritten for better efficiency)
-
-- 15-Oct-2006, Peter Schorn (updated CP/M 2 operating system and application software description)
-
-- 17-Sep-2006, Peter Schorn (added Altair Basic 5.0 to the sample software, corrected TTY/ANSI description)
-
-- 21-Aug-2006, Peter Schorn (added MINOL and VTL-2 software, retyping courtesy of Emmanuel ROCHE, fixed a bug in memory breakpoints and added a create (“C”) switch to the attach command)
-
-- 24-Jan-2006, Peter Schorn (transcribed documentation to Word / PDF format)
-
-- 05-Apr-2005, Peter Schorn (removed bogus t-state stepping support)
-
-- 24-Jul-2004, Peter Schorn (updated CP/M 2 and SPL packages)
-
-- 12-Apr-2004, Peter Schorn (added MAP/NOMAP capability to switch off key mapping)
-
-- 26-Jan-2004, Peter Schorn (added support for t-state stepping)
-
-- 25-Feb-2003, Peter Schorn (added support for real time simulation)
-
-- 9-Oct-2002, Peter Schorn (added support for simulated hard disk)
-
-- 28-Sep-2002, Peter Schorn (number of tracks per disk can be configured)
-
-- 19-Sep-2002, Peter Schorn (added WARNROM feature)
-
-- 31-Aug-2002, Peter Schorn (added extended ROM features suggested by Scott LaBombard)
-
-- 4-May-2002, Peter Schorn (added description of MP/M II sample software)
-
-- 28-Apr-2002, Peter Schorn (added periodic timer interrupts and three additional consoles)
-
-- 15-Apr-2002, Peter Schorn (added memory breakpoint)
-
-- 7-Apr-2002, Peter Schorn (added ALTAIRROM / NOALTAIRROM switch)
-
-The first version of this document was written by Charles E. Owen
 
 # Background
 
@@ -5534,3 +5412,125 @@ AUTOST.SUB?
 C\>
 
 Typing “bbye” at the `C>` command prompt brings you back to SIMH.
+
+# Revision History
+
+- 13-Jul-2024 Peter Schorn (fixed some 8080 and Z80 instructions based on Thomas Eberhardt’s work)
+
+- 31-Dec-2023 Patrick Linstruth (added support for Josh Bensadon’s JAIR Single Board Computer)
+
+- 30-Jul-2023 Patrick Linstruth (added CTS command for M2SIO)
+
+- 17-Jul-2023 Peter Schorn (corrections, formatting)
+
+- 20-Mar-2023 Patrick Linstruth (added support for Processor Technology VDM-1 Video Display Module and Sol-20 Terminal Computer.)
+
+- 16-Jan-2022 Howard Harte (updated ADC, CompuPro documentation, added Seattle Computer Products documentation.)
+
+- 22-Nov-2022 Patrick Linstruth (added MEM and REG commands)
+
+- 19-Nov-2022 Patrick Linstruth (added support for Morrow Micro Decision)
+
+- 18-Jan-2021 Patrick Linstruth (added support for Morrow Disk Jockey 2D original disk controller)
+
+- 10-Jan-2021 Peter Schorn (corrections)
+
+- 01-Jan-2021 Patrick Linstruth (added support for Morrow Disk Jockey 2D Model B disk controller)
+
+- 27-Nov-2020, Peter Schorn (added port command for PTP/PTR)
+
+- 27-Nov-2020, Patrick Linstruth (added support for iCOM FD3712/FD3812 FDS)
+
+- 14-Aug-2020, Patrick Linstruth (added support for Hayes S-100 modems)
+
+- 02-Jul-2020, Patrick Linstruth (added support for PMMI MM-103 MODEM),
+
+- 30-Jun-2020 Patrick Linstruth (added DSDD support to Tarbell disk controller)
+
+- 29-Jun-2020 Patrick Linstruth (added support for MITS 88-2SIO)
+
+- 10-Jun-2020, Mike Douglas (added documentation for North Star MDS-A (single density FDC))
+
+- 05-Jun-2020, Peter Schorn (additional documentation for CPU SET commands and CPU pseudo registers)
+
+- 04-Jun-2020, Patrick Linstruth (added support for the JADE Double D disk controller)
+
+- 24-May-2020, Peter Schorn (added M68000 assembler based on Holger Veit’s Bison code)
+
+- 28-Apr-2020, Patrick Linstruth (added support for CPU instruction history)
+
+- 09-Dec-2019, Peter Schorn (small updates)
+
+- 05-Dec-2019, Patrick Linstruth (added support for the Altair Tarbell SSSD disk controller)
+
+- 27-Dec-2015, Peter Schorn (updated SIO device documentation)
+
+- 24-May-2014, Peter Schorn (added support for the Altair Mini-Disk contributed by Mike Douglas)
+
+- 6-May-2014, Peter Schorn (added Motorola MC68000 CPU, updated HDSK and added a driver for CP/M-68K simulation)
+
+- 21-Apr-2014, Peter Schorn (added debug flags for the MHDSK device and support for the NEXT command)
+
+- 29-Mar-2014, Peter Schorn (added support for the MITS/Pertec 88-HDSK hard disk contributed by Mike Douglas)
+
+- 15-Apr-2013, Peter Schorn (added correct cycle count timing for 8080 CPU, improved .IMD file processing, SIO ‘C’ switch was renamed to ‘N’)
+
+- 24-Aug-2012, Peter Schorn (added capability to HDSK device for IMD disk processing)
+
+- 01-Aug-2011, Peter Schorn (added some explanation to Altair Basic)
+
+- 29-Sep-2009, Peter Schorn (added debug flags to SIO, PTR and PTP)
+
+- 18-Apr-2009, Peter Schorn (fixed some errata in the manual found by Kim Sparre and added additional disk layouts to HDSK)
+
+- 17-Aug-2008, Peter Schorn (moved VERBOSE/QUIET for DSK and HDSK to debug flags)
+
+- 03-Jul-2008, Howard M. Harte (added support for hardware modules from Cromemco, Advanced Digital Corporation, Seattle Computer Products and N8VEM)
+
+- 29-Feb-2008, Howard M. Harte / Peter Schorn (added support for additional S100 and CompuPro hardware modules, added 8086 CPU)
+
+- 29-Dec-2007, Howard M. Harte / Peter Schorn (added support for Vector Graphic Flashwriter II, Micropolis FDC, ImageDisk disk image File, IMSAI FIF disk controller, North Star MDS-AD disk controller)
+
+- 21-Apr-2007, Peter Schorn (added documentation for UCSD Pascal II.0)
+
+- 14-Apr-2007, Peter Schorn (added documentation for Howard M. Harte’s hard disk extensions)
+
+- 05-Jan-2007, Peter Schorn (added networking capability, included CP/NET and CPNOS)
+
+- 26-Nov-2006, Peter Schorn (SIO can now be attached to a file, SIO rewritten for better efficiency)
+
+- 15-Oct-2006, Peter Schorn (updated CP/M 2 operating system and application software description)
+
+- 17-Sep-2006, Peter Schorn (added Altair Basic 5.0 to the sample software, corrected TTY/ANSI description)
+
+- 21-Aug-2006, Peter Schorn (added MINOL and VTL-2 software, retyping courtesy of Emmanuel ROCHE, fixed a bug in memory breakpoints and added a create (“C”) switch to the attach command)
+
+- 24-Jan-2006, Peter Schorn (transcribed documentation to Word / PDF format)
+
+- 05-Apr-2005, Peter Schorn (removed bogus t-state stepping support)
+
+- 24-Jul-2004, Peter Schorn (updated CP/M 2 and SPL packages)
+
+- 12-Apr-2004, Peter Schorn (added MAP/NOMAP capability to switch off key mapping)
+
+- 26-Jan-2004, Peter Schorn (added support for t-state stepping)
+
+- 25-Feb-2003, Peter Schorn (added support for real time simulation)
+
+- 9-Oct-2002, Peter Schorn (added support for simulated hard disk)
+
+- 28-Sep-2002, Peter Schorn (number of tracks per disk can be configured)
+
+- 19-Sep-2002, Peter Schorn (added WARNROM feature)
+
+- 31-Aug-2002, Peter Schorn (added extended ROM features suggested by Scott LaBombard)
+
+- 4-May-2002, Peter Schorn (added description of MP/M II sample software)
+
+- 28-Apr-2002, Peter Schorn (added periodic timer interrupts and three additional consoles)
+
+- 15-Apr-2002, Peter Schorn (added memory breakpoint)
+
+- 7-Apr-2002, Peter Schorn (added ALTAIRROM / NOALTAIRROM switch)
+
+The first version of this document was written by Charles E. Owen
