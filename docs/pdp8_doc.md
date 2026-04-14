@@ -368,8 +368,10 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | out of tape           |
+|              |            |                       |
 | end of file  | 1          | report error and stop |
 |              | 0          | out of tape           |
+|              |            |                       |
 | OS I/O error | x          | report error and stop |
 
 ### PC8E Paper Tape Punch (`PTP`)
@@ -399,6 +401,7 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | out of tape           |
+|              |            |                       |
 | OS I/O error | x          | report error and stop |
 
 ### KL8E Terminal Input (`TTI`)
@@ -472,6 +475,7 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | out of paper          |
+|              |            |                       |
 | OS I/O error | x          | report error and stop |
 
 ### DK8E Line-Frequency Clock (`CLK`)
@@ -682,7 +686,9 @@ Error handling is as follows:
 | error        | processed as                        |
 |--------------|-------------------------------------|
 | not attached | tape not ready; if `STOP_IOE`, stop |
+|              |                                     |
 | end of file  | bad tape                            |
+|              |                                     |
 | OS I/O error | CRC error; if `STOP_IOE`, stop      |
 
 ## Moving Head Disks
@@ -720,7 +726,9 @@ Error handling is as follows:
 |--------------|------------|-----------------------------|
 | not attached | 1          | report error and stop       |
 |              | 0          | disk not ready              |
+|              |            |                             |
 | end of file  | x          | assume rest of disk is zero |
+|              |            |                             |
 | OS I/O error | x          | report error and stop       |
 
 ### RL8A Cartridge Disk (RL)
@@ -763,7 +771,9 @@ Error handling is as follows:
 |--------------|------------|-----------------------------|
 | not attached | 1          | report error and stop       |
 |              | 0          | disk not ready              |
+|              |            |                             |
 | end of file  | x          | assume rest of disk is zero |
+|              |            |                             |
 | OS I/O error | x          | report error and stop       |
 
 ## RX8E/RX01, RX28/RX02 Floppy Disk (`RX`)
@@ -1033,7 +1043,9 @@ Error handling is as follows:
 | error        | processed as                        |
 |--------------|-------------------------------------|
 | not attached | tape not ready; if `STOP_IOE`, stop |
+|              |                                     |
 | end of file  | bad tape                            |
+|              |                                     |
 | OS I/O error | parity error; if `STOP_IOE`, stop   |
 
 # Symbolic Display and Input

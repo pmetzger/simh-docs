@@ -251,8 +251,10 @@ Error handling is as follows:
 |-------|------------|--------------|
 | not attached | 1 | report error and stop |
 | not attached | 0 | out of tape |
+| | | |
 | end of file | 1 | report error and stop |
 | end of file | 0 | out of tape |
+| | | |
 | OS I/O error | x | report error and stop |
 
 ### Paper Tape Punch (PTP)

@@ -699,7 +699,6 @@ Error handling is as follows:
 
 | error        | `STOP_IOE` | processed as          |
 |--------------|------------|-----------------------|
-|              |            |                       |
 | not attached | 1          | report error and stop |
 |              | 0          | out of tape           |
 |              |            |                       |
