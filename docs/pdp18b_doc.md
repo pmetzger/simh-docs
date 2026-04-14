@@ -260,7 +260,7 @@ The `PROT` option corresponds to the `KX09A` on the PDP-9 and the
 Foreground/Background Monitor. The `RELOC` option corresponds to the
 `KT15` on the PDP-15, and the `XVM` option corresponds to the `XM15`
 on the PDP-15. `ADSS-15`, `ADSS-15 Foreground/Background`, and
-standard `DOS-15` will `<not>` run if these options are enabled.
+standard `DOS-15` will not run if these options are enabled.
 
 CPU registers include the visible state of the processor as well as
 the control registers for the interrupt system.
@@ -466,7 +466,7 @@ On the PDP-7 and PDP-9, `Unix v0` mode is also available:
 
 The default mode is `KSR`.
 
-The console terminal operates, by default, with local echo. The
+The console terminal operates by default with local echo. The
 terminal input can be set to `FDX` (full duplex), which suppresses
 local echo.
 
@@ -877,7 +877,7 @@ track, and block header and trailer, are not stored. Thus, the
 and trailer; and the `WRITE ALL` function dumps non-data words into
 the bit bucket.
 
-The `TC02` and `TC15` are 3-cycle databreak devices. The word count
+The `TC02` and `TC15` are 3-cycle data break devices. The word count
 and current address registers are in memory. They can be examined and
 modified with `SET` and `SHOW` commands:
 
@@ -1008,7 +1008,7 @@ The PDP-15 recognizes two additional switches:
 
 | switch | action |
 |--------|--------|
-| `-u` | display as PDP11 ASCII (two 7b ASCII characters in 8b bytes, little-endian); 16b devices only |
+| `-u` | display as PDP-11 ASCII (two 7b ASCII characters in 8b bytes, little-endian); 16b devices only |
 | `-p` | display as packed ASCII (five 7b ASCII characters in two 18b words) |
 
 Input parsing is controlled by the first character typed in or by
@@ -1032,7 +1032,7 @@ The PDP-15 also recognizes an additional input mode:
 | switch | action |
 |--------|--------|
 | `-p` | five-character packed ASCII string in two 18b words |
-| `-u` | PDP11 ASCII (two 7b ASCII in 8b bytes, little-endian) |
+| `-u` | PDP-11 ASCII (two 7b ASCII in 8b bytes, little-endian) |
 
 Instruction input uses standard 18b PDP assembler syntax. There are
 eight instruction classes: memory reference, `EAE`, index
