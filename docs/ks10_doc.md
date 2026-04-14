@@ -1,5 +1,7 @@
 # PDP-10 KS10 Processor Simulator User's Guide
 
+Revision of 17-Feb-2022
+
 **Copyright Notice**
 
 The SIMH source code and documentation is made available under a
@@ -7,7 +9,7 @@ X11-style open source license; the precise terms are available at:
 
 <https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-The DEC PDP-10/KA10 simulator was written by Richard Cornwell.
+The DEC PDP-10/KS10 simulator was written by Richard Cornwell.
 
 # Table of Contents
 
@@ -39,13 +41,13 @@ The DEC PDP-10/KA10 simulator was written by Richard Cornwell.
 
 [3.7.1 DZ11 Terminal Controller](#dz11-terminal-controller)
 
-[3.8 Network Devices.](#network-devices.)
+[3.8 Network Devices](#network-devices)
 
 [3.8.1 IMP Interface Message Processor](#imp-interface-message-processor)
 
 [3.8.2 CH11 Chaosnet interface](#ch11-chaosnet-interface)
 
-[3.8.3 KMC11 communications controller.](#kmc11-communications-controller.)
+[3.8.3 KMC11 communications controller](#kmc11-communications-controller)
 
 [3.8.4 DUP11 network interface](#dup11-network-interface)
 
@@ -55,15 +57,15 @@ The DEC PDP-10/KA10 simulator was written by Richard Cornwell.
 
 [5.1 ITS](#its)
 
-#  Introduction
+# Introduction
 
 Originally the DEC PDP-10 computer started as the PDP-6. This was a 36
 bit computer that was designed for timesharing, which was introduced
 in 1964. The original goal of the machine was to allow for processing
 of many 6 bit characters at a time. 36 bits were also common in
 machines like the IBM 7090, GE 645, and Univac 11xx lines. Several
-systems influenced the design of the PDP-6, like CTSS, Lisp, support
-for larger memory.
+influences shaped the design of the PDP-6, including CTSS, Lisp, and
+support for larger memory.
 
 The PDP-6 was canceled by DEC due to production problems. The
 engineers designed a smaller replacement, which happened to be a 36
@@ -73,24 +75,24 @@ PDP-10, later renamed to "DECSystem-10". The system supported up to
 
 The first PDP-10 was labeled the KA10, and added a few instructions to
 the PDP-6. Both the PDP-6 and PDP-10 used a base and limit relocation
-scheme. The KA10 generally offered two registers, one of user data and
-the second for user shared code. These were referred to the
-Low-Segment and High-Segment, the High-Segment could be shared with
+scheme. The KA10 generally offered two registers, one for user data
+and the second for user shared code. These were referred to as the
+Low-Segment and High-Segment. The High-Segment could be shared with
 several jobs.
 
 The next version was called KI10 for Integrated. This added support
 for paging and double precision floating point instructions. It also
 added 4 sets of registers to improve context switching time. It could
-also support up to 4Mega words of memory.
+also support up to 4 megawords of memory.
 
 Following the KI10 was the KL10 (for Low-Cost). The KL10 added double
 precision integer instructions and instructions to improve COBOL
 performance. This was the first version which was microcoded. The KL10
-was extended to support user programs larger then 256k.
+was extended to support user programs larger than 256K.
 
 The final version to make it to market was the KS10 (for Small). This
 was a bit-slice version of the PDP-10 which used Unibus devices which
-were cheaper then the KL10 devices.
+were cheaper than the KL10 devices.
 
 The original operating system for the PDP-6/PDP-10 was just called
 "Monitor". It was designed to fit into 6K words. Around the third
@@ -100,7 +102,7 @@ virtual memory. Around the fourth release it was given the name
 implemented it on the PDP-10. This was called "TENEX". This was later
 adopted by DEC and became "TOPS-20".
 
-During the mid 1960s a group at MIT, who where not happy with how
+During the mid 1960s a group at MIT, who were not happy with how
 Multics was being developed, decided to create their own operating
 system, which they called Incompatible Timesharing System, or
 "ITS". The name was a play on an earlier project called the Compatible
@@ -119,7 +121,7 @@ the KI10, KL10, and KS10.
 
 The PDP-10 was ultimately replaced by the VAX.
 
-#  Simulator Files
+# Simulator Files
 
 To compile the DEC PDP-10/KS10 simulator, you must define `USE_INT64`
 as part of the compilation command line.
@@ -147,7 +149,7 @@ as part of the compilation command line.
 |              | `ks10_kmc.c`    | KMC communications controller.             |
 
 
-#  KS10 Features
+# KS10 Features
 
 The KS10 simulator is configured as follows:
 
@@ -158,18 +160,18 @@ The KS10 simulator is configured as follows:
 | `LP20`         | LP10 Line Printer                   |
 | `RPA`          | RH10/RH20 Disk controllers via RH10 |
 | `TUA`          | TM02 Tape controller via RH10/RH20  |
-| `DZ`           | DC10 Communications controller.     |
+| `DZ`           | DZ11 communications controller.     |
 | `IMP`          | IMP network interface               |
-| `CH`           | CH10 Chaosnet interface             |
+| `CH`           | CH11 Chaosnet interface             |
 | `DUP`          | DUP11 interface.                    |
 | `KDP`          | KMC11 interface.                    |
 
-##  CPU
+## CPU
 
 The CPU options include setting memory size and O/S customization.
 
-|                  |                                              |     |
-|------------------|----------------------------------------------|-----|
+| command          | action                                       | OS Type |
+|------------------|----------------------------------------------|---------|
 | `SET CPU 256K`   | Sets memory to 256K                          |     |
 | `SET CPU 512K`   | Sets memory to 512K                          |     |
 | `SET CPU 1024K`  | Set memory to 1024K                          |     |
@@ -177,7 +179,8 @@ The CPU options include setting memory size and O/S customization.
 | `SET CPU NOIDLE` | Disables Idle detection                      |     |
 | `SET CPU IDLE`   | Enables Idle detection                       |     |
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as
+the control registers for the interrupt system.
 
 | Name          | Size | Comments                   | OS Type |
 |---------------|------|----------------------------|---------|
@@ -211,9 +214,10 @@ CPU registers include the visible state of the processor as well as the control 
 
 The CPU can maintain a history of the most recently executed instructions.
 
-This is controlled by the `SET CPU HISTORY` and `SHOW CPU HISTORY` commands:
+This is controlled by the `SET CPU HISTORY` and `SHOW CPU HISTORY`
+commands:
 
-|                      |                                        |
+| command              | action                                 |
 |----------------------|----------------------------------------|
 | `SET CPU HISTORY`    | clear history buffer                   |
 | `SET CPU HISTORY=0`  | disable history                        |
@@ -227,35 +231,36 @@ contents the memory location referenced by `EA`. `RES` is the result
 of the instruction. `FLAGS` shows the flags after the instruction is
 executed. `IR` shows the instruction being executed.
 
-##  KS10 front end processor
+## KS10 front end processor
 
-###  Console Teletype (`CTY`)
+### Console Teletype (`CTY`)
 
 The console station allows for communications with the operating system.
 
-|              |                                     |
+| command      | action                              |
 |--------------|-------------------------------------|
 | `SET CTY 7B` | 7 bit characters, space parity.     |
 | `SET CTY 8B` | 8 bit characters, space parity.     |
 | `SET CTY 7P` | 7 bit characters, space parity.     |
 | `SET CTY UC` | Translate lower case to upper case. |
 
-The CTY also supports a method for stopping TOPS-10 operating system.
+The `CTY` also supports a method for stopping the TOPS-10 operating
+system.
 
-|                |                           |
+| command        | action                    |
 |----------------|---------------------------|
 | `SET CTY STOP` | Deposit 1 in location 30. |
 
-##  Unit Record I/O Devices
+## Unit Record I/O Devices
 
-###  LP20 Printer (`LP20`)
+### LP20 Printer (`LP20`)
 
 The line printer (`LP20`) writes data to a disk file as ASCII text with
-terminating newlines. Currently set to handle standard signals to
-control paper advance. Currently only one line printer device is
+terminating newlines. It currently handles standard signals to control
+paper advance. Currently only one line printer device is
 supported.
 
-|               |                                   |
+| command       | action                            |
 |---------------|-----------------------------------|
 | `SET LP20 LC` | Allow printer to print lower case |
 | `SET LP20 UC` | Print only upper case             |
@@ -278,23 +283,23 @@ These characters control the skipping of various number of lines.
 | `022`     | Skip to every 3 line                       |
 | `023`     | Same as line feed (12), but ignore margin. |
 
-##  Disk I/O Devices
+## Disk I/O Devices
 
 The PDP-10 supported many disk controllers. The KS10 supports only
 Massbus devices.
 
-##  Massbus Devices
+## Massbus Devices
 
 Massbus devices are attached via RH11s.
 
-###  `RP` Disk Drives
+### `RP` Disk drives
 
-The KS10 supports one RH11 controller with up to 8 `RP` drives can be
-configured. These are addresses as RP Disks can be stored in one of
-several file formats, `SIMH`, `DBD9` and `DLD9`. The later two are for
+The KS10 supports one RH11 controller with up to 8 `RP` drives.
+Disks can be stored in one of
+several file formats, `SIMH`, `DBD9` and `DLD9`. The latter two are for
 compatibility with other simulators.
 
-|                        |                                            |
+| command                | action                                     |
 |------------------------|--------------------------------------------|
 | `SET RPAn RP04`        | Sets this unit to be an `RP04` (19MWords)  |
 | `SET RPAn RP06`        | Sets this unit to be an `RP06` (39MWords)  |
@@ -308,79 +313,80 @@ compatibility with other simulators.
 
 To attach a disk use the ATTACH command:
 
-|                                 |                                        |
+| command                         | action                                 |
 |---------------------------------|----------------------------------------|
 | `ATTACH RPAn <file>`            | Attaches a file                        |
-| `ATTACH RAn -f <format> <file>` | Attaches a file with the given format. |
+| `ATTACH RPAn -f <format> <file>` | Attaches a file with the given format. |
 | `ATTACH RPAn -n <file>`         | Creates a blank disk.                  |
 
 Format can be `SIMH`, `DBD9`, `DLD9`.
 
-###  `TUA` Tape Drives
+### `TUA` Tape drives
 
 The TU is a Massbus tape controller using a TM03 formatter.
 
-|                        |                                    |
+| command                | action                             |
 |------------------------|------------------------------------|
-| `SET TUAn LOCKED`      | Sets the mag tape to be read only. |
-| `SET TUAn WRITEENABLE` | Sets the mag tape to be writable.  |
+| `SET TUAn LOCKED`      | Sets the magtape to be read only.  |
+| `SET TUAn WRITEENABLE` | Sets the magtape to be writable.   |
 | `SET TUA ADDR=value` | Sets the Unibus address of device. (default: 772440) |
 | `SET TUA VECT=value` | Sets the interrupt vector of device. (default: 224) |
 | `SET TUA BR=value`   | Sets the interrupt priority of device. (default: 6) |
 | `SET TUA CTL=value`  | Sets the Unibus adapter number. (default: 3)        |
 
-##  Terminal Multiplexer I/O Devices
+## Terminal Multiplexer I/O Devices
 
-All terminal multiplexers must be attached in order to work. The ATTACH command specifies the port to be used for Telnet sessions:
+All terminal multiplexers must be attached in order to work. The
+`ATTACH` command specifies the port to be used for Telnet sessions:
 
-|                          |                       |
+| command                  | action                |
 |--------------------------|-----------------------|
 | `ATTACH <device> <port>` | set up listening port |
 
 where `port` is a decimal number between 1 and 65535 that is not being
-used other TCP/IP activities.
+used for other TCP/IP activities.
 
 Once attached and the simulator is running, the multiplexer listens
 for connections on the specified port. It assumes that any incoming
-connection is a Telnet connections. The connections remain open until
+connection is a Telnet connection. The connections remain open until
 disconnected either by the Telnet client, a `SET <device> DISCONNECT`
-command,or a `DETACH <device>` command.
+command, or a `DETACH <device>` command.
 
-|                               |                     |
+| command                       | action              |
 |-------------------------------|---------------------|
-| `SET <device> DISCONNECT=n` | Disconnect line `n` |
+| `SET <device> DISCONNECT=n`   | Disconnect line `n` |
 
 The `<device>` implements the following special `SHOW` commands:
 
-|                             |                                              |
+| command                     | action                                       |
 |-----------------------------|----------------------------------------------|
-| `SHOW <device> CONNECTIONS` | Displays current connections to the <device> |
+| `SHOW <device> CONNECTIONS` | Displays current connections to the `<device>` |
 | `SHOW <device> STATISTICS`  | Displays statistics for active connections   |
-| `SHOW <device> LOG`         | Display logging for all lines.               |
+| `SHOW <device> LOG`         | Displays logging for all lines.              |
 
 Logging can be controlled as follows:
 
-|                               |                                    |
+| command                       | action                             |
 |-------------------------------|------------------------------------|
 | `SET <device> LOG=n=filename` | Log output of line `n` to filename |
 | `SET <device> NOLOG`          | Disable logging and close log file |
 
-###  DZ11 Terminal Controller
+### DZ11 Terminal Controller
 
 The `DZ` device was the standard terminal multiplexer for the
 KS10. Lines came in groups of 8. A max of 32 lines can be supported.
 
-|                   |                                                      |
+| command           | action                                               |
 |-------------------|------------------------------------------------------|
-| `SET DZ LINES=n`  | Set the number of lines on the DZ10, multiple of 8.  |
+| `SET DZ LINES=n`  | Set the number of lines on the DZ11, multiple of 8.  |
 | `SET DZ ADDR=value` | Sets the Unibus address of device. (default: 760000) |
 | `SET DZ VECT=value` | Sets the interrupt vector of device. (default: 340)  |
 | `SET DZ BR=value`   | Sets the interrupt priority of device. (default: 5)  |
 | `SET DZ CTL=value`  | Sets the Unibus adapter number. (default: 3)         |
 
-##  Network Devices.
+## Network Devices
 
-###  `IMP` Interface Message Processor
+### `IMP` Interface Message Processor
 
 This allows the KA/KI to connect to the Internet. Currently only
 supported under ITS. ITS and other OS that used the `IMP` did not
@@ -393,15 +399,15 @@ address then it will be mapped into the address set in `IP`. If `DHCP`
 is enabled the `IMP` will issue a DHCP request at startup and set `IP`
 to the address that is provided. DHCP is enabled by default.
 
-|   |   |
+| command | action |
 |---|---|
 | `SET IMP MAC=xx:xx:xx:xx:xx:xx` | Set the `MAC` address of the `IMP` to the value given. |
 | `SET IMP IP=ddd.ddd.ddd.ddd/dd` | Set the external `IP` address of the `IMP` along with the net mask in bits. |
 | `SET IMP GW=ddd.ddd.ddd.ddd` | Set the Gateway address for the `IMP`. |
 | `SET IMP HOST=ddd.ddd.ddd.ddd` | Sets the IP address of the PDP-10 system. |
-| `SET IMP DHCP` | Allows the IMP to acquire an IP address from the local network via `DHCP`. Only `HOST` must be set if this feature is used. |
+| `SET IMP DHCP` | Allows the `IMP` to acquire an IP address from the local network via `DHCP`. Only `HOST` must be set if this feature is used. |
 | `SET IMP NODHCP` | Disables the `IMP` from making `DHCP` queries |
-| `SET IMP ARP=ddd.ddd.ddd.ddd= xx:xx:xx:xx:xx:xx` | Creates a static `ARP` entry for the IP address with the indicated MAC address. |
+| `SET IMP ARP=ddd.ddd.ddd.ddd=xx:xx:xx:xx:xx:xx` | Creates a static `ARP` entry for the IP address with the indicated MAC address. |
 | `SET IMP ADDR=value` | Sets the Unibus address of device. (default: 767600) |
 | `SET IMP VECT=value` | Sets the interrupt vector of device. (default: 250) |
 | `SET IMP BR=value` | Sets the interrupt priority of device. (default: 6) |
@@ -413,11 +419,11 @@ determine which devices are available use the `SHOW ETHERNET` to list
 the potential interfaces. Check out the `0readme_ethernet.txt` from
 the top of the source directory.
 
-The `IMP` device can be configured in several ways. Ether it can
+The `IMP` device can be configured in several ways. Either it can
 connect directly to an ethernet port (via `TAP`) or it can be
 connected via a `TUN` interface. If configured via `TAP` interface the
-`IMP` will behave like any other ethernet interface and if asked grab
-it’s own address. In environments where this is not desired the `TUN`
+`IMP` will behave like any other ethernet interface and if asked
+obtain its own address. In environments where this is not desired, the `TUN`
 interface can be used. When configured under a `TUN` interface the
 simulated network is a collection of ports on the local host. These
 can be mapped based on configuration options, see the
@@ -431,23 +437,23 @@ address. If this address is not the same as the address of the system
 as seen by the network, then this address can be set with `SET IMP
 IP=<ip>`, and `SET IMP GW=<ip>`, or `SET IMP DHCP` which will allow
 the `IMP` to request an address from a local `DHCP` server. The `IMP`
-will translate the packets it receives/sends to look like the appeared
-from the desired address. The `IMP` will also correctly translate FTP
+will translate the packets it receives and sends to look like they
+appeared from the desired address. The `IMP` will also correctly translate FTP
 requests in this configuration.
 
 When running under a `TUN` interface, IMP is on a virtual `10.0.2.0`
 network. The default gateway is `10.0.2.1`, with the default `IMP` at
 `10.0.2.15`. For this mode `DHCP` can be used.
 
-###  CH11 Chaosnet interface
+### CH11 Chaosnet interface
 
-Chaosnet was another methods of network access for ITS. Chaosnet can
+Chaosnet was another method of network access for ITS. Chaosnet can
 be connected to another ITS system or a VAX/PDP-11 running BSD Unix or
 VMS. Chaosnet runs over UDP protocol under UNIX. You must specify a
 node number, peer to talk to and your local UDP listening port. All
 UDP packets are sent to the peer for further processing.
 
-|                 |                                      |
+| command         | action                               |
 |-----------------|--------------------------------------|
 | `SET CH NODE=n` | Set the Node number for this system. |
 | `SET CH PEER=ddd.ddd.ddd.ddd:dddd` | Set the Peer address and port number. |
@@ -457,9 +463,9 @@ UDP packets are sent to the peer for further processing.
 | `SET CH CTL=value` | Sets the Unibus adapter number. (default: 3) |
 
 The `CH` device must be attached to a UDP port number. This is where
-it will receive UDP packets from it’s peer.
+it will receive UDP packets from its peer.
 
-###  KMC11 communications controller.
+### KMC11 communications controller
 
 The KMC11-A is a general purpose microprocessor that is used in
 several DEC products. The KDP is an emulation of one of those
@@ -470,13 +476,13 @@ validation, receiver resynchronization, and address recognition. The
 DUP-11 lines are assigned to the KMC11 by the (emulated) operating
 system, but SimH must be told how to connect them.
 
-###  DUP11 network interface
+### DUP11 network interface
 
 DUP11 devices are used by DECNET to link machines together. They are a
 synchronous serial interface. This is implemented by UDP to send
 packets to the remote machine.
 
-|                   |                                                         |
+| command           | action                                                  |
 |-------------------|---------------------------------------------------------|
 | `SET DUP LINES=n` | Sets number of DUP11 lines supported; current max is 2. |
 | `SET DUPn SPEED=bits/sec` | Set speed of link, default of 0 means no restrictions. |
@@ -493,7 +499,7 @@ packets to the remote machine.
 | `SET DUP CTL=value` | Sets the Unibus adapter number. (default: 3) |
 
 The `DUP` device must be attached to a UDP port number. This is where
-it will receive UDP packets from it’s peer.
+it will receive UDP packets from its peer.
 
 The communication line performs input and output through a TCP session
 (or UDP session) connected to a user-specified port. The `ATTACH`
@@ -520,21 +526,21 @@ the peer. Alternatively, UDP can be used by specifying UDP on the
 
 For more connection options, view the Help attach command for the `DUP`.
 
-#  Symbolic Display and Input
+# Symbolic Display and Input
 
 The KS10 simulator implements symbolic display and input. These are
 controlled by the following switches to the `EXAMINE` and `DEPOSIT`
 commands:
 
-|   |   |
-|---|---|
-| `-v` | Looks up the address via translation, will return nothing if address is not valid. |
-| `-u` | With the `-v` option, used user space instead of executive space. |
-| `-a` | Display/Enter ASCII data.                                         |
-| `-p` | Display/Enter packed ASCII data.                                  |
-| `-c` | Display/Enter Sixbit Character data.                              |
-| `-m` | Display/Enter Symbolic instructions                               |
-|      | Display/Enter Octal data.                                         |
+| switch    | action                                                                          |
+|-----------|---------------------------------------------------------------------------------|
+| `-v`      | Looks up the address via translation, will return nothing if address is not valid. |
+| `-u`      | With the `-v` option, use user space instead of executive space.               |
+| `-a`      | Display/Enter ASCII data.                                                      |
+| `-p`      | Display/Enter packed ASCII data.                                               |
+| `-c`      | Display/Enter Sixbit character data.                                           |
+| `-m`      | Display/Enter symbolic instructions.                                           |
+| `default` | Display/Enter octal data.                                                      |
 
 Symbolic instructions can be of the formats:
 
@@ -556,27 +562,28 @@ command will stop the simulator on access to that memory location,
 either via fetch, indirection or operand access. Adding `-w` will stop
 the simulator when the location is modified.
 
-The simulator can load `RIM` files, `SAV` files, `EXE` files, WAITS Octal
-`DMP` files, and MIT SBLK files.
+The simulator can load `RIM` files, `SAV` files, `EXE` files, WAITS octal
+`DMP` files, and MIT `SBLK` files.
 
 When instruction history is enabled, the history trace shows internal
 status of various registers at the start of the instruction execution.
 
-|       |                                                     |
-|-------|-----------------------------------------------------|
-| `PC`  | Shows the PC of the instruction executed.           |
-| `AC`  | The contents of the referenced AC.                  |
-| `EA`  | The final computed Effective address.               |
-| `AR`  | Generally the operand that was computed.            |
-| `RES` | The AR register after the instruction was complete. |
-| `FLAGS` | The values of the FLAGS register before execution of the instruction. |
-| `IR` | The fetched instruction followed by the disassembled instruction. |
+| field   | meaning                                                                  |
+|---------|--------------------------------------------------------------------------|
+| `PC`    | Shows the PC of the instruction executed.                                |
+| `AC`    | The contents of the referenced AC.                                       |
+| `EA`    | The final computed Effective address.                                    |
+| `AR`    | Generally the operand that was computed.                                 |
+| `RES`   | The AR register after the instruction was complete.                      |
+| `FLAGS` | The values of the FLAGS register before execution of the instruction.     |
+| `IR`    | The fetched instruction followed by the disassembled instruction.         |
 
 The PDP-10 simulator allows for memory reference and memory modify
 breakpoints with the `-r` and `-w` options given to the break command.
 
-#  OS specific configurations
+# OS specific configurations
 
-##  ITS
+## ITS
 
-To run ITS the CPU must be “set cpu ITS”, this will enable the ITS pager.
+To run ITS, the CPU must be `SET CPU ITS`. This will enable the ITS
+pager.
