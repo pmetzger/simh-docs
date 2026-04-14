@@ -38,209 +38,111 @@ This memorandum documents the SEL-32 simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-scp_help.h
-
-sim_card.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_disk.h
-
-sim_ether.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_serial.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_card.c
-
-sim_console.c
-
-sim_disk.c
-
-sim_ether.c
-
-sim_fio.c
-
-sim_serial.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/SEL32/ sel32_defs.h
-
-sel32_chan.c
-
-sel32_clk.c
-
-sel32_com.c
-
-sel32_con.c
-
-sel32_cpu.c
-
-sel32_disk.c
-
-sel32_ec.c
-
-sel32_fltpt.c
-
-sel32_hsdp.c
-
-sel32_iop.c
-
-sel32_lpr.c
-
-> sel32_mfp.c
-
-sel32_mt.c
-
-sel32_scfi.c
-
-> sel32_scsi.c
-
-sel32_sys.c
-
-sim/SEL32/taptools/
-
-cutostap.c
-
-ddcat.c
-
-ddump.c
-
-deblk.c
-
-diagcopy.c
-
-disk2tap.c
-
-diskload.c
-
-eomtap.c
-
-filelist.c
-
-> fileread.c
-
-fmgrcopy.c
-
-makefile
-
-mkdiagtape.c
-
-mkfmtape.c
-
-mkvmtape.c
-
-mpxblk.c
-
-README.md
-
-renum.c
-
-sdtfmgrcopy.c
-
-small.c
-
-tapdump.c
-
-tape2disk.c
-
-tapscan.c
-
-volmcopy.c
-
-sim/SEL32/tests
-
-cpu.icl
-
-diag.ini
-
-diag.tap
-
-sel32_test.ini
-
-SetupNet
-
-testcode.mem
-
-testcode0.l
-
-testcode0.mem
-
-testcpu.l
-
-testcpu.s
-
-sim/SEL32/util
-
-makecode.c
-
-makefile
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `scp_help.h` |
+|  | `sim_card.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_disk.h` |
+|  | `sim_ether.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_serial.h` |
+|  | `sim_sock.h` |
+|  | `sim_tape.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_card.c` |
+|  | `sim_console.c` |
+|  | `sim_disk.c` |
+|  | `sim_ether.c` |
+|  | `sim_fio.c` |
+|  | `sim_serial.c` |
+|  | `sim_sock.c` |
+|  | `sim_tape.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/SEL32/` | `sel32_defs.h` |
+|  | `sel32_chan.c` |
+|  | `sel32_clk.c` |
+|  | `sel32_com.c` |
+|  | `sel32_con.c` |
+|  | `sel32_cpu.c` |
+|  | `sel32_disk.c` |
+|  | `sel32_ec.c` |
+|  | `sel32_fltpt.c` |
+|  | `sel32_hsdp.c` |
+|  | `sel32_iop.c` |
+|  | `sel32_lpr.c` |
+|  | `sel32_mfp.c` |
+|  | `sel32_mt.c` |
+|  | `sel32_scfi.c` |
+|  | `sel32_scsi.c` |
+|  | `sel32_sys.c` |
+| `sim/SEL32/taptools/` | `cutostap.c` |
+|  | `ddcat.c` |
+|  | `ddump.c` |
+|  | `deblk.c` |
+|  | `diagcopy.c` |
+|  | `disk2tap.c` |
+|  | `diskload.c` |
+|  | `eomtap.c` |
+|  | `filelist.c` |
+|  | `fileread.c` |
+|  | `fmgrcopy.c` |
+|  | `makefile` |
+|  | `mkdiagtape.c` |
+|  | `mkfmtape.c` |
+|  | `mkvmtape.c` |
+|  | `mpxblk.c` |
+|  | `README.md` |
+|  | `renum.c` |
+|  | `sdtfmgrcopy.c` |
+|  | `small.c` |
+|  | `tapdump.c` |
+|  | `tape2disk.c` |
+|  | `tapscan.c` |
+|  | `volmcopy.c` |
+| `sim/SEL32/tests/` | `cpu.icl` |
+|  | `diag.ini` |
+|  | `diag.tap` |
+|  | `sel32_test.ini` |
+|  | `SetupNet` |
+|  | `testcode.mem` |
+|  | `testcode0.l` |
+|  | `testcode0.mem` |
+|  | `testcpu.l` |
+|  | `testcpu.s` |
+| `sim/SEL32/util/` | `makecode.c` |
+|  | `makefile` |
 
 #  SEL-32 Features
 
 The SEL-32 simulator is configured as follows:
 
-> device name(s) simulates
->
-> CPU 32/55, 32/75, 32/27, 32/67, 32/87, 32/97, V6, V9
->
-> IOP 8000/8001 IOP controller
->
-> MFP 8002 MFP controller
->
-> ITM IOP/MFP interval timer
->
-> CON IOP console terminal
->
-> LPR IOP/MFP line printer
->
-> RTC IOP/MFP real-time clock
->
-> COMC IOP/MFP 8-line character communications subsystem
->
-> DMA 2311/2314 disk processor with up to 8 drives
->
-> DMB 2311/2314 disk processor with up to 8 drives
->
-> DPA 8064 high speed disk processor with up to 8 drives
->
-> DPB 8064 high speed disk processor with up to 8 drives
->
-> SBA MFP SCSI bus A disk controller with up to 2 units
->
-> SBB MFP SCSI bus B tape controller with up to 2 units
->
-> SDA SCFI SCSI disk controller with up to 8 units
->
-> SDB SCFI SCSI disk controller with up to 8 units
->
-> MTA 8051 9-Trk Buffered tape processor with up to 8 drives
->
-> MTB 8051 9-Trk Buffered tape processor with up to 8 drives
+| Device name(s) | Simulates |
+|---|---|
+| `CPU` | 32/55, 32/75, 32/27, 32/67, 32/87, 32/97, V6, V9 |
+| `IOP` | 8000/8001 IOP controller |
+| `MFP` | 8002 MFP controller |
+| `ITM` | IOP/MFP interval timer |
+| `CON` | IOP console terminal |
+| `LPR` | IOP/MFP line printer |
+| `RTC` | IOP/MFP real-time clock |
+| `COMC` | IOP/MFP 8-line character communications subsystem |
+| `DMA` | 2311/2314 disk processor with up to 8 drives |
+| `DMB` | 2311/2314 disk processor with up to 8 drives |
+| `DPA` | 8064 high speed disk processor with up to 8 drives |
+| `DPB` | 8064 high speed disk processor with up to 8 drives |
+| `SBA` | MFP SCSI bus A disk controller with up to 2 units |
+| `SBB` | MFP SCSI bus B tape controller with up to 2 units |
+| `SDA` | SCFI SCSI disk controller with up to 8 units |
+| `SDB` | SCFI SCSI disk controller with up to 8 units |
+| `MTA` | 8051 9-Trk Buffered tape processor with up to 8 drives |
+| `MTB` | 8051 9-Trk Buffered tape processor with up to 8 drives |
 
 Most devices can be disabled or enabled with the SET \<dev\> DISABLED
 and SET \<dev\> ENABLED commands, respectively. The channel address of

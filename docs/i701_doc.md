@@ -46,8 +46,8 @@ the compilation command line.
 
 |                    |              |                                         |
 |--------------------|--------------|-----------------------------------------|
-| ***Subdirectory*** | ***File***   | ***Contains***                          |
-| **I7000**          | i7000_defs.h | IBM 7000 simulators general definitions |
+| Subdirectory | File   | Contains                          |
+| `I7000`          | i7000_defs.h | IBM 7000 simulators general definitions |
 |                    | i701_defs.h  | IBM 701 simulator specific definitions  |
 |                    | i7000_chan.c | Generic channel interface.              |
 |                    | i701_cpu.c   | 701 CPU, Channel, interface             |
@@ -65,14 +65,14 @@ The IBM 701 simulator is configured as follows:
 
 |                    |                              |
 |--------------------|------------------------------|
-| **Device Name(s)** | **Simulates**                |
-| **CPU**            | 701 CPU with 2KW of memory   |
-| **CH**             | 701 Channel Device           |
-| **MT**             | 729 Magnetic Tape Controller |
-| **CDR**            | 711 Card Reader              |
-| **CDP**            | 721 Card Punch               |
-| **LP**             | 716 Line Printer             |
-| **DR0**            | 733 Drum                     |
+| Device Name(s) | Simulates |
+| `CPU`            | 701 CPU with 2KW of memory   |
+| `CH`             | 701 Channel Device           |
+| `MT`             | 729 Magnetic Tape Controller |
+| `CDR`            | 711 Card Reader              |
+| `CDP`            | 721 Card Punch               |
+| `LP`             | 716 Line Printer             |
+| `DR0`            | 733 Drum                     |
 
 The 701 simulator implements several unique stop condition:
 
@@ -92,7 +92,7 @@ Memory size is 2KW on a standard CPU.
 CPU registers include the visible state of the processor as well as the
 control registers for the interrupt system.
 
-| ***Name*** | ***Size*** | ***Comments***         |
+| Name | Size | Comments         |
 |------------|------------|------------------------|
 | IC         | 15         | Program Counter        |
 | AC         | 38         | Accumulator            |

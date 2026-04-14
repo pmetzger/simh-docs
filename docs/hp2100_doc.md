@@ -215,8 +215,8 @@ HP claimed the relative CPU performance, normalized to a 1000 E-Series,
 as follows:
 
 |  |  |  |  |  |  |  |  |  |  |  |  |  |
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| ***2114*** | ***2115*** | ***2116*** | ***2100*** | ***1000 M*** | ***1000 E*** | ***1000 F*** | ***1000 L*** | ***A400*** | ***A600*** | ***A700*** | ***A900*** | ***A990*** |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| 2114 | 2115 | 2116 | 2100 | 1000 M | 1000 E | 1000 F | 1000 L | A400 | A600 | A700 | A900 | A990 |
 | 0.22 | 0.37 | 0.42 | 0.55 | 0.45 | 1.0 | 1.4 | 0.3 | 1.1 | 1.0 | 1.67 | 3.3 | 6.7 |
 
 All of the machines support a 15-bit logical address space, addressing a
@@ -310,9 +310,9 @@ set is common to all SIMH simulators, whereas the latter set is specific
 to the virtual machine being simulated. The files that make up this
 simulator are:
 
-| ***Subdirectory*** | ***File*** | ***Contains*** |
+| Subdirectory | File | Contains |
 |----|----|----|
-| **HP2100** | hp2100_cpu.h | CPU architectural declarations |
+| `HP2100` | hp2100_cpu.h | CPU architectural declarations |
 |  | hp2100_cpu_dmm.h | CPU-to-DMA/MEM/MP interface declarations |
 |  | hp2100_cpu_fp.h | Floating-point interface declarations |
 |  | hp2100_defs.h | System architectural declarations |
@@ -580,7 +580,7 @@ peripheral device front panels. Instead, commands entered through the
 simulation console are used to perform hardware actions. The simulation
 commands that substitute for CPU front-panel actions are:
 
-| ***Hardware Front-Panel Action*** | ***Equivalent Simulation Command*** |
+| Hardware Front-Panel Action | Equivalent Simulation Command |
 |----|----|
 | Pressing the RUN button | GO |
 | Pressing the HALT button | CTRL+E |
@@ -640,12 +640,12 @@ may be changed with the ***SET CPU { BIN \| OCT \| DEC \| HEX }***
 command, or the radix may be overridden temporarily with a command line
 switch, as follows:
 
-|   ***Switch***    | ***Interpretation*** |
+| Switch | Interpretation |
 |:-----------------:|----------------------|
-|      **–2**       | A binary value       |
-| **–8** or **–O**  | An octal value       |
-| **–10** or **–D** | A decimal value      |
-| **–16** or **–H** | A hexadecimal value  |
+| `–2` | A binary value |
+| `–8 or –O` | An octal value |
+| `–10 or –D` | A decimal value |
+| `–16 or –H` | A hexadecimal value |
 
 When examining or depositing into device registers, the default radix
 for the specified register is used unless overridden with one of the
@@ -658,11 +658,11 @@ When examining or depositing into memory or certain registers, command
 line switches specifying the symbolic mode and format may be used to
 override the default numeric mode, as follows:
 
-| ***Switch*** | ***Mode Interpretation***                 |
+| Switch | Mode Interpretation |
 |:------------:|-------------------------------------------|
-|    **–A**    | A single character in the right-hand byte |
-|    **–C**    | A two-character packed string             |
-|    **–M**    | A CPU instruction mnemonic                |
+| `–A` | A single character in the right-hand byte |
+| `–C` | A two-character packed string |
+| `–M` | A CPU instruction mnemonic |
 
 In the absence of a mode switch or a specified symbolic default,
 entering values with a leading ' (apostrophe) implies ***–A***, a
@@ -689,13 +689,13 @@ Any numeric operands present are displayed or accepted in a default
 radix unless overridden by the addition of one of these mutually
 exclusive format switches:
 
-| ***Switch*** | ***Format Interpretation***               |
+| Switch | Format Interpretation |
 |:------------:|-------------------------------------------|
-|    **–A**    | A single character in the right-hand byte |
-|    **–B**    | A binary value                            |
-|    **–O**    | An octal value                            |
-|    **–D**    | A decimal value                           |
-|    **–H**    | A hexadecimal value                       |
+| `–A` | A single character in the right-hand byte |
+| `–B` | A binary value |
+| `–O` | An octal value |
+| `–D` | A decimal value |
+| `–H` | A hexadecimal value |
 
 Operand values use a default radix suitable to the type of the value, as
 follows:
@@ -769,13 +769,13 @@ a 10-bit offset within the page (e.g., ***1777.1777***), and
 space (e.g., ***77777***). Command line switches modify the mapping of
 logical addresses to physical addresses as follows:
 
-| ***Switch*** | ***Interpretation***                               |
+| Switch | Interpretation |
 |:------------:|----------------------------------------------------|
-|    **–N**    | Use the address directly with no mapping           |
-|    **–S**    | If memory expansion is enabled, use the system map |
-|    **–U**    | If memory expansion is enabled, use the user map   |
-|    **–P**    | If memory expansion is enabled, use the port A map |
-|    **–Q**    | If memory expansion is enabled, use the port B map |
+| `–N` | Use the address directly with no mapping |
+| `–S` | If memory expansion is enabled, use the system map |
+| `–U` | If memory expansion is enabled, use the user map |
+| `–P` | If memory expansion is enabled, use the port A map |
+| `–Q` | If memory expansion is enabled, use the port B map |
 
 If no switch is specified, the address is interpreted using **–N** if
 memory expansion is currently disabled, otherwise it is interpreted
@@ -796,12 +796,12 @@ in logical form.
 
 The CPU implements four different kinds of instruction breakpoints, as follows:
 
-| ***Switch*** | ***Action***                                             |
+| Switch | Action |
 |:------------:|----------------------------------------------------------|
-|    **–E**    | Break unconditionally                                    |
-|    **–N**    | Break if memory expansion is disabled                    |
-|    **–S**    | Break if memory expansion and the system map are enabled |
-|    **–U**    | Break if memory expansion and the user map are enabled   |
+| `–E` | Break unconditionally |
+| `–N` | Break if memory expansion is disabled |
+| `–S` | Break if memory expansion and the system map are enabled |
+| `–U` | Break if memory expansion and the user map are enabled |
 
 If no switch is specified, the default is to use **–N** if memory
 expansion is currently disabled, otherwise to use **–S** if the system
@@ -855,17 +855,17 @@ starting address of the loader program. For a given device, the loader
 selected depends on the current CPU model, as shown in the following
 table:
 
-| ***Device Name*** | ***HP 21xx Bootstrap*** | ***HP 1000 Bootstrap*** | ***Boot Device*** |
-|:--:|:--:|:--:|----|
-| **DA** | — | 12992H | 7906H/7920H/7925H/9895 ICD Disc |
-| **DPC** | BMDL-7900 | 12992F | 2870/7900 Disc |
-| **DQC** | BMDL-2883 | 12992A | 2883 Disc |
-| **DRC** | BBDL | — | 277x Fixed-Head Disc/Drum |
-| **DS** | BMDL-7905 | 12992B | 7905/7906/7920/7925 MAC Disc |
-| **IPL** | BBL-IOP | 12992K | 12875A Processor Interconnect |
-| **MSC** | BMTL | 12992D | 7970B/E Magnetic Tape |
-| **PTR** | BBL | 12992K | 2748 Paper Tape Reader |
-| **CPU** | — | (various) | Selected by S-register bits 15-14 |
+| Device Name | HP 21xx Bootstrap | HP 1000 Bootstrap | Boot Device |
+| :--: | :--: | :--: | ---- |
+| DA | — | 12992H | 7906H/7920H/7925H/9895 ICD Disc |
+| DPC | BMDL-7900 | 12992F | 2870/7900 Disc |
+| DQC | BMDL-2883 | 12992A | 2883 Disc |
+| DRC | BBDL | — | 277x Fixed-Head Disc/Drum |
+| DS | BMDL-7905 | 12992B | 7905/7906/7920/7925 MAC Disc |
+| IPL | BBL-IOP | 12992K | 12875A Processor Interconnect |
+| MSC | BMTL | 12992D | 7970B/E Magnetic Tape |
+| PTR | BBL | 12992K | 2748 Paper Tape Reader |
+| CPU | — | (various) | Selected by S-register bits 15-14 |
 
 The BMDL (Basic Moving-Head Disc Loader), BBDL (Basic Binary Disc
 Loader), BMTL (Basic Magnetic Tape Loader), and the BBL-IOP (Basic
@@ -959,10 +959,10 @@ All devices other than the CPU may be disabled or enabled. Disabling a
 device simulates removing the associated accessory or interface from the
 system chassis. To disable or enable a device, use:
 
-| ***Command***               | ***Action***       |
+| Command | Action |
 |-----------------------------|--------------------|
-| **SET \<device\> DISABLED** | Disable the device |
-| **SET \<device\> ENABLED**  | Enable the device  |
+| `SET \<device\> DISABLED` | Disable the device |
+| `SET \<device\> ENABLED` | Enable the device |
 
 For devices that use two interface cards, enabling or disabling either
 card also enables or disables the other card. For example, entering
@@ -974,10 +974,10 @@ controller allow the units to be individually disabled or enabled.
 Disabling simulates disconnecting the associated unit from the
 controller. The commands to disable or enable a unit are:
 
-| ***Command***             | ***Action***     |
+| Command | Action |
 |---------------------------|------------------|
-| **SET \<unit\> DISABLED** | Disable the unit |
-| **SET \<unit\> ENABLED**  | Enable the unit  |
+| `SET \<unit\> DISABLED` | Disable the unit |
+| `SET \<unit\> ENABLED` | Enable the unit |
 
 Each of the above command options is replicated in the option tables of
 the devices to which they apply.
@@ -1178,11 +1178,11 @@ the instruction (e.g., for each word moved within a block-move
 instruction). Device simulations provide commands that determine how the
 appropriate tick counts are selected for I/O operations timing:
 
-| ***Command*** | ***Action*** |
+| Command | Action |
 |----|----|
-| ***SET \<device\> REALTIME*** | Configure the device to use realistic timing |
-| ***SET \<device\> CALTIME*** | Configure the device to use calibrated timing |
-| ***SET \<device\> FASTTIME*** | Configure the device to use optimized timing |
+| `SET \<device\> REALTIME` | Configure the device to use realistic timing |
+| `SET \<device\> CALTIME` | Configure the device to use calibrated timing |
+| `SET \<device\> FASTTIME` | Configure the device to use optimized timing |
 
 A device configured to use *realistic timing* selects its tick counts to
 encompass the same number of machine instructions as would be executed
@@ -1365,59 +1365,59 @@ SET {-F} CPU \<option\>
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **2114** | Use a 2114 computer |
-| **2115** | Use a 2115 computer |
-| **2116** | Use a 2116 computer; default |
-| **2100** | Use a 2100 computer |
-| **1000-M** | Use a 1000 M-Series computer |
-| **1000-E** | Use a 1000 E-Series computer |
-| **1000-F** | Use a 1000 F-Series computer |
-| **21MX-M** | Use a 21MX M-Series computer (same as a 1000 M-Series) |
-| **21MX-E** | Use a 21MX E-Series computer (same as a 1000 E-Series) |
-| **8K** | Set the memory size to 8K words |
-| **12K** | Set the memory size to 12K words |
-| **16K** | Set the memory size to 16K words |
-| **24K** | Set the memory size to 24K words |
-| **32K** | Set the memory size to 32K words; default |
-| **64K** | Set the memory size to 64K words |
-| **128K** | Set the memory size to 128K words |
-| **256K** | Set the memory size to 256K words |
-| **512K** | Set the memory size to 512K words |
-| **1024K** | Set the memory size to 1024K words |
-| **EAU** | Enable the Extended Arithmetic Unit instructions |
-| **NOEAU** | Disable the Extended Arithmetic Unit instructions; default |
-| **FP** | Enable the Floating Point instructions |
-| **NOFP** | Disable the Floating Point instructions; default |
-| **IOP** | Enable the 2000/Access I/O Processor instructions |
-| **NOIOP** | Disable the 2000/Access I/O Processor; default |
-| **DMS** | Enable the Dynamic Mapping System instructions |
-| **NODMS** | Disable the Dynamic Mapping System instructions; default |
-| **FFP** | Enable the Fast FORTRAN Processor instructions |
-| **NOFFP** | Disable Fast FORTRAN Processor instructions; default |
-| **DBI** | Enable the Double Integer Instructions |
-| **NODBI** | Disable the Double Integer Instructions; default |
-| **EMA** | Enable the Extended Memory Array instructions |
-| **NOEMA** | Disable the Extended Memory Array instructions; default |
-| **VMAOS** | Enable the Virtual Memory and Operating System instructions |
-| **NOVMAOS** | Disable the Virtual Memory and Operating System instructions; default |
-| **VIS** | Enable the Vector Instruction Set |
-| **NOVIS** | Disable the Vector Instruction Set; default |
-| **SIGNAL** | Enable the SIGNAL/1000 instructions |
-| **NOSIGNAL** | Disable the SIGNAL/1000 Instructions; default |
-| **LOADERENABLE** | Enable access to the protected binary loader |
-| **LOADERDISABLE** | Disable access to the protected binary loader; default |
-| **ROMS=\<rom-list\>** | Change the set of installed boot loader ROMs |
-| **IDLE** | Enable idle detection |
-| **NOIDLE** | Disable idle detection; default |
-| **STOP=\<option\>\[;\<option\]** | Enable simulation stops |
-| **NOSTOP=\<option\>\[;\<option\]** | Disable simulation stops; default |
-| **INDIR=\<limit\>** | Set the maximum indirect addressing chain length; default is 16 |
-| **EXEC=\<match\>\[;\<mask\>\]** | Enable execution tracing of matching instructions |
-| **NOEXEC** | Disable execution tracing; default |
-| **DEBUG=\<option\>** | Enable tracing |
-| **NODEBUG** | Disable tracing; default |
+| 2114 | Use a 2114 computer |
+| 2115 | Use a 2115 computer |
+| 2116 | Use a 2116 computer; default |
+| 2100 | Use a 2100 computer |
+| `1000-M` | Use a 1000 M-Series computer |
+| `1000-E` | Use a 1000 E-Series computer |
+| `1000-F` | Use a 1000 F-Series computer |
+| `21MX-M` | Use a 21MX M-Series computer (same as a 1000 M-Series) |
+| `21MX-E` | Use a 21MX E-Series computer (same as a 1000 E-Series) |
+| `8K` | Set the memory size to 8K words |
+| `12K` | Set the memory size to 12K words |
+| `16K` | Set the memory size to 16K words |
+| `24K` | Set the memory size to 24K words |
+| `32K` | Set the memory size to 32K words; default |
+| `64K` | Set the memory size to 64K words |
+| `128K` | Set the memory size to 128K words |
+| `256K` | Set the memory size to 256K words |
+| `512K` | Set the memory size to 512K words |
+| `1024K` | Set the memory size to 1024K words |
+| `EAU` | Enable the Extended Arithmetic Unit instructions |
+| `NOEAU` | Disable the Extended Arithmetic Unit instructions; default |
+| `FP` | Enable the Floating Point instructions |
+| `NOFP` | Disable the Floating Point instructions; default |
+| `IOP` | Enable the 2000/Access I/O Processor instructions |
+| `NOIOP` | Disable the 2000/Access I/O Processor; default |
+| `DMS` | Enable the Dynamic Mapping System instructions |
+| `NODMS` | Disable the Dynamic Mapping System instructions; default |
+| `FFP` | Enable the Fast FORTRAN Processor instructions |
+| `NOFFP` | Disable Fast FORTRAN Processor instructions; default |
+| `DBI` | Enable the Double Integer Instructions |
+| `NODBI` | Disable the Double Integer Instructions; default |
+| `EMA` | Enable the Extended Memory Array instructions |
+| `NOEMA` | Disable the Extended Memory Array instructions; default |
+| `VMAOS` | Enable the Virtual Memory and Operating System instructions |
+| `NOVMAOS` | Disable the Virtual Memory and Operating System instructions; default |
+| `VIS` | Enable the Vector Instruction Set |
+| `NOVIS` | Disable the Vector Instruction Set; default |
+| `SIGNAL` | Enable the SIGNAL/1000 instructions |
+| `NOSIGNAL` | Disable the SIGNAL/1000 Instructions; default |
+| `LOADERENABLE` | Enable access to the protected binary loader |
+| `LOADERDISABLE` | Disable access to the protected binary loader; default |
+| `ROMS=\<rom-list\>` | Change the set of installed boot loader ROMs |
+| `IDLE` | Enable idle detection |
+| `NOIDLE` | Disable idle detection; default |
+| `STOP=\<option\>\[;\<option\]` | Enable simulation stops |
+| `NOSTOP=\<option\>\[;\<option\]` | Disable simulation stops; default |
+| `INDIR=\<limit\>` | Set the maximum indirect addressing chain length; default is 16 |
+| `EXEC=\<match\>\[;\<mask\>\]` | Enable execution tracing of matching instructions |
+| `NOEXEC` | Disable execution tracing; default |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
 
 The abbreviated ***SET CPU 1000*** and ***SET CPU 21MX*** commands
 configure the CPU models as 1000 E-Series and 1000 M-Series machines,
@@ -1432,55 +1432,55 @@ lost.
 The following standard microcode is automatically enabled when the
 applicable 1000-series CPU is selected:
 
-| ***Instruction Set***      | ***Applicable to*** |
+| Instruction Set | Applicable to |
 |----------------------------|---------------------|
-| Extended Instruction Group | 1000 M/E/F-Series   |
-| Floating-Point Processor   | 1000 F-Series       |
-| Scientific Instruction Set | 1000 F-Series       |
+| Extended Instruction Group | 1000 M/E/F-Series |
+| Floating-Point Processor | 1000 F-Series |
+| Scientific Instruction Set | 1000 F-Series |
 
 The 1000 E/F-Series microcode self-test diagnostics are not simulated.
 
-The ***EAU*** option simulates the installation of the 12579A Extended
+The `EAU` option simulates the installation of the 12579A Extended
 Arithmetic Unit providing hardware multiply, divide, double load, double
 store, and 32-bit rotate and shift instructions. EAU instructions are
 standard equipment on the 2100 and 1000 CPUs.
 
-The ***FP*** option simulates the installation of the 12901A Floating
+The `FP` option simulates the installation of the 12901A Floating
 Point firmware ROMs, providing single-precision (two-word)
 floating-point add, subtract, multiply, divide, fix, and float
 instructions. FP instructions are standard equipment on 1000 CPUs.
 
-The ***IOP*** option simulates the installation of the 13206A (2100),
+The `IOP` option simulates the installation of the 13206A (2100),
 13207A (1000 M-Series), or 22702A (1000 E-Series) 2000/Access I/O
 Processor firmware ROMs. These instructions accelerate certain common
 operations of the I/O processor for the HP 2000/Access Time-Shared BASIC
 operating system.
 
-The ***DMS*** option simulates the installation of the 12731A Memory
+The `DMS` option simulates the installation of the 12731A Memory
 Expansion Module and the 12976B (1000 M-Series) or 13307B (1000
 E/F-Series) Dynamic Mapping System firmware ROMs, providing 38
 instructions that control the MEM to expand the basic 32K-word logical
 address space to a 1024K-word physical space. The MEM is automatically
 enabled or disabled with the DMS instruction set.
 
-The ***FFP*** option simulates the installation of the 12907A (2100),
+The `FFP` option simulates the installation of the 12907A (2100),
 12977B (1000 M-Series), or 13306B (1000 E-Series) Fast FORTRAN Processor
 firmware ROMs, providing several frequently used FORTRAN operations and
 extended-precision (three-word) floating-point instructions.
 
-The ***DBI*** option simulates the installation of the 93585A Double
+The `DBI` option simulates the installation of the 93585A Double
 Integer Instructions firmware ROMs. A product of the HP “specials
 group,” the microcode added twelve 32-bit integer instructions to the
 1000 E-Series repertoire. DBI instructions are standard equipment on the
 1000 F-Series CPU.
 
-The ***EMA*** option simulates the installation of the 92067A Extended
+The `EMA` option simulates the installation of the 92067A Extended
 Memory Area firmware ROMs. The RTE-IV operating system introduced the
 EMA instructions. EMA provided a mapped data area up to one megaword in
 size. These three instructions accelerated data accesses to variables
 stored in EMA partitions.
 
-The ***VMAOS*** option simulates the installation of the 92084A Virtual
+The `VMAOS` option simulates the installation of the 92084A Virtual
 Memory and Operating System firmware ROMs. The RTE-6/VM operating system
 introduced Virtual Memory Area (VMA) instructions — a superset of the
 RTE-IV EMA instructions — and a set of OS instructions that accelerate
@@ -1496,12 +1496,12 @@ an E/F-Series. Entering the command ***SET CPU DEBUG=NOOS*** will return
 a firmware revision code of 0 to RTE, which will permit the use of the
 software replacements.
 
-The ***VIS*** option simulates the installation of the 12824A (for
+The `VIS` option simulates the installation of the 12824A (for
 RTE-IVB) or 12829A (for RTE-6/VM) Vector Instruction Set ROMs, providing
 vector arithmetic instructions using single- and double-precision
 values. Vectors may reside either in EMA/VMA or in regular memory.
 
-The ***SIGNAL*** option simulates the installation of the 92835A
+The `SIGNAL` option simulates the installation of the 92835A
 SIGNAL/1000 firmware ROMs. These instructions provide fast Fourier
 transforms and complex arithmetic. They use the F-Series floating-point
 processor and the Vector Instruction Set.
@@ -1766,15 +1766,15 @@ fine-tune the desired feature set.
 
 The CPU configuration may be displayed with the following commands:
 
-| ***Command***       | ***Action***                                        |
+| Command | Action |
 |---------------------|-----------------------------------------------------|
-| **SHOW CPU**        | Display the device configuration                    |
-| **SHOW CPU ROMS**   | Display the set of installed boot loader ROMs       |
-| **SHOW CPU IOCAGE** | Display the set of installed I/O interfaces         |
-| **SHOW CPU STOPS**  | Display the enabled simulation stops                |
-| **SHOW CPU INDIR**  | Display the indirect chain length limit             |
-| **SHOW CPU EXEC**   | Display the matching criteria for execution tracing |
-| **SHOW CPU SPEED**  | Display the current simulation speed                |
+| `SHOW CPU` | Display the device configuration |
+| `SHOW CPU ROMS` | Display the set of installed boot loader ROMs |
+| `SHOW CPU IOCAGE` | Display the set of installed I/O interfaces |
+| `SHOW CPU STOPS` | Display the enabled simulation stops |
+| `SHOW CPU INDIR` | Display the indirect chain length limit |
+| `SHOW CPU EXEC` | Display the matching criteria for execution tracing |
+| `SHOW CPU SPEED` | Display the current simulation speed |
 
 The current simulation speed, expressed as a multiple of the speed of a
 real HP 1000 E-Series, may be obtained with the ***SHOW CPU SPEED***
@@ -1827,8 +1827,8 @@ interfaces, and begin execution.
 In simulation, the ***LOAD CPU*** command implements the IBL facility.
 The following set of ROMs is initially installed in the CPU:
 
-| ***ROM Number*** | ***Product Number*** | ***Boot Device Description*** | ***Boot Device*** |
-|:--:|:--:|----|:--:|
+| ROM Number | Product Number | Boot Device Description | Boot Device |
+| :--: | :--: | ---- | :--: |
 | 00 | 12992K | 2748B paper tape reader | PTR |
 | 01 | 12992A | 7900 or 2883 disc | DPC or DQC |
 | 10 | 12992D | 7970B or 7970E magnetic tape | MSC |
@@ -1869,13 +1869,13 @@ into the socket corresponding to the position of the device name in the
 list. Sockets may be left empty by omitting the corresponding device
 name or by supplying fewer than four device names. For example:
 
-| ***Command*** | ***Action*** |
+| Command | Action |
 |----|----|
-| **SET CPU ROMS=** | Remove ROMs from sockets 0-3 |
-| **SET CPU ROMS=PTR** | Install the PTR ROM in socket 0; leave sockets 1-3 empty |
-| **SET CPU ROMS=DS;MS** | Install the DS ROM in 0 and the MS ROM in 1; leave 2 and 3 empty |
-| **SET CPU ROMS=;;DPC** | Install the DPC ROM in 2; leave 0, 1, and 3 empty |
-| **SET CPU ROMS=DQC;;;DA** | Install the DQC ROM in 0 and the DA ROM in 3; leave 1 and 2 empty |
+| `SET CPU ROMS=` | Remove ROMs from sockets 0-3 |
+| `SET CPU ROMS=PTR` | Install the PTR ROM in socket 0; leave sockets 1-3 empty |
+| `SET CPU ROMS=DS;MS` | Install the DS ROM in 0 and the MS ROM in 1; leave 2 and 3 empty |
+| `SET CPU ROMS=;;DPC` | Install the DPC ROM in 2; leave 0, 1, and 3 empty |
+| `SET CPU ROMS=DQC;;;DA` | Install the DQC ROM in 0 and the DA ROM in 3; leave 1 and 2 empty |
 
 The current CPU model must be a 1000-series machine, and each device
 must be bootable and have a loader ROM assigned, or the command will be
@@ -1945,12 +1945,12 @@ disable all of the configurable stops.
 
 These options control the simulation stop conditions:
 
-| ***Option*** | ***Stop Condition***                               |
+| Option | Stop Condition |
 |--------------|----------------------------------------------------|
-| **UNIMPL**   | Stop when an unimplemented instruction is executed |
-| **UNDEF**    | Stop when an undefined instruction is executed     |
-| **UNSC**     | Stop when an unused select code is referenced      |
-| **IOERR**    | Stop when an unreported I/O error occurs           |
+| `UNIMPL` | Stop when an unimplemented instruction is executed |
+| `UNDEF` | Stop when an undefined instruction is executed |
+| `UNSC` | Stop when an unused select code is referenced |
+| `IOERR` | Stop when an unreported I/O error occurs |
 
 Setting the ***UNIMPL*** option stops the simulator if execution of an
 unimplemented instruction is attempted. An instruction is unimplemented
@@ -2019,12 +2019,12 @@ specifying the ***–B*** switch with any of the preceding commands will
 resume execution while bypassing the stop for the current instruction.
 Bypassing a stop has the following effect:
 
-| ***Option*** | ***Bypass Action***                                          |
+| Option | Bypass Action |
 |--------------|--------------------------------------------------------------|
-| **UNIMPL**   | Resume execution with the instruction ignored                |
-| **UNDEF**    | Resume execution with the instruction decoded as in hardware |
-| **UNSC**     | Resume execution with the I/O instruction ignored            |
-| **IOERR**    | Resume execution with the action as in hardware              |
+| `UNIMPL` | Resume execution with the instruction ignored |
+| `UNDEF` | Resume execution with the instruction decoded as in hardware |
+| `UNSC` | Resume execution with the I/O instruction ignored |
+| `IOERR` | Resume execution with the action as in hardware |
 
 In addition to these configurable stops, an unconditional simulation
 stop will occur if an indirect addressing chain exceeds the maximum
@@ -2085,14 +2085,14 @@ trap cell instruction is executed.
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                 |
+| Option | Reporting Level |
 |--------------|---------------------------------------|
-| **INSTR**    | Machine instructions executed         |
-| **DATA**     | Memory data accesses                  |
-| **FETCH**    | Memory instruction fetches            |
-| **REG**      | Register values                       |
-| **OPND**     | Memory operand values                 |
-| **EXEC**     | Matching instruction execution states |
+| `INSTR` | Machine instructions executed |
+| `DATA` | Memory data accesses |
+| `FETCH` | Memory instruction fetches |
+| `REG` | Register values |
+| `OPND` | Memory operand values |
+| `EXEC` | Matching instruction execution states |
 
 A section of an example trace is:
 
@@ -2276,23 +2276,23 @@ log file size.
 The CPU state contains the registers visible to the programmer and the
 interrupt and dynamic mapping system control registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Read-Only*** | ***Description*** |
-|----|:--:|:--:|:--:|:--:|----|
-| **P** | 15 | 8 |  |  | Program Counter |
-| **A** | 16 | 8 | ✔ |  | Accumulator A |
-| **B** | 16 | 8 | ✔ |  | Accumulator B |
-| **M** | 15 | 8 |  |  | Memory Address Register |
-| **T** | 16 | 8 | ✔ | ✔ | Memory Data Register |
-| **X** | 16 | 8 | ✔ |  | Index Register X |
-| **Y** | 16 | 8 | ✔ |  | Index Register Y |
-| **S** | 16 | 8 | ✔ |  | Display Register |
-| **E** | 1 | 2 |  |  | Extend Register |
-| **O** | 1 | 2 |  |  | Overflow Register |
-| **CIR** | 6 | 8 |  |  | Central Interrupt Register |
-| **INTSYS** | 1 | 2 |  |  | Interrupt System Enabled |
-| **INTEN** | 1 | 2 |  |  | Interrupt Recognition Enabled |
-| **IOPSP** | 16 | 8 |  |  | I/O Processor Stack Pointer |
-| **PCQ \[0:63\]** | 15 | 8 |  | ✔ | Program Counter Queue |
+| Name | Size | Radix | Symbolic | Read-Only | Description |
+| ---- | :--: | :--: | :--: | :--: | ---- |
+| P | 15 | 8 |  |  | Program Counter |
+| A | 16 | 8 | ✔ |  | Accumulator A |
+| B | 16 | 8 | ✔ |  | Accumulator B |
+| M | 15 | 8 |  |  | Memory Address Register |
+| T | 16 | 8 | ✔ | ✔ | Memory Data Register |
+| X | 16 | 8 | ✔ |  | Index Register X |
+| Y | 16 | 8 | ✔ |  | Index Register Y |
+| S | 16 | 8 | ✔ |  | Display Register |
+| E | 1 | 2 |  |  | Extend Register |
+| O | 1 | 2 |  |  | Overflow Register |
+| CIR | 6 | 8 |  |  | Central Interrupt Register |
+| INTSYS | 1 | 2 |  |  | Interrupt System Enabled |
+| INTEN | 1 | 2 |  |  | Interrupt Recognition Enabled |
+| IOPSP | 16 | 8 |  |  | I/O Processor Stack Pointer |
+| PCQ \[0:63\] | 15 | 8 |  | ✔ | Program Counter Queue |
 
 The A, B, T, X, Y, and S registers may be examined or deposited using
 any of the modes described in the Symbolic Display and Entry section
@@ -2323,23 +2323,23 @@ The device names are ***DMA1*** for the 12607B, ***DMA1*** and
 ***DMA2*** for the 12578A and 12895A, and ***DCPC1*** and ***DCPC2***
 for the 12897B. Device options that may be specified are:
 
-| ***Option***         | ***Action***               |
+| Option | Action |
 |----------------------|----------------------------|
-| **DEBUG=\<option\>** | Enable tracing             |
-| **NODEBUG**          | Disable tracing; default   |
-| **ENABLED**          | Enable the device; default |
-| **DISABLED**         | Disable the device         |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMD**      | Channel commands                                     |
-| **CSRW**     | Control, status, read, and write actions             |
-| **SR**       | Service requests received                            |
-| **DATA**     | Direct memory data accesses                          |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMD` | Channel commands |
+| `CSRW` | Control, status, read, and write actions |
+| `SR` | Service requests received |
+| `DATA` | Direct memory data accesses |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMD*** option traces the initiation and completion of channel
 transfers. The ***CSRW*** option traces control, status, read, and write
@@ -2373,18 +2373,18 @@ Memory map (port A/port B/disabled)
 
 Each DMA/DCPC channel state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Description*** |
-|----|:--:|:--:|:--:|----|
-| **XFR** | 6 | 8 |  | Channel is active if \> 0 |
-| **CTL** | 1 | 2 |  | Channel interrupt is enabled |
-| **FLG** | 1 | 2 |  | Channel is ready |
-| **FBF** | 1 | 2 |  | Channel is ready (buffer) |
-| **CTL2** | 1 | 2 |  | Command word 2/3 selector |
-| **CW1** | 16 | 8 |  | Command word 1 |
-| **CW2** | 16 | 8 |  | Command word 2 |
-| **CW3** | 16 | 8 |  | Command word 3 |
-| **BYTE** | 1 | 2 |  | Byte-packing register is occupied |
-| **PACKER** | 8 | 8 | ✔ | Byte-packing register |
+| Name | Size | Radix | Symbolic | Description |
+| ---- | :--: | :--: | :--: | ---- |
+| XFR | 6 | 8 |  | Channel is active if \> 0 |
+| CTL | 1 | 2 |  | Channel interrupt is enabled |
+| FLG | 1 | 2 |  | Channel is ready |
+| FBF | 1 | 2 |  | Channel is ready (buffer) |
+| CTL2 | 1 | 2 |  | Command word 2/3 selector |
+| CW1 | 16 | 8 |  | Command word 1 |
+| CW2 | 16 | 8 |  | Command word 2 |
+| CW3 | 16 | 8 |  | Command word 3 |
+| BYTE | 1 | 2 |  | Byte-packing register is occupied |
+| PACKER | 8 | 8 | ✔ | Byte-packing register |
 
 The BYTE and PACKER registers are applicable only to the 12578A
 controller. The PACKER register defaults to single-character format
@@ -2408,16 +2408,16 @@ standard memory protection for the 2100.
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action***               |
+| Option | Action |
 |--------------|----------------------------|
-| **JSBIN**    | Install jumper W5; default |
-| **JSBOUT**   | Remove jumper W5           |
-| **INTIN**    | Install jumper W6; default |
-| **INTOUT**   | Remove jumper W6           |
-| **SEL1IN**   | Install jumper W7          |
-| **SEL1OUT**  | Remove jumper W7; default  |
-| **ENABLED**  | Enable the device; default |
-| **DISABLED** | Disable the device         |
+| `JSBIN` | Install jumper W5; default |
+| `JSBOUT` | Remove jumper W5 |
+| `INTIN` | Install jumper W6; default |
+| `INTOUT` | Remove jumper W6 |
+| `SEL1IN` | Install jumper W7 |
+| `SEL1OUT` | Remove jumper W7; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 W5 determines whether JSB instructions referencing memory locations 0
 and 1 are legal (installed) or illegal (removed). W6 controls whether
@@ -2436,9 +2436,9 @@ Violation Register, but the offending program is allowed to continue.
 When a debug log has been established, tracing may be configured by
 specifying the reporting level option:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***IOBUS*** option traces the I/O backplane signals and data
 received and returned by the device.
@@ -2454,15 +2454,15 @@ Examples of the trace formats follow:
 
 The Memory Protect state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***                    |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|--------------------------------------|
-| **CTL**    |     1      |      2      | Control flip-flop                    |
-| **FLG**    |     1      |      2      | Flag flip-flop                       |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop                |
-| **FR**     |     15     |      8      | Fence register                       |
-| **VR**     |     16     |      8      | Violation register                   |
-| **EVR**    |     1      |      2      | Enable violation register flip-flop  |
-| **MEV**    |     1      |      2      | Memory expansion violation flip-flop |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `FR` | 15 | 8 | Fence register |
+| `VR` | 16 | 8 | Violation register |
+| `EVR` | 1 | 2 | Enable violation register flip-flop |
+| `MEV` | 1 | 2 | Memory expansion violation flip-flop |
 
 ## 12731A Memory Expansion Module
 
@@ -2482,16 +2482,16 @@ The MEM simulator is enabled and disabled by the ***SET CPU DMS*** and
 ***SET CPU NODMS*** commands, rather than the ***SET MEM ENABLED*** and
 ***DISABLED*** commands. The MEM state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description*** |
-|----|:--:|:--:|----|
-| **ENABLED** | 1 | 2 | Memory expansion is enabled |
-| **CURMAP** | 1 | 2 | The user map is currently selected |
-| **STATUS** | 16 | 8 | Status register |
-| **VIOL** | 16 | 8 | Violation register |
-| **SMAP \[0:31\]** | 16 | 8 | System map registers |
-| **UMAP \[0:31\]** | 16 | 8 | User map registers |
-| **PAMAP \[0:31\]** | 16 | 8 | DCPC port A registers |
-| **PBMAP \[0:31\]** | 16 | 8 | DCPC port B registers |
+| Name | Size | Radix | Description |
+| ---- | :--: | :--: | ---- |
+| ENABLED | 1 | 2 | Memory expansion is enabled |
+| CURMAP | 1 | 2 | The user map is currently selected |
+| STATUS | 16 | 8 | Status register |
+| VIOL | 16 | 8 | Violation register |
+| SMAP \[0:31\] | 16 | 8 | System map registers |
+| UMAP \[0:31\] | 16 | 8 | User map registers |
+| PAMAP \[0:31\] | 16 | 8 | DCPC port A registers |
+| PBMAP \[0:31\] | 16 | 8 | DCPC port B registers |
 
 # General I/O Device Simulations
 
@@ -2560,13 +2560,13 @@ incomplete if the problem is uncorrectable.
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action***                                      |
+| Option | Action |
 |--------------|---------------------------------------------------|
-| **FASTTIME** | Use optimized timing; default                     |
-| **REALTIME** | Use realistic timing                              |
-| **SC=\<n\>** | Set the interface card select code; default is 11 |
-| **ENABLED**  | Enable the device; default                        |
-| **DISABLED** | Disable the device                                |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `SC=\<n\>` | Set the interface card select code; default is 11 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The interface supports realistic and optimized timing modes. Realistic
 timing accurately models the 10 character per second print and punch
@@ -2586,21 +2586,21 @@ which defaults to CTRL+E.
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***     | ***Action***                              |
+| Command | Action |
 |-------------------|-------------------------------------------|
-| **SHOW TTY**      | Display the device and unit configuration |
-| **SHOW TTY MODE** | Display the timing mode                   |
+| `SHOW TTY` | Display the device and unit configuration |
+| `SHOW TTY MODE` | Display the timing mode |
 
 Unit options that may be specified for the keyboard and printer are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **UC** | Upshift lowercase characters to uppercase; default |
-| **7B** | Transfer characters with the high-order bit cleared |
-| **7P** | Transfer characters with the high-order bit cleared, non-printing suppressed |
-| **8B** | Transfer characters without changing |
-| **AUTOLF** | Enable automatic output of line-feed characters |
-| **NOAUTOLF** | Disable automatic output of line-feed characters; default |
+| `UC` | Upshift lowercase characters to uppercase; default |
+| `7B` | Transfer characters with the high-order bit cleared |
+| `7P` | Transfer characters with the high-order bit cleared, non-printing suppressed |
+| `8B` | Transfer characters without changing |
+| `AUTOLF` | Enable automatic output of line-feed characters |
+| `NOAUTOLF` | Disable automatic output of line-feed characters; default |
 
 The printer may be set to mode ***UC***, ***7B***, ***7P***, or
 ***8B***. The set of non-printing characters allowed by mode ***7P*** is
@@ -2619,13 +2619,13 @@ the AUTO LF latching key on an HP 264x terminal.
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CSRW**     | Interface control, status, read, and write actions   |
-| **SERV**     | Printer and punch unit service events                |
-| **PSERV**    | Keyboard unit service events (periodic)              |
-| **XFER**     | Data receptions and transmissions                    |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CSRW` | Interface control, status, read, and write actions |
+| `SERV` | Printer and punch unit service events |
+| `PSERV` | Keyboard unit service events (periodic) |
+| `XFER` | Data receptions and transmissions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CSRW*** option traces control, status, read, and write commands
 sent to the interface. The ***SERV*** option traces print and punch
@@ -2654,17 +2654,17 @@ Examples of the trace formats follow:
 
 The teleprinter interface state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***                 |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|-----------------------------------|
-| **BUF**    |     8      |      8      | Output data buffer                |
-| **MODE**   |     3      |      2      | Control word bits 14-12           |
-| **CTL**    |     1      |      2      | Control flip-flop                 |
-| **FLG**    |     1      |      2      | Flag flip-flop                    |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop             |
-| **KPOS**   |     32     |     10      | Number of characters input        |
-| **TPOS**   |     32     |     10      | Number of characters printed      |
-| **PPOS**   |     32     |     10      | Position in the punch output file |
-| **TTIME**  |     24     |     10      | Fast print/punch time             |
+| `BUF` | 8 | 8 | Output data buffer |
+| `MODE` | 3 | 2 | Control word bits 14-12 |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `KPOS` | 32 | 10 | Number of characters input |
+| `TPOS` | 32 | 10 | Number of characters printed |
+| `PPOS` | 32 | 10 | Position in the punch output file |
+| `TTIME` | 24 | 10 | Fast print/punch time |
 
 ## 12539C Time Base Generator
 
@@ -2677,17 +2677,17 @@ second time without acknowledgement.
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action***                                      |
+| Option | Action |
 |--------------|---------------------------------------------------|
-| **CALTIME**  | Use calibrated timing; default                    |
-| **REALTIME** | Use realistic timing                              |
-| **W1A**      | Install jumper W1 in the A position; default      |
-| **W1B**      | Install jumper W1 in the B position               |
-| **W2A**      | Install jumper W2 in the A position; default      |
-| **W2B**      | Install jumper W2 in the B position               |
-| **SC=\<n\>** | Set the interface card select code; default is 13 |
-| **ENABLED**  | Enable the device; default                        |
-| **DISABLED** | Disable the device                                |
+| `CALTIME` | Use calibrated timing; default |
+| `REALTIME` | Use realistic timing |
+| `W1A` | Install jumper W1 in the A position; default |
+| `W1B` | Install jumper W1 in the B position |
+| `W2A` | Install jumper W2 in the A position; default |
+| `W2B` | Install jumper W2 in the B position |
+| `SC=\<n\>` | Set the interface card select code; default is 13 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Calibrated timing aligns the simulated clock periods with the clock on
 the host system. When calibrated, each of the programmable periods will
@@ -2710,11 +2710,11 @@ milliseconds to facilitate testing with the diagnostic.
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CSRW**     | Interface control, status, read, and write actions   |
-| **PSERV**    | Clock unit service events (periodic)                 |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CSRW` | Interface control, status, read, and write actions |
+| `PSERV` | Clock unit service events (periodic) |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CSRW*** option traces control, status, read, and write commands
 sent to the interface. The ***PSERV*** option traces event service
@@ -2732,14 +2732,14 @@ Examples of the trace formats follow:
 
 The Time Base Generator state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***                      |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|----------------------------------------|
-| **SEL**    |     3      |      8      | Time base selector                     |
-| **CTR**    |     14     |     10      | Prescale counter for \< 1 Hz operation |
-| **CTL**    |     1      |      2      | Control flip-flop                      |
-| **FLG**    |     1      |      2      | Flag flip-flop                         |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop                  |
-| **ERR**    |     1      |      2      | Error flip-flop                        |
+| `SEL` | 3 | 8 | Time base selector |
+| `CTR` | 14 | 10 | Prescale counter for \< 1 Hz operation |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `ERR` | 1 | 2 | Error flip-flop |
 
 ## 12566B Microcircuit Interface
 
@@ -2761,28 +2761,28 @@ disabled by default, as they are only useful when running diagnostics.
 
 Device options that may be specified are:
 
-| ***Option***   | ***Action***                                               |
+| Option | Action |
 |----------------|------------------------------------------------------------|
-| **DEVICE**     | Remove the diagnostic loopback connector; default          |
-| **DIAGNOSTIC** | Install the diagnostic loopback connector                  |
-| **SC=\<n\>**   | Set the interface card select code; defaults are 44 and 45 |
-| **ENABLED**    | Enable the device                                          |
-| **DISABLED**   | Disable the device; default                                |
+| `DEVICE` | Remove the diagnostic loopback connector; default |
+| `DIAGNOSTIC` | Install the diagnostic loopback connector |
+| `SC=\<n\>` | Set the interface card select code; defaults are 44 and 45 |
+| `ENABLED` | Enable the device |
+| `DISABLED` | Disable the device; default |
 
 The ***DIAGNOSTIC*** option simulates the installation of the HP
 1251-0332 diagnostic test (loopback) connector in place of the device
 cable. It also configures hardware jumpers W1-W3 on the interface as
 required by the following diagnostics:
 
-| ***W1*** | ***W2*** | ***W3*** | ***DSN***  | ***Diagnostic***             |
+| W1 | W2 | W3 | DSN | Diagnostic |
 |:--------:|:--------:|:--------:|:----------:|------------------------------|
-|  **C**   |  **B**   |  **B**   | **143300** | General Purpose Register     |
-|  **C**   |  **B**   |  **B**   | **141203** | I/O Instruction Group        |
-|  **C**   |  **B**   |  **B**   | **102103** | Memory Expansion Unit        |
-|  **C**   |  **B**   |  **B**   | **101220** | DMA/DCPC for 2100/1000       |
-|  **B**   |  **A**   |  **A**   |   **—**    | DMA for 2100 (HP 24195)      |
-|  **B**   |  **A**   |  **A**   | **101105** | DMA for 2114/2115/2116       |
-|  **B**   |  **C**   |  **B**   |   **—**    | DMA for 2115/2116 (HP 24185) |
+| `C` | `B` | `B` | `143300` | General Purpose Register |
+| `C` | `B` | `B` | `141203` | I/O Instruction Group |
+| `C` | `B` | `B` | `102103` | Memory Expansion Unit |
+| `C` | `B` | `B` | `101220` | DMA/DCPC for 2100/1000 |
+| `B` | `A` | `A` | — | DMA for 2100 (HP 24195) |
+| `B` | `A` | `A` | `101105` | DMA for 2114/2115/2116 |
+| `B` | `C` | `B` | — | DMA for 2115/2116 (HP 24185) |
 
 Setting the ***DEVICE*** option removes the loopback connector and
 leaves the device interface disconnected.
@@ -2790,10 +2790,10 @@ leaves the device interface disconnected.
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **XFER**     | Data transmissions or receptions                     |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `XFER` | Data transmissions or receptions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***XFER*** option traces the words sent or received by the interface
 during diagnostic operation. The ***IOBUS*** option traces the I/O
@@ -2809,14 +2809,14 @@ Examples of the trace formats follow:
 
 The interface state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***     |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|-----------------------|
-| **IN**     |     16     |      8      | Input data register   |
-| **OUT**    |     16     |      8      | Output data register  |
-| **CTL**    |     1      |      2      | Control flip-flop     |
-| **FLG**    |     1      |      2      | Flag flip-flop        |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop |
-| **CMD**    |     1      |      2      | Command flip-flop     |
+| `IN` | 16 | 8 | Input data register |
+| `OUT` | 16 | 8 | Output data register |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `CMD` | 1 | 2 | Command flip-flop |
 
 ## 12597A-002 Tape Reader Interface with One 2748 Paper Tape Reader
 
@@ -2857,15 +2857,15 @@ incomplete if the problem is uncorrectable.
 
 Device options that may be specified are:
 
-| ***Option***   | ***Action***                                           |
+| Option | Action |
 |----------------|--------------------------------------------------------|
-| **READER**     | Use a normal paper tape; default                       |
-| **DIAGNOSTIC** | Use a continuous paper tape loop or loopback connector |
-| **FASTTIME**   | Use optimized timing; default                          |
-| **REALTIME**   | Use realistic timing                                   |
-| **SC=\<n\>**   | Set the interface card select code; default is 10      |
-| **ENABLED**    | Enable the device; default                             |
-| **DISABLED**   | Disable the device                                     |
+| `READER` | Use a normal paper tape; default |
+| `DIAGNOSTIC` | Use a continuous paper tape loop or loopback connector |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `SC=\<n\>` | Set the interface card select code; default is 10 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The simulator provides two diagnostic modes. If a paper tape image file
 is not attached, then the ***DIAGNOSTIC*** option simulates the
@@ -2906,8 +2906,8 @@ the front panel, and, for the ***BOOT*** command, pressing the INTERNAL
 PRESET, EXTERNAL PRESET, and RUN buttons to begin execution. Before
 execution, the S register must be set as follows:
 
-| ***15*** | ***14*** | ***13*** | ***12*** | ***11*** | ***10*** | ***9*** | ***8*** | ***7*** | ***6*** | ***5*** | ***4*** | ***3*** | ***2*** | ***1*** | ***0*** |
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
 | ● | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ● |
 
 If bit 15 is set to 1, the loader will compare the absolute program on
@@ -2998,11 +2998,11 @@ Loader execution ends with one of the following halt instructions:
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **SERV**     | Reader unit service events                           |
-| **XFER**     | Data bytes read from the tape                        |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `SERV` | Reader unit service events |
+| `XFER` | Data bytes read from the tape |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***SERV*** option traces reader event service scheduling and
 entries. The ***XFER*** option traces the bytes received from the
@@ -3021,15 +3021,15 @@ Examples of the trace formats follow:
 
 The paper tape reader state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***              |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|--------------------------------|
-| **BUF**    |     8      |      8      | Input data buffer              |
-| **CTL**    |     1      |      2      | Control flip-flop              |
-| **FLG**    |     1      |      2      | Flag flip-flop                 |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop          |
-| **TRLLIM** |     8      |     10      | Trailing feed frame limit      |
-| **POS**    |     32     |     10      | Paper tape image file position |
-| **TIME**   |     24     |     10      | Fast read time                 |
+| `BUF` | 8 | 8 | Input data buffer |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `TRLLIM` | 8 | 10 | Trailing feed frame limit |
+| `POS` | 32 | 10 | Paper tape image file position |
+| `TIME` | 24 | 10 | Fast read time |
 
 The TRLLIM register specifies the number of feed frames (zero bytes) to
 supply as paper tape trailer when the end of the tape image file is
@@ -3070,15 +3070,15 @@ incomplete if the problem is uncorrectable.
 
 Device options that may be specified are:
 
-| ***Option***   | ***Action***                                      |
+| Option | Action |
 |----------------|---------------------------------------------------|
-| **PUNCH**      | Connect to the paper tape punch; default          |
-| **DIAGNOSTIC** | Use a loopback connector                          |
-| **FASTTIME**   | Use optimized timing; default                     |
-| **REALTIME**   | Use realistic timing                              |
-| **SC=\<n\>**   | Set the interface card select code; default is 12 |
-| **ENABLED**    | Enable the device; default                        |
-| **DISABLED**   | Disable the device                                |
+| `PUNCH` | Connect to the paper tape punch; default |
+| `DIAGNOSTIC` | Use a loopback connector |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `SC=\<n\>` | Set the interface card select code; default is 12 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Setting the ***DIAGNOSTIC*** option simulates the installation of the HP
 1251-0332 diagnostic test (loopback) connector in place of the punch
@@ -3102,12 +3102,12 @@ rapid punching operations. Resetting the device with the ***RESET –P***
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CSRW**     | Interface control, status, read, and write actions   |
-| **SERV**     | Punch unit service events                            |
-| **XFER**     | Data bytes written to the tape                       |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CSRW` | Interface control, status, read, and write actions |
+| `SERV` | Punch unit service events |
+| `XFER` | Data bytes written to the tape |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CSRW*** option traces control, status, read, and write commands
 sent to the interface. The ***SERV*** option traces punch event service
@@ -3128,14 +3128,14 @@ Examples of the trace formats follow:
 
 The paper tape punch state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***              |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|--------------------------------|
-| **BUF**    |     8      |      8      | Output data buffer             |
-| **CTL**    |     1      |      2      | Control flip-flop              |
-| **FLG**    |     1      |      2      | Flag flip-flop                 |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop          |
-| **POS**    |     32     |     10      | Paper tape image file position |
-| **TIME**   |     24     |     10      | Fast punch time                |
+| `BUF` | 8 | 8 | Output data buffer |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `POS` | 32 | 10 | Paper tape image file position |
+| `TIME` | 24 | 10 | Fast punch time |
 
 ## 12620A/12936A Privileged Interrupt Fence
 
@@ -3155,30 +3155,30 @@ for DOS. They behave quite differently and are not interchangeable.
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                      |
+| Option | Action |
 |----------------------|---------------------------------------------------|
-| **12620A**           | Use a 12620A RTE fence; default                   |
-| **12936A**           | Use a 12936A DOS fence                            |
-| **SC=\<n\>**         | Set the interface card select code; default is 37 |
-| **DEBUG=\<option\>** | Enable tracing                                    |
-| **NODEBUG**          | Disable tracing; default                          |
-| **ENABLED**          | Enable the device; default                        |
-| **DISABLED**         | Disable the device                                |
+| `12620A` | Use a 12620A RTE fence; default |
+| `12936A` | Use a 12936A DOS fence |
+| `SC=\<n\>` | Set the interface card select code; default is 37 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***      | ***Action***                    |
+| Command | Action |
 |--------------------|---------------------------------|
-| **SHOW PIF TYPE**  | Display the current fence type  |
-| **SHOW PIF DEBUG** | Display the current debug state |
+| `SHOW PIF TYPE` | Display the current fence type |
+| `SHOW PIF DEBUG` | Display the current debug state |
 
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMD**      | Interface commands                                   |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMD` | Interface commands |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMD*** option traces commands executed by the interface. The
 ***IOBUS*** option traces the I/O backplane signals and data received
@@ -3199,11 +3199,11 @@ be enabled for the minimum time necessary.
 
 The Privileged Interrupt Fence state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description***     |
+| Name | Size | Radix | Description |
 |------------|:----------:|:-----------:|-----------------------|
-| **CTL**    |     1      |      2      | Control flip-flop     |
-| **FLG**    |     1      |      2      | Flag flip-flop        |
-| **FBF**    |     1      |      2      | Flag Buffer flip-flop |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag Buffer flip-flop |
 
 ## 12653A Line Printer Interface with One 2767 Line Printer
 
@@ -3250,17 +3250,17 @@ SET LPS \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                      |
+| Option | Action |
 |----------------------|---------------------------------------------------|
-| **FASTTIME**         | Use optimized timing; default                     |
-| **REALTIME**         | Use realistic timing                              |
-| **PRINTER**          | Install the standard printer cable; default       |
-| **DIAGNOSTIC**       | Install the diagnostic loopback connector         |
-| **SC=\<n\>**         | Set the interface card select code; default is 14 |
-| **DEBUG=\<option\>** | Enable tracing                                    |
-| **NODEBUG**          | Disable tracing; default                          |
-| **ENABLED**          | Enable the device                                 |
-| **DISABLED**         | Disable the device; default                       |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `PRINTER` | Install the standard printer cable; default |
+| `DIAGNOSTIC` | Install the diagnostic loopback connector |
+| `SC=\<n\>` | Set the interface card select code; default is 14 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device |
+| `DISABLED` | Disable the device; default |
 
 The printer supports realistic and optimized timing modes. Realistic
 timing attempts to model the print buffer load and print-and-space
@@ -3289,19 +3289,19 @@ Setting the ***PRINTER*** option reinstalls the standard printer cable.
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***       | ***Action***                              |
+| Command | Action |
 |---------------------|-------------------------------------------|
-| **SHOW LPS**        | Display the device and unit configuration |
-| **SHOW LPS TIMING** | Display the timing mode                   |
+| `SHOW LPS` | Display the device and unit configuration |
+| `SHOW LPS TIMING` | Display the timing mode |
 
 Unit options that may be specified are:
 
-| ***Option*** | ***Action***                                   |
+| Option | Action |
 |--------------|------------------------------------------------|
-| **OFFLINE**  | Set the printer offline; default when detached |
-| **ONLINE**   | Set the printer online; default when attached  |
-| **POWEROFF** | Turn the printer power off                     |
-| **POWERON**  | Turn the printer power on; default             |
+| `OFFLINE` | Set the printer offline; default when detached |
+| `ONLINE` | Set the printer online; default when attached |
+| `POWEROFF` | Turn the printer power off |
+| `POWERON` | Turn the printer power on; default |
 
 The ***OFFLINE*** and ***ONLINE*** options place the printer offline and
 online, respectively. The former provides a convenient method of setting
@@ -3314,16 +3314,16 @@ the printer.
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMDS**     | Command initiations and completions                  |
-| **CPU**      | Words received from and sent to the CPU              |
-| **XFER**     | Data receptions and transmissions                    |
-| **STATE**    | Printer state transitions                            |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMDS` | Command initiations and completions |
+| `CPU` | Words received from and sent to the CPU |
+| `XFER` | Data receptions and transmissions |
+| `STATE` | Printer state transitions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMDS*** option traces the commands executed by the printer. The
-***CPU*** option traces words received from (control and write data) and
+`CPU` option traces words received from (control and write data) and
 sent to (status and read data) the CPU. The ***XFER*** option traces the
 characters sent to the printer. The ***STATE*** option traces printer
 state changes. The ***IOBUS*** option traces the I/O backplane signals
@@ -3344,21 +3344,21 @@ Examples of the trace formats follow:
 
 The Line Printer Controller state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Read-Only*** | ***Action*** |
-|----|:--:|:--:|:--:|----|----|
-| **BUF** | 16 | 8 | ✔ |  | Output buffer |
-| **STA** | 16 | 8 |  |  | Printer status |
-| **POWER** | 2 | 8 |  | ✔ | Printer power state |
-| **CTL** | 1 | 2 |  |  | Control flip-flop |
-| **FLG** | 1 | 2 |  |  | Flag flip-flop |
-| **FBF** | 1 | 2 |  |  | Flag buffer flip-flop |
-| **CCNT** | 7 | 10 |  |  | Current character count |
-| **LCNT** | 7 | 10 |  |  | Current line count |
-| **POS** | 32 | 10 |  |  | Printer file position |
-| **CTIME** | 24 | 10 |  |  | Character transfer time |
-| **PTIME** | 24 | 10 |  |  | Per-zone print operation time |
-| **STIME** | 24 | 10 |  |  | Per-line paper slew time |
-| **RTIME** | 24 | 10 |  |  | Power-on ready delay time |
+| Name | Size | Radix | Symbolic | Read-Only | Action |
+| ---- | :--: | :--: | :--: | ---- | ---- |
+| BUF | 16 | 8 | ✔ |  | Output buffer |
+| STA | 16 | 8 |  |  | Printer status |
+| POWER | 2 | 8 |  | ✔ | Printer power state |
+| CTL | 1 | 2 |  |  | Control flip-flop |
+| FLG | 1 | 2 |  |  | Flag flip-flop |
+| FBF | 1 | 2 |  |  | Flag buffer flip-flop |
+| CCNT | 7 | 10 |  |  | Current character count |
+| LCNT | 7 | 10 |  |  | Current line count |
+| POS | 32 | 10 |  |  | Printer file position |
+| CTIME | 24 | 10 |  |  | Character transfer time |
+| PTIME | 24 | 10 |  |  | Per-zone print operation time |
+| STIME | 24 | 10 |  |  | Per-line paper slew time |
+| RTIME | 24 | 10 |  |  | Power-on ready delay time |
 
 The BUF register may be displayed in character format, if desired.
 Symbolic entry is also supported.
@@ -3455,15 +3455,15 @@ SET MPXn \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **LINEORDER=\<c1\>\[;\<c2\>...\]** | Set the channel connection order |
-| **DISCONNECT=\<chan\>** | Disconnect the specified channel |
-| **SC=\<n\>** | Set the interface card select code; default is 36 |
-| **DEBUG=\<option\>** | Enable tracing |
-| **NODEBUG** | Disable tracing; default |
-| **ENABLED** | Enable the device; default |
-| **DISABLED** | Disable the device |
+| `LINEORDER=\<c1\>\[;\<c2\>...\]` | Set the channel connection order |
+| `DISCONNECT=\<chan\>` | Disconnect the specified channel |
+| `SC=\<n\>` | Set the interface card select code; default is 36 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The ***LINEORDER*** option specifies the order in which new connections
 are assigned to multiplexer channels. The arguments may be single
@@ -3485,14 +3485,14 @@ disconnect the serial port, include the ***–C*** switch in the command.
 
 Unit options that may be specified are:
 
-| ***Option***         | ***Action***                                    |
+| Option | Action |
 |----------------------|-------------------------------------------------|
-| **FASTTIME**         | Use optimized timing; default                   |
-| **REALTIME**         | Use realistic timing                            |
-| **CAPSLOCK**         | Upshift lowercase input characters to uppercase |
-| **NOCAPSLOCK**       | Input characters are unchanged; default         |
-| **LOG=\<filename\>** | Enable I/O logging                              |
-| **NOLOG**            | Disable I/O logging; default                    |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `CAPSLOCK` | Upshift lowercase input characters to uppercase |
+| `NOCAPSLOCK` | Input characters are unchanged; default |
+| `LOG=\<filename\>` | Enable I/O logging |
+| `NOLOG` | Disable I/O logging; default |
 
 The 12792C supports twelve programmable baud rates from 50 to 19200
 baud. When realistic timing is enabled, the simulation accurately models
@@ -3521,35 +3521,35 @@ Disabling logging also closes the log file.
 
 The device configuration may be displayed with the following commands:
 
-| ***Command*** | ***Action*** |
+| Command | Action |
 |----|----|
-| **SHOW MPX** | Display the device configuration |
-| **SHOW MPX LINEORDER** | Display the channel connection order |
-| **SHOW MPX CONNECTIONS** | Display the channel connections |
-| **SHOW MPX STATISTICS** | Display the channel I/O statistics for the active connections |
+| `SHOW MPX` | Display the device configuration |
+| `SHOW MPX LINEORDER` | Display the channel connection order |
+| `SHOW MPX CONNECTIONS` | Display the channel connections |
+| `SHOW MPX STATISTICS` | Display the channel I/O statistics for the active connections |
 
 The unit configuration may be displayed with the following commands:
 
-| ***Command***         | ***Action***                                  |
+| Command | Action |
 |-----------------------|-----------------------------------------------|
-| **SHOW MPX\<n\>**     | Display the selected channel’s configuration  |
-| **SHOW MPX\<n\> LOG** | Display the selected channel’s logging status |
+| `SHOW MPX\<n\>` | Display the selected channel’s configuration |
+| `SHOW MPX\<n\> LOG` | Display the selected channel’s logging status |
 
 ### Tracing and Registers
 
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMDS**     | Command initiations and completions                  |
-| **CPU**      | Words received from and sent to the CPU              |
-| **BUF**      | Data read from and written to the channel buffers    |
-| **XFER**     | Data receptions and transmissions                    |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMDS` | Command initiations and completions |
+| `CPU` | Words received from and sent to the CPU |
+| `BUF` | Data read from and written to the channel buffers |
+| `XFER` | Data receptions and transmissions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMDS*** option traces the commands executed by the multiplexer.
-The ***CPU*** option traces words received from (control and write data)
+The `CPU` option traces words received from (control and write data)
 and sent to (status and read data) the CPU. The ***BUF*** option traces
 reads and writes from the internal channel buffers. The ***XFER***
 option traces the characters sent and received from the multiplexer
@@ -3566,36 +3566,36 @@ Examples of the trace formats follow:
 
 The multiplexer state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Action*** |
-|----|:--:|:--:|:--:|----|
-| **STATE** | 3 | 10 |  | Controller state |
-| **IBUF** | 16 | 8 | ✔ | Input buffer (from multiplexer to CPU) |
-| **OBUF** | 16 | 8 | ✔ | Output buffer (from CPU to multiplexer) |
-| **CMD** | 8 | 8 |  | Command code |
-| **PARAM** | 16 | 8 |  | Command parameter |
-| **PORT** | 8 | 10 |  | Port number for last command |
-| **PORTKEY** | 8 | 10 |  | Port key for last command |
-| **IOLEN** | 16 | 10 |  | I/O transfer length for last command |
-| **UIEN** | 1 | 2 |  | Unsolicited interrupts enabled |
-| **UIPORT** | 3 | 10 |  | Unsolicited interrupt port |
-| **UICODE** | 3 | 10 |  | Unsolicited interrupt reason code |
-| **KEYS \[0:7\]** | 8 | 10 |  | Port keys, ports 0-7 |
-| **PCONFIG \[0:7\]** | 16 | 8 |  | Port configuration, ports 0-7 |
-| **RCVTYPE \[0:7\]** | 16 | 2 |  | Receive type, ports 0-7 |
-| **CHARCNT \[0:7\]** | 16 | 8 |  | Received character count, ports 0-7 |
-| **TERMCNT \[0:7\]** | 16 | 8 |  | Termination character count, ports 0-7 |
-| **FLOWCNTL \[0:7\]** | 16 | 8 |  | Flow control, ports 0-7 |
-| **ENQCNTR \[0:7\]** | 7 | 10 |  | ENQ character counter, ports 0-7 |
-| **ACKWAIT \[0:7\]** | 10 | 10 |  | ACK wait counter, ports 0-7 |
-| **PFLAGS \[0:7\]** | 12 | 2 |  | Port flags, ports 0-7 |
-| **RBUF \[0:7\] \[0:513\]** | 8 | 8 | ✔ | Read buffers, ports 0-7 |
-| **WBUF \[0:7\] \[0:513\]** | 8 | 8 | ✔ | Write buffers, ports 0-7 |
-| **GET \[0:7\] \[0:1\]** | 10 | 10 |  | Read/write get indexes, ports 0-7 |
-| **SEP \[0:7\] \[0:1\]** | 10 | 10 |  | Read/write separator indexes, ports 0-7 |
-| **PUT \[0:7\] \[0:1\]** | 10 | 10 |  | Read/write put indexes, ports 0-7 |
-| **CTL** | 1 | 2 |  | Control flip-flop |
-| **FLG** | 1 | 2 |  | Flag flip-flop |
-| **FBF** | 1 | 2 |  | Flag buffer flip-flop |
+| Name | Size | Radix | Symbolic | Action |
+| ---- | :--: | :--: | :--: | ---- |
+| STATE | 3 | 10 |  | Controller state |
+| IBUF | 16 | 8 | ✔ | Input buffer (from multiplexer to CPU) |
+| OBUF | 16 | 8 | ✔ | Output buffer (from CPU to multiplexer) |
+| CMD | 8 | 8 |  | Command code |
+| PARAM | 16 | 8 |  | Command parameter |
+| PORT | 8 | 10 |  | Port number for last command |
+| PORTKEY | 8 | 10 |  | Port key for last command |
+| IOLEN | 16 | 10 |  | I/O transfer length for last command |
+| UIEN | 1 | 2 |  | Unsolicited interrupts enabled |
+| UIPORT | 3 | 10 |  | Unsolicited interrupt port |
+| UICODE | 3 | 10 |  | Unsolicited interrupt reason code |
+| KEYS \[0:7\] | 8 | 10 |  | Port keys, ports 0-7 |
+| PCONFIG \[0:7\] | 16 | 8 |  | Port configuration, ports 0-7 |
+| RCVTYPE \[0:7\] | 16 | 2 |  | Receive type, ports 0-7 |
+| CHARCNT \[0:7\] | 16 | 8 |  | Received character count, ports 0-7 |
+| TERMCNT \[0:7\] | 16 | 8 |  | Termination character count, ports 0-7 |
+| FLOWCNTL \[0:7\] | 16 | 8 |  | Flow control, ports 0-7 |
+| ENQCNTR \[0:7\] | 7 | 10 |  | ENQ character counter, ports 0-7 |
+| ACKWAIT \[0:7\] | 10 | 10 |  | ACK wait counter, ports 0-7 |
+| PFLAGS \[0:7\] | 12 | 2 |  | Port flags, ports 0-7 |
+| RBUF \[0:7\] \[0:513\] | 8 | 8 | ✔ | Read buffers, ports 0-7 |
+| WBUF \[0:7\] \[0:513\] | 8 | 8 | ✔ | Write buffers, ports 0-7 |
+| GET \[0:7\] \[0:1\] | 10 | 10 |  | Read/write get indexes, ports 0-7 |
+| SEP \[0:7\] \[0:1\] | 10 | 10 |  | Read/write separator indexes, ports 0-7 |
+| PUT \[0:7\] \[0:1\] | 10 | 10 |  | Read/write put indexes, ports 0-7 |
+| CTL | 1 | 2 |  | Control flip-flop |
+| FLG | 1 | 2 |  | Flag flip-flop |
+| FBF | 1 | 2 |  | Flag buffer flip-flop |
 
 The RBUF and WBUF registers logically represent eight character buffers
 of 514 bytes each, and the GET, SEP, and PUT registers logically
@@ -3667,17 +3667,17 @@ SET LPT \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                      |
+| Option | Action |
 |----------------------|---------------------------------------------------|
-| **FASTTIME**         | Use optimized timing; default                     |
-| **REALTIME**         | Use realistic timing                              |
-| **PRINTER**          | Install the standard printer VFU tape; default    |
-| **DIAGNOSTIC**       | Install the diagnostic VFU tape                   |
-| **SC=\<n\>**         | Set the interface card select code; default is 15 |
-| **DEBUG=\<option\>** | Enable tracing                                    |
-| **NODEBUG**          | Disable tracing; default                          |
-| **ENABLED**          | Enable the device; default                        |
-| **DISABLED**         | Disable the device                                |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `PRINTER` | Install the standard printer VFU tape; default |
+| `DIAGNOSTIC` | Install the diagnostic VFU tape |
+| `SC=\<n\>` | Set the interface card select code; default is 15 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The printer supports realistic and optimized timing modes. Realistic
 timing attempts to model the print buffer load and print-and-space
@@ -3704,29 +3704,29 @@ reinstalls the standard VFU tape (02607-80024 for the 2607 and
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***      | ***Action***                              |
+| Command | Action |
 |--------------------|-------------------------------------------|
-| **SHOW LPT**       | Display the device and unit configuration |
-| **SHOW LPT MODES** | Display the timing and VFU tape modes     |
+| `SHOW LPT` | Display the device and unit configuration |
+| `SHOW LPT MODES` | Display the timing and VFU tape modes |
 
 ### Unit Options
 
 Unit options that may be specified are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **2607** | Set the printer model to 2607; default |
-| **2613** | Set the printer model to 2613 |
-| **2617** | Set the printer model to 2617 |
-| **2618** | Set the printer model to 2618 |
-| **VFU** | Install the HP standard 66-line VFU tape; default |
-| **VFU=\<filename\>** | Install a custom VFU tape image |
-| **OFFLINE** | Set the printer offline; default when detached |
-| **ONLINE** | Set the printer online; default when attached |
-| **EXPAND** | Write expanded output to the printer image file; default |
-| **COMPACT** | Write compact output to the printer image file |
-| **POWEROFF** | Turn the printer power off |
-| **POWERON** | Turn the printer power on; default |
+| 2607 | Set the printer model to 2607; default |
+| 2613 | Set the printer model to 2613 |
+| 2617 | Set the printer model to 2617 |
+| 2618 | Set the printer model to 2618 |
+| `VFU` | Install the HP standard 66-line VFU tape; default |
+| `VFU=\<filename\>` | Install a custom VFU tape image |
+| `OFFLINE` | Set the printer offline; default when detached |
+| `ONLINE` | Set the printer online; default when attached |
+| `EXPAND` | Write expanded output to the printer image file; default |
+| `COMPACT` | Write compact output to the printer image file |
+| `POWEROFF` | Turn the printer power off |
+| `POWERON` | Turn the printer power on; default |
 
 The ***2607***, ***2613***, ***2617***, and ***2618*** options select
 the printer model. Each printer is configured with Option 001, which
@@ -3817,16 +3817,16 @@ Initially, the standard VFU tape (part number 02607-80024 for the HP
 tape associates commands for channels 1-8 with the following printer
 actions:
 
-| ***Channel*** | ***Printer Advances to the*** |
+| Channel | Printer Advances to the |
 |:-------------:|-------------------------------|
-|     **1**     | Top of form                   |
-|     **2**     | Bottom of form                |
-|     **3**     | Next single space             |
-|     **4**     | Next double space             |
-|     **5**     | Next triple space             |
-|     **6**     | Next half-page                |
-|     **7**     | Next quarter-page             |
-|     **8**     | Next sixth-page               |
+| 1 | Top of form |
+| 2 | Bottom of form |
+| 3 | Next single space |
+| 4 | Next double space |
+| 5 | Next triple space |
+| 6 | Next half-page |
+| 7 | Next quarter-page |
+| 8 | Next sixth-page |
 
 For the 02613-80001 tape, channel 9 is punched the same as channel 2,
 and channels 10-12 are uncommitted.
@@ -3836,12 +3836,12 @@ If the device is in diagnostic mode, the appropriate diagnostic VFU tape
 installed. These tapes associate commands for channels 1-8 as above and
 for channels 9-12 with the following actions:
 
-| ***Channel*** | ***Printer Advances to the***  |
+| Channel | Printer Advances to the |
 |:-------------:|--------------------------------|
-|     **9**     | Bottom of form                 |
-|    **10**     | Line before the bottom of form |
-|    **11**     | Line before the top of form    |
-|    **12**     | Top of form                    |
+| 9 | Bottom of form |
+| 10 | Line before the bottom of form |
+| 11 | Line before the top of form |
+| 12 | Top of form |
 
 Setting the device back to printer mode restores the standard VFU tape.
 
@@ -3931,9 +3931,9 @@ back online will clear the fault.
 
 The current VFU definition may be displayed with the following command:
 
-| ***Command***    | ***Action***                                     |
+| Command | Action |
 |------------------|--------------------------------------------------|
-| **SHOW LPT VFU** | Display the currently loaded VFU tape definition |
+| `SHOW LPT VFU` | Display the currently loaded VFU tape definition |
 
 This command displays the current VFU tape title and then the channel
 definitions for each form line. By default, a punched channel is
@@ -3946,13 +3946,13 @@ into the PUNCHR and UNPCHR registers, respectively.
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMD**      | Printer commands executed                            |
-| **CSRW**     | Interface control, status, read, and write actions   |
-| **SERV**     | Printer unit service events                          |
-| **XFER**     | Data transmissions                                   |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMD` | Printer commands executed |
+| `CSRW` | Interface control, status, read, and write actions |
+| `SERV` | Printer unit service events |
+| `XFER` | Data transmissions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMD*** option traces the commands executed by the printer. The
 ***CSRW*** option traces control, status, read, and write commands sent
@@ -3977,30 +3977,30 @@ Examples of the trace formats follow:
 
 The Line Printer Controller state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Read-Only*** | ***Description*** |
-|----|:--:|:--:|:--:|:--:|----|
-| **DEVCTL** | 1 | 2 |  |  | Device control flip-flop |
-| **DEVFLG** | 1 | 2 |  |  | Device flag flip-flop |
-| **DEVFBF** | 1 | 2 |  |  | Device flag buffer flip-flop |
-| **STROBE** | 1 | 2 |  |  | Strobe signal to the printer |
-| **DEMAND** | 1 | 2 |  |  | Demand signal from the printer |
-| **OUTPUT** | 16 | 8 | ✔ |  | Output data word to the printer |
-| **STATUS** | 16 | 8 |  |  | Device status from the printer |
-| **PFAULT** | 1 | 2 |  |  | Paper fault exists |
-| **TFAULT** | 1 | 2 |  |  | Tape fault exists |
-| **OLPEND** | 1 | 2 |  |  | Offline transition is pending |
-| **PRLINE** | 8 | 10 |  |  | Current print line number |
-| **BUFIDX** | 8 | 10 |  |  | Current print buffer index |
-| **PRTBUF \[0:423\]** | 8 | 8 | ✔ |  | Print buffer |
-| **OVPCHR** | 8 | 8 | ✔ |  | Overprint character |
-| **FORMLN** | 8 | 10 |  | ✔ | Form length in lines |
-| **VFU \[0:144\]** | 12 | 2 |  | ✔ | Vertical format unit channels |
-| **PUNCHR** | 8 | 8 | ✔ |  | Punched channel character |
-| **UNPCHR** | 8 | 8 | ✔ |  | Unpunched channel character |
-| **BTIME** | 24 | 10 |  |  | Fast printer buffer load delay time |
-| **PTIME** | 24 | 10 |  |  | Fast printing delay time |
-| **STIME** | 24 | 10 |  |  | Fast paper slew per-line delay time |
-| **POS** | 32 | 10 |  |  | Printer file current position |
+| Name | Size | Radix | Symbolic | Read-Only | Description |
+| ---- | :--: | :--: | :--: | :--: | ---- |
+| DEVCTL | 1 | 2 |  |  | Device control flip-flop |
+| DEVFLG | 1 | 2 |  |  | Device flag flip-flop |
+| DEVFBF | 1 | 2 |  |  | Device flag buffer flip-flop |
+| STROBE | 1 | 2 |  |  | Strobe signal to the printer |
+| DEMAND | 1 | 2 |  |  | Demand signal from the printer |
+| OUTPUT | 16 | 8 | ✔ |  | Output data word to the printer |
+| STATUS | 16 | 8 |  |  | Device status from the printer |
+| PFAULT | 1 | 2 |  |  | Paper fault exists |
+| TFAULT | 1 | 2 |  |  | Tape fault exists |
+| OLPEND | 1 | 2 |  |  | Offline transition is pending |
+| PRLINE | 8 | 10 |  |  | Current print line number |
+| BUFIDX | 8 | 10 |  |  | Current print buffer index |
+| PRTBUF \[0:423\] | 8 | 8 | ✔ |  | Print buffer |
+| OVPCHR | 8 | 8 | ✔ |  | Overprint character |
+| FORMLN | 8 | 10 |  | ✔ | Form length in lines |
+| VFU \[0:144\] | 12 | 2 |  | ✔ | Vertical format unit channels |
+| PUNCHR | 8 | 8 | ✔ |  | Punched channel character |
+| UNPCHR | 8 | 8 | ✔ |  | Unpunched channel character |
+| BTIME | 24 | 10 |  |  | Fast printer buffer load delay time |
+| PTIME | 24 | 10 |  |  | Fast printing delay time |
+| STIME | 24 | 10 |  |  | Fast paper slew per-line delay time |
+| POS | 32 | 10 |  |  | Printer file current position |
 
 The PRTBUF, OVPCHR, PUNCHR, and UNPCHR registers default to
 single-character format display and entry but may be overridden with
@@ -4080,15 +4080,15 @@ device, then resuming simulation will retry the operation.
 
 Processor interconnect options that may be specified for the IPL device are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **WAIT** | Suspend execution until a signal is received from the other instance |
-| **SIGNAL** | Signal the other instance |
-| **SC=\<n\>** | Set the interface card select codes; defaults are 32/33 |
-| **ENABLED** | Enable the IPLI and IPLO devices |
-| **DISABLED** | Disable the IPLI and IPLO devices; default |
+| `WAIT` | Suspend execution until a signal is received from the other instance |
+| `SIGNAL` | Signal the other instance |
+| `SC=\<n\>` | Set the interface card select codes; defaults are 32/33 |
+| `ENABLED` | Enable the IPLI and IPLO devices |
+| `DISABLED` | Disable the IPLI and IPLO devices; default |
 
-The ***WAIT*** and ***SIGNAL*** options are used to synchronize the two
+The ***WAIT*** and `SIGNAL` options are used to synchronize the two
 simulator instances connected by ***ATTACH*** commands specifying the
 same code number. Entering a ***SET IPL WAIT*** command suspends the
 current simulator instance until a ***SET IPL SIGNAL*** command is
@@ -4107,12 +4107,12 @@ assigned in the correct order.
 Processor interconnect options that may be specified for either the IPLI
 or IPLO device are:
 
-| ***Option***         | ***Action***                                         |
+| Option | Action |
 |----------------------|------------------------------------------------------|
-| **DIAGNOSTIC**       | Connect using the diagnostic test connector or cable |
-| **LINK**             | Connect using the processor interconnect cables      |
-| **DEBUG=\<option\>** | Enable tracing                                       |
-| **NODEBUG**          | Disable tracing; default                             |
+| `DIAGNOSTIC` | Connect using the diagnostic test connector or cable |
+| `LINK` | Connect using the processor interconnect cables |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
 
 Enabling diagnostic mode for either device individually simulates the
 installation of the HP 1251-0332 diagnostic test (loopback) connector in
@@ -4132,13 +4132,13 @@ When a debug log has been established, tracing may be configured for
 each card separately by specifying one or more of the reporting level
 options:
 
-| ***Option*** | ***Reporting Level***                                     |
+| Option | Reporting Level |
 |--------------|-----------------------------------------------------------|
-| **CMD**      | Command initiations and completions                       |
-| **CSRW**     | Control, status, read, and write actions                  |
-| **PSERV**    | Interface service scheduling calls and entries (periodic) |
-| **XFER**     | Data receptions and transmissions                         |
-| **IOBUS**    | I/O bus signals and data words received and returned      |
+| `CMD` | Command initiations and completions |
+| `CSRW` | Control, status, read, and write actions |
+| `PSERV` | Interface service scheduling calls and entries (periodic) |
+| `XFER` | Data receptions and transmissions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMD*** option traces the commands executed by the processor
 interconnect. The ***CSRW*** option traces words received from and sent
@@ -4259,14 +4259,14 @@ For either loader, execution ends with one of the following halt instructions:
 
 The IPLI and IPLO state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Action***               |
+| Name | Size | Radix | Action |
 |------------|:----------:|:-----------:|----------------------------|
-| **IBUF**   |     16     |      8      | Input buffer               |
-| **OBUF**   |     16     |      8      | Output buffer              |
-| **CTL**    |     1      |      2      | Control flip-flop          |
-| **FLG**    |     1      |      2      | Flag flip-flop             |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop      |
-| **TIME**   |     24     |     10      | Polling interval for input |
+| `IBUF` | 16 | 8 | Input buffer |
+| `OBUF` | 16 | 8 | Output buffer |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `TIME` | 24 | 10 | Polling interval for input |
 
 ## 12920A Asynchronous Multiplexer Interface
 
@@ -4360,17 +4360,17 @@ SET MUXLn \<unit-option\>
 
 Device options that may be specified for the Upper Data PCA are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **TERMINAL** | Connect using Telnet or serial ports; default |
-| **DIAGNOSTIC** | Connect using diagnostic test cables |
-| **LINEORDER=\<c1\>\[;\<c2\>...\]** | Set the channel connection order |
-| **DISCONNECT=\<chan\>** | Disconnect the specified channel |
-| **SC=\<n\>** | Set the interface card select codes; default is 40/41 |
-| **DEBUG=\<option\>** | Enable tracing |
-| **NODEBUG** | Disable tracing; default |
-| **ENABLED** | Enable the device; default |
-| **DISABLED** | Disable the device |
+| `TERMINAL` | Connect using Telnet or serial ports; default |
+| `DIAGNOSTIC` | Connect using diagnostic test cables |
+| `LINEORDER=\<c1\>\[;\<c2\>...\]` | Set the channel connection order |
+| `DISCONNECT=\<chan\>` | Disconnect the specified channel |
+| `SC=\<n\>` | Set the interface card select codes; default is 40/41 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Enabling the ***DIAGNOSTIC*** mode simulates the installation of eight
 HP 30062-60003 diagnostic test (loopback) cables between channels 0-1,
@@ -4406,27 +4406,27 @@ and the cards will be assigned in the correct order.
 
 Device options that may be specified for the Lower Data PCA are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **SC=\<n\>** | Set the interface card select codes; default is 40/41 |
-| **DEBUG=\<option\>** | Enable tracing |
-| **NODEBUG** | Disable tracing; default |
-| **ENABLED** | Enable the device; default |
-| **DISABLED** | Disable the device |
+| `SC=\<n\>` | Set the interface card select codes; default is 40/41 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Unit options that may be specified for individual Lower Data PCA channels are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **UC** | Upshift lowercase output characters to uppercase; default |
-| **7B** | Output with high-order bit cleared |
-| **7P** | Output with high-order bit cleared, non-printing suppressed |
-| **8B** | Output characters without changing |
-| **DATASET** | Enable modem control via the Control PCA |
-| **NODATASET** | Disable modem control; default |
-| **LOG=\<filename\>** | Enable I/O logging |
-| **NOLOG** | Disable I/O logging; default |
-| **DISCONNECT** | Disconnect the channel |
+| `UC` | Upshift lowercase output characters to uppercase; default |
+| `7B` | Output with high-order bit cleared |
+| `7P` | Output with high-order bit cleared, non-printing suppressed |
+| `8B` | Output characters without changing |
+| `DATASET` | Enable modem control via the Control PCA |
+| `NODATASET` | Disable modem control; default |
+| `LOG=\<filename\>` | Enable I/O logging |
+| `NOLOG` | Disable I/O logging; default |
+| `DISCONNECT` | Disconnect the channel |
 
 Each channel may be set to one of four output modes (***UC***, ***7B***,
 ***7P***, or ***8B***). The default mode is ***UC*** for all channels.
@@ -4459,19 +4459,19 @@ include the ***–C*** switch in the command.
 Upper Data PCA device configuration may be displayed with the following
 commands:
 
-| ***Command*** | ***Action*** |
+| Command | Action |
 |----|----|
-| **SHOW MUX** | Display the device configuration |
-| **SHOW MUX LINEORDER** | Display the channel connection order |
-| **SHOW MUX CONNECTIONS** | Display the channel connections |
-| **SHOW MUX STATISTICS** | Display the channel I/O statistics for the active connections |
+| `SHOW MUX` | Display the device configuration |
+| `SHOW MUX LINEORDER` | Display the channel connection order |
+| `SHOW MUX CONNECTIONS` | Display the channel connections |
+| `SHOW MUX STATISTICS` | Display the channel I/O statistics for the active connections |
 
 Lower Data PCA unit configuration may be displayed with the following commands:
 
-| ***Command***          | ***Action***                                  |
+| Command | Action |
 |------------------------|-----------------------------------------------|
-| **SHOW MUXL\<n\>**     | Display the selected channel’s configuration  |
-| **SHOW MUXL\<n\> LOG** | Display the selected channel’s logging status |
+| `SHOW MUXL\<n\>` | Display the selected channel’s configuration |
+| `SHOW MUXL\<n\> LOG` | Display the selected channel’s logging status |
 
 In addition to the current configuration settings, a channel controlled
 by the Control PCA will be marked **data set** in the listing; a channel
@@ -4481,21 +4481,21 @@ When a debug log has been established, tracing of the Upper Data PCA
 device may be configured by specifying one or more of these reporting
 level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CSRW**     | Control, status, read, and write actions             |
-| **PSERV**    | Poll unit service events (periodic)                  |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CSRW` | Control, status, read, and write actions |
+| `PSERV` | Poll unit service events (periodic) |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 Tracing of the Lower Data PCA device may be configured by specifying
 these options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CSRW**     | Control, status, read, and write actions             |
-| **SERV**     | Channel unit service events                          |
-| **XFER**     | Data receptions and transmissions                    |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CSRW` | Control, status, read, and write actions |
+| `SERV` | Channel unit service events |
+| `XFER` | Data receptions and transmissions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CSRW*** option traces control, status, read, and write commands
 sent to the interface. The ***PSERV*** option traces poll unit service
@@ -4528,27 +4528,27 @@ Examples of the trace formats follow:
 
 The Upper Data PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Action***                       |
+| Name | Size | Radix | Action |
 |------------|:----------:|:-----------:|------------------------------------|
-| **IBUF**   |     16     |      8      | Input buffer; holds channel status |
-| **OBUF**   |     16     |      8      | Output buffer; hold channel select |
+| `IBUF` | 16 | 8 | Input buffer; holds channel status |
+| `OBUF` | 16 | 8 | Output buffer; hold channel select |
 
 The Lower Data PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Action*** |
-|----|:--:|:--:|:--:|----|
-| **CTL** | 1 | 2 |  | Control flip-flop |
-| **FLG** | 1 | 2 |  | Flag flip-flop |
-| **FBF** | 1 | 2 |  | Flag buffer flip-flop |
-| **STA \[0:20\]** | 16 | 8 |  | Receive channel status, channels 0-20 |
-| **RPAR \[0:20\]** | 16 | 8 |  | Receive channel parameters, channels 0-20 |
-| **XPAR \[0:15\]** | 16 | 8 |  | Transmit channel parameters, channels 0-15 |
-| **RBUF \[0:20\]** | 16 | 8 | ✔ | Receive channel buffers, channels 0-20 |
-| **XBUF \[0:15\]** | 16 | 8 | ✔ | Transmit channel buffers, channels 0-15 |
-| **RCHP \[0:20\]** | 1 | 2 |  | Receive channel character present, channels 0-20 |
-| **XDON \[0:15\]** | 1 | 2 |  | Transmit channel done, channels 0-15 |
-| **BDFR \[0:15\]** | 1 | 2 |  | Receive channel break deferred, channels 0-15 |
-| **TIME \[0:15\]** | 24 | 10 |  | Transmit channel time, channels 0-15 |
+| Name | Size | Radix | Symbolic | Action |
+| ---- | :--: | :--: | :--: | ---- |
+| CTL | 1 | 2 |  | Control flip-flop |
+| FLG | 1 | 2 |  | Flag flip-flop |
+| FBF | 1 | 2 |  | Flag buffer flip-flop |
+| STA \[0:20\] | 16 | 8 |  | Receive channel status, channels 0-20 |
+| RPAR \[0:20\] | 16 | 8 |  | Receive channel parameters, channels 0-20 |
+| XPAR \[0:15\] | 16 | 8 |  | Transmit channel parameters, channels 0-15 |
+| RBUF \[0:20\] | 16 | 8 | ✔ | Receive channel buffers, channels 0-20 |
+| XBUF \[0:15\] | 16 | 8 | ✔ | Transmit channel buffers, channels 0-15 |
+| RCHP \[0:20\] | 1 | 2 |  | Receive channel character present, channels 0-20 |
+| XDON \[0:15\] | 1 | 2 |  | Transmit channel done, channels 0-15 |
+| BDFR \[0:15\] | 1 | 2 |  | Receive channel break deferred, channels 0-15 |
+| TIME \[0:15\] | 24 | 10 |  | Transmit channel time, channels 0-15 |
 
 The RBUF and XBUF registers default to single-character format display
 and entry but may be overridden with numeric-format switches, if
@@ -4566,9 +4566,9 @@ Data Terminal Ready is set or not.
 
 Control PCA device options that may be specified are:
 
-| ***Option*** | ***Action***                                      |
+| Option | Action |
 |--------------|---------------------------------------------------|
-| **SC=\<n\>** | Set the interface card select code; default is 42 |
+| `SC=\<n\>` | Set the interface card select code; default is 42 |
 
 The Control PCA is usually installed in the slot above the Upper Data
 PCA, but this is not required.
@@ -4577,18 +4577,18 @@ There are no Control PCA units or unit commands.
 
 Control PCA device configuration may be displayed with the following commands:
 
-| ***Command*** | ***Action***                     |
+| Command | Action |
 |---------------|----------------------------------|
-| **SHOW MUXC** | Display the device configuration |
+| `SHOW MUXC` | Display the device configuration |
 
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CSRW**     | Control, status, read, and write actions             |
-| **XFER**     | Control and status line changes                      |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CSRW` | Control, status, read, and write actions |
+| `XFER` | Control and status line changes |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The CSRW option traces control, status, read, and write commands sent to
 the interface. The XFER option traces the changes in control and status
@@ -4609,15 +4609,15 @@ Examples of the trace formats follow:
 
 The Control PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description*** |
-|----|:--:|:--:|----|
-| **CTL** | 1 | 2 | Control flip-flop |
-| **FLG** | 1 | 2 | Flag flip-flop |
-| **FBF** | 1 | 2 | Flag buffer flip-flop |
-| **SCAN** | 1 | 2 | Scan flip-flop |
-| **CHAN** | 4 | 8 | Current channel number |
-| **DSO \[0:15\]** | 6 | 2 | Control lines C2, C1, ES2, ES1, SS2, and SS1, channels 0-15 |
-| **DSI \[0:15\]** | 2 | 2 | Status lines S2 and S1, channels 0-15 |
+| Name | Size | Radix | Description |
+| ---- | :--: | :--: | ---- |
+| CTL | 1 | 2 | Control flip-flop |
+| FLG | 1 | 2 | Flag flip-flop |
+| FBF | 1 | 2 | Flag buffer flip-flop |
+| SCAN | 1 | 2 | Scan flip-flop |
+| CHAN | 4 | 8 | Current channel number |
+| DSO \[0:15\] | 6 | 2 | Control lines C2, C1, ES2, ES1, SS2, and SS1, channels 0-15 |
+| DSI \[0:15\] | 2 | 2 | Status lines S2 and S1, channels 0-15 |
 
 ## 12966A Buffered Asynchronous Communications Interface
 
@@ -4681,17 +4681,17 @@ SET BACI \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                      |
+| Option | Action |
 |----------------------|---------------------------------------------------|
-| **DIAGNOSTIC**       | Connect using a diagnostic test connector         |
-| **TERMINAL**         | Connect using Telnet or a serial port; default    |
-| **FASTTIME**         | Use optimized timing; default                     |
-| **REALTIME**         | Use realistic timing                              |
-| **SC=\<n\>**         | Set the interface card select code; default is 35 |
-| **DEBUG=\<option\>** | Enable tracing                                    |
-| **NODEBUG**          | Disable tracing; default                          |
-| **ENABLED**          | Enable the device; default                        |
-| **DISABLED**         | Disable the device                                |
+| `DIAGNOSTIC` | Connect using a diagnostic test connector |
+| `TERMINAL` | Connect using Telnet or a serial port; default |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `SC=\<n\>` | Set the interface card select code; default is 35 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Enabling ***DIAGNOSTIC*** mode simulates the installation of the HP
 12966-60003 diagnostic test (loopback) connector onto the 12966A card.
@@ -4722,13 +4722,13 @@ break-mode response under RTE.
 
 Unit options that may be specified are:
 
-| ***Option***         | ***Action***                                    |
+| Option | Action |
 |----------------------|-------------------------------------------------|
-| **CAPSLOCK**         | Upshift lowercase input characters to uppercase |
-| **NOCAPSLOCK**       | Input characters are unchanged; default         |
-| **LOG=\<filename\>** | Enable I/O logging                              |
-| **NOLOG**            | Disable I/O logging; default                    |
-| **DISCONNECT**       | Disconnect the connection                       |
+| `CAPSLOCK` | Upshift lowercase input characters to uppercase |
+| `NOCAPSLOCK` | Input characters are unchanged; default |
+| `LOG=\<filename\>` | Enable I/O logging |
+| `NOLOG` | Disable I/O logging; default |
+| `DISCONNECT` | Disconnect the connection |
 
 Many HP operating systems require command input in upper case, although
 mixed-case output is supported. As an aid to avoid toggling the host
@@ -4747,25 +4747,25 @@ serial port, include the ***–C*** switch in the command.
 
 Device configuration may be displayed with the following commands:
 
-| ***Command*** | ***Action*** |
+| Command | Action |
 |----|----|
-| **SHOW BACI** | Display the device and unit configuration |
-| **SHOW BACI CONNECTION** | Display the active connection status |
-| **SHOW BACI STATISTICS** | Display the I/O statistics for the active connection |
+| `SHOW BACI` | Display the device and unit configuration |
+| `SHOW BACI CONNECTION` | Display the active connection status |
+| `SHOW BACI STATISTICS` | Display the I/O statistics for the active connection |
 
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMDS**     | Command initiations and completions                  |
-| **CPU**      | Words received from and sent to the CPU              |
-| **BUF**      | Data read from and written to the FIFO               |
-| **XFER**     | Data receptions and transmissions                    |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMDS` | Command initiations and completions |
+| `CPU` | Words received from and sent to the CPU |
+| `BUF` | Data read from and written to the FIFO |
+| `XFER` | Data receptions and transmissions |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMDS*** option traces the commands executed by the interface. The
-***CPU*** option traces words received from (control and write data) and
+`CPU` option traces words received from (control and write data) and
 sent to (status and read data) the CPU. The ***BUF*** option traces gets
 from and puts to the internal FIFO buffers. The ***XFER*** option traces
 the words received and transmitted via the Telnet or serial connection.
@@ -4783,33 +4783,33 @@ Examples of the trace formats follow:
 
 The BACI state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Symbolic*** | ***Action*** |
-|----|:--:|:--:|:--:|----|
-| **IBUF** | 16 | 8 | ✔ | Input buffer; holds line status |
-| **OBUF** | 16 | 8 | ✔ | Output buffer; hold channel select |
-| **STATUS** | 16 | 2 |  | Card status word |
-| **EDSIW** | 16 | 8 |  | Enable device status interrupt word |
-| **DSRW** | 16 | 8 |  | Device status reference word |
-| **CFCW** | 16 | 8 |  | Character frame control word |
-| **ICW** | 16 | 8 |  | Interface control word |
-| **ISRW** | 16 | 8 |  | Interrupt status reset word |
-| **FIFOPUT** | 8 | 10 |  | FIFO load index |
-| **FIFOGET** | 8 | 10 |  | FIFO unload index |
-| **FIFOCNTR** | 8 | 10 |  | FIFO character counter |
-| **BRKCNTR** | 16 | 10 |  | BREAK clock counter |
-| **FIFO \[0:127\]** | 8 | 8 | ✔ | FIFO buffer |
-| **SPCHAR \[0:255\]** | 1 | 2 |  | Special character RAM |
-| **UARTTHR** | 16 | 8 | ✔ | UART transmitter holding register |
-| **UARTTR** | 16 | 8 | ✔ | UART transmitter register |
-| **UARTRHR** | 16 | 8 | ✔ | UART receiver holding register |
-| **UARTRR** | 16 | 8 | ✔ | UART receiver register |
-| **UARTCLK** | 16 | 10 |  | UART transmitter/receiver clock counter |
-| **CTIME** | 19 | 10 |  | Inter-character poll time |
-| **LKO** | 1 | 2 |  | Interface interrupt lockout flip-flop |
-| **CTL** | 1 | 2 |  | Interface control flip-flop |
-| **FLG** | 1 | 2 |  | Interface flag flip-flop |
-| **FBF** | 1 | 2 |  | Interface flag buffer flip-flop |
-| **SRQ** | 1 | 2 |  | Interface DMA service request flip-flop |
+| Name | Size | Radix | Symbolic | Action |
+| ---- | :--: | :--: | :--: | ---- |
+| IBUF | 16 | 8 | ✔ | Input buffer; holds line status |
+| OBUF | 16 | 8 | ✔ | Output buffer; hold channel select |
+| STATUS | 16 | 2 |  | Card status word |
+| EDSIW | 16 | 8 |  | Enable device status interrupt word |
+| DSRW | 16 | 8 |  | Device status reference word |
+| CFCW | 16 | 8 |  | Character frame control word |
+| ICW | 16 | 8 |  | Interface control word |
+| ISRW | 16 | 8 |  | Interrupt status reset word |
+| FIFOPUT | 8 | 10 |  | FIFO load index |
+| FIFOGET | 8 | 10 |  | FIFO unload index |
+| FIFOCNTR | 8 | 10 |  | FIFO character counter |
+| BRKCNTR | 16 | 10 |  | BREAK clock counter |
+| FIFO \[0:127\] | 8 | 8 | ✔ | FIFO buffer |
+| SPCHAR \[0:255\] | 1 | 2 |  | Special character RAM |
+| UARTTHR | 16 | 8 | ✔ | UART transmitter holding register |
+| UARTTR | 16 | 8 | ✔ | UART transmitter register |
+| UARTRHR | 16 | 8 | ✔ | UART receiver holding register |
+| UARTRR | 16 | 8 | ✔ | UART receiver register |
+| UARTCLK | 16 | 10 |  | UART transmitter/receiver clock counter |
+| CTIME | 19 | 10 |  | Inter-character poll time |
+| LKO | 1 | 2 |  | Interface interrupt lockout flip-flop |
+| CTL | 1 | 2 |  | Interface control flip-flop |
+| FLG | 1 | 2 |  | Interface flag flip-flop |
+| FBF | 1 | 2 |  | Interface flag buffer flip-flop |
+| SRQ | 1 | 2 |  | Interface DMA service request flip-flop |
 
 The FIFO register defaults to single-character format display and entry
 but may be overridden with a numeric-format switch, if desired. The
@@ -4879,13 +4879,13 @@ SET DPCn \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action***                                          |
+| Option | Action |
 |--------------|-------------------------------------------------------|
-| **12557A**   | Use the 12557A interface and 2870A drives             |
-| **13210A**   | Use the 13210A interface and 7900A drives; default    |
-| **SC=\<n\>** | Set the interface card select codes; default is 22/23 |
-| **ENABLED**  | Enable the device; default                            |
-| **DISABLED** | Disable the device                                    |
+| `12557A` | Use the 12557A interface and 2870A drives |
+| `13210A` | Use the 13210A interface and 7900A drives; default |
+| `SC=\<n\>` | Set the interface card select codes; default is 22/23 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The ***12557A*** and ***13210A*** options set the interface type and, by
 implication, the disc drive type.
@@ -4896,21 +4896,21 @@ and the cards will be assigned in the correct order.
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***     | ***Action***                              |
+| Command | Action |
 |-------------------|-------------------------------------------|
-| **SHOW DPC**      | Display the device and unit configuration |
-| **SHOW DPC TYPE** | Display the interface type                |
+| `SHOW DPC` | Display the device and unit configuration |
+| `SHOW DPC TYPE` | Display the interface type |
 
 Unit options that may be specified for the individual disc drives are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **UNLOAD** | Set the drive’s Run/Stop switch to *Stop*; default when detached |
-| **LOAD** | Set the drive’s Run/Stop switch to *Run*; default when attached |
-| **PROTECT** | Set the drive’s Data Protect switches to *On* |
-| **UNPROTECT** | Set the drive’s Data Protect switches to *Off*; default |
-| **ENABLED** | Enable the unit; default |
-| **DISABLED** | Disable the unit |
+| `UNLOAD` | Set the drive’s Run/Stop switch to *Stop*; default when detached |
+| `LOAD` | Set the drive’s Run/Stop switch to *Run*; default when attached |
+| `PROTECT` | Set the drive’s Data Protect switches to *On* |
+| `UNPROTECT` | Set the drive’s Data Protect switches to *Off*; default |
+| `ENABLED` | Enable the unit; default |
+| `DISABLED` | Disable the unit |
 
 The ***UNLOAD*** and ***LOAD*** options unload and load the drive's
 heads from the disc pack, setting the drive not-ready and ready,
@@ -5046,50 +5046,50 @@ ends with one of the following instructions:
 When a debug log has been established, tracing may be configured for
 each card separately by specifying the reporting level option:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***IOBUS*** option traces the I/O backplane signals and data
 received and returned by the interface.
 
 The Data PCA state contains these registers:
 
-| ***Name***         | ***Size*** | ***Radix*** | ***Action***              |
+| Name | Size | Radix | Action |
 |--------------------|:----------:|:-----------:|---------------------------|
-| **IBUF**           |     16     |      8      | Input buffer              |
-| **OBUF**           |     16     |      8      | Output buffer             |
-| **DBUF \[0:127\]** |     16     |      8      | Sector buffer             |
-| **BPTR**           |     7      |     10      | Sector buffer pointer     |
-| **CMD**            |     1      |      2      | Command flip-flop         |
-| **CTL**            |     1      |      2      | Control flip-flop         |
-| **FLG**            |     1      |      2      | Flag flip-flop            |
-| **FBF**            |     1      |      2      | Flag buffer flip-flop     |
-| **XFER**           |     1      |      2      | Transfer in progress flag |
-| **WVAL**           |     1      |      2      | Write data valid flag     |
+| `IBUF` | 16 | 8 | Input buffer |
+| `OBUF` | 16 | 8 | Output buffer |
+| `DBUF \[0:127\]` | 16 | 8 | Sector buffer |
+| `BPTR` | 7 | 10 | Sector buffer pointer |
+| `CMD` | 1 | 2 | Command flip-flop |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `XFER` | 1 | 2 | Transfer in progress flag |
+| `WVAL` | 1 | 2 | Write data valid flag |
 
 The Control PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Read-Only*** | ***Action*** |
-|----|:--:|:--:|:--:|----|
-| **OBUF** | 16 | 8 |  | Output buffer |
-| **BUSY** | 4 | 8 | ✔ | Busy unit number + 1 |
-| **CNT** | 5 | 8 |  | Check record counter |
-| **CMD** | 1 | 2 |  | Command flip-flop |
-| **CTL** | 1 | 2 |  | Control flip-flop |
-| **FLG** | 1 | 2 |  | Flag flip-flop |
-| **FBF** | 1 | 2 |  | Flag buffer flip-flop |
-| **EOC** | 1 | 2 |  | End of cylinder pending |
-| **POLL** | 1 | 2 |  | Attention polling enabled |
-| **RARC** | 8 | 10 |  | Record address register (cylinder) |
-| **RARH** | 2 | 10 |  | Record address register (head) |
-| **RARS** | 4 | 10 |  | Record address register (sector) |
-| **CYL \[0:3\]** | 8 | 10 |  | Current cylinder, drives 0-3 |
-| **STA \[0:3\]** | 16 | 8 |  | Drive status, drives 0-3 |
-| **CTIME** | 24 | 10 |  | Data transfer command delay time |
-| **DTIME** | 24 | 10 |  | Data channel command delay time |
-| **STIME** | 24 | 10 |  | Seek delay time, per cylinder |
-| **XTIME** | 24 | 10 |  | Inter-word transfer time |
+| Name | Size | Radix | Read-Only | Action |
+| ---- | :--: | :--: | :--: | ---- |
+| OBUF | 16 | 8 |  | Output buffer |
+| BUSY | 4 | 8 | ✔ | Busy unit number + 1 |
+| CNT | 5 | 8 |  | Check record counter |
+| CMD | 1 | 2 |  | Command flip-flop |
+| CTL | 1 | 2 |  | Control flip-flop |
+| FLG | 1 | 2 |  | Flag flip-flop |
+| FBF | 1 | 2 |  | Flag buffer flip-flop |
+| EOC | 1 | 2 |  | End of cylinder pending |
+| POLL | 1 | 2 |  | Attention polling enabled |
+| RARC | 8 | 10 |  | Record address register (cylinder) |
+| RARH | 2 | 10 |  | Record address register (head) |
+| RARS | 4 | 10 |  | Record address register (sector) |
+| CYL \[0:3\] | 8 | 10 |  | Current cylinder, drives 0-3 |
+| STA \[0:3\] | 16 | 8 |  | Drive status, drives 0-3 |
+| CTIME | 24 | 10 |  | Data transfer command delay time |
+| DTIME | 24 | 10 |  | Data channel command delay time |
+| STIME | 24 | 10 |  | Seek delay time, per cylinder |
+| XTIME | 24 | 10 |  | Inter-word transfer time |
 
 ## 12565A Disc Interface with Two 2883 Drives
 
@@ -5132,11 +5132,11 @@ SET DQCn \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action***                                          |
+| Option | Action |
 |--------------|-------------------------------------------------------|
-| **SC=\<n\>** | Set the interface card select codes; default is 24/25 |
-| **ENABLED**  | Enable the device; default                            |
-| **DISABLED** | Disable the device                                    |
+| `SC=\<n\>` | Set the interface card select codes; default is 24/25 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 When entering the ***SC*** option, specify the lower select code with
 either device name; the higher select code will be set automatically,
@@ -5144,20 +5144,20 @@ and the cards will be assigned in the correct order.
 
 Device configuration may be displayed with the following command:
 
-| ***Command*** | ***Action***                              |
+| Command | Action |
 |---------------|-------------------------------------------|
-| **SHOW DQC**  | Display the device and unit configuration |
+| `SHOW DQC` | Display the device and unit configuration |
 
 Unit options that may be specified for individual disc drives are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **UNLOAD** | Set the drive’s Run/Stop switch to *Stop*; default when detached |
-| **LOAD** | Set the drive’s Run/Stop switch to *Run*; default when attached |
-| **PROTECT** | Prohibit writing to the drive |
-| **UNPROTECT** | Permit writing to the drive; default |
-| **ENABLED** | Enable the unit; default |
-| **DISABLED** | Disable the unit |
+| `UNLOAD` | Set the drive’s Run/Stop switch to *Stop*; default when detached |
+| `LOAD` | Set the drive’s Run/Stop switch to *Run*; default when attached |
+| `PROTECT` | Prohibit writing to the drive |
+| `UNPROTECT` | Permit writing to the drive; default |
+| `ENABLED` | Enable the unit; default |
+| `DISABLED` | Disable the unit |
 
 The ***UNLOAD*** and ***LOAD*** options unload and load the drive's
 heads from the disc pack, setting the drive not-ready and ready,
@@ -5282,49 +5282,49 @@ The success or failure of the transfer is not checked.
 When a debug log has been established, tracing may be configured for
 each card separately by specifying the reporting level option:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***IOBUS*** option traces the I/O backplane signals and data
 received and returned by the interface.
 
 The Data PCA state contains these registers:
 
-| ***Name***         | ***Size*** | ***Radix*** | ***Action***              |
+| Name | Size | Radix | Action |
 |--------------------|:----------:|:-----------:|---------------------------|
-| **IBUF**           |     16     |      8      | Input buffer              |
-| **OBUF**           |     16     |      8      | Output buffer             |
-| **DBUF \[0:127\]** |     16     |      8      | Sector buffer             |
-| **BPTR**           |     7      |     10      | Sector buffer pointer     |
-| **CMD**            |     1      |      2      | Command flip-flop         |
-| **CTL**            |     1      |      2      | Control flip-flop         |
-| **FLG**            |     1      |      2      | Flag flip-flop            |
-| **FBF**            |     1      |      2      | Flag buffer flip-flop     |
-| **XFER**           |     1      |      2      | Transfer in progress flag |
-| **WVAL**           |     1      |      2      | Write data valid flag     |
+| `IBUF` | 16 | 8 | Input buffer |
+| `OBUF` | 16 | 8 | Output buffer |
+| `DBUF \[0:127\]` | 16 | 8 | Sector buffer |
+| `BPTR` | 7 | 10 | Sector buffer pointer |
+| `CMD` | 1 | 2 | Command flip-flop |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `XFER` | 1 | 2 | Transfer in progress flag |
+| `WVAL` | 1 | 2 | Write data valid flag |
 
 The Control PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Read-Only*** | ***Action*** |
-|----|:--:|:--:|:--:|----|
-| **OBUF** | 16 | 8 |  | Output buffer |
-| **BUSY** | 2 | 8 | ✔ | Busy unit number + 1 |
-| **CNT** | 9 | 8 |  | Check record counter |
-| **CMD** | 1 | 2 |  | Command flip-flop |
-| **CTL** | 1 | 2 |  | Control flip-flop |
-| **FLG** | 1 | 2 |  | Flag flip-flop |
-| **FBF** | 1 | 2 |  | Flag buffer flip-flop |
-| **RARC** | 8 | 10 |  | Record address register (cylinder) |
-| **RARH** | 5 | 10 |  | Record address register (head) |
-| **RARS** | 5 | 10 |  | Record address register (sector) |
-| **CYL \[0:1\]** | 8 | 10 |  | Current cylinder, drives 0-1 |
-| **HED \[0:1\]** | 5 | 10 |  | Current head, drives 0-1 |
-| **STA \[0:1\]** | 16 | 8 |  | Drive status, drives 0-1 |
-| **CTIME** | 24 | 10 |  | Data transfer command delay time |
-| **DTIME** | 24 | 10 |  | Data channel command delay time |
-| **STIME** | 24 | 10 |  | Seek delay time, per cylinder |
-| **XTIME** | 24 | 10 |  | Inter-word transfer time |
+| Name | Size | Radix | Read-Only | Action |
+| ---- | :--: | :--: | :--: | ---- |
+| OBUF | 16 | 8 |  | Output buffer |
+| BUSY | 2 | 8 | ✔ | Busy unit number + 1 |
+| CNT | 9 | 8 |  | Check record counter |
+| CMD | 1 | 2 |  | Command flip-flop |
+| CTL | 1 | 2 |  | Control flip-flop |
+| FLG | 1 | 2 |  | Flag flip-flop |
+| FBF | 1 | 2 |  | Flag buffer flip-flop |
+| RARC | 8 | 10 |  | Record address register (cylinder) |
+| RARH | 5 | 10 |  | Record address register (head) |
+| RARS | 5 | 10 |  | Record address register (sector) |
+| CYL \[0:1\] | 8 | 10 |  | Current cylinder, drives 0-1 |
+| HED \[0:1\] | 5 | 10 |  | Current head, drives 0-1 |
+| STA \[0:1\] | 16 | 8 |  | Drive status, drives 0-1 |
+| CTIME | 24 | 10 |  | Data transfer command delay time |
+| DTIME | 24 | 10 |  | Data channel command delay time |
+| STIME | 24 | 10 |  | Seek delay time, per cylinder |
+| XTIME | 24 | 10 |  | Inter-word transfer time |
 
 ## 12606B Disc Memory Interface with One 2770/2771 Disc, 12610B Drum Memory Interface with One 2773/2774/2775 Drum
 
@@ -5340,18 +5340,18 @@ The storage capacity of the HP 277x drives is expandable by adding sets
 of heads to the base model. This simulation supports the following
 models and options:
 
-| ***Model-Option*** | ***Tracks*** | ***Sectors*** | ***Words*** | ***Capacity*** |
+| Model-Option | Tracks | Sectors | Words | Capacity |
 |--------------------|:------------:|:-------------:|:-----------:|:--------------:|
-| **2770A**          |      32      |      90       |     64      |     180 KW     |
-| **2771A**          |      64      |      90       |     64      |     360 KW     |
-| **2771A-001**      |     128      |      90       |     64      |     720 KW     |
-| **2773A**          |     192      |      32       |     64      |     384 KW     |
-| **2773A-001**      |     256      |      32       |     64      |     512 KW     |
-| **2773A-002**      |     320      |      32       |     64      |     640 KW     |
-| **2774A**          |     384      |      32       |     64      |     768 KW     |
-| **2774A-001**      |     448      |      32       |     64      |     896 KW     |
-| **2774A-002**      |     512      |      32       |     64      |    1024 KW     |
-| **2775A**          |     768      |      32       |     64      |    1536 KW     |
+| `2770A` | 32 | 90 | 64 | 180 KW |
+| `2771A` | 64 | 90 | 64 | 360 KW |
+| `2771A-001` | 128 | 90 | 64 | 720 KW |
+| `2773A` | 192 | 32 | 64 | 384 KW |
+| `2773A-001` | 256 | 32 | 64 | 512 KW |
+| `2773A-002` | 320 | 32 | 64 | 640 KW |
+| `2774A` | 384 | 32 | 64 | 768 KW |
+| `2774A-001` | 448 | 32 | 64 | 896 KW |
+| `2774A-002` | 512 | 32 | 64 | 1024 KW |
+| `2775A` | 768 | 32 | 64 | 1536 KW |
 
 Attaching a disc or drum image file to a unit simulates applying power
 to the drive:
@@ -5381,11 +5381,11 @@ SET DRC \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option*** | ***Action***                                          |
+| Option | Action |
 |--------------|-------------------------------------------------------|
-| **SC=\<n\>** | Set the interface card select codes; default is 26/27 |
-| **ENABLED**  | Enable the device; default                            |
-| **DISABLED** | Disable the device                                    |
+| `SC=\<n\>` | Set the interface card select codes; default is 26/27 |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 When entering the ***SC*** option, specify the lower select code with
 either device name; the higher select code will be set automatically,
@@ -5393,31 +5393,31 @@ and the cards will be assigned in the correct order.
 
 Device configuration may be displayed with the following command:
 
-| ***Command*** | ***Action***                              |
+| Command | Action |
 |---------------|-------------------------------------------|
-| **SHOW DRC**  | Display the device and unit configuration |
+| `SHOW DRC` | Display the device and unit configuration |
 
 Unit options that may be specified are:
 
-| ***Option***        | ***Action***                                     |
+| Option | Action |
 |---------------------|--------------------------------------------------|
-| **180K**            | Use the 12606B interface and 2770A drive         |
-| **360K**            | Use the 12606B interface and 2771A drive         |
-| **720K**            | Use the 12606B interface and 2771A-001 drive     |
-| **384K**            | Use the 12610B interface and 2773A drive         |
-| **512K**            | Use the 12610B interface and 2773A-001 drive     |
-| **640K**            | Use the 12610B interface and 2773A-002 drive     |
-| **768K**            | Use the 12610B interface and 2774A drive         |
-| **896K**            | Use the 12610B interface and 2774A-001 drive     |
-| **1024K**           | Use the 12610B interface and 2774A-002 drive     |
-| **1536K**           | Use the 12610B interface and 2775A drive         |
-| **PROTECT**         | Prohibit writing to the protected tracks         |
-| **UNPROTECT**       | Permit writing to all tracks; default            |
-| **TRACKPROT=\<n\>** | Set the number of protected tracks; default is 1 |
+| `180K` | Use the 12606B interface and 2770A drive |
+| `360K` | Use the 12606B interface and 2771A drive |
+| `720K` | Use the 12606B interface and 2771A-001 drive |
+| `384K` | Use the 12610B interface and 2773A drive |
+| `512K` | Use the 12610B interface and 2773A-001 drive |
+| `640K` | Use the 12610B interface and 2773A-002 drive |
+| `768K` | Use the 12610B interface and 2774A drive |
+| `896K` | Use the 12610B interface and 2774A-001 drive |
+| `1024K` | Use the 12610B interface and 2774A-002 drive |
+| `1536K` | Use the 12610B interface and 2775A drive |
+| `PROTECT` | Prohibit writing to the protected tracks |
+| `UNPROTECT` | Permit writing to all tracks; default |
+| `TRACKPROT=\<n\>` | Set the number of protected tracks; default is 1 |
 
 The ***180K***, ***360K***, and ***720K*** options set the interface
 type and drive model for the fixed-head disc. The ***384K***,
-***512K***, ***640K***, ***768K***, ***896K***, ***1024K***, and
+`512K`, ***640K***, ***768K***, ***896K***, `1024K`, and
 ***1536K*** set the interface type and drive model for the fixed-head
 drum.
 
@@ -5477,31 +5477,31 @@ a **Command not allowed** error.
 When a debug log has been established, tracing may be configured for
 each card separately by specifying the reporting level option:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***IOBUS*** option traces the I/O backplane signals and data
 received and returned by the interface.
 
 The Data PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Action***          |
+| Name | Size | Radix | Action |
 |------------|:----------:|:-----------:|-----------------------|
-| **IBUF**   |     16     |      8      | Input buffer          |
-| **OBUF**   |     16     |      8      | Output buffer         |
-| **CTL**    |     1      |      2      | Control flip-flop     |
-| **FLG**    |     1      |      2      | Flag flip-flop        |
-| **BPTR**   |     6      |      8      | Sector buffer pointer |
+| `IBUF` | 16 | 8 | Input buffer |
+| `OBUF` | 16 | 8 | Output buffer |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `BPTR` | 6 | 8 | Sector buffer pointer |
 
 The Control PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Action***             |
+| Name | Size | Radix | Action |
 |------------|:----------:|:-----------:|--------------------------|
-| **CW**     |     16     |      8      | Command word             |
-| **STA**    |     16     |      8      | Status word              |
-| **RUN**    |     1      |      2      | Run flip-flop            |
-| **TIME**   |     24     |     10      | Inter-word transfer time |
+| `CW` | 16 | 8 | Command word |
+| `STA` | 16 | 8 | Status word |
+| `RUN` | 1 | 2 | Run flip-flop |
+| `TIME` | 24 | 10 | Inter-word transfer time |
 
 ## 12821A Disc Interface with Four 7906H/7920H/7925H Drives
 
@@ -5558,16 +5558,16 @@ SET DAn \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                      |
+| Option | Action |
 |----------------------|---------------------------------------------------|
-| **ADDRESS=\<n\>**    | Set the HP-IB address; default is 0               |
-| **DIAGNOSTIC**       | Connect the HP-IB cable to a second interface     |
-| **HPIB**             | Connect the HP-IB cable to the drives             |
-| **SC=\<n\>**         | Set the interface card select code; default is 43 |
-| **DEBUG=\<option\>** | Enable tracing                                    |
-| **NODEBUG**          | Disable tracing; default                          |
-| **ENABLED**          | Enable the device; default                        |
-| **DISABLED**         | Disable the device                                |
+| `ADDRESS=\<n\>` | Set the HP-IB address; default is 0 |
+| `DIAGNOSTIC` | Connect the HP-IB cable to a second interface |
+| `HPIB` | Connect the HP-IB cable to the drives |
+| `SC=\<n\>` | Set the interface card select code; default is 43 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The ***ADDRESS*** option configures the interface to use the specified
 HP-IB address from 0-7. The interface address is independent of the disc
@@ -5582,30 +5582,30 @@ interface and the drives.
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***     | ***Action***                              |
+| Command | Action |
 |-------------------|-------------------------------------------|
-| **SHOW DA**       | Display the device and unit configuration |
-| **SHOW DA CABLE** | Display the HP-IB cable configuration     |
-| **SHOW DA BUS**   | Display the bus address                   |
+| `SHOW DA` | Display the device and unit configuration |
+| `SHOW DA CABLE` | Display the HP-IB cable configuration |
+| `SHOW DA BUS` | Display the bus address |
 
 ### Unit Options
 
 Unit options that may be specified for individual disc drives are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **7906H** | Set the drive type to 7906H; default |
-| **7920H** | Set the drive type to 7920H |
-| **7925H** | Set the drive type to 7925H |
-| **BUS=\<n\>** | Set the drive’s HP-IB address; default is the unit number |
-| **UNLOAD** | Set the drive’s Run/Stop switch to *Stop*; default when detached |
-| **LOAD** | Set the drive’s Run/Stop switch to *Run*; default when attached |
-| **PROTECT** | Set the drive’s Disc Protect or Read Only switch to *On* |
-| **UNPROTECT** | Set the drive’s Disc Protect or Read Only switch to *Off* |
-| **FORMAT** | Set the drive’s Format switch to *Enabled* |
-| **NOFORMAT** | Set the drive’s Format switch to *Disabled*; default |
-| **ENABLED** | Enable the unit; default |
-| **DISABLED** | Disable the unit |
+| `7906H` | Set the drive type to 7906H; default |
+| `7920H` | Set the drive type to 7920H |
+| `7925H` | Set the drive type to 7925H |
+| `BUS=\<n\>` | Set the drive’s HP-IB address; default is the unit number |
+| `UNLOAD` | Set the drive’s Run/Stop switch to *Stop*; default when detached |
+| `LOAD` | Set the drive’s Run/Stop switch to *Run*; default when attached |
+| `PROTECT` | Set the drive’s Disc Protect or Read Only switch to *On* |
+| `UNPROTECT` | Set the drive’s Disc Protect or Read Only switch to *Off* |
+| `FORMAT` | Set the drive’s Format switch to *Enabled* |
+| `NOFORMAT` | Set the drive’s Format switch to *Disabled*; default |
+| `ENABLED` | Enable the unit; default |
+| `DISABLED` | Disable the unit |
 
 The ***7906H***, ***7920H***, and ***7925H*** options select the disc
 drive model.
@@ -5634,9 +5634,9 @@ subject to the appropriate drive protection status.
 
 Drive configuration may be displayed with the following command:
 
-| ***Command***    | ***Action***                               |
+| Command | Action |
 |------------------|--------------------------------------------|
-| **SHOW DA\<n\>** | Display the selected drive’s configuration |
+| `SHOW DA\<n\>` | Display the selected drive’s configuration |
 
 ### LOAD and BOOT Commands
 
@@ -5725,19 +5725,19 @@ execute a ***LOAD DA*** or ***BOOT DA*** command will be rejected with a
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **RWSC**     | Controller read, write, status, and control commands |
-| **CMDS**     | Interface commands received from the CPU             |
-| **CPU**      | Words received from and sent to the CPU              |
-| **BUF**      | Data read from and written to the interface FIFO     |
-| **XFER**     | Data received and transmitted via HP-IB              |
-| **SERV**     | Disc unit service events                             |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `RWSC` | Controller read, write, status, and control commands |
+| `CMDS` | Interface commands received from the CPU |
+| `CPU` | Words received from and sent to the CPU |
+| `BUF` | Data read from and written to the interface FIFO |
+| `XFER` | Data received and transmitted via HP-IB |
+| `SERV` | Disc unit service events |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***RWSC*** option traces the read, write, status, and control
 commands executed by the disc controller. The ***CMDS*** option traces
-the commands executed by the interface. The ***CPU*** option traces
+the commands executed by the interface. The `CPU` option traces
 words received from (control and write data) and sent to (status and
 read data) the CPU. The ***BUF*** option traces loads into and unloads
 from the interface FIFO. The ***XFER*** option traces the data words
@@ -5765,28 +5765,28 @@ Examples of the trace formats follow:
 
 The Disc Interface state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description*** |
-|----|:--:|:--:|----|
-| **CWR** | 16 | 8 | Control word register |
-| **SWR** | 16 | 8 | Status word register |
-| **IDR** | 16 | 8 | Input data register |
-| **FCNT** | 5 | 10 | FIFO fill count |
-| **FIFO \[0:15\]** | 20 | 8 | Data FIFO |
-| **ACPT** | 4 | 2 | Bus acceptor units bitmap |
-| **LSTN** | 4 | 2 | Bus listener units bitmap |
-| **TALK** | 4 | 2 | Bus talker unit bitmap |
-| **PPR** | 8 | 2 | Parallel poll response bitmap |
-| **BUSCTL** | 8 | 2 | HP-IB control lines |
-| **CTL** | 1 | 2 | Interface control |
-| **FLG** | 1 | 2 | Interface flag |
-| **FBF** | 1 | 2 | Interface flag buffer |
-| **SRQ** | 1 | 2 | Interface DCPC service request |
-| **EDT** | 1 | 2 | End of data transfer flag |
-| **EOR** | 1 | 2 | End of record flag |
-| **BUFFER \[0:137\]** | 16 | 8 | Sector buffer |
-| **DSJ \[0:3\]** | 2 | 10 | Controller Device-Specified Jump, drives 0-3 |
-| **ISTATE \[0:3\]** | 4 | 10 | Interface state, drives 0-3 |
-| **ICMD \[0:3\]** | 4 | 10 | Interface command, drives 0-3 |
+| Name | Size | Radix | Description |
+| ---- | :--: | :--: | ---- |
+| CWR | 16 | 8 | Control word register |
+| SWR | 16 | 8 | Status word register |
+| IDR | 16 | 8 | Input data register |
+| FCNT | 5 | 10 | FIFO fill count |
+| FIFO \[0:15\] | 20 | 8 | Data FIFO |
+| ACPT | 4 | 2 | Bus acceptor units bitmap |
+| LSTN | 4 | 2 | Bus listener units bitmap |
+| TALK | 4 | 2 | Bus talker unit bitmap |
+| PPR | 8 | 2 | Parallel poll response bitmap |
+| BUSCTL | 8 | 2 | HP-IB control lines |
+| CTL | 1 | 2 | Interface control |
+| FLG | 1 | 2 | Interface flag |
+| FBF | 1 | 2 | Interface flag buffer |
+| SRQ | 1 | 2 | Interface DCPC service request |
+| EDT | 1 | 2 | End of data transfer flag |
+| EOR | 1 | 2 | End of record flag |
+| BUFFER \[0:137\] | 16 | 8 | Sector buffer |
+| DSJ \[0:3\] | 2 | 10 | Controller Device-Specified Jump, drives 0-3 |
+| ISTATE \[0:3\] | 4 | 10 | Interface state, drives 0-3 |
+| ICMD \[0:3\] | 4 | 10 | Interface command, drives 0-3 |
 
 ## 13175D Disc Controller Interface with Eight 7905/7906/7920/7925 Drives
 
@@ -5845,39 +5845,39 @@ SET DSn \<unit-option\>
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                      |
+| Option | Action |
 |----------------------|---------------------------------------------------|
-| **SC=\<n\>**         | Set the interface card select code; default is 34 |
-| **DEBUG=\<option\>** | Enable tracing                                    |
-| **NODEBUG**          | Disable tracing; default                          |
-| **ENABLED**          | Enable the device; default                        |
-| **DISABLED**         | Disable the device                                |
+| `SC=\<n\>` | Set the interface card select code; default is 34 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 Device configuration may be displayed with the following commands:
 
-| ***Command*** | ***Action***                              |
+| Command | Action |
 |---------------|-------------------------------------------|
-| **SHOW DS**   | Display the device and unit configuration |
+| `SHOW DS` | Display the device and unit configuration |
 
 ### Unit Options
 
 Unit options that may be specified for individual disc drives are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **7905** | Set the drive type to 7905; default |
-| **7906** | Set the drive type to 7906 |
-| **7920** | Set the drive type to 7920 |
-| **7925** | Set the drive type to 7925 |
-| **AUTOSIZE** | Set the drive type based on the attached file size |
-| **UNLOAD** | Set the drive’s Run/Stop switch to *Stop*; default when detached |
-| **LOAD** | Set the drive’s Run/Stop switch to *Run*; default when attached |
-| **PROTECT** | Set the drive’s Disc Protect or Read Only switch to *On* |
-| **UNPROTECT** | Set the drive’s Disc Protect or Read Only switch to *Off* |
-| **FORMAT** | Set the drive’s Format switch to *Enabled* |
-| **NOFORMAT** | Set the drive’s Format switch to *Disabled*; default |
-| **ENABLED** | Enable the unit; default |
-| **DISABLED** | Disable the unit |
+| 7905 | Set the drive type to 7905; default |
+| 7906 | Set the drive type to 7906 |
+| 7920 | Set the drive type to 7920 |
+| 7925 | Set the drive type to 7925 |
+| `AUTOSIZE` | Set the drive type based on the attached file size |
+| `UNLOAD` | Set the drive’s Run/Stop switch to *Stop*; default when detached |
+| `LOAD` | Set the drive’s Run/Stop switch to *Run*; default when attached |
+| `PROTECT` | Set the drive’s Disc Protect or Read Only switch to *On* |
+| `UNPROTECT` | Set the drive’s Disc Protect or Read Only switch to *Off* |
+| `FORMAT` | Set the drive’s Format switch to *Enabled* |
+| `NOFORMAT` | Set the drive’s Format switch to *Disabled*; default |
+| `ENABLED` | Enable the unit; default |
+| `DISABLED` | Disable the unit |
 
 The ***7905***, ***7906***, ***7920***, and ***7925*** options select
 the disc drive model. The ***AUTOSIZE*** option selects the disc drive
@@ -5906,9 +5906,9 @@ command, subject to the appropriate drive protection status.
 
 Drive configuration may be displayed with the following command:
 
-| ***Command***    | ***Action***                               |
+| Command | Action |
 |------------------|--------------------------------------------|
-| **SHOW DS\<n\>** | Display the selected drive’s configuration |
+| `SHOW DS\<n\>` | Display the selected drive’s configuration |
 
 ### LOAD and BOOT Commands
 
@@ -6088,18 +6088,18 @@ Loader execution ends with one of the following instructions:
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **RWSC**     | Controller read, write, status, and control commands |
-| **CMDS**     | Interface commands received from the CPU             |
-| **CPU**      | Words received from and sent to the CPU              |
-| **BUF**      | Data read from and written to the interface FIFO     |
-| **SERV**     | Disc unit service events                             |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `RWSC` | Controller read, write, status, and control commands |
+| `CMDS` | Interface commands received from the CPU |
+| `CPU` | Words received from and sent to the CPU |
+| `BUF` | Data read from and written to the interface FIFO |
+| `SERV` | Disc unit service events |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***RWSC*** option traces the read, write, status, and control
 commands executed by the disc controller. The ***CMDS*** option traces
-the commands executed by the interface. The ***CPU*** option traces
+the commands executed by the interface. The `CPU` option traces
 words received from (control and write data) and sent to (status and
 read data) the CPU. The ***BUF*** option traces loads into and unloads
 from the interface FIFO. The ***IOBUS*** option traces the I/O backplane
@@ -6122,43 +6122,43 @@ Examples of the trace formats follow:
 
 The Disc Interface state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Description*** |
-|----|:--:|:--:|----|
-| **CMFOL** | 1 | 2 | Command follows flip-flop |
-| **CMRDY** | 1 | 2 | Command ready flip-flop |
-| **FCNT** | 5 | 10 | FIFO fill count |
-| **FIFO \[0:15\]** | 16 | 8 | Data FIFO |
-| **STATE** | 2 | 8 | Controller state |
-| **OPCODE** | 6 | 8 | Current operation code |
-| **STATUS** | 6 | 8 | Last operation status |
-| **EOC** | 1 | 2 | End of cylinder flip-flop |
-| **EOD** | 1 | 2 | End of data flip-flop |
-| **SPDU** | 16 | 8 | S/P/D flags and last unit |
-| **FLMASK** | 4 | 8 | File mask |
-| **CYL** | 16 | 10 | Controller cylinder |
-| **HEAD** | 6 | 10 | Controller head |
-| **SECTOR** | 8 | 10 | Controller sector |
-| **VFYCNT** | 16 | 8 | Verify counter |
-| **LASPOL** | 3 | 8 | Last unit polled |
-| **BUFFER \[0:137\]** | 16 | 8 | Sector buffer |
-| **INDEX** | 8 | 10 | Buffer index |
-| **LENGTH** | 8 | 10 | Buffer length |
-| **STIME** | 24 | 10 | Per-cylinder seek delay time |
-| **ITIME** | 24 | 10 | Intersector delay time |
-| **CTIME** | 24 | 10 | Command response time |
-| **DTIME** | 24 | 10 | Data transfer response time |
-| **WTIME** | 31 | 10 | Command wait time |
-| **CTL** | 1 | 2 | Interface control flip-flop |
-| **FLG** | 1 | 2 | Interface flag flip-flop |
-| **FBF** | 1 | 2 | Interface flag buffer flip-flop |
-| **SRQ** | 1 | 2 | Interface DCPC service request flip-flop |
-| **EDT** | 1 | 2 | End of data transfer flag |
-| **UCYL \[0:9\]** | 10 | 10 | Current cylinder, drives 0-7, controller, and timer |
-| **UOP \[0:9\]** | 6 | 8 | Current operation code, drives 0-7, controller, and timer |
-| **USTAT \[0:9\]** | 8 | 2 | Unit status, drives 0-7, controller, and timer |
-| **UPHASE \[0:9\]** | 3 | 8 | Current command state, drives 0-7, controller, and timer |
-| **UPOS \[0:9\]** | 32 | 8 | Current byte position, drives 0-7, controller, and timer |
-| **UWAIT \[0:9\]** | 32 | 8 | Scheduled wait delay, drives 0-7, controller, and timer |
+| Name | Size | Radix | Description |
+| ---- | :--: | :--: | ---- |
+| CMFOL | 1 | 2 | Command follows flip-flop |
+| CMRDY | 1 | 2 | Command ready flip-flop |
+| FCNT | 5 | 10 | FIFO fill count |
+| FIFO \[0:15\] | 16 | 8 | Data FIFO |
+| STATE | 2 | 8 | Controller state |
+| OPCODE | 6 | 8 | Current operation code |
+| STATUS | 6 | 8 | Last operation status |
+| EOC | 1 | 2 | End of cylinder flip-flop |
+| EOD | 1 | 2 | End of data flip-flop |
+| SPDU | 16 | 8 | S/P/D flags and last unit |
+| FLMASK | 4 | 8 | File mask |
+| CYL | 16 | 10 | Controller cylinder |
+| HEAD | 6 | 10 | Controller head |
+| SECTOR | 8 | 10 | Controller sector |
+| VFYCNT | 16 | 8 | Verify counter |
+| LASPOL | 3 | 8 | Last unit polled |
+| BUFFER \[0:137\] | 16 | 8 | Sector buffer |
+| INDEX | 8 | 10 | Buffer index |
+| LENGTH | 8 | 10 | Buffer length |
+| STIME | 24 | 10 | Per-cylinder seek delay time |
+| ITIME | 24 | 10 | Intersector delay time |
+| CTIME | 24 | 10 | Command response time |
+| DTIME | 24 | 10 | Data transfer response time |
+| WTIME | 31 | 10 | Command wait time |
+| CTL | 1 | 2 | Interface control flip-flop |
+| FLG | 1 | 2 | Interface flag flip-flop |
+| FBF | 1 | 2 | Interface flag buffer flip-flop |
+| SRQ | 1 | 2 | Interface DCPC service request flip-flop |
+| EDT | 1 | 2 | End of data transfer flag |
+| UCYL \[0:9\] | 10 | 10 | Current cylinder, drives 0-7, controller, and timer |
+| UOP \[0:9\] | 6 | 8 | Current operation code, drives 0-7, controller, and timer |
+| USTAT \[0:9\] | 8 | 2 | Unit status, drives 0-7, controller, and timer |
+| UPHASE \[0:9\] | 3 | 8 | Current command state, drives 0-7, controller, and timer |
+| UPOS \[0:9\] | 32 | 8 | Current byte position, drives 0-7, controller, and timer |
+| UWAIT \[0:9\] | 32 | 8 | Scheduled wait delay, drives 0-7, controller, and timer |
 
 # Magnetic Tape I/O Device Simulations
 
@@ -6207,12 +6207,12 @@ error).
 
 Device options that may be specified with the ***SET MTC*** command are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **FORMAT=\<fmt\>** | Set the tape image format; default is SIMH format |
-| **SC=\<n\>** | Set the interface card select codes; defaults are 20/11 |
-| **ENABLED** | Enable the device; |
-| **DISABLED** | Disable the device; default |
+| `FORMAT=\<fmt\>` | Set the tape image format; default is SIMH format |
+| `SC=\<n\>` | Set the interface card select codes; defaults are 20/11 |
+| `ENABLED` | Enable the device; |
+| `DISABLED` | Disable the device; default |
 
 The tape image format for future ***ATTACH*** commands may be set to one
 of the format identifiers listed above. The unit must be detached when
@@ -6224,49 +6224,49 @@ and the cards will be assigned in the correct order.
 
 Drive configuration may be displayed with the following commands:
 
-| ***Command***       | ***Action***                          |
+| Command | Action |
 |---------------------|---------------------------------------|
-| **SHOW MTC**        | Display the drive’s configuration     |
-| **SHOW MTC FORMAT** | Display the drive’s tape image format |
+| `SHOW MTC` | Display the drive’s configuration |
+| `SHOW MTC FORMAT` | Display the drive’s tape image format |
 
 The ***BOOT*** command is not supported. The 12559C is disabled by default.
 
 When a debug log has been established, tracing may be configured for
 each card separately by specifying the reporting level option:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***IOBUS*** option traces the I/O backplane signals and data
 received and returned by the interface.
 
 The Data PCA state contains these registers:
 
-| ***Name***           | ***Size*** | ***Radix*** | ***Action***           |
+| Name | Size | Radix | Action |
 |----------------------|:----------:|:-----------:|------------------------|
-| **FLG**              |     1      |      2      | Flag flip-flop         |
-| **FBF**              |     1      |      2      | Flag buffer flip-flop  |
-| **DBUF \[0:65535\]** |     8      |      8      | Tape record buffer     |
-| **BPTR**             |     17     |     10      | Buffer pointer         |
-| **BMAX**             |     17     |     10      | Buffer size for writes |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `DBUF \[0:65535\]` | 8 | 8 | Tape record buffer |
+| `BPTR` | 17 | 10 | Buffer pointer |
+| `BMAX` | 17 | 10 | Buffer size for writes |
 
 The Control PCA state contains these registers:
 
-| ***Name*** | ***Size*** | ***Radix*** | ***Action***                    |
+| Name | Size | Radix | Action |
 |------------|:----------:|:-----------:|---------------------------------|
-| **FNC**    |     8      |      8      | Current function                |
-| **STA**    |     9      |      8      | Tape status                     |
-| **BUF**    |     8      |      8      | Command buffer                  |
-| **CTL**    |     1      |      2      | Control flip-flop               |
-| **FLG**    |     1      |      2      | Flag flip-flop                  |
-| **FBF**    |     1      |      2      | Flag buffer flip-flop           |
-| **DTF**    |     1      |      2      | Data transfer flip-flop         |
-| **FSVC**   |     1      |      2      | First service flip-flop         |
-| **POS**    |     32     |     10      | Tape position                   |
-| **CTIME**  |     24     |     10      | Command delay time              |
-| **GTIME**  |     24     |     10      | Inter-record gap traversal time |
-| **XTIME**  |     24     |     10      | Inter-word transfer time        |
+| `FNC` | 8 | 8 | Current function |
+| `STA` | 9 | 8 | Tape status |
+| `BUF` | 8 | 8 | Command buffer |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `DTF` | 1 | 2 | Data transfer flip-flop |
+| `FSVC` | 1 | 2 | First service flip-flop |
+| `POS` | 32 | 10 | Tape position |
+| `CTIME` | 24 | 10 | Command delay time |
+| `GTIME` | 24 | 10 | Inter-record gap traversal time |
+| `XTIME` | 24 | 10 | Inter-word transfer time |
 
 ## 13181B Digital Magnetic Tape Unit Interface with Four 7970B Drives, 13183B Digital Magnetic Tape Unit Interface with Four 7970E Drives
 
@@ -6321,17 +6321,17 @@ SET MSCn \<unit-option\>
 
 The device options that may be specified are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **13181** | Use the 13181B interface and 7970B drives; default |
-| **13183** | Use the 13183B interface and 7970E drives |
-| **FASTTIME** | Use optimized timing; default |
-| **REALTIME** | Use realistic timing |
-| **SC=\<n\>** | Set the interface card select codes; defaults are 30/31 |
-| **DEBUG=\<option\>** | Enable tracing |
-| **NODEBUG** | Disable tracing; default |
-| **ENABLED** | Enable the device; default |
-| **DISABLED** | Disable the device |
+| 13181 | Use the 13181B interface and 7970B drives; default |
+| 13183 | Use the 13183B interface and 7970E drives |
+| `FASTTIME` | Use optimized timing; default |
+| `REALTIME` | Use realistic timing |
+| `SC=\<n\>` | Set the interface card select codes; defaults are 30/31 |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing; default |
+| `ENABLED` | Enable the device; default |
+| `DISABLED` | Disable the device |
 
 The ***13181*** and ***13183*** options set the interface type and, by
 implication, the tape drive type.
@@ -6361,25 +6361,25 @@ and the cards will be assigned in the correct order.
 
 Device configuration may be displayed with the following commands:
 
-| ***Command***       | ***Action***                              |
+| Command | Action |
 |---------------------|-------------------------------------------|
-| **SHOW MSC**        | Display the device and unit configuration |
-| **SHOW MSC TIMING** | Display the timing mode                   |
-| **SHOW MSC TYPE**   | Display the interface type                |
+| `SHOW MSC` | Display the device and unit configuration |
+| `SHOW MSC TIMING` | Display the timing mode |
+| `SHOW MSC TYPE` | Display the interface type |
 
 ### Unit Options
 
 Unit options that may be specified for individual tape drives are:
 
-| ***Option*** | ***Action*** |
+| Option | Action |
 |----|----|
-| **OFFLINE** | Set the unit offline; default when detached |
-| **ONLINE** | Set the unit online; default when attached |
-| **REEL=\<n\>** | Set the reel size in feet; default is unlimited |
-| **CAPACITY=\<n\>** | Set the reel capacity in megabytes; default is unlimited |
-| **FORMAT=\<fmt\>** | Set the tape image format; default is SIMH format |
-| **ENABLED** | Enable the unit; default |
-| **DISABLED** | Disable the unit |
+| `OFFLINE` | Set the unit offline; default when detached |
+| `ONLINE` | Set the unit online; default when attached |
+| `REEL=\<n\>` | Set the reel size in feet; default is unlimited |
+| `CAPACITY=\<n\>` | Set the reel capacity in megabytes; default is unlimited |
+| `FORMAT=\<fmt\>` | Set the tape image format; default is SIMH format |
+| `ENABLED` | Enable the unit; default |
+| `DISABLED` | Disable the unit |
 
 The ***OFFLINE*** and ***ONLINE*** options place a drive offline and
 online, respectively. The former provides a convenient method of setting
@@ -6396,12 +6396,12 @@ the format is set.
 
 Drive configuration may be displayed with the following commands:
 
-| ***Command*** | ***Action*** |
+| Command | Action |
 |----|----|
-| **SHOW MSC\<n\>** | Display the selected drive’s configuration |
-| **SHOW MSC\<n\> REEL** | Display the selected drive’s reel size or capacity |
-| **SHOW MSC\<n\> CAPACITY** | Display the selected drive’s reel size or capacity |
-| **SHOW MSC\<n\> FORMAT** | Display the selected drive’s tape image format |
+| `SHOW MSC\<n\>` | Display the selected drive’s configuration |
+| `SHOW MSC\<n\> REEL` | Display the selected drive’s reel size or capacity |
+| `SHOW MSC\<n\> CAPACITY` | Display the selected drive’s reel size or capacity |
+| `SHOW MSC\<n\> FORMAT` | Display the selected drive’s tape image format |
 
 ### LOAD and BOOT Commands
 
@@ -6569,16 +6569,16 @@ Loader execution ends with one of the following halt instructions:
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                                |
+| Option | Reporting Level |
 |--------------|------------------------------------------------------|
-| **CMDS**     | Controller command initiations and completions       |
-| **RWS**      | Tape reads, writes, and status returns               |
-| **CPU**      | Words received from and sent to the CPU              |
-| **IOBUS**    | I/O bus signals and data words received and returned |
+| `CMDS` | Controller command initiations and completions |
+| `RWS` | Tape reads, writes, and status returns |
+| `CPU` | Words received from and sent to the CPU |
+| `IOBUS` | I/O bus signals and data words received and returned |
 
 The ***CMDS*** option traces the commands executed by the tape
 controller. The ***RWS*** option traces the read, write, and status
-commands executed by the controller. The ***CPU*** option traces words
+commands executed by the controller. The `CPU` option traces words
 received from (control and write data) and sent to (status and read
 data) the CPU. The ***IOBUS*** option traces the I/O backplane signals
 and data received and returned via the interface.
@@ -6596,31 +6596,31 @@ Examples of the trace formats follow:
 
 The Data PCA state contains these registers:
 
-| ***Name***           | ***Size*** | ***Radix*** | ***Action***           |
+| Name | Size | Radix | Action |
 |----------------------|:----------:|:-----------:|------------------------|
-| **BUF**              |     16     |      8      | Data buffer            |
-| **CTL**              |     1      |      2      | Control flip-flop      |
-| **FLG**              |     1      |      2      | Flag flip-flop         |
-| **FBF**              |     1      |      2      | Flag buffer flip-flop  |
-| **DBUF \[0:65535\]** |     8      |      8      | Tape record buffer     |
-| **BPTR**             |     17     |     10      | Buffer pointer         |
-| **BMAX**             |     17     |     10      | Buffer size for writes |
+| `BUF` | 16 | 8 | Data buffer |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `DBUF \[0:65535\]` | 8 | 8 | Tape record buffer |
+| `BPTR` | 17 | 10 | Buffer pointer |
+| `BMAX` | 17 | 10 | Buffer size for writes |
 
 The Control PCA state contains these registers:
 
-| ***Name***      | ***Size*** | ***Radix*** | ***Action***              |
+| Name | Size | Radix | Action |
 |-----------------|:----------:|:-----------:|---------------------------|
-| **STA**         |     12     |      8      | Tape status               |
-| **BUF**         |     16     |      8      | Command buffer            |
-| **USEL**        |     2      |      8      | Currently selected unit   |
-| **FSVC**        |     1      |      2      | First service flip-flop   |
-| **CTL**         |     1      |      2      | Control flip-flop         |
-| **FLG**         |     1      |      2      | Flag flip-flop            |
-| **FBF**         |     1      |      2      | Flag buffer flip-flop     |
-| **POS \[0:3\]** |     32     |     10      | Tape position, drives 0-3 |
-| **BTIME**       |     24     |     10      | BOT start delay time      |
-| **CTIME**       |     24     |     10      | Command delay time        |
-| **GTIME**       |     24     |     10      | Gap traversal time        |
-| **ITIME**       |     24     |     10      | IRG traversal time        |
-| **RTIME**       |     24     |     10      | Rewind initiation time    |
-| **XTIME**       |     24     |     10      | Inter-word transfer time  |
+| `STA` | 12 | 8 | Tape status |
+| `BUF` | 16 | 8 | Command buffer |
+| `USEL` | 2 | 8 | Currently selected unit |
+| `FSVC` | 1 | 2 | First service flip-flop |
+| `CTL` | 1 | 2 | Control flip-flop |
+| `FLG` | 1 | 2 | Flag flip-flop |
+| `FBF` | 1 | 2 | Flag buffer flip-flop |
+| `POS \[0:3\]` | 32 | 10 | Tape position, drives 0-3 |
+| `BTIME` | 24 | 10 | BOT start delay time |
+| `CTIME` | 24 | 10 | Command delay time |
+| `GTIME` | 24 | 10 | Gap traversal time |
+| `ITIME` | 24 | 10 | IRG traversal time |
+| `RTIME` | 24 | 10 | Rewind initiation time |
+| `XTIME` | 24 | 10 | Inter-word transfer time |

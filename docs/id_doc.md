@@ -29,76 +29,47 @@ X11-style open source license; the precise terms are available at:
 [2.6 Mass Storage Module/Intelligent Disk Controller (DM)](#mass-storage-moduleintelligent-disk-controller-dm)
 [2.7 Magnetic Tape Controller (MT)](#magnetic-tape-controller-mt)
 [3 Symbolic Display and Input](#symbolic-display-and-input)
-[3.1 16b Instruction Input](#b-instruction-input)
-[3.2 32b Instruction Input](#b-instruction-input-1)
+[3.1 16b Instruction Input](#instruction-input)
+[3.2 32b Instruction Input](#instruction-input-1)
 
 This memorandum documents the Interdata 16b and 32b simulators.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/interdata/ id_defs.h
-
-id16_cpu.c \[id32_cpu.c\]
-
-id16_dboot.c \[id32_dboot.c\]
-
-id_dp.c
-
-id_fd.c
-
-id_fp.c
-
-id_idc.c
-
-id_io.c
-
-id_lp.c
-
-id_mt.c
-
-id_pas.c
-
-id_pt.c
-
-id_tt.c
-
-id_ttp.c
-
-id_uvc.c
-
-id16_sys.c \[id32_sys.c\]
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_tape.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_tape.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/interdata/` | `id_defs.h` |
+|  | `id16_cpu.c [id32_cpu.c]` |
+|  | `id16_dboot.c [id32_dboot.c]` |
+|  | `id_dp.c` |
+|  | `id_fd.c` |
+|  | `id_fp.c` |
+|  | `id_idc.c` |
+|  | `id_io.c` |
+|  | `id_lp.c` |
+|  | `id_mt.c` |
+|  | `id_pas.c` |
+|  | `id_pt.c` |
+|  | `id_tt.c` |
+|  | `id_ttp.c` |
+|  | `id_uvc.c` |
+|  | `id16_sys.c [id32_sys.c]` |
 
 # Interdata Features
 
@@ -111,45 +82,24 @@ extension for virtual memory (3200 series).
 
 The Interdata simulator is configured as follows:
 
-> device names simulates
->
-> CPU - 16b Interdata 3, 4, 5, 70, 80, 7/16, or 8/16 CPU with 64KB
->
-> memory
->
-> Interdata 8/16E CPU with 256KB memory
->
-> CPU - 32b Interdata 7/32 or 8/32 CPU with 1MB memory;
->
-> 8/32 supports 2 or 8 register banks
->
-> SELCH selector channel (1-4)
->
-> PT paper tape reader/punch
->
-> TT console terminal, Teletype interface
->
-> TTP console terminal, PASLA interface
->
-> LFC line frequency clock
->
-> PIC programmable interval clock
->
-> LPT line printer
->
-> FD floppy disk
->
-> DP 2.5MB/10MB cartridge disk with four disk drives
->
-> DM mass storage module (MSM)/intelligent (IDC) disk
->
-> controller with four disk drives
->
-> MT magnetic tape
->
-> PAS programmable asynchronous line controller
->
-> PASL programmable asynchronous lines, up to 32
+| Device names | Simulates |
+|---|---|
+| `CPU - 16b` | Interdata 3, 4, 5, 70, 80, 7/16, or 8/16 CPU with 64KB memory |
+|  | Interdata 8/16E CPU with 256KB memory |
+| `CPU - 32b` | Interdata 7/32 or 8/32 CPU with 1MB memory; 8/32 supports 2 or 8 register banks |
+| `SELCH` | selector channel (1-4) |
+| `PT` | paper tape reader/punch |
+| `TT` | console terminal, Teletype interface |
+| `TTP` | console terminal, PASLA interface |
+| `LFC` | line frequency clock |
+| `PIC` | programmable interval clock |
+| `LPT` | line printer |
+| `FD` | floppy disk |
+| `DP` | 2.5MB/10MB cartridge disk with four disk drives |
+| `DM` | mass storage module (MSM)/intelligent (IDC) disk controller with four disk drives |
+| `MT` | magnetic tape |
+| `PAS` | programmable asynchronous line controller |
+| `PASL` | programmable asynchronous lines, up to 32 |
 
 The Interdata simulator implements two unique stop conditions:
 

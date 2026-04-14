@@ -125,9 +125,9 @@ to all SIMH simulators, whereas the latter set is specific to the
 virtual machine being simulated. The files that make up this simulator
 are:
 
-| ***Subdirectory*** | ***File*** | ***Contains*** |
+| Subdirectory | File | Contains |
 |----|----|----|
-| **i650** | i650_defs.h | System architectural declarations |
+| i650 | i650_defs.h | System architectural declarations |
 |  | i650_sys.c | SCP interface |
 |  | i650_cpu.c | Main CPU simulator |
 |  | i650_cdr.c | IBM 533 (card reader part) simulator |
@@ -136,7 +136,7 @@ are:
 |  | i650_dsk.c | IBM 355 RAMAC Disk Storage |
 |  | i650_doc.doc | Documentation (this file) |
 |  | I650_test.ini | Executes all the sw rest-run scripts |
-| **I650 / sw** |  | Contains the included software and test run script files (See usage section) |
+| `I650 / sw` |  | Contains the included software and test run script files (See usage section) |
 
 PDF files of the original IBM 650 hardware and software manuals are
 available in Bitsavers repository: <http://www.bitsavers.org/>
@@ -189,24 +189,24 @@ peripheral device front panels. Instead, commands entered through the
 simulation console are used to perform hardware actions. The simulation
 commands that substitute for IBM 650 console actions are:
 
-| ***Hardware Console Action***        | ***Equivalent Simulation Command*** |
+| Hardware Console Action | Equivalent Simulation Command |
 |--------------------------------------|-------------------------------------|
-| Set PROGRAMMED switch to RUN \| STOP | DEPOSIT CSWPS 0 \| 1                |
-| Set OVERFLOW switch to SENSE \| STOP | DEPOSIT CSWOS 0 \| 1                |
-| Set HALF CYCLE switch to RUN \| HALF | DEPOSIT HALF 0 \| 1                 |
-| Set ERROR switch                     | Not simulated                       |
-| Set CONTROL to ADDRESS STOP          | BREAK \<address\>                   |
-| Setting the Console Switches         | DEPOSIT CSW \<value\>               |
-| Display Lower Accumulator            | EXAMINE ACCLO                       |
-| Display Upper Accumulator            | EXAMINE ACCUP                       |
-| Display Distributor                  | EXAMINE DIST                        |
-| Display Program Register             | EXAMINE PR                          |
-| Display Read-Out Storage             | EXAMINE \<address\>                 |
-| Display Read-In Storage              | DEPOSIT \<address\> \<value\>       |
-| Press TRANSFER Key                   | DEPOSIT AR \<address\>              |
-| Press PROGRAM START Key              | GO                                  |
-| Press PROGRAM STOP Key               | ^E on console                       |
-| Press COMPUTER RESET Key             | RESET                               |
+| `Set PROGRAMMED switch to RUN \` | STOP | DEPOSIT CSWPS 0 \ | 1 |
+| `Set OVERFLOW switch to SENSE \` | STOP | DEPOSIT CSWOS 0 \ | 1 |
+| `Set HALF CYCLE switch to RUN \` | HALF | DEPOSIT HALF 0 \ | 1 |
+| Set ERROR switch | Not simulated |
+| Set CONTROL to ADDRESS STOP | BREAK \<address\> |
+| Setting the Console Switches | DEPOSIT CSW \<value\> |
+| Display Lower Accumulator | EXAMINE ACCLO |
+| Display Upper Accumulator | EXAMINE ACCUP |
+| Display Distributor | EXAMINE DIST |
+| Display Program Register | EXAMINE PR |
+| Display Read-Out Storage | EXAMINE \<address\> |
+| Display Read-In Storage | DEPOSIT \<address\> \<value\> |
+| Press TRANSFER Key | DEPOSIT AR \<address\> |
+| Press PROGRAM START Key | GO |
+| Press PROGRAM STOP Key | ^E on console |
+| Press COMPUTER RESET Key | RESET |
 
 Mounting media on a peripheral device is simulated by the ***ATTACH***
 command. For example, entering the ***ATTACH CDR1
@@ -225,10 +225,10 @@ When examining or depositing into memory, command line switches
 specifying the symbolic mode and format may be used to override the
 default numeric mode, as follows:
 
-| ***Switch*** | ***Mode Interpretation***      |
+| Switch | Mode Interpretation |
 |:------------:|--------------------------------|
-|    **–C**    | String of up to five character |
-|    **–M**    | A CPU instruction opcode       |
+| `–C` | String of up to five character |
+| `–M` | A CPU instruction opcode |
 
 If the ***–C*** switch is specified, the value is displayed as five
 characters delimited by single quotes.
@@ -554,10 +554,10 @@ All devices other than the CPU, CDR and CDP may be disabled or enabled.
 Disabling a device simulates removing the associated equipment from the
 main CPU console. To disable or enable a device, use:
 
-| ***Command***               | ***Action***       |
+| Command | Action |
 |-----------------------------|--------------------|
-| **SET \<device\> DISABLED** | Disable the device |
-| **SET \<device\> ENABLED**  | Enable the device  |
+| `SET \<device\> DISABLED` | Disable the device |
+| `SET \<device\> ENABLED` | Enable the device |
 
 MTn (magnetic tape) and DSKn (disk units) are enabled by default
 
@@ -595,23 +595,23 @@ the form:
 
 Device options that may be specified are:
 
-| ***Option***         | ***Action***                                    |
+| Option | Action |
 |----------------------|-------------------------------------------------|
-| **1K**               | Set the drum memory size to 1000 words          |
-| **2K**               | Set the drum memory size to 2000 words          |
-| **4K**               | Set the drum memory size to 4000 words          |
-| **DEBUG=\<option\>** | Enable tracing                                  |
-| **NODEBUG**          | Disable tracing (default)                       |
-| **SOAPMNE**          | Use SOAP opcode mnemonics                       |
-| **DEFAULTMNE**       | Use regular IBM opcode mnemonics (default)      |
-| **FAST**             | Execute all instructions in one cycle           |
-| **REALTIME**         | Simulate real number of cycles (default)        |
-| **STORAGEUNIT**      | Enable IBM 653 Storage Unit                     |
-| **NOSTORAGEUNIT**    | Disable IBM 653 Storage Unit (default)          |
-| **CNTRLUNIT**        | Enable IBM 652 Control Unit                     |
-| **NOCNTRLUNIT**      | Disable IBM 652 Control Unit (default)          |
-| **TLE**              | Enable Table LookUp on equal feature            |
-| **NOTLE**            | Disable Table LookUp on equal feature (default) |
+| `1K` | Set the drum memory size to 1000 words |
+| `2K` | Set the drum memory size to 2000 words |
+| `4K` | Set the drum memory size to 4000 words |
+| `DEBUG=\<option\>` | Enable tracing |
+| `NODEBUG` | Disable tracing (default) |
+| `SOAPMNE` | Use SOAP opcode mnemonics |
+| `DEFAULTMNE` | Use regular IBM opcode mnemonics (default) |
+| `FAST` | Execute all instructions in one cycle |
+| `REALTIME` | Simulate real number of cycles (default) |
+| `STORAGEUNIT` | Enable IBM 653 Storage Unit |
+| `NOSTORAGEUNIT` | Disable IBM 653 Storage Unit (default) |
+| `CNTRLUNIT` | Enable IBM 652 Control Unit |
+| `NOCNTRLUNIT` | Disable IBM 652 Control Unit (default) |
+| `TLE` | Enable Table LookUp on equal feature |
+| `NOTLE` | Disable Table LookUp on equal feature (default) |
 
 There is no memory default value. Must be set each time the simulation
 is started.
@@ -735,28 +735,28 @@ Opcode Execution Error
 When a debug log has been established, tracing may be configured by
 specifying one or more of the reporting level options:
 
-| ***Option*** | ***Reporting Level***                     |
+| Option | Reporting Level |
 |--------------|-------------------------------------------|
-| **CMD**      | Opcode instructions executed              |
-| **DATA**     | Memory data accesses                      |
-| **DETAIL**   | Register values or processing information |
+| `CMD` | Opcode instructions executed |
+| `DATA` | Memory data accesses |
+| `DETAIL` | Register values or processing information |
 
 ### Registers
 
 The CPU state contains the registers visible to the programmer (either
 on code or thru the IBM 650 console):
 
-| ***Name*** | ***Size*** | ***Description***             |
+| Name | Size | Description |
 |------------|:----------:|-------------------------------|
-| **DIST**   |     10     | Distributor                   |
-| **ACCLO**  |     10     | Lower Accumulator             |
-| **ACCUP**  |     10     | Upper Accumulator             |
-| **PR**     |     10     | Program Register              |
-| **AR**     |     4      | Address Register              |
-| **OV**     |     1      | Overflow                      |
-| **CSW**    |     10     | Console Switches              |
-| **CSWPS**  |     1      | Console Switch Programed Stop |
-| **CSWOS**  |     1      | Console Switch Overflow Stop  |
+| `DIST` | 10 | Distributor |
+| `ACCLO` | 10 | Lower Accumulator |
+| `ACCUP` | 10 | Upper Accumulator |
+| `PR` | 10 | Program Register |
+| `AR` | 4 | Address Register |
+| `OV` | 1 | Overflow |
+| `CSW` | 10 | Console Switches |
+| `CSWPS` | 1 | Console Switch Programed Stop |
+| `CSWOS` | 1 | Console Switch Overflow Stop |
 
 Size is given in digits, not in bits. If size is 1, only 0 and 1 values
 are allowed.
@@ -1074,17 +1074,17 @@ or
 
 Where \<option\> can be one of the following:
 
-| ***\<Option\>*** | ***Description*** |
+| \<Option\> | Description |
 |----|----|
-| **SOAP** | Simulates SOAP II assembler wiring |
-| **SOAPA** | Simulates SOAP IIA multipass assembler wiring |
-| **SUPERSOAP** | Simulates SuperSoap assembler |
-| **IS** | Simulates Bell Floating Point Interpretive System wiring |
-| **IT** | Simulates IT Compiler wiring |
-| **8WORD** | Simulates an 8 word per card wiring, with no translation (default) |
-| **RA** | Simulates wiring for Lockheed Regional Assembler cars |
-| **FDS** | Simulates wiring for Interpretive Floating Decimal System |
-| **FORTRANSIT** | Simulates FORTRANSIT Compiler wiring |
+| `SOAP` | Simulates SOAP II assembler wiring |
+| `SOAPA` | Simulates SOAP IIA multipass assembler wiring |
+| `SUPERSOAP` | Simulates SuperSoap assembler |
+| `IS` | Simulates Bell Floating Point Interpretive System wiring |
+| `IT` | Simulates IT Compiler wiring |
+| `8WORD` | Simulates an 8 word per card wiring, with no translation (default) |
+| `RA` | Simulates wiring for Lockheed Regional Assembler cars |
+| `FDS` | Simulates wiring for Interpretive Floating Decimal System |
+| `FORTRANSIT` | Simulates FORTRANSIT Compiler wiring |
 
 The 8WORD wiring just punches/reads cards with the word value from the
 first eight words of the I/O buffer. No character translation is done.
@@ -1234,12 +1234,12 @@ output</p></td> </tr> </tbody> </table>
 
 ## Assemble a SOAP Program
 
-| ***Files***  | ***Description***              | ***Hardware equivalent*** |
+| Files | Description | Hardware equivalent |
 |--------------|--------------------------------|---------------------------|
-| soapII.dck   | SOAP II assembler deck         | Punched card deck         |
-| source.dck   | Source program to be assembled | Punched card deck         |
-| deck_out.dck | Assembled program output       | Blank cards deck          |
-| print.txt    | SOAP assembly listing printout | Paper listing             |
+| `soapII.dck` | SOAP II assembler deck | Punched card deck |
+| source.dck | Source program to be assembled | Punched card deck |
+| deck_out.dck | Assembled program output | Blank cards deck |
+| print.txt | SOAP assembly listing printout | Paper listing |
 
 The following steps are described on page 15 of the SOAP II manual
 (24-4000-0) in the "Machine Operator's Guide" section:
@@ -1294,12 +1294,12 @@ All ini files an in **i650/sw** directory. The language files in its own folder
 
 ### Interpretive Floating Decimal System 
 
-| ***Files*** | ***Description*** |
+| Files | Description |
 |----|----|
 | run_fds.ini | SimH script to load and run fds programs |
-| fds/ | Folder contents: |
-| load\_ card.dck | Loader for FDS deck in five-word format (load card) |
-| 5440.2009_INTERPRETIVE_FDS.crd | FDS main deck (five-word format), binary format |
+| `fds/` | Folder contents: |
+| `load\_ card.dck` | Loader for FDS deck in five-word format (load card) |
+| `5440.2009_INTERPRETIVE_FDS.crd` | FDS main deck (five-word format), binary format |
 | ra_starter_card.dck | Regional assembler starter card (see doc) (load card) |
 | example.txt | Sample program |
 
@@ -1309,10 +1309,10 @@ How to run:
 
 ### Regional Assembler 
 
-| ***Files*** | ***Description*** |
+| Files | Description |
 |----|----|
 | run_ra.ini | SimH script to load and run source programs |
-| regional/ | Folder contents: |
+| `regional/` | Folder contents: |
 | load_id_card.dck | Loader for any deck in five-field format (load card) |
 | ra.dck | Regional assembler main deck (five-field format) |
 | ra_starter_card.dck | Regional assembler starter card (see doc) (load card) |
@@ -1327,11 +1327,11 @@ How to run:
 
 ### Floating Point Interpretive System
 
-| ***Files*** | ***Description*** |
+| Files | Description |
 |----|----|
 | build_is_from_decks.ini | SimH script to build IS main deck from source using SOAP II |
 | run_is.ini | SimH script to load and run source programs |
-| bell/ | Folder contents: |
+| `bell/` | Folder contents: |
 | 00_readme.txt | Restoration comments |
 | is_sys_load_src.txt | Source for program build (system loader) |
 | is.dck | Main program deck (1-word load format) |
@@ -1348,17 +1348,17 @@ How to run:
 
 ### SOAP Assembler
 
-| ***Files*** | ***Description*** |
+| Files | Description |
 |----|----|
 | build_soap_from_source.ini | SimH script to build SOAP from source using condensed SOAP II card deck |
 | run_soap.ini | SimH script to assemble and run source programs using SOAP II |
 | run_soap4.ini | SimH script to assemble and run using SOAP IIA-4000 |
-| soap/ | Folder contents: |
+| `soap/` | Folder contents: |
 | 00_readme.txt | Restoration comments |
 | soap_listing.txt | Main program assembly listing (SOAP II) |
 | soap_src.txt | Main program source |
-| soapII.dck | Main program deck (1-word load format) |
-| soapII_condensed_card.dck | Main program deck (7-word per card load format) |
+| `soapII.dck` | Main program deck (1-word load format) |
+| `soapII_condensed_card.dck` | Main program deck (7-word per card load format) |
 | soap_example_1_src.txt | Sample 1 SOAP source (as in manual) |
 | soap4_listing.txt | Main program assembly listing (SOAP IIA-4000) |
 | soap4_src.txt | Main program source |
@@ -1397,18 +1397,18 @@ How to run:
 
 ### Internal Translator (IT Compiler)
 
-| ***Files*** | ***Description*** |
+| Files | Description |
 |----|----|
 |  |  |
 | run_it.ini | SimH script to compile and run source programs |
-| it/ | Folder contents: |
+| `it/` | Folder contents: |
 | 00_readme.txt | Restoration comments |
 | it_compiler_listing.txt | Compiler assembly listing |
 | it_compiler.dck | Main program deck (1-word load format) |
 | soap_patch_listing.txt | Patches on SOAP listing (as on manual) |
-| soapII_patch.txt | Text file that describe patches on SOAP II |
-| soapII_patch.dck | Patches to SOAP II (1-word load format) |
-| soapII.dck | SOAP II to be patched (1-word load format) |
+| `soapII_patch.txt` | Text file that describe patches on SOAP II |
+| `soapII_patch.dck` | Patches to SOAP II (1-word load format) |
+| `soapII.dck` | SOAP II to be patched (1-word load format) |
 | it_reservation_p1.dck | Reservation for Runtime Package P1 source |
 | it_reservation_p1.dck | Reservation for Runtime Package P2 source |
 | it_reservation_p2.dck | Reservation for Runtime Package P3 source |
@@ -1440,11 +1440,11 @@ How to run:
 
 ### FORTRANSIT 
 
-| ***Files*** | ***Description*** |
+| Files | Description |
 |----|----|
 | build_fortransit_pack.ini | SimH script to build PACKAGE from source using regular SOAP II card deck |
 | run_fortransit.ini | SimH script to compile and run source programs |
-| fortransit/ | Folder contents: |
+| `fortransit/` | Folder contents: |
 | 00_readme.txt | Restoration comments |
 | fortransit_translator_listing.txt | Fortransit Translator assembly listing |
 | it_compiler_listing.txt | Fortransit IT compiler assembly listing |
@@ -1459,7 +1459,7 @@ How to run:
 | fortransit_addfn.dck | Main program deck (1-word load format) |
 | it_compiler.dck | Main program deck (1-word load format) |
 | pack.dck | Runtime PACKAGE (1-word load format) |
-| soapII.dck | Regular SOAP II assembler (1-word load format) |
+| `soapII.dck` | Regular SOAP II assembler (1-word load format) |
 | fortransit_example_1_src.txt | Sample Fortransit source. Prints prime numbers \< 50 |
 | fortransit_example_2_src.txt | Sample Fortransit source as in manual (rectangular |
 | fortransit_example_2_data.txt | matrix multiplication) and input data |

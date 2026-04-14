@@ -33,95 +33,56 @@ This memorandum documents the Nova simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/nova/ nova_defs.h
-
-nova_cpu.c
-
-nova_clk.c
-
-nova_dkp.c
-
-nova_dsk.c
-
-nova_lp.c
-
-nova_mta.c
-
-nova_plt.c
-
-nova_qty.c
-
-nova_sys.c
-
-nova_tt.c
-
-nova_tt1.c
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_tape.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_tape.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/nova/` | `nova_defs.h` |
+|  | `nova_cpu.c` |
+|  | `nova_clk.c` |
+|  | `nova_dkp.c` |
+|  | `nova_dsk.c` |
+|  | `nova_lp.c` |
+|  | `nova_mta.c` |
+|  | `nova_plt.c` |
+|  | `nova_qty.c` |
+|  | `nova_sys.c` |
+|  | `nova_tt.c` |
+|  | `nova_tt1.c` |
 
 # Nova Features
 
 The Nova simulator is configured as follows:
 
-> device names simulates
->
-> CPU Nova, Nova 3, Nova 4 CPU with 32KW of memory,
->
-> Or Keronix CPU with 64KW of memory
->
-> \- hardware multiply/divide
->
-> PTR,PTP paper tape reader/punch
->
-> TTI,TTO console terminal
->
-> TTI1,TTO1 second terminal
->
-> LPT line printer
->
-> PLT plotter
->
-> RTC real-time clock
->
-> DSK head-per-track disk controller
->
-> DKP moving head disk controller with four drives
->
-> MTA magnetic tape controller with eight drives
->
-> QTY 4060 multiplexer with up to 64 lines
->
-> ALM 4255 multiplexer with up to 64 lines
+| Device names | Simulates |
+|---|---|
+| `CPU` | Nova, Nova 3, Nova 4 CPU with 32KW of memory, or Keronix CPU with 64KW of memory |
+|  | hardware multiply/divide |
+| `PTR,PTP` | paper tape reader/punch |
+| `TTI,TTO` | console terminal |
+| `TTI1,TTO1` | second terminal |
+| `LPT` | line printer |
+| `PLT` | plotter |
+| `RTC` | real-time clock |
+| `DSK` | head-per-track disk controller |
+| `DKP` | moving head disk controller with four drives |
+| `MTA` | magnetic tape controller with eight drives |
+| `QTY` | 4060 multiplexer with up to 64 lines |
+| `ALM` | 4255 multiplexer with up to 64 lines |
 
 The Nova simulator implements these unique stop conditions:
 

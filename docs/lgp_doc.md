@@ -25,57 +25,38 @@ This memorandum documents the LGP-30 simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/lgp/ lgp_defs.h
-
-lgp_cpu.c
-
-lgp_stddev.c
-
-lgp_sys.c
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/lgp/` | `lgp_defs.h` |
+|  | `lgp_cpu.c` |
+|  | `lgp_stddev.c` |
+|  | `lgp_sys.c` |
 
 # LGP Features
 
 The LGP is configured as follows:
 
-> device names simulates
->
-> CPU LGP-30 or LGP-21 CPU with 4096 words of memory
->
-> TTI Typewriter input (keyboard and reader)
->
-> TTO Typewriter output (printer and punch)
->
-> PTR high-speed paper tape reader
->
-> PTP high-speed paper tape punch
+| Device names | Simulates |
+|---|---|
+| `CPU` | LGP-30 or LGP-21 CPU with 4096 words of memory |
+| `TTI` | Typewriter input (keyboard and reader) |
+| `TTO` | Typewriter output (printer and punch) |
+| `PTR` | high-speed paper tape reader |
+| `PTP` | high-speed paper tape punch |
 
 The LGP simulator implements the following unique stop conditions:
 

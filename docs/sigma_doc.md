@@ -32,101 +32,60 @@ This memorandum documents the SDS 940 simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/sds/ sigma_defs.h
-
-sigma_io_defs.h
-
-sigma_cis.c
-
-sigma_coc.c
-
-sigma_cpu.c
-
-sigma_dk.c
-
-sigma_dp.c
-
-sigma_fp.c
-
-sigma_io.c
-
-sigma_lp.c
-
-sigma_map.c
-
-sigma_mt.c
-
-sigma_pt.c
-
-sigma_rad.c
-
-sigma_rtc.c
-
-sigma_sys.c
-
-sigma_tt.c
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_tape.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_tape.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/sds/` | `sigma_defs.h` |
+|  | `sigma_io_defs.h` |
+|  | `sigma_cis.c` |
+|  | `sigma_coc.c` |
+|  | `sigma_cpu.c` |
+|  | `sigma_dk.c` |
+|  | `sigma_dp.c` |
+|  | `sigma_fp.c` |
+|  | `sigma_io.c` |
+|  | `sigma_lp.c` |
+|  | `sigma_map.c` |
+|  | `sigma_mt.c` |
+|  | `sigma_pt.c` |
+|  | `sigma_rad.c` |
+|  | `sigma_rtc.c` |
+|  | `sigma_sys.c` |
+|  | `sigma_tt.c` |
 
 # XDS Sigma 32b Features
 
 The XDS Sigma 32b simulator is configured as follows:
 
-> device name(s) simulates
->
-> CPU XDS Sigma 5, 6, 7, 7 “big mem”, 8, 9, or XDS 550, 560
->
-> CHANA..CHANH I/O channels, up to 8
->
-> PT 7060 paper tape reader/punch
->
-> TT 7012 console Teletype
->
-> LP 7440 or 7450 line printer
->
-> RTC real-time clock
->
-> MUX character-oriented communications subsystem
->
-> DK 7250 cartridge disk subsystem with up to 8 drives
->
-> DPA disk pack subsystem with up to 15 drives
->
-> DPB disk pack subsystem with up to 15 drives
->
-> RAD 7211/7212 or 7231/7232 fixed head disk
->
-> MT 732X 9-track magnetic tape with up to 8 drives
+| Device name(s) | Simulates |
+|---|---|
+| `CPU` | XDS Sigma 5, 6, 7, 7 “big mem”, 8, 9, or XDS 550, 560 |
+| `CHANA..CHANH` | I/O channels, up to 8 |
+| `PT` | 7060 paper tape reader/punch |
+| `TT` | 7012 console Teletype |
+| `LP` | 7440 or 7450 line printer |
+| `RTC` | real-time clock |
+| `MUX` | character-oriented communications subsystem |
+| `DK` | 7250 cartridge disk subsystem with up to 8 drives |
+| `DPA` | disk pack subsystem with up to 15 drives |
+| `DPB` | disk pack subsystem with up to 15 drives |
+| `RAD` | 7211/7212 or 7231/7232 fixed head disk |
+| `MT` | 732X 9-track magnetic tape with up to 8 drives |
 
 Most devices can be disabled or enabled with the SET \<dev\> DISABLED
 and SET \<dev\> ENABLED commands, respectively.

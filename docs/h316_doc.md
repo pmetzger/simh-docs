@@ -35,111 +35,65 @@ This memorandum documents the Honeywell H316/H516 simulator.
 
 The H316 requires the following files:
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/h316/ h316_defs.h
-
-h316_cpu.c
-
-h316_dp.c
-
-h316_fhd.c
-
-h316_hi.c
-
-h316_imp.c
-
-h316_lp.c
-
-h316_mi.c
-
-h316_mt.c
-
-h316_rtc.c
-
-h316_stddev.c
-
-h316_sys.c
-
-h316_udp.c
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_tape.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_tape.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/h316/` | `h316_defs.h` |
+|  | `h316_cpu.c` |
+|  | `h316_dp.c` |
+|  | `h316_fhd.c` |
+|  | `h316_hi.c` |
+|  | `h316_imp.c` |
+|  | `h316_lp.c` |
+|  | `h316_mi.c` |
+|  | `h316_mt.c` |
+|  | `h316_rtc.c` |
+|  | `h316_stddev.c` |
+|  | `h316_sys.c` |
+|  | `h316_udp.c` |
 
 # H316/H516 Features
 
 The Honeywell 316/516 simulator is configured as follows:
 
-> device names simulates
->
-> CPU H316/H516 CPU with 16/32KW memory
->
-> PTR 316/516-50 paper tape reader
->
-> PTP 316/516-52 paper tape punch
->
-> LPT 316/516 line printer
->
-> TTY 316/516-33 console terminal
->
-> MT 4100 seven track magnetic tape with four drives
->
-> CLK 316/516-12 real time clock
->
-> FHD 4400 fixed head disk
->
-> DP 4623/4653/4720 disk pack controller with eight drives
->
-> WDT 4400 fixed head disk
->
-> RTC 4400 fixed head disk
->
-> IMP IM/TIP Specific Hardware
->
-> MI1 IM/TIP Modem Interface
->
-> MI2 IM/TIP Modem Interface
->
-> MI3 IM/TIP Modem Interface
->
-> MI4 IM/TIP Modem Interface
->
-> MI5 IM/TIP Modem Interface
->
-> HI1 IMP Host Interface
->
-> HI2 IMP Host Interface
->
-> HI3 IMP Host Interface
->
-> HI4 IMP Host Interface
+| Device name(s) | Simulates |
+|---|---|
+| `CPU` | H316/H516 CPU with 16/32KW memory |
+| `PTR` | 316/516-50 paper tape reader |
+| `PTP` | 316/516-52 paper tape punch |
+| `LPT` | 316/516 line printer |
+| `TTY` | 316/516-33 console terminal |
+| `MT` | 4100 seven track magnetic tape with four drives |
+| `CLK` | 316/516-12 real time clock |
+| `FHD` | 4400 fixed head disk |
+| `DP` | 4623/4653/4720 disk pack controller with eight drives |
+| `WDT` | 4400 fixed head disk |
+| `RTC` | 4400 fixed head disk |
+| `IMP` | IM/TIP Specific Hardware |
+| `MI1` | IM/TIP Modem Interface |
+| `MI2` | IM/TIP Modem Interface |
+| `MI3` | IM/TIP Modem Interface |
+| `MI4` | IM/TIP Modem Interface |
+| `MI5` | IM/TIP Modem Interface |
+| `HI1` | IMP Host Interface |
+| `HI2` | IMP Host Interface |
+| `HI3` | IMP Host Interface |
+| `HI4` | IMP Host Interface |
 
 The H316/H516 simulator implements several unique stop conditions:
 

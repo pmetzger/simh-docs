@@ -49,7 +49,7 @@ The opcode may be one of:
 
 |  |  |  |
 |----|----|----|
-| **Opcode** | **Value** | **Description** |
+| `Opcode` | `Value` | `Description` |
 | INA | 54 | Input to A-register[^1] |
 | OCP | 14 | Output Control Pulse as designated by Function Code |
 | OTA | 74 | Output to device[^2] |
@@ -65,7 +65,7 @@ The following device addresses (octal) have been gleaned from the 3050 listing.
 
 |             |                                                 |     |
 |:-----------:|-------------------------------------------------|-----|
-| **Address** | **Device**                                      |     |
+| `Address` | `Device` |     |
 |     04      | TTY                                             |     |
 |     20      | Standard Interrupt Unit & Extension             |     |
 |     26      | Watchdog Timer and Status Light Box, Proc. Type |     |
@@ -92,7 +92,7 @@ for two TTY units, but only TTY A is used.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
-| **Instruction** | **Opcode** | **FC** | **Dev** | **Description** |
+| `Instruction` | `Opcode` | `FC` | `Dev` | `Description` |
 | 030004 | OCP | 00 | 04 | TTSIM – set TTY input mode |
 | 030104 | OCP | 10 | 04 | TTSOM – set TTY output mode |
 | 070004 | SKS | 00 | 04 | TTSRDY – skip on TTY ready |
@@ -120,7 +120,7 @@ extension to allow interrupts on lines 1-16. This probably is where the
 
 |  |  |  |  |  |
 |----|----|----|----|----|
-| **Instruction** | **Opcode** | **FC** | **Dev** | **Description** |
+| `Instruction` | `Opcode` | `FC` | `Dev` | `Description` |
 | 170020 | OTA | 00 | 20 | SMK – set “standard” interrupt mask |
 | 170120 | OTA | 00 | 20 | SMK – set extension interrupt mask lines 1-16 |
 
@@ -190,7 +190,7 @@ zero on power up. Not sure whether the clock counts up or down.
 
 |                 |            |        |         |                               |
 |-----------------|------------|--------|---------|-------------------------------|
-| **Instruction** | **Opcode** | **FC** | **Dev** | **Description**               |
+| `Instruction` | `Opcode` | `FC` | `Dev` | `Description` |
 | 030040          | OCP        | 00     | 40      | CLKON – turn clock on         |
 | 031040          | OCP        | 10     | 40      | CLKOFF – stop real time clock |
 | 131040          | INA        | 10     | 40      | RDCLOK – read current time    |
@@ -203,7 +203,7 @@ IMP number appears to be a hardwired number of the particular IMP.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
-| **Instruction** | **Opcode** | **FC** | **Dev** | **Description** |
+| `Instruction` | `Opcode` | `FC` | `Dev` | `Description` |
 | 030041 | OCP | 00 | 41 | TASK – set task interrupt |
 | 131041 | INA | 10 | 41 | RDIMPN – probably hardwired IMP number |
 
@@ -266,7 +266,7 @@ host is transferred through DMC channels.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
-| **Instruction** | **Opcode** | **FC** | **Description** | **Listing** |
+| `Instruction` | `Opcode` | `FC` | `Description` | `Listing` |
 | 303060 | OCP | 00 | HxROUT – Host “regular” output – start output to host | 17056 |
 | 030170 | OCP | 01 | HxIN – start host input | 13200 |
 | 030270 | OCP | 02 | HxFOUT – Host final output – final output to host | 16124 |
@@ -287,7 +287,7 @@ table above. Instruction codes are examples for particular modems. Page
 
 |  |  |  |  |  |
 |----|----|----|----|----|
-| **Instruction** | **Opcode** | **FC** | **Description** | **Listing** |
+| `Instruction` | `Opcode` | `FC` | `Description` | `Listing` |
 | 030071 | OCP | 00 | MxOUT – start modem output | 01062 |
 | 030171 | OCP | 01 | MxUNXP – un-Cross Patch Modem (see listing p. 179) | 01266 |
 | 030172 | OCP | 02 | MxLXP – set Line Cross Patch (see listing p. 179) | 21631 |

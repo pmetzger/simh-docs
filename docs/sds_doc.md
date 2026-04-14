@@ -32,91 +32,55 @@ This memorandum documents the SDS 940 simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/sds/ sds_defs.h
-
-sds_cpu.c
-
-sds_drm.c
-
-sds_dsk.c
-
-sds_io.c
-
-sds_lp.c
-
-sds_mt.c
-
-sds_mux.c
-
-sds_rad.c
-
-sds_stddev.c
-
-sds_sys.c
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_tape.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_tape.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/sds/` | `sds_defs.h` |
+|  | `sds_cpu.c` |
+|  | `sds_drm.c` |
+|  | `sds_dsk.c` |
+|  | `sds_io.c` |
+|  | `sds_lp.c` |
+|  | `sds_mt.c` |
+|  | `sds_mux.c` |
+|  | `sds_rad.c` |
+|  | `sds_stddev.c` |
+|  | `sds_sys.c` |
 
 # SDS 940 Features
 
 The SDS-940 simulator is configured as follows:
 
-> device name(s) simulates
->
-> CPU SDS-940 CPU with 16KW to 64KW of memory
->
-> CHAN I/O channels
->
-> PTR paper tape reader
->
-> PTP paper tape punch
->
-> TTI console input
->
-> TTO console output
->
-> LPT line printer
->
-> RTC real-time clock
->
-> MUX terminal multiplexor
->
-> DRM Project Genie drum
->
-> RAD fixed head disk
->
-> DSK 9164/9165 rapid access (moving head) disk
->
-> MT magnetic tape
+| Device name(s) | Simulates |
+|---|---|
+| `CPU` | SDS-940 CPU with 16KW to 64KW of memory |
+| `CHAN` | I/O channels |
+| `PTR` | paper tape reader |
+| `PTP` | paper tape punch |
+| `TTI` | console input |
+| `TTO` | console output |
+| `LPT` | line printer |
+| `RTC` | real-time clock |
+| `MUX` | terminal multiplexor |
+| `DRM` | Project Genie drum |
+| `RAD` | fixed head disk |
+| `DSK` | 9164/9165 rapid access (moving head) disk |
+| `MT` | magnetic tape |
 
 Most devices can be disabled or enabled with the SET \<dev\> DISABLED
 and SET \<dev\> ENABLED commands, respectively.
@@ -148,65 +112,36 @@ truncated portion of memory is lost. Initial memory size is 64KW.
 CPU registers include the visible state of the processor as well as the
 control registers for the interrupt system.
 
-name size comments
-
-P 14 program counter
-
-A 24 accumulator A
-
-B 24 accumulator B
-
-X 24 index register
-
-OV 1 overflow indicator
-
-EM2 3 memory extension, quadrant 2
-
-EM3 3 memory extension, quadrant 3
-
-RL1 24 user relocation register 1
-
-RL2 24 user relocation register 2
-
-RL4 12 kernel relocation register
-
-NML 1 normal mode flag
-
-USR 1 user mode flag
-
-MONUSR 1 monitor-to-user trap enable
-
-ION 1 interrupt enable
-
-INTDEF 1 interrupt defer
-
-INTREQ 32 interrupt request flags
-
-APIACT 5 highest active API level
-
-APIREQ 5 highest requesting API level
-
-XFRREQ 32 device transfer request flags
-
-BPT 4 breakpoint switches
-
-ALERT 6 outstanding alert number
-
-STOP_INVINS 1 stop on invalid instruction
-
-STOP_INVDEV 1 stop on invalid device number
-
-STOP_INVIOP 1 stop on invalid I/O operation
-
-INDLIM 8 maximum indirect nesting depth
-
-EXULIM 8 maximum execute nesting depth
-
-PCQ\[0:63\] 14 P prior to last branch or interrupt;
-
-most recent P change first
-
-WRU 8 interrupt character
+| Name | Size | Comments |
+|---|---|---|
+| `P` | 14 | program counter |
+| `A` | 24 | accumulator A |
+| `B` | 24 | accumulator B |
+| `X` | 24 | index register |
+| `OV` | 1 | overflow indicator |
+| `EM2` | 3 | memory extension, quadrant 2 |
+| `EM3` | 3 | memory extension, quadrant 3 |
+| `RL1` | 24 | user relocation register 1 |
+| `RL2` | 24 | user relocation register 2 |
+| `RL4` | 12 | kernel relocation register |
+| `NML` | 1 | normal mode flag |
+| `USR` | 1 | user mode flag |
+| `MONUSR` | 1 | monitor-to-user trap enable |
+| `ION` | 1 | interrupt enable |
+| `INTDEF` | 1 | interrupt defer |
+| `INTREQ` | 32 | interrupt request flags |
+| `APIACT` | 5 | highest active API level |
+| `APIREQ` | 5 | highest requesting API level |
+| `XFRREQ` | 32 | device transfer request flags |
+| `BPT` | 4 | breakpoint switches |
+| `ALERT` | 6 | outstanding alert number |
+| `STOP_INVINS` | 1 | stop on invalid instruction |
+| `STOP_INVDEV` | 1 | stop on invalid device number |
+| `STOP_INVIOP` | 1 | stop on invalid I/O operation |
+| `INDLIM` | 8 | maximum indirect nesting depth |
+| `EXULIM` | 8 | maximum execute nesting depth |
+| `PCQ[0:63]` | 14 | P prior to last branch or interrupt; most recent P change first |
+| `WRU` | 8 | interrupt character |
 
 The CPU can maintain a history of the most recently executed
 instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
@@ -331,19 +266,19 @@ is eventually executed.
 
 |               |               |                      |                       |
 |---------------|---------------|----------------------|-----------------------|
-| **Opcode**    | **Next**      | **Next -a (Atomic)** | **Next -f (forward)** |
-| **Bad op**    | Step          | Step                 | Step                  |
-| **BRI**       | Step          | EA                   | Step                  |
-| **BRM, SBRM** | P+1, P+2, P+3 | EA+1, P+1, P+2, P+3  | P+1, P+2, P+3         |
-| **BRR**       | Step          | EA                   | Step                  |
-| **BRU**       | Step          | EA                   | Step                  |
-| **BRX**       | Step          | EA, P+1              | P+1                   |
-| **EXU**       | ?             | ?                    | ?                     |
-| **HLT**       | Step          | Step                 | Step                  |
-| **LDA, etc**  | Step          | P+1                  | P+1                   |
-| **SKx**       | Step          | P+1, P+2             | P+1, P+2              |
-| **POP**       | P+1, P+2      | 100+OP, P+1, P+2     | P+1, P+2              |
-| **SYSPOP**    | P+1, P+2      | 100+OP, P+1, P+2     | P+1, P+2              |
+| `Opcode` | `Next` | Next -a (Atomic) | Next -f (forward) |
+| Bad op | Step          | Step                 | Step                  |
+| `BRI` | Step          | EA                   | Step                  |
+| BRM, SBRM | P+1, P+2, P+3 | EA+1, P+1, P+2, P+3  | P+1, P+2, P+3         |
+| `BRR` | Step          | EA                   | Step                  |
+| `BRU` | Step          | EA                   | Step                  |
+| `BRX` | Step          | EA, P+1              | P+1                   |
+| `EXU` | ?             | ?                    | ?                     |
+| `HLT` | Step          | Step                 | Step                  |
+| LDA, etc | Step          | P+1                  | P+1                   |
+| `SKx` | Step          | P+1, P+2             | P+1, P+2              |
+| `POP` | P+1, P+2      | 100+OP, P+1, P+2     | P+1, P+2              |
+| `SYSPOP` | P+1, P+2      | 100+OP, P+1, P+2     | P+1, P+2              |
 
 Note that these temporary breakpoints are CPU-mode insensitive, so there
 is the potential for conflict if execution in a different CPU mode

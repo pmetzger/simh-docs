@@ -30,61 +30,40 @@ This memorandum documents the TX-0 simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/TX-0/ tx0_defs.h
-
-tx0_cpu.c
-
-tx0_stddev.c
-
-tx0_sys.c
-
-tx0_sys_orig.c
+| Subdirectory | File |
+|---|---|
+| `sim/` | `scp.h` |
+|  | `sim_console.h` |
+|  | `sim_defs.h` |
+|  | `sim_fio.h` |
+|  | `sim_rev.h` |
+|  | `sim_sock.h` |
+|  | `sim_timer.h` |
+|  | `sim_tmxr.h` |
+|  | `scp.c` |
+|  | `sim_console.c` |
+|  | `sim_fio.c` |
+|  | `sim_sock.c` |
+|  | `sim_timer.c` |
+|  | `sim_tmxr.c` |
+| `sim/TX-0/` | `tx0_defs.h` |
+|  | `tx0_cpu.c` |
+|  | `tx0_stddev.c` |
+|  | `tx0_sys.c` |
+|  | `tx0_sys_orig.c` |
 
 # TX-0 Features
 
 The TX-0 is configured as follows:
 
-> device name(s) simulates
->
-> CPU TX-0 CPU with up to 64KW of memory
->
-> PETR Photo Electric Tape Rader
->
-> PTP Paper Tape Punch
->
-> TTI FlexoWriter input
->
-> TTO FlexoWriter output
->
-> DPY 512x512 7” high-persistence phosphor CRT Display
+| Device name(s) | Simulates |
+|---|---|
+| `CPU` | TX-0 CPU with up to 64KW of memory |
+| `PETR` | Photo Electric Tape Rader |
+| `PTP` | Paper Tape Punch |
+| `TTI` | FlexoWriter input |
+| `TTO` | FlexoWriter output |
+| `DPY` | 512x512 7” high-persistence phosphor CRT Display |
 
 The TX-0 simulator implements the following unique stop conditions:
 
@@ -139,33 +118,20 @@ default configuration is a TX-0 with AO, EAO, and GPR.
 CPU registers include the visible state of the processor as well as the
 control registers for the interrupt system.
 
-name size comments
-
-MBR 18 Memory Buffer Register
-
-AC 18 Accumulator
-
-MAR 16 Memory Address Register
-
-PC 16 Program Counter
-
-IR 5 Instruction Register (5 bits in Extended
-
-> Mode, 2 bits in Standard Mode)
-
-LR 18 Live Register
-
-TBR 18 Toggle Switch Buffer Register
-
-TAC 18 Toggle Switch Accumulator
-
-XR 14 Index Register (Extended Mode Only)
-
-T 1 Test Mode flip-flop (Read Only)
-
-R 1 Read In Mode flip-flop (Read Only)
-
-LP 2 Light Pen / Light Gun flip-flops.
+| Name | Size | Comments |
+|---|---|---|
+| `MBR` | 18 | Memory Buffer Register |
+| `AC` | 18 | Accumulator |
+| `MAR` | 16 | Memory Address Register |
+| `PC` | 16 | Program Counter |
+| `IR` | 5 | Instruction Register (5 bits in Extended Mode, 2 bits in Standard Mode) |
+| `LR` | 18 | Live Register |
+| `TBR` | 18 | Toggle Switch Buffer Register |
+| `TAC` | 18 | Toggle Switch Accumulator |
+| `XR` | 14 | Index Register (Extended Mode Only) |
+| `T` | 1 | Test Mode flip-flop (Read Only) |
+| `R` | 1 | Read In Mode flip-flop (Read Only) |
+| `LP` | 2 | Light Pen / Light Gun flip-flops. |
 
 ## I/O Devices
 
@@ -208,13 +174,10 @@ Read-In mode, and starts the processor running.
 
 The paper tape reader implements these registers:
 
-name size comments
-
-BUF 18 18-bit buffer to store up to three lines of
-
-> Paper tape input
-
-POS 32 position in the input file
+| Name | Size | Comments |
+|---|---|---|
+| `BUF` | 18 | 18-bit buffer to store up to three lines of Paper tape input |
+| `POS` | 32 | position in the input file |
 
 ### Paper Tape Punch (PTP)
 

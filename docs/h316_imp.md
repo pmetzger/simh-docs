@@ -55,33 +55,26 @@ all.
 
 These additional IMP/TIP specific files are added to simh:
 
-sim/h316/ h316_imp.h IMP/TIP and ARPAnet specific definitions
-
-h316_imp.c the IMP pseudo device
-
-h316_rtc.c real time clock and watch dog timer
-
-h316_hi.c host interfaces
-
-h316_mi.c modem interfaces
-
-h316_udp.c UDP support for MI and HI modules
+| Subdirectory | File | Contains |
+|---|---|---|
+| `sim/h316/` | `h316_imp.h` | IMP/TIP and ARPAnet specific definitions |
+|  | `h316_imp.c` | the IMP pseudo device |
+|  | `h316_rtc.c` | real time clock and watch dog timer |
+|  | `h316_hi.c` | host interfaces |
+|  | `h316_mi.c` | modem interfaces |
+|  | `h316_udp.c` | UDP support for MI and HI modules |
 
 # Additional Features and Devices
 
 The IMP/TIP adds the following devices to the H316 configuration:
 
-> <u>device name</u> <u>simulates</u>
->
-> MI modem interface (up to 5)
->
-> HI host interface (up to 4)
->
-> WDT watchdog timer
->
-> RTC real time clock (replaces H316 CLK device)
->
-> IMP TASK, IMPN and MLC functions (addresses 41<sub>8</sub> and 42<sub>8</sub>)
+| Device name | Simulates |
+|---|---|
+| `MI` | modem interface (up to 5) |
+| `HI` | host interface (up to 4) |
+| `WDT` | watchdog timer |
+| `RTC` | real time clock (replaces H316 CLK device) |
+| `IMP` | TASK, IMPN and MLC functions (addresses 41<sub>8</sub> and 42<sub>8</sub>) |
 
 ### IMP Pseudo Device
 
@@ -106,13 +99,11 @@ presently hard wired as a NOP (i.e. it never skips).
 
 The IMP device implements the following registers:
 
-<u>name size comments</u>
-
-MLC 1 always zero (TIP flag)
-
-IEN 1 task interrupt enabled
-
-IRQ 1 task interrupt pending
+| Name | Size | Comments |
+|---|---|---|
+| `MLC` | 1 | always zero (TIP flag) |
+| `IEN` | 1 | task interrupt enabled |
+| `IRQ` | 1 | task interrupt pending |
 
 These registers can be viewed with the command
 
@@ -120,9 +111,10 @@ EXAMINE IMP STATE
 
 The IMP device implements these debugging flags:
 
-SET IMP DEBUG=WARN print warnings for unusual conditions
-
-SET IMP DEBUG=IO trace all IMP device I/O instructions
+| Command | Action |
+|---|---|
+| `SET IMP DEBUG=WARN` | print warnings for unusual conditions |
+| `SET IMP DEBUG=IO` | trace all IMP device I/O instructions |
 
 Remember that you must enable debugging output first before these
 settings will be effective; refer to the *SIMH User’s Guide*,
@@ -167,19 +159,14 @@ count at an effective rate of 50 kHz regardless of the QUANTUM value.
 
 The RTC device implements the following registers:
 
-<u>name size comments</u>
-
-ENA 1 RTC is enabled
-
-COUNT 16 current count
-
-IEN 1 RTC interrupt enabled
-
-IRQ 1 RTC interrupt pending
-
-TPS 1 effective ticks per second
-
-WAIT 24 simulator time until the next tick
+| Name | Size | Comments |
+|---|---|---|
+| `ENA` | 1 | RTC is enabled |
+| `COUNT` | 16 | current count |
+| `IEN` | 1 | RTC interrupt enabled |
+| `IRQ` | 1 | RTC interrupt pending |
+| `TPS` | 1 | effective ticks per second |
+| `WAIT` | 24 | simulator time until the next tick |
 
 These registers can be viewed with the command
 
@@ -187,9 +174,10 @@ EXAMINE RTC STATE
 
 The RTC device implements these debugging flags:
 
-SET RTC DEBUG=WARN print warnings for unusual conditions
-
-SET RTC DEBUG=IO trace all RTC device I/O instructions
+| Command | Action |
+|---|---|
+| `SET RTC DEBUG=WARN` | print warnings for unusual conditions |
+| `SET RTC DEBUG=IO` | trace all RTC device I/O instructions |
 
 Please refer to the *SIMH User’s Guide*, “Controlling Debugging,” for
 more information and remember that you must enable debugging output
@@ -607,7 +595,7 @@ address assigned to that modem (71<sub>8</sub> thru 75<sub>8</sub>).
 
 |              |            |                                |
 |--------------|:----------:|--------------------------------|
-| **Mnemonic** | **Opcode** | **Operation**                  |
+| `Mnemonic` | `Opcode` | `Operation` |
 | MnOUT        |   0300dd   | *start modem output*           |
 | MnUNXP       |   0301dd   | *un-cross patch modem*         |
 | MnLXP        |   0302dd   | *enable line cross patch*      |
@@ -626,7 +614,7 @@ address assigned to that host (50<sub>8</sub>, 51<sub>8</sub>,
 
 |              |            |                                |
 |--------------|:----------:|--------------------------------|
-| **Mnemonic** | **Opcode** | **Operation**                  |
+| `Mnemonic` | `Opcode` | `Operation` |
 | HnROUT       |   0300dd   | *start regular output to host* |
 | HnIN         |   0301dd   | *start host input*             |
 | HnFOUT       |   0302dd   | *start host final output*      |
@@ -646,7 +634,7 @@ Table 5 summarizes the additional miscellaneous I/O instructions.
 
 |  |  |  |  |
 |----|:--:|:--:|----|
-| **Mnemonic** | **Opcode** | **Device** | **Operation** |
+| Mnemonic | Opcode | Device | Operation |
 | SMK 120 | 170120 | CPU | *set extended interrupt mask* |
 |  | 030026 | WDT | *reset watch dog timer* |
 |  | 170026 | WDT | *set status lights* |

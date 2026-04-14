@@ -34,103 +34,66 @@ This memorandum documents the SWTP 6800 simulator.
 
 # Simulator Files
 
-sim/ scp.h
-
-sim_console.h
-
-sim_defs.h
-
-sim_fio.h
-
-sim_rev.h
-
-sim_sock.h
-
-sim_tape.h
-
-sim_timer.h
-
-sim_tmxr.h
-
-scp.c
-
-sim_console.c
-
-sim_fio.c
-
-sim_sock.c
-
-sim_tape.c
-
-sim_timer.c
-
-sim_tmxr.c
-
-sim/swtp6800/common bootrom.c boot ROM simulator
-
-dc-4.c disk controller simulator
-
-lfd-400.c disk controller simulator
-
-i2716.c 2716 ROM simulator d
-
-m6800.c m6800 CPU simulator
-
-m6810.c m6810 RAM simulator
-
-mp-8m.c 8K RAM board simulator
-
-mp-a.c MP-A CPU board simulator
-
-mp-a2.c MP-A2 CPU board simulator mp-b2.c MP-B2 Motherboard board simulator
-
-mp-s.c serial port board simulator
-
-sim/swtp6800/swtp6800 mp-a_sys.c system definitions for MP-A CPU board
-
-mp-a2_sys.c system definitions for MP-A2 CPU board
-
-swtp_defs.h system definitions for the SWTP 6800
+| Subdirectory | File | Contains |
+|---|---|---|
+| `sim/` | `scp.h` |  |
+|  | `sim_console.h` |  |
+|  | `sim_defs.h` |  |
+|  | `sim_fio.h` |  |
+|  | `sim_rev.h` |  |
+|  | `sim_sock.h` |  |
+|  | `sim_tape.h` |  |
+|  | `sim_timer.h` |  |
+|  | `sim_tmxr.h` |  |
+|  | `scp.c` |  |
+|  | `sim_console.c` |  |
+|  | `sim_fio.c` |  |
+|  | `sim_sock.c` |  |
+|  | `sim_tape.c` |  |
+|  | `sim_timer.c` |  |
+|  | `sim_tmxr.c` |  |
+| `sim/swtp6800/common/` | `bootrom.c` | boot ROM simulator |
+|  | `dc-4.c` | disk controller simulator |
+|  | `lfd-400.c` | disk controller simulator |
+|  | `i2716.c` | 2716 ROM simulator d |
+|  | `m6800.c` | m6800 CPU simulator |
+|  | `m6810.c` | m6810 RAM simulator |
+|  | `mp-8m.c` | 8K RAM board simulator |
+|  | `mp-a.c` | MP-A CPU board simulator |
+|  | `mp-a2.c` | MP-A2 CPU board simulator |
+|  | `mp-b2.c` | MP-B2 Motherboard board simulator |
+|  | `mp-s.c` | serial port board simulator |
+| `sim/swtp6800/swtp6800/` | `mp-a_sys.c` | system definitions for MP-A CPU board |
+|  | `mp-a2_sys.c` | system definitions for MP-A2 CPU board |
+|  | `swtp_defs.h` | system definitions for the SWTP 6800 |
 
 Additional files are:
 
-sim/swtp6800/swtp6800 swtbug.bin SWTBUG boot ROM code
-
-swtp6800mp-a.ini Initialization for MP-A CPU
-
-swtp6800mp-a2.ini Initialization for MP-A2 CPU
+| Subdirectory | File | Contains |
+|---|---|---|
+| `sim/swtp6800/swtp6800/` | `swtbug.bin` | SWTBUG boot ROM code |
+|  | `swtp6800mp-a.ini` | Initialization for MP-A CPU |
+|  | `swtp6800mp-a2.ini` | Initialization for MP-A2 CPU |
 
 # SWTP 6800 Features
 
 The SWTP 6800 simulator is configured as follows:
 
-device names(s) simulates
-
-m6800+ MP-A CPU with
-
-m6810+ 128B of RAM and
-
-bootrom 512 - 8192B of boot ROM
-
-m6800+ MP-A2 CPU with
-
-m6810+ 128B of RAM
-
-bootrom+ 512 - 8192B of boot ROM
-
-i2716 4 each 2716 EPROMS and
-
-external RAM above 40K
-
-Motherboard MP-B2 with 8 SS-30 plugs and 7 SS-50 plugs
-
-MP-8M 6 each 8K byte memory board (0-7FFFH & A000-DFFFH)
-
-DC-4 SS-30 5-1/4” Dual Floppy disk controller
-
-LFD-400 SS-30 5-1/4” Dual Floppy disk controller
-
-MP-S SS-30 Serial I/O Port
+| Device names(s) | Simulates |
+|---|---|
+| `m6800+` | MP-A CPU with |
+| `m6810+` | 128B of RAM and |
+| `bootrom` | 512 - 8192B of boot ROM |
+| `m6800+` | MP-A2 CPU with |
+| `m6810+` | 128B of RAM |
+| `bootrom+` | 512 - 8192B of boot ROM |
+| `i2716` | 4 each 2716 EPROMS and |
+|  | external RAM above 40K |
+| `Motherboard` | MP-B2 with 8 SS-30 plugs and 7 SS-50 plugs |
+| `MP-8M` | 6 each 8K byte memory board (0-7FFFH & A000-DFFFH) |
+| `DC-4` | SS-30 5-1/4” Dual Floppy disk controller |
+| `LFD-400` | SS-30 5-1/4” Dual Floppy disk controller |
+| `MP-S` | SS-30 Serial I/O Port |
 
 The simulator builds as two executable files, SWTP6800MP-A and
 SWTP6800MP-A2, one for each of the processor boards available.
@@ -163,19 +126,14 @@ other SS-50 peripherals with the MP-S and DC-4.
 
 Addresses are fixed for each of the 6 MP-8M boards as shown below:
 
-Device Base address
-
-bd0 0000H
-
-bd1 2000H
-
-bd2 4000H
-
-bd3 6000H
-
-bd4 0A000H
-
-bd5 0C000H
+| Device | Base address |
+|---|---|
+| `bd0` | `0000H` |
+| `bd1` | `2000H` |
+| `bd2` | `4000H` |
+| `bd3` | `6000H` |
+| `bd4` | `0A000H` |
+| `bd5` | `0C000H` |
 
 The simulator allows each board to be enabled or disabled individually
 to simulate the presence or absence of a particular board. This is the
