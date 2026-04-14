@@ -19,7 +19,9 @@ X11-style open source license; the precise terms are available at:
 
 [3. Symbolic Display and Input](#symbolic-display-and-input)
 
-This memorandum documents the SSEM simulator.
+This memorandum documents the SSEM simulator. The SSEM is the
+Manchester Small-Scale Experimental Machine, also known as the
+"Baby".
 
 # Simulator Files
 
