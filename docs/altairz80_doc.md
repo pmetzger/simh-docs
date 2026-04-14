@@ -17,329 +17,329 @@ Harte, Ernie Price, Mike Douglas, and Patrick Linstruth.
 
 [1 Simulator Files](#simulator-files)
 
-[3 Background](#background)
+[2 Background](#background)
 
-[4 Hardware](#hardware)
+[3 Hardware](#hardware)
 
-[4.1 CPU](#cpu)
+[3.1 CPU](#cpu)
 
-[4.1.1 Registers for the 8080 and Z80](#registers-for-the-8080-and-z80)
+[3.1.1 Registers for the 8080 and Z80](#registers-for-the-8080-and-z80)
 
-[4.1.2 Registers for the 8086](#registers-for-the-8086)
+[3.1.2 Registers for the 8086](#registers-for-the-8086)
 
-[4.1.3 Registers for the MC68000](#registers-for-the-mc68000)
+[3.1.3 Registers for the MC68000](#registers-for-the-mc68000)
 
-[4.2 The Serial I/O Card (2SIO)](#the-serial-io-card-2sio)
+[3.2 The Serial I/O Card (2SIO)](#the-serial-io-card-2sio)
 
-[4.3 MITS 88-2SIO Serial Adapter (M2SIO)](#mits-88-2sio-serial-adapter-m2sio)
+[3.3 MITS 88-2SIO Serial Adapter (M2SIO)](#mits-88-2sio-serial-adapter-m2sio)
 
-[4.3.1 Using the M2SIO device with serial ports](#using-the-m2sio-device-with-serial-ports)
+[3.3.1 Using the M2SIO device with serial ports](#using-the-m2sio-device-with-serial-ports)
 
-[4.3.2 Using the M2SIO device with sockets](#using-the-m2sio-device-with-sockets)
+[3.3.2 Using the M2SIO device with sockets](#using-the-m2sio-device-with-sockets)
 
-[4.3.3 M2SIO limitations](#m2sio-limitations)
+[3.3.3 M2SIO limitations](#m2sio-limitations)
 
-[4.4 The SIMH pseudo device](#the-simh-pseudo-device)
+[3.4 The SIMH pseudo device](#the-simh-pseudo-device)
 
-[4.5 The 88-DISK controller](#the-88-disk-controller)
+[3.5 The 88-DISK controller](#the-88-disk-controller)
 
-[4.6 The 88-HDSK controller](#the-88-hdsk-controller)
+[3.6 The 88-HDSK controller](#the-88-hdsk-controller)
 
-[4.7 The Simulated Hard Disk](#the-simulated-hard-disk)
+[3.7 The Simulated Hard Disk](#the-simulated-hard-disk)
 
-[4.8 The simulated network](#the-simulated-network)
+[3.8 The simulated network](#the-simulated-network)
 
-[5 Sample Software](#sample-software)
+[4 Sample Software](#sample-software)
 
-[5.1 CP/M Version 2.2](#cpm-version-2.2)
+[4.1 CP/M Version 2.2](#cpm-version-2.2)
 
-[5.2 CP/M Version 3 with banked memory](#cpm-version-3-with-banked-memory)
+[4.2 CP/M Version 3 with banked memory](#cpm-version-3-with-banked-memory)
 
-[5.3 MP/M II with banked memory](#mpm-ii-with-banked-memory)
+[4.3 MP/M II with banked memory](#mpm-ii-with-banked-memory)
 
-[5.4 CP/NET](#cpnet)
+[4.4 CP/NET](#cpnet)
 
-[5.5 CPNOS](#cpnos)
+[4.5 CPNOS](#cpnos)
 
-[5.6 CP/M application software](#cpm-application-software)
+[4.6 CP/M application software](#cpm-application-software)
 
-[5.7 MITS Disk Extended BASIC Version 4.1](#mits-disk-extended-basic-version-4.1)
+[4.7 MITS Disk Extended BASIC Version 4.1](#mits-disk-extended-basic-version-4.1)
 
-[5.8 Altair DOS Version 1.0](#altair-dos-version-1.0)
+[4.8 Altair DOS Version 1.0](#altair-dos-version-1.0)
 
-[5.9 Altair Basic 3.2 (4k)](#altair-basic-3.2-4k)
+[4.9 Altair Basic 3.2 (4k)](#altair-basic-3.2-4k)
 
-[5.10 Altair Basic 4.0 (4k)](#altair-basic-4.0-4k)
+[4.10 Altair Basic 4.0 (4k)](#altair-basic-4.0-4k)
 
-[5.11 Altair 8k Basic](#altair-8k-basic)
+[4.11 Altair 8k Basic](#altair-8k-basic)
 
-[5.12 Altair Basic 4.0](#altair-basic-4.0)
+[4.12 Altair Basic 4.0](#altair-basic-4.0)
 
-[5.13 Altair Disk Extended Basic Version 300-5-C](#altair-disk-extended-basic-version-300-5-c)
+[4.13 Altair Disk Extended Basic Version 300-5-C](#altair-disk-extended-basic-version-300-5-c)
 
-[5.14 Altair Disk Extended Basic Version 5.0](#altair-disk-extended-basic-version-5.0)
+[4.14 Altair Disk Extended Basic Version 5.0](#altair-disk-extended-basic-version-5.0)
 
-[5.15 Altair Hard Disk Basic 300-5-C](#altair-hard-disk-basic-300-5-c)
+[4.15 Altair Hard Disk Basic 300-5-C](#altair-hard-disk-basic-300-5-c)
 
-[5.16 Altair programming languages VTL-2 and MINOL](#altair-programming-languages-vtl-2-and-minol)
+[4.16 Altair programming languages VTL-2 and MINOL](#altair-programming-languages-vtl-2-and-minol)
 
-[5.17 UCSD Pascal II.0](#ucsd-pascal-ii.0)
+[4.17 UCSD Pascal II.0](#ucsd-pascal-ii.0)
 
-[5.18 CP/M-68K](#cpm-68k)
+[4.18 CP/M-68K](#cpm-68k)
 
-[6 Special simulator features](#special-simulator-features)
+[5 Special simulator features](#special-simulator-features)
 
-[6.1 Memory access breakpoints (8080/Z80 only)](#memory-access-breakpoints-8080z80-only)
+[5.1 Memory access breakpoints (8080/Z80 only)](#memory-access-breakpoints-8080z80-only)
 
-[6.2 Instruction breakpoints (8080/Z80/8086)](#instruction-breakpoints-8080z808086)
+[5.2 Instruction breakpoints (8080/Z80/8086)](#instruction-breakpoints-8080z808086)
 
-[6.3 Breakpoints and instruction history (8080/Z80 only)](#breakpoints-and-instruction-history-8080z80-only)
+[5.3 Breakpoints and instruction history (8080/Z80 only)](#breakpoints-and-instruction-history-8080z80-only)
 
-[7 Brief summary of all major changes to the original Altair simulator](#brief-summary-of-all-major-changes-to-the-original-altair-simulator)
+[6 Brief summary of all major changes to the original Altair simulator](#brief-summary-of-all-major-changes-to-the-original-altair-simulator)
 
-[8 Appendix: Python script for converting MBL files to plain binary files](#appendix-python-script-for-converting-mbl-files-to-plain-binary-files)
+[7 Appendix: Python script for converting MBL files to plain binary files](#appendix-python-script-for-converting-mbl-files-to-plain-binary-files)
 
-[9 Appendix: How to bring up UCSD Pascal II.0 on SIMH](#appendix-how-to-bring-up-ucsd-pascal-ii.0-on-simh)
+[8 Appendix: How to bring up UCSD Pascal II.0 on SIMH](#appendix-how-to-bring-up-ucsd-pascal-ii.0-on-simh)
 
-[10 Vector Graphic, Inc. Simulation](#vector-graphic-inc.-simulation)
+[9 Vector Graphic, Inc. Simulation](#vector-graphic-inc.-simulation)
 
-[10.1 Overview](#overview)
+[9.1 Overview](#overview)
 
-[10.2 48K Vector MZ](#k-vector-mz)
+[9.2 48K Vector MZ](#k-vector-mz)
 
-[10.3 56K Vector MZ](#k-vector-mz-1)
+[9.3 56K Vector MZ](#k-vector-mz-1)
 
-[10.4 56K Vector with HD-FD Controller](#k-vector-with-hd-fd-controller)
+[9.4 56K Vector with HD-FD Controller](#k-vector-with-hd-fd-controller)
 
-[10.5 Notes on Simulated Hardware](#notes-on-simulated-hardware)
+[9.5 Notes on Simulated Hardware](#notes-on-simulated-hardware)
 
-[10.6 Notes on the Vector Graphic Disk Image (VGI) File Format](#notes-on-the-vector-graphic-disk-image-vgi-file-format)
+[9.6 Notes on the Vector Graphic Disk Image (VGI) File Format](#notes-on-the-vector-graphic-disk-image-vgi-file-format)
 
-[11 IMSAI 8080 Simulation](#imsai-8080-simulation)
+[10 IMSAI 8080 Simulation](#imsai-8080-simulation)
 
-[11.1 Overview](#overview-1)
+[10.1 Overview](#overview-1)
 
-[11.2 IMSAI 8080 with FIF Disk Controller](#imsai-8080-with-fif-disk-controller)
+[10.2 IMSAI 8080 with FIF Disk Controller](#imsai-8080-with-fif-disk-controller)
 
-[12 NorthStar MDS-A and MDS-AD FDC Simulation](#northstar-mds-a-and-mds-ad-fdc-simulation)
+[11 NorthStar MDS-A and MDS-AD FDC Simulation](#northstar-mds-a-and-mds-ad-fdc-simulation)
 
-[12.1 Overview](#overview-2)
+[11.1 Overview](#overview-2)
 
-[12.2 MDS-A Single Density Disk Controller](#mds-a-single-density-disk-controller)
+[11.2 MDS-A Single Density Disk Controller](#mds-a-single-density-disk-controller)
 
-[12.3 MDS-AD Double Density Disk Controller](#mds-ad-double-density-disk-controller)
+[11.3 MDS-AD Double Density Disk Controller](#mds-ad-double-density-disk-controller)
 
-[13 Compupro 8-16 Simulation](#compupro-8-16-simulation)
+[12 Compupro 8-16 Simulation](#compupro-8-16-simulation)
 
-[13.1 Overview](#overview-3)
+[12.1 Overview](#overview-3)
 
-[13.2 DISK1A High Performance Floppy Disk Controller](#disk1a-high-performance-floppy-disk-controller)
+[12.2 DISK1A High Performance Floppy Disk Controller](#disk1a-high-performance-floppy-disk-controller)
 
-[13.2.1 DISK1A Controller Parameters](#disk1a-controller-parameters)
+[12.2.1 DISK1A Controller Parameters](#disk1a-controller-parameters)
 
-[13.2.2 DISK1A Controller Limitations](#disk1a-controller-limitations)
+[12.2.2 DISK1A Controller Limitations](#disk1a-controller-limitations)
 
-[13.3 DISK2 Compupro Hard Disk Controller](#disk2-compupro-hard-disk-controller)
+[12.3 DISK2 Compupro Hard Disk Controller](#disk2-compupro-hard-disk-controller)
 
-[13.3.1 DISK2 Controller Parameters](#disk2-controller-parameters)
+[12.3.1 DISK2 Controller Parameters](#disk2-controller-parameters)
 
-[13.3.2 DISK2 Controller Configuration Registers](#disk2-controller-configuration-registers)
+[12.3.2 DISK2 Controller Configuration Registers](#disk2-controller-configuration-registers)
 
-[13.4 SELCHAN Compupro Selector Channel Controller](#selchan-compupro-selector-channel-controller)
+[12.4 SELCHAN Compupro Selector Channel Controller](#selchan-compupro-selector-channel-controller)
 
-[13.4.1 DISK2 Controller Parameters](#disk2-controller-parameters-1)
+[12.4.1 SELCHAN Controller Parameters](#selchan-controller-parameters)
 
-[13.5 DISK3 Viasyn ST-506 Hard Disk Controller](#disk3-viasyn-st-506-hard-disk-controller)
+[12.5 DISK3 Viasyn ST-506 Hard Disk Controller](#disk3-viasyn-st-506-hard-disk-controller)
 
-[13.5.1 DISK3 Controller Parameters](#disk3-controller-parameters)
+[12.5.1 DISK3 Controller Parameters](#disk3-controller-parameters)
 
-[13.5.2 DISK3 Controller Configuration Registers](#disk3-controller-configuration-registers)
+[12.5.2 DISK3 Controller Configuration Registers](#disk3-controller-configuration-registers)
 
-[13.5.3 DISK3 Controller Limitations](#disk3-controller-limitations)
+[12.5.3 DISK3 Controller Limitations](#disk3-controller-limitations)
 
-[14 Compupro CPU-68K Simulation](#compupro-cpu-68k-simulation)
+[13 Compupro CPU-68K Simulation](#compupro-cpu-68k-simulation)
 
-[14.1 Overview](#overview-4)
+[13.1 Overview](#overview-4)
 
-[14.2 M68K Registers Added](#m68k-registers-added)
+[13.2 M68K Registers Added](#m68k-registers-added)
 
-[14.3 M68K Additional Parameters](#m68k-additional-parameters)
+[13.3 M68K Additional Parameters](#m68k-additional-parameters)
 
-[15 Cromemco 4/16/64FDC and CCS-2422 FDC Simulation](#cromemco-41664fdc-and-ccs-2422-fdc-simulation)
+[14 Cromemco 4/16/64FDC and CCS-2422 FDC Simulation](#cromemco-41664fdc-and-ccs-2422-fdc-simulation)
 
-[15.1 Overview](#overview-5)
+[14.1 Overview](#overview-5)
 
-[15.1.1 CROMFDC Controller Parameters](#cromfdc-controller-parameters)
+[14.1.1 CROMFDC Controller Parameters](#cromfdc-controller-parameters)
 
-[15.1.2 CROMFDC Controller Configuration Registers](#cromfdc-controller-configuration-registers)
+[14.1.2 CROMFDC Controller Configuration Registers](#cromfdc-controller-configuration-registers)
 
-[15.1.3 CROMFDC Controller Limitations](#cromfdc-controller-limitations)
+[14.1.3 CROMFDC Controller Limitations](#cromfdc-controller-limitations)
 
-[16 Seattle Computer Products Simulation](#seattle-computer-products-simulation)
+[15 Seattle Computer Products Simulation](#seattle-computer-products-simulation)
 
-[16.1 Overview](#overview-6)
+[15.1 Overview](#overview-6)
 
-[16.2 SCP300F CPU Support Board](#scp300f-cpu-support-board)
+[15.2 SCP300F CPU Support Board](#scp300f-cpu-support-board)
 
-[16.2.1 SCP300F Parameters](#scp300f-parameters)
+[15.2.1 SCP300F Parameters](#scp300f-parameters)
 
-[16.2.2 SCP300F Configuration Registers](#scp300f-configuration-registers)
+[15.2.2 SCP300F Configuration Registers](#scp300f-configuration-registers)
 
-[16.2.3 SCP300F Limitations](#scp300f-limitations)
+[15.2.3 SCP300F Limitations](#scp300f-limitations)
 
-[16.3 TDD – Tarbell Double-Density Controller](#tdd-tarbell-double-density-controller)
+[15.3 TDD – Tarbell Double-Density Controller](#tdd-tarbell-double-density-controller)
 
-[16.3.1 TDD Parameters](#tdd-parameters)
+[15.3.1 TDD Parameters](#tdd-parameters)
 
-[16.3.2 TDD Configuration Registers](#tdd-configuration-registers)
+[15.3.2 TDD Configuration Registers](#tdd-configuration-registers)
 
-[16.3.3 TDD Limitations](#tdd-limitations)
+[15.3.3 TDD Limitations](#tdd-limitations)
 
-[16.4 DJHDC – Morrow HDC / DMA Hard Disk Controller](#djhdc-morrow-hdc-dma-hard-disk-controller)
+[15.4 DJHDC – Morrow HDC / DMA Hard Disk Controller](#djhdc-morrow-hdc-dma-hard-disk-controller)
 
-[16.4.1 DJHDC Controller Parameters](#djhdc-controller-parameters)
+[15.4.1 DJHDC Controller Parameters](#djhdc-controller-parameters)
 
-[16.4.2 DJHDC Controller Configuration Registers](#djhdc-controller-configuration-registers)
+[15.4.2 DJHDC Controller Configuration Registers](#djhdc-controller-configuration-registers)
 
-[16.4.3 DJHDC Controller Limitations](#djhdc-controller-limitations)
+[15.4.3 DJHDC Controller Limitations](#djhdc-controller-limitations)
 
-[17 Tarbell MDL-1011/2022 Floppy Disk Interface Simulation](#tarbell-mdl-10112022-floppy-disk-interface-simulation)
+[16 Tarbell MDL-1011/2022 Floppy Disk Interface Simulation](#tarbell-mdl-10112022-floppy-disk-interface-simulation)
 
-[17.1 Overview](#overview-7)
+[16.1 Overview](#overview-7)
 
-[17.1.1 TARBELL Controller Parameters](#tarbell-controller-parameters)
+[16.1.1 TARBELL Controller Parameters](#tarbell-controller-parameters)
 
-[17.1.2 TARBELL Example Usage](#tarbell-example-usage)
+[16.1.2 TARBELL Example Usage](#tarbell-example-usage)
 
-[17.1.3 TARBELL Controller Limitations](#tarbell-controller-limitations)
+[16.1.3 TARBELL Controller Limitations](#tarbell-controller-limitations)
 
-[18 JADE Double D Floppy Disk Controller Simulation](#jade-double-d-floppy-disk-controller-simulation)
+[17 JADE Double D Floppy Disk Controller Simulation](#jade-double-d-floppy-disk-controller-simulation)
 
-[18.1 Overview](#overview-8)
+[17.1 Overview](#overview-8)
 
-[18.1.1 JADE Double D Controller Parameters](#jade-double-d-controller-parameters)
+[17.1.1 JADE Double D Controller Parameters](#jade-double-d-controller-parameters)
 
-[18.1.2 JADEDD Example Usage](#jadedd-example-usage)
+[17.1.2 JADEDD Example Usage](#jadedd-example-usage)
 
-[18.1.3 JADE Double D Controller Limitations](#jade-double-d-controller-limitations)
+[17.1.3 JADE Double D Controller Limitations](#jade-double-d-controller-limitations)
 
-[19 iCOM FD3712/FD3812 Flexible Disk System Simulation](#icom-fd3712fd3812-flexible-disk-system-simulation)
+[18 iCOM FD3712/FD3812 Flexible Disk System Simulation](#icom-fd3712fd3812-flexible-disk-system-simulation)
 
-[19.1 Overview](#overview-9)
+[18.1 Overview](#overview-9)
 
-[19.1.1 iCOM FD3712/FD3812 Flexible Disk System Parameters](#icom-fd3712fd3812-flexible-disk-system-parameters)
+[18.1.1 iCOM FD3712/FD3812 Flexible Disk System Parameters](#icom-fd3712fd3812-flexible-disk-system-parameters)
 
-[19.1.2 iCOM Example Usage](#icom-example-usage)
+[18.1.2 iCOM Example Usage](#icom-example-usage)
 
-[20 Morrow DISK JOCKEY 2D Disk Controller Simulation](#morrow-disk-jockey-2d-disk-controller-simulation)
+[19 Morrow DISK JOCKEY 2D Disk Controller Simulation](#morrow-disk-jockey-2d-disk-controller-simulation)
 
-[20.1 Overview](#overview-10)
+[19.1 Overview](#overview-10)
 
-[20.1.1 DJ2D Parameters](#dj2d-parameters)
+[19.1.1 DJ2D Parameters](#dj2d-parameters)
 
-[20.1.2 DJ2D Example Usage](#dj2d-example-usage)
+[19.1.2 DJ2D Example Usage](#dj2d-example-usage)
 
-[20.1.3 DJ2D Simulator Limitations](#dj2d-simulator-limitations)
+[19.1.3 DJ2D Simulator Limitations](#dj2d-simulator-limitations)
 
-[21 Advanced Digital Corporation Simulation](#advanced-digital-corporation-simulation)
+[20 Advanced Digital Corporation Simulation](#advanced-digital-corporation-simulation)
 
-[21.1 ADC Super-Six Single-Board Computer](#adc-super-six-single-board-computer)
+[20.1 ADC Super-Six Single-Board Computer](#adc-super-six-single-board-computer)
 
-[21.1.1 ADCS6 SBC Overview](#adcs6-sbc-overview)
+[20.1.1 ADCS6 SBC Overview](#adcs6-sbc-overview)
 
-[21.1.2 ADCS6 SBC Parameters](#adcs6-sbc-parameters)
+[20.1.2 ADCS6 SBC Parameters](#adcs6-sbc-parameters)
 
-[21.1.3 ADCS6 SBC Configuration Registers](#adcs6-sbc-configuration-registers)
+[20.1.3 ADCS6 SBC Configuration Registers](#adcs6-sbc-configuration-registers)
 
-[21.1.4 ADCS6 SBC Limitations](#adcs6-sbc-limitations)
+[20.1.4 ADCS6 SBC Limitations](#adcs6-sbc-limitations)
 
-[21.2 ADCHD – Advanced Digital HDC-1001 Hard Disk Controller](#adchd-advanced-digital-hdc-1001-hard-disk-controller)
+[20.2 ADCHD – Advanced Digital HDC-1001 Hard Disk Controller](#adchd-advanced-digital-hdc-1001-hard-disk-controller)
 
-[21.2.1 ADCHD Controller Parameters](#adchd-controller-parameters)
+[20.2.1 ADCHD Controller Parameters](#adchd-controller-parameters)
 
-[21.2.2 ADCHD Controller Configuration Registers](#adchd-controller-configuration-registers)
+[20.2.2 ADCHD Controller Configuration Registers](#adchd-controller-configuration-registers)
 
-[21.2.3 ADCHD Controller Limitations](#adchd-controller-limitations)
+[20.2.3 ADCHD Controller Limitations](#adchd-controller-limitations)
 
-[22 N8VEM Single Board Computer Simulation](#n8vem-single-board-computer-simulation)
+[21 N8VEM Single Board Computer Simulation](#n8vem-single-board-computer-simulation)
 
-[22.1 Overview](#overview-11)
+[21.1 Overview](#overview-11)
 
-[22.1.1 N8VEM SBC Parameters](#n8vem-sbc-parameters)
+[21.1.1 N8VEM SBC Parameters](#n8vem-sbc-parameters)
 
-[22.1.2 N8VEM SBC Configuration Registers](#n8vem-sbc-configuration-registers)
+[21.1.2 N8VEM SBC Configuration Registers](#n8vem-sbc-configuration-registers)
 
-[22.1.3 N8VEM SBC Limitations](#n8vem-sbc-limitations)
+[21.1.3 N8VEM SBC Limitations](#n8vem-sbc-limitations)
 
-[23 Morrow Micro Decision (MD) Computer Simulation](#morrow-micro-decision-md-computer-simulation)
+[22 Morrow Micro Decision (MD) Computer Simulation](#morrow-micro-decision-md-computer-simulation)
 
-[23.1 Overview](#overview-12)
+[22.1 Overview](#overview-12)
 
-[23.1.1 Morrow MD Parameters](#morrow-md-parameters)
+[22.1.1 Morrow MD Parameters](#morrow-md-parameters)
 
-[23.1.2 Morrow MD Configuration Registers](#morrow-md-configuration-registers)
+[22.1.2 Morrow MD Configuration Registers](#morrow-md-configuration-registers)
 
-[23.1.3 Morrow MD Limitations](#morrow-md-limitations)
+[22.1.3 Morrow MD Limitations](#morrow-md-limitations)
 
-[23.1.4 Morrow MD Example Usage](#morrow-md-example-usage)
+[22.1.4 Morrow MD Example Usage](#morrow-md-example-usage)
 
-[24 Processor Technology Sol-20 Terminal Computer Simulation](#processor-technology-sol-20-terminal-computer-simulation)
+[23 Processor Technology Sol-20 Terminal Computer Simulation](#processor-technology-sol-20-terminal-computer-simulation)
 
-[24.1 Overview](#overview-13)
+[23.1 Overview](#overview-13)
 
-[24.1.1 Sol-20 Parameters](#sol-20-parameters)
+[23.1.1 Sol-20 Parameters](#sol-20-parameters)
 
-[24.1.2 Sol-20 Configuration Registers](#sol-20-configuration-registers)
+[23.1.2 Sol-20 Configuration Registers](#sol-20-configuration-registers)
 
-[24.1.3 Sol-20 Keyboard](#sol-20-keyboard)
+[23.1.3 Sol-20 Keyboard](#sol-20-keyboard)
 
-[24.1.4 Sol-20 Example Usage](#sol-20-example-usage)
+[23.1.4 Sol-20 Example Usage](#sol-20-example-usage)
 
-[24.1.5 Sol-20 ENT Files](#sol-20-ent-files)
+[23.1.5 Sol-20 ENT Files](#sol-20-ent-files)
 
-[25 Josh Bensadon’s JAIR Single Board Computer Simulation](#josh-bensadons-jair-single-board-computer-simulation)
+[24 Josh Bensadon’s JAIR Single Board Computer Simulation](#josh-bensadons-jair-single-board-computer-simulation)
 
-[25.1 Overview](#overview-14)
+[24.1 Overview](#overview-14)
 
-[25.1.1 JAIR Parameters](#jair-parameters)
+[24.1.1 JAIR Parameters](#jair-parameters)
 
-[25.1.2 JAIR Configuration Registers](#jair-configuration-registers)
+[24.1.2 JAIR Configuration Registers](#jair-configuration-registers)
 
-[25.1.3 JAIR Example Usage](#jair-example-usage)
+[24.1.3 JAIR Example Usage](#jair-example-usage)
 
-[25.1.4 JAIR Caveats](#jair-caveats)
+[24.1.4 JAIR Caveats](#jair-caveats)
 
-[25.1.5 JAIR File Repository](#jair-file-repository)
+[24.1.5 JAIR File Repository](#jair-file-repository)
 
-[26 PMMI MM-103 MODEM and Communications Adapter](#pmmi-mm-103-modem-and-communications-adapter)
+[25 PMMI MM-103 MODEM and Communications Adapter](#pmmi-mm-103-modem-and-communications-adapter)
 
-[26.1 Overview](#overview-15)
+[25.1 Overview](#overview-15)
 
-[26.1.1 PMMI Device Parameters](#pmmi-device-parameters)
+[25.1.1 PMMI Device Parameters](#pmmi-device-parameters)
 
-[26.1.2 PMMI Example Usage](#pmmi-example-usage)
+[25.1.2 PMMI Example Usage](#pmmi-example-usage)
 
-[26.1.3 PMMI and SIMH Timing](#pmmi-and-simh-timing)
+[25.1.3 PMMI and SIMH Timing](#pmmi-and-simh-timing)
 
-[27 Hayes Micromodem 100](#hayes-micromodem-100)
+[26 Hayes Micromodem 100](#hayes-micromodem-100)
 
-[27.1 Overview](#overview-16)
+[26.1 Overview](#overview-16)
 
-[27.1.1 HAYES Device Parameters](#hayes-device-parameters)
+[26.1.1 HAYES Device Parameters](#hayes-device-parameters)
 
-[27.1.2 HAYES Example Usage](#hayes-example-usage)
+[26.1.2 HAYES Example Usage](#hayes-example-usage)
 
-[27.1.3 HAYES and SIMH Timing](#hayes-and-simh-timing)
+[26.1.3 HAYES and SIMH Timing](#hayes-and-simh-timing)
 
-[28 ImageDisk (IMD) Disk Image Support in SIMH](#imagedisk-imd-disk-image-support-in-simh)
+[27 ImageDisk (IMD) Disk Image Support in SIMH](#imagedisk-imd-disk-image-support-in-simh)
 
-[28.1 Overview](#overview-17)
+[27.1 Overview](#overview-17)
 
-[28.2 References](#references)
+[27.2 References](#references)
 
-[29 CP/M-68K Simulation](#cpm-68k-simulation)
+[28 CP/M-68K Simulation](#cpm-68k-simulation)
 
-[30 Revision History](#revision-history)
+[29 Revision History](#revision-history)
 
 This memorandum documents the Altair 8800 Simulator.
 
@@ -444,7 +444,7 @@ This memorandum documents the Altair 8800 Simulator.
 The MITS (Micro Instrumentation and Telemetry Systems) Altair 8800 was
 announced on the January 1975 cover of Popular Electronics, which
 boasted you could buy and build this powerful computer kit for only
-\$397. The kit consisted at that time of only the parts to build a case,
+$397. The kit consisted at that time of only the parts to build a case,
 power supply, card cage (18 slots), CPU card, and memory card with 256
 *bytes* of memory. Still, thousands were ordered within the first few
 months after the announcement, starting the personal computer revolution
@@ -455,7 +455,7 @@ peripherals and the 256 byte memory size. But the computer was an open
 system, and by 1977 MITS and many other small startups had added many
 expansion cards to make the Altair quite a respectable little computer.
 The “Altair Bus” that made this possible was soon called the S-100 Bus,
-later adopted as an industry standard, and eventually became the IEE-696
+later adopted as an industry standard, and eventually became the IEEE-696
 Bus.
 
 # Hardware
@@ -1060,7 +1060,7 @@ The HDSK device can be configured with
 
 | command | action |
 |---------|--------|
-| `SET HDSK<n> GEOM=<t>/<s>/<l>` | Set the hard disk geometry to `<t>` tracks with `<s>` sectors with sector length `<l>`. Alternatively you can also use `GEOM=T:<t>/N:<s>/S:<s>`. |
+| `SET HDSK<n> GEOM=<t>/<s>/<l>` | Set the hard disk geometry to `<t>` tracks with `<s>` sectors with sector length `<l>`. Alternatively you can also use `GEOM=T:<t>/N:<s>/S:<l>`. |
 
 Note that the `Attach` command will choose the correct format based on
 the size of the attached file. In case the file does not yet exist it is
@@ -1076,7 +1076,7 @@ DEBUG=f1{;f}` or `SET HDSK DEBUG` to enable all of them)
 | `WRITE` | All write operations on the disk |
 | `VERBOSE` | All other warning and error messages (e.g. disk is write locked, disk is not attached) |
 
-## The simulated network
+## The Simulated Network
 
 The simulator supports networking via sockets (TCP/IP) for simulating
 operating systems such as CP/NET (see section [5.4](#cpnet)) and CPNOS
@@ -1456,7 +1456,7 @@ sim> set cpu banked
 sim> set simh timeroff
 sim> attach sio 23
 sim> set net server
-sim> at net 127.0.0.1:4000
+sim> attach net 127.0.0.1:4000
 sim> boot dsk
 ```
 
@@ -1479,7 +1479,7 @@ sim> set cpu nonbanked
 sim> reset cpu
 sim> set sio ansi
 sim> set net client
-sim> at net 127.0.0.1:4000
+sim> attach net 127.0.0.1:4000
 sim> boot dsk
 ```
 
@@ -1944,7 +1944,7 @@ with `<first byte of instruction>`.
 ## Breakpoints and instruction history (8080/Z80 only)
 
 One can use breakpoints with the CPU instruction history. For example,
-suppose one wanted to determine what lead up to memory address 05C00
+suppose one wanted to determine what led up to memory address 05C00
 being accessed:
 
 ```
@@ -2017,7 +2017,7 @@ CPU: C0Z1M0E1I0 A=31 B=0088 D=FF33 H=5C00 S=0000 P=FF28 LDAX D
 - Made the DSK and SIO device more robust (previously malicious code
   could crash the simulator)
 
-- Added memory access break points
+- Added memory access breakpoints
 
 - Added periodic timer interrupts (useful for MP/M)
 
@@ -2527,7 +2527,7 @@ Vector Graphic support was added by Howard M. Harte.
 
 ## Overview
 
-Vector Graphic is an early microcomputer from the mid 1970's, based
+Vector Graphic is an early microcomputer from the mid 1970s, based
 on the [S-100](http://en.wikipedia.org/wiki/S-100) bus using the
 [Z80](http://en.wikipedia.org/wiki/Z80) microprocessor. There were
 several Vector Graphic models produced. Although primarily used with the
@@ -2747,7 +2747,7 @@ IMSAI FIF Disk Controller support was added by Ernie Price.
 
 The IMSAI FIF Disk Controller consists of an IFM (Interface Master
 Board) and a FIB (Floppy Disk Interface board) which interface the disk
-to the computer. The combination of FIB and IFM boards create an
+to the computer. The combination of FIB and IFM boards creates an
 intelligent controller including DMA transfer, which permits the
 computer to perform other tasks during disk operations.
 
@@ -2868,7 +2868,7 @@ Horizon computer.
 ```
 sim> set mdsad enable ; enable NorthStar MDS-AD Controller
 sim> attach mdsad0 D01B01.NSI ; attach CP/M boot disk to MDSAD0 drive
-sim> boot mdsad0(or go e800) ; boot the disk
+sim> boot mdsad0 (or go e800) ; boot the disk
 ```
 
 There is a configuration file that configures SIMH to simulate a
@@ -2903,9 +2903,9 @@ included a dual CPU card containing Intel 8085 and 8088 processors. This
 processor card was capable of switching between CPUs at runtime, and
 this allowed the user to run CP/M-80 as well as CP/M-86. In the latest
 version of CP/M-80 released by Viasyn (who had acquired Compupro by that
-time) uses the 8085 CPU for running CP/M, but offloads some of the
-memory operations to the 8088 CPU because of its ability to operate
-faster, and more easily address memory above 64K.
+time), the 8085 CPU is used for running CP/M, but some memory
+operations are offloaded to the 8088 CPU because of its ability to
+operate faster and more easily address memory above 64K.
 
 Additional devices include:
 
@@ -3185,7 +3185,7 @@ Howard M. Harte.
 The Cromemco 4/16/64FDC disk controllers are a family of floppy disk
 controllers for Cromemco systems. The controller is based on the Western
 Digital WD179x series of floppy controller chips. The implementation of
-the DISK1A uses a generic WD179x controller core with a
+the CROMFDC uses a generic WD179x controller core with a
 Cromemco-specific wrapper to implement the Cromemco-specific features.
 
 The WD179x controller core simulation utilizes the ImageDisk (IMD) file
@@ -3267,7 +3267,7 @@ Howard M. Harte.
 
 ## Overview
 
-The Seattle Computer Products line of products with the 8086 CPU were
+The Seattle Computer Products line of products with the 8086 CPU was
 used for development of 86-DOS, which was later sold to Microsoft and
 re-branded as MS-DOS. AltairZ80 provides enough simulated hardware to
 run 86-DOS as well as MS-DOS 1.x and [MS-DOS
@@ -3487,11 +3487,9 @@ file will be created.
 
 ### TARBELL Example Usage
 
-Download `CPM22-48K-SSSD.DSK` via
-[https://deramp.com/downloads/altair/software/tarbell_floppy_controllers/single_density_controller/CPM%202.2%20(1982)/CPM22-48K-SSSD.DSK
-for the Tarbell
-MDL-1011](https://deramp.com/downloads/altair/software/tarbell_floppy_controllers/single_density_controller/CPM%202.2%20(1982)/CPM22-48K-SSSD.DSK%20for%20the%20Tarbell%20MDL-1011)
-and then
+Download
+[`CPM22-48K-SSSD.DSK`](https://deramp.com/downloads/altair/software/tarbell_floppy_controllers/single_density_controller/CPM%202.2%20(1982)/CPM22-48K-SSSD.DSK)
+for the Tarbell MDL-1011 and then
 
 ```
 sim> set cpu 48k
@@ -3502,9 +3500,8 @@ sim> set sio sleep
 sim> set tarbell enable ; enable Tarbell Controller
 sim> set tarbell model=sd ; single density controller
 sim> set tarbell debug=ERROR ; show debug ERROR messages
-sim> attach tarbell0 CPM22-48K-SSSD.DSK ; attach CP/M boot disk to
-TARBELL0 drive
-sim> boot tarbell0 ; boot CPM22.DSK (or "g 0")it
+sim> attach tarbell0 CPM22-48K-SSSD.DSK ; attach CP/M boot disk to TARBELL0 drive
+sim> boot tarbell0 ; boot CPM22.DSK (or "g 0")
 ```
 
 CP/M disk images supporting the Tarbell MDL-1011 floppy disk interface
@@ -3698,7 +3695,7 @@ supporting single density and double density soft sector 8" media with
 26 128-byte sectors per track. Double density disks have 26 256-byte, 15
 512-byte, or 8 1024-byte sectors per track. Track 0 of double density
 disks are always formatted single density. The standard format for CP/M
-is 1024-byte sectors. The simulated controller include 1K PROMs for
+is 1024-byte sectors. The simulated controller includes 1K PROMs for
 addresses E000 and F800. The PROM is followed by 1024 bytes of RAM. The
 DJ2D provides for 8 memory-mapped I/O addresses starting at location
 PROMBASE+03F8. Using the simulated DJ2D, it is possible to load and run
@@ -3771,7 +3768,7 @@ CP/M 2.2 disk images supporting the `DJ2D` simulator are available at
 
 ### DJ2D Simulator Limitations
 
-The `DJ2D` devices detects the format of the `DSK` image by its size.
+The `DJ2D` device detects the format of the `DSK` image by its size.
 
 Bank select logic is not currently supported.
 
@@ -3922,7 +3919,7 @@ N8VEM Single Board Computer support was added by Howard M. Harte.
 ## Overview
 
 The N8VEM Single Board Computer is a homebrew Z80 system designed by
-Andrew Lynch. This SBC can has 1MB of EPROM, 512KB of RAM, and can run
+Andrew Lynch. This SBC has 1MB of EPROM, 512KB of RAM, and can run
 CP/M 2.2. More details about the N8VEM are on the following newsgroup:
 
 <http://groups.google.com/group/n8vem>
@@ -3962,8 +3959,8 @@ and deposited in the simulator. These registers are:
 | `SAVEROM` | When set to `1`, the ROM data will be saved to an attached file. |
 | `SAVERAM` | When set to `1`, the RAM data will be saved to an attached file. |
 | `PIO1A` | 8255 `PIO1A` port |
-| `PIO1B` | 8255 `PIO1A` port |
-| `PIO1C` | 8255 `PIO1A` port |
+| `PIO1B` | 8255 `PIO1B` port |
+| `PIO1C` | 8255 `PIO1C` port |
 | `PIOCTRL` | 8255 `PIO` Control register |
 
 The `N8VEM` supports two storage devices: `N8VEM0` and `N8VEM1`.
@@ -3977,7 +3974,7 @@ into an EPROM for use with the actual `N8VEM` hardware.
 to `1`, and the unit is detached. Since the `N8VEM` has 512KB of RAM, the
 file created will be 524288 bytes in length. This file is useful as a
 “core dump” to examine the state of a running system. It can also serve
-to model persistent storage for the `N8VEM` RAM drive, in case an 512KB
+to model persistent storage for the `N8VEM` RAM drive, in case a 512KB
 `NVRAM` is used in place of the 512KB `SRAM` on the `N8VEM`.
 
 ### N8VEM SBC Limitations
@@ -4075,7 +4072,7 @@ The MMDM device registers are:
 
 The Morrow MD parallel port is not currently supported.
 
-The `MDMM` modem port device is disabled by default as it uses the same
+The `MMDM` modem port device is disabled by default as it uses the same
 port address as `SIMH`. If this device is enabled, CP/M utilities such as
 `R.COM` and `W.COM` will not work.
 
@@ -4239,7 +4236,7 @@ JAIR support was added by Patrick A. Linstruth, <patrick@deltecent.com>.
 Josh’s Altair/IMSAI Replacement (JAIR) is a Single Board Computer for
 the S100 bus designed by Josh Bensadon. The JAIR provides an Intel 8080
 CPU, 32K EPROM, 64K RAM, two 8250 serial ports, one 8212 parallel port,
-and SD memory card for firmware and CP/M virtual disk image storage.
+and an SD memory card for firmware and CP/M virtual disk image storage.
 
 The JAIR simulator provides the following devices:
 
@@ -4466,7 +4463,7 @@ The disk images used in the above examples may be downloaded from
 ### PMMI and SIMH Timing
 
 The PMMI device and communications software for CP/M depend on
-predicable timing to function properly. This is accomplished by setting
+predictable timing to function properly. This is accomplished by setting
 CPU’s `CLOCK` register and using the M2SIO0 device for console input and
 output. If using the SIO device for console input and output, use `SET
 SIO NOSLEEP` to disable sleeps during keyboard checks as this interferes
@@ -4582,12 +4579,12 @@ The disk images used in the above examples may be downloaded from:
 ### HAYES and SIMH Timing
 
 The HAYES device and communications software for CP/M depend on
-predicable timing to function properly. This is accomplished by setting
+predictable timing to function properly. This is accomplished by setting
 the CPU’s `CLOCK` register and using the M2SIO0 device for console input
 and output. If using the SIO device for console input and output, use
 `SET SIO NOSLEEP` to disable sleeps during keyboard checks that
 interfere with SIMH’s timing. Software that uses the 50ms hardware timer
-on the Micromodem 100 should be able run at any CPU clock speed.
+on the Micromodem 100 should be able to run at any CPU clock speed.
 
 # ImageDisk (IMD) Disk Image Support in SIMH
 
@@ -4653,9 +4650,9 @@ Typing `bbye` at the `C>` command prompt brings you back to SIMH.
 
 - 20-Mar-2023 Patrick Linstruth (added support for Processor Technology VDM-1 Video Display Module and Sol-20 Terminal Computer.)
 
-- 16-Jan-2022 Howard Harte (updated ADC, CompuPro documentation, added Seattle Computer Products documentation.)
-
 - 22-Nov-2022 Patrick Linstruth (added MEM and REG commands)
+
+- 16-Jan-2022 Howard Harte (updated ADC, CompuPro documentation, added Seattle Computer Products documentation.)
 
 - 19-Nov-2022 Patrick Linstruth (added support for Morrow Micro Decision)
 
