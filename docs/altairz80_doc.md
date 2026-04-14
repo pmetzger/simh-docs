@@ -446,7 +446,7 @@ announced on the January 1975 cover of Popular Electronics, which
 boasted you could buy and build this powerful computer kit for only
 \$397. The kit consisted at that time of only the parts to build a case,
 power supply, card cage (18 slots), CPU card, and memory card with 256
-\*bytes\* of memory. Still, thousands were ordered within the first few
+*bytes* of memory. Still, thousands were ordered within the first few
 months after the announcement, starting the personal computer revolution
 as we know it today.
 
@@ -454,13 +454,13 @@ Many laugh at the small size of that first kit, noting there were no
 peripherals and the 256 byte memory size. But the computer was an open
 system, and by 1977 MITS and many other small startups had added many
 expansion cards to make the Altair quite a respectable little computer.
-The "Altair Bus" that made this possible was soon called the S-100 Bus,
+The “Altair Bus” that made this possible was soon called the S-100 Bus,
 later adopted as an industry standard, and eventually became the IEE-696
 Bus.
 
 # Hardware
 
-We are simulating a fairly "loaded" Altair 8800 from about 1977, with
+We are simulating a fairly “loaded” Altair 8800 from about 1977, with
 the following configuration:
 
 | device name | simulates |
@@ -498,11 +498,11 @@ minimum of 24K.
 | `SET CPU 16K` |  |
 | `... (in 4K steps)` |  |
 | `SET CPU 64K` | All these set various CPU memory configurations, resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. |
-| `SET CPU MEMORY=\<nnn\>K` | Sets the memory to `<nnn>` kilo bytes, resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. |
+| `SET CPU MEMORY=<nnn>K` | Sets the memory to `<nnn>` kilo bytes, resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. |
 | `SET CPU BANKED` | Enables the banked memory support. The simulated memory has eight banks with address range 0..’COMMON’ (see registers below) and a common area from ‘COMMON’ to 0FFFF which is common to all banks. The currently active bank is determined by register 'BANK' (see below). You can only switch to banked memory if the memory is set to 64K. The banked memory is used by CP/M 3. |
 | `SET CPU NONBANKED` | Disables banked memory support. |
 | `SET CPU CLEARMEMORY` | Resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. Note that resetting the CPU does only clear the CPU registers but not the memory nor the MMU. |
-| `SET CPU RESIZEMEMORY=\<nnn\>K` | Resets all internal memory to 0 but does not reset the Memory Management Unit (MMU) such that all memory pages are RAM. |
+| `SET CPU RESIZEMEMORY=<nnn>K` | Resets all internal memory to 0 but does not reset the Memory Management Unit (MMU) such that all memory pages are RAM. |
 | `SET CPU ALTAIRROM` | Enables the slightly modified but downwards compatible Altair boot ROM at addresses 0FF00 to 0FFFF. This is the default. |
 | `SET CPU NOALTAIRROM` | Disables standard Altair ROM behavior. |
 | `SET CPU MMU` | Enables the Memory Management Unit (MMU) and clock frequency support. |
@@ -521,9 +521,9 @@ minimum of 24K.
 | `SET CPU LOOPONHALT` | Z80 or 8080 CPU does not stop when a HALT instruction is encountered but waits for an interrupt to occur. |
 | `SET CPU HISTORY` | Clears CPU instruction history buffer (8080 and Z80). |
 | `SET CPU HISTORY=0` | Disables CPU instruction history (8080 and Z80). |
-| `SET CPU HISTORY=\<n\>` | Enables CPU instruction history buffer with a size of `<n>` (8080 and Z80). |
+| `SET CPU HISTORY=<n>` | Enables CPU instruction history buffer with a size of `<n>` (8080 and Z80). |
 | `SHOW CPU HISTORY` | Displays CPU instruction history buffer in CP/M DDT format (8080 and Z80). |
-| `SHOW CPU HISTORY=\<n\>` | Displays last `<n>` entries of the CPU instruction history buffer in CP/M DDT format (8080 and Z80). |
+| `SHOW CPU HISTORY=<n>` | Displays last `<n>` entries of the CPU instruction history buffer in CP/M DDT format (8080 and Z80). |
 
 The BOOT EPROM card starts at address 0FF00 if it has been enabled by
 'SET CPU ALTAIRROM'. Jumping to this address will boot drive 0 of the
@@ -707,13 +707,13 @@ C = Carry
 | `MMIOSIZE` | 17 | Memory Mapped I/O Size |
 | `M68KVAR` | 17 | M68K CPU Type |
 
-The CPU device supports the following debug flags (set with “SET CPU
-DEBUG=f1{;f}” or “SET CPU DEBUG” to enable all of them)
+The CPU device supports the following debug flags (set with "SET CPU
+DEBUG=f1{;f}" or "SET CPU DEBUG" to enable all of them)
 
-LOG_IN Log all IN operations to the file specified with “SET DEBUG \<file\>”.
+LOG_IN Log all IN operations to the file specified with `SET DEBUG <file>`.
 
-LOG_OUT Log all OUT operations to the file specified with “SET DEBUG
-\<file\>”. Use “SET NODEBUG” to close the file. Also note that there is
+LOG_OUT Log all OUT operations to the file specified with "SET DEBUG
+<file>". Use "SET NODEBUG" to close the file. Also note that there is
 no logging if no file has been specified.
 
 ## The Serial I/O Card (2SIO)
@@ -747,7 +747,7 @@ The SIO can be configured in SIMH with the following commands:
 | `SET SIO NOBELL` | Do not display ^G (Control-G, bell character. This feature is useful when a simulated program makes excessive use of the bell character. Furthermore, the `SHOW` command prints more information. |
 | `SET SIO INTERRUPT` | Status port 0 creates an interrupt when a character becomes available. The handler is at SIO register `KEYBDH`. |
 | `SET SIO NOINTERRUPT` | Status port 0 does not create interrupts. |
-| `SET SIO SLEEP` | Sleeps for `SLEEP` milliseconds after a keyboard status check where no character was available. This is useful in many operating systems to avoid high real CPU usage in busy wait loops. Use “D SLEEP `<n>`” to change the number of milliseconds – the default value is 1. |
+| `SET SIO SLEEP` | Sleeps for `SLEEP` milliseconds after a keyboard status check where no character was available. This is useful in many operating systems to avoid high real CPU usage in busy wait loops. Use `D SLEEP <n>` to change the number of milliseconds – the default value is 1. |
 | `SET SIO NOSLEEP` | Do not sleep after unsuccessful keyboard status checks. |
 | `SET SIO PORT=Port/Terminal/Read/NotRead/Write/Reset/Reset/Data` |  |
 
@@ -764,31 +764,28 @@ The SIO can be configured in SIMH with the following commands:
 
 The standard setting for the console / keyboard port is equivalent to
 
-SET SIO PORT=10/0/1/0/2/T/3/F
-
-SET SIO PORT=11/0/1/0/2/T/3/T
+| command | action |
+|---------|--------|
+| `SET SIO PORT=10/0/1/0/2/T/3/F` | set the status port defaults |
+| `SET SIO PORT=11/0/1/0/2/T/3/T` | set the data port defaults |
 
 You can also attach the SIO to a port or a file:
 
-ATTACH SIO 23 Console IO goes via a Telnet connection on port 23 (often requires root privileges, you can also use another port and use Telnet with this port)
+| command | action |
+|---------|--------|
+| `ATTACH SIO 23` | Console IO goes via a Telnet connection on port 23 (often requires root privileges, you can also use another port and use Telnet with this port) |
+| `ATTACH SIO <filename>` | Console input is taken from the file with name `<filename>` and output goes to the SIMH console. Note that sometimes this does not work as expected since some application programs or operating system commands periodically check for input. |
+| `DETACH SIO` | Console IO goes via the regular SIMH console |
 
-ATTACH SIO \<filename\> Console input is taken from the file with name
-\<filename\> and output goes to the SIMH console. Note that sometimes
-this does not work as expected since some application programs or
-operating system commands periodically check for input.
+The SIO device supports the following debug flags (set with "SET SIO
+DEBUG=f1{;f}" or "SET SIO DEBUG" to enable all of them)
 
-DETACH SIO Console IO goes via the regular SIMH console
-
-The SIO device supports the following debug flags (set with “SET SIO
-DEBUG=f1{;f}” or “SET SIO DEBUG” to enable all of them)
-
-IN All IN operations on the SIO ports (status and data)
-
-OUT All OUT operations on the SIO ports (status and data)
-
-CMD All OUT operations which are interpreted as commands
-
-VERBOSE All warning messages (currently: none)
+| flag | meaning |
+|------|---------|
+| `IN` | All IN operations on the SIO ports (status and data) |
+| `OUT` | All OUT operations on the SIO ports (status and data) |
+| `CMD` | All OUT operations which are interpreted as commands |
+| `VERBOSE` | All warning messages (currently: none) |
 
 The PTP/PTR can be configured in SIMH with the following command:
 
@@ -802,28 +799,25 @@ The PTP/PTR can be configured in SIMH with the following command:
 | `StatusPort` | two digit hex address of the new status port (originally 0x12) |
 | `DataPort` | two digit hex address of the new data port (originally 0x13) |
 
-The PTP device supports the following debug flags (set with “SET PTP
-DEBUG=f1{;f}” or “SET PTP DEBUG” to enable all of them)
+The PTP device supports the following debug flags (set with "SET PTP
+DEBUG=f1{;f}" or "SET PTP DEBUG" to enable all of them)
 
-IN All IN operations on the PTP ports (status and data)
+| flag | meaning |
+|------|---------|
+| `IN` | All IN operations on the PTP ports (status and data) |
+| `OUT` | All OUT operations on the PTP ports (status and data) |
+| `CMD` | All OUT operations which are interpreted as commands |
+| `VERBOSE` | All warning messages (currently: use of unattached PTP) |
 
-OUT All OUT operations on the PTP ports (status and data)
+The PTR device supports the following debug flags (set with "SET PTR
+DEBUG=f1{;f}" or "SET PTR DEBUG" to enable all of them)
 
-CMD All OUT operations which are interpreted as commands
-
-VERBOSE All warning messages (currently: use of unattached PTP)
-
-The PTR device supports the following debug flags (set with “SET PTR
-DEBUG=f1{;f}” or “SET PTR DEBUG” to enable all of them)
-
-IN All IN operations on the PTR ports (status and data)
-
-OUT All OUT operations on the PTR ports (status and data)
-
-CMD All OUT operations which are interpreted as commands
-
-VERBOSE All warning messages (currently: use of unattached PTR, attempt
-to read past end of attached file)
+| flag | meaning |
+|------|---------|
+| `IN` | All IN operations on the PTR ports (status and data) |
+| `OUT` | All OUT operations on the PTR ports (status and data) |
+| `CMD` | All OUT operations which are interpreted as commands |
+| `VERBOSE` | All warning messages (currently: use of unattached PTR, attempt to read past end of attached file) |
 
 ## MITS 88-2SIO Serial Adapter (M2SIO)
 
@@ -842,9 +836,10 @@ manipulations. Also, there are no PTP or PTR devices.
 
 Before either of these ports can be used, they must be enabled:
 
-SET M2SIO0 ENA Enable the first 88-2SIO port (replaces SIO port).
-
-SET M2SIO1 ENA Enable the second 88-2SIO port (replaces PTP and PTR ports).
+| command | action |
+|---------|--------|
+| `SET M2SIO0 ENA` | Enable the first 88-2SIO port (replaces SIO port). |
+| `SET M2SIO1 ENA` | Enable the second 88-2SIO port (replaces PTP and PTR ports). |
 
 Once enabled, the M2SIO ports can be configured in SIMH with the
 following commands, where ‘x’ is 0 for port 0 and 1 for port 1:
@@ -887,7 +882,7 @@ The M2SIO device implements these registers:
 ### Using the M2SIO device with serial ports
 
 It is possible to attach host serial ports to the M2SIO ports using the
-“Attach” command. The following example shows how to attach the second
+"Attach" command. The following example shows how to attach the second
 88-2SIO port (M2SIO1) to a serial port to on a UNIX-type platform:
 
 ```
@@ -896,15 +891,15 @@ sim> attach m2sio1 connect=/dev/cu.USA19H14411P1.1
 ```
 
 The 88-2SIO does not have a DTR modem output. If you need DTR, configure
-the port to have DTR follow RTS with the “set m2siox dtr” command.
+the port to have DTR follow RTS with the "set m2siox dtr" command.
 
 The 88-2SIO will not enable the receiver unless DCD is present. If you
 need the port to receive without DCD, configure the port to force DCD to
-an active low state with the “SET M2SIOx DCD” command.
+an active low state with the "SET M2SIOx DCD" command.
 
 The 88-2SIO will not transmit unless CTS is present. If you need the
 port to transmit without CTS, configure the port to force CTS to an
-active low state with the “SET M2SIOx CTS” command.
+active low state with the "SET M2SIOx CTS" command.
 
 ### Using the M2SIO device with sockets
 
@@ -919,8 +914,8 @@ sim> attach m2sio1 -U :8800 ;Bind to all interfaces on port 8800
 ```
 
 Now that the simulator is listening on port 8800, you may connect to the
-simulator’s 88-2SIO port with “telnet \<ip address\> 8800”, where \<ip
-address\> is the IP address of your computer.
+simulator’s 88-2SIO port with `telnet <ip address> 8800`, where
+`<ip address>` is the IP address of your computer.
 
 ### M2SIO limitations
 
@@ -933,7 +928,7 @@ devices.
 The M2SIO device makes it possible to run communications software for
 CP/M, such as PCGET/PUT, MEX, MODEM 7, and BYE using host serial ports
 and sockets. Many of these programs use loops for timeout processing.
-For these timeouts to work properly, it is necessary to use the “Clock”
+For these timeouts to work properly, it is necessary to use the "Clock"
 register to simulate your CPU’s speed.
 
 ## The SIMH pseudo device
@@ -945,31 +940,34 @@ useful for debugging purposes.
 
 The SIMH pseudo device can be configured with
 
-SET SIMH TIMERON Start periodic timer interrupts
-
-SET SIMH TIMEROFF Stop the periodic timer interrupts
+| command | action |
+|---------|--------|
+| `SET SIMH TIMERON` | Start periodic timer interrupts |
+| `SET SIMH TIMEROFF` | Stop the periodic timer interrupts |
 
 The following variables determine the behavior of the timer:
 
-TIMD This is the delay between consecutive interrupts in milliseconds.
-Use D TIMD 20 for a 50 Hz clock.
+| variable | meaning |
+|----------|---------|
+| `TIMD` | This is the delay between consecutive interrupts in milliseconds. Use `D TIMD 20` for a 50 Hz clock. |
+| `TIMH` | This is the address of the interrupt handler to call for a timer interrupt. |
 
-TIMH This is the address of the interrupt handler to call for a timer interrupt.
+The SIMH device supports the following debug flags (set with "SET SIMH
+DEBUG=f1{;f}" or "SET SIMH DEBUG" to enable all of them)
 
-The SIMH device supports the following debug flags (set with “SET SIMH
-DEBUG=f1{;f}” or “SET SIMH DEBUG” to enable all of them)
-
-IN All IN operations on the SIMH port
-
-OUT All OUT operations on the SIMH port
-
-CMD All illegal commands
-
-VERBOSE All other warning or error messages
+| flag | meaning |
+|------|---------|
+| `IN` | All IN operations on the SIMH port |
+| `OUT` | All OUT operations on the SIMH port |
+| `CMD` | All illegal commands |
+| `VERBOSE` | All other warning or error messages |
 
 There are also some useful simulator-specific commands available:
 
-MEM Provides a HEX and ASCII dump of memory
+| command | action |
+|---------|--------|
+| `MEM` | Provides a HEX and ASCII dump of memory |
+| `REG` | Displays a DDT-formatted dump of 8080/Z80 registers |
 
 ```
 sim> mem
@@ -990,8 +988,6 @@ DFD0 AF 32 ED E6 11 CD E6 C3 CB DF 0E 10 C3 C3 DF 0E .2..............
 DFE0 11 C3 C3 DF 0E 12 C3 C3 DF 11 CD E6 C3 DF DF 0E ................
 DFF0 13 C3 05 00 CD 05 00 B7 C9 0E 14 C3 F4 DF 11 CD ................
 ```
-
-REG Displays a DDT-formatted dump of 8080/Z80 registers
 
 ```
 sim> reg
@@ -1031,29 +1027,23 @@ support was added by Mike Douglas in May 2014.
 
 The DSK device can be configured with
 
-SET DSK\<n\> WRTENB Allow write operations for disk \<n\>.
+| command | action |
+|---------|--------|
+| `SET DSK<n> WRTENB` | Allow write operations for disk `<n>`. |
+| `SET DSK<n> WRTLCK` | Disk `<n>` is locked, i.e. no write operations will be allowed. |
 
-SET DSK\<n\> WRTLCK Disk \<n\> is locked, i.e. no write operations will
-be allowed.
+The DSK device supports the following debug flags (set with "SET DSK
+DEBUG=f1{;f}" or "SET DSK DEBUG" to enable all of them)
 
-The DSK device supports the following debug flags (set with “SET DSK
-DEBUG=f1{;f}” or “SET DSK DEBUG” to enable all of them)
-
-IN All IN operations on the controller port
-
-OUT All OUT operations on the controller port
-
-READ All read operations of the disk
-
-WRITE All write operations on the disk
-
-SECTOR_STUCK Warn when the controller appears to be stuck searching for
-a sector.
-
-TRACK_STUCK Warn when the controller appears to be stuck searching for a track.
-
-VERBOSE All other warning and error messages (e.g. disk is write locked,
-disk is not attached)
+| flag | meaning |
+|------|---------|
+| `IN` | All IN operations on the controller port |
+| `OUT` | All OUT operations on the controller port |
+| `READ` | All read operations of the disk |
+| `WRITE` | All write operations on the disk |
+| `SECTOR_STUCK` | Warn when the controller appears to be stuck searching for a sector. |
+| `TRACK_STUCK` | Warn when the controller appears to be stuck searching for a track. |
+| `VERBOSE` | All other warning and error messages (e.g. disk is write locked, disk is not attached) |
 
 ## The 88-HDSK controller
 
@@ -1073,19 +1063,19 @@ and the disk images were provided by Martin Eberhard.
 
 The MHDSK device can be configured with
 
-SET MHDSK \<n\> WRTENB Allow write operations for hard disk \<n\>.
+| command | action |
+|---------|--------|
+| `SET MHDSK <n> WRTENB` | Allow write operations for hard disk `<n>`. |
+| `SET MHDSK <n> WRTLCK` | Hard disk `<n>` is locked, i.e. no write operations will be allowed. |
 
-SET MHDSK \<n\> WRTLCK Hard disk \<n\> is locked, i.e. no write
-operations will be allowed.
+The MHDSK device supports the following debug flags (set with "SET MHDSK
+DEBUG=f1{;f}" or "SET MHDSK DEBUG" to enable all of them)
 
-The MHDSK device supports the following debug flags (set with “SET MHDSK
-DEBUG=f1{;f}” or “SET MHDSK DEBUG” to enable all of them)
-
-READ All read operations of the disk
-
-WRITE All write operations on the disk
-
-VERBOSE All other operations of the disk
+| flag | meaning |
+|------|---------|
+| `READ` | All read operations of the disk |
+| `WRITE` | All write operations on the disk |
+| `VERBOSE` | All other operations of the disk |
 
 ## The simulated hard disk
 
@@ -1095,21 +1085,19 @@ Currently only CP/M supports two hard disks as devices I: and J:.
 
 The HDSK device can be configured with
 
-SET HDSK\<n\> WRTENB Allow write operations for hard disk \<n\>.
+| command | action |
+|---------|--------|
+| `SET HDSK<n> WRTENB` | Allow write operations for hard disk `<n>`. |
+| `SET HDSK<n> WRTLCK` | Hard disk `<n>` is locked, i.e. no write operations will be allowed. |
+| `SET HDSK<n> FORMAT=<value>` | Set the hard disk to `<value>`. Possible values are listed below. |
 
-SET HDSK\<n\> WRTLCK Hard disk \<n\> is locked, i.e. no write operations
-will be allowed.
+- HDSK (standard simulated AltairZ80 hard disk with 8,192 kB capacity)
 
-SET HDSK\<n\> FORMAT=\<value\> Set the hard disk to \<value\>. Possible
-values are
-
-- HDSK (standard simulated AltairZ80 hard disk with 8’192 kB capacity)
-
-- CPM68K (simulated hard drive 16’384 kB capacity for CP/M-68K)
+- CPM68K (simulated hard drive 16,384 kB capacity for CP/M-68K)
 
 - EZ80FL (128 kB flash)
 
-- P112 (1’440 kB P112)
+- P112 (1,440 kB P112)
 
 - SU720 (720 kB Super I/O)
 
@@ -1137,13 +1125,13 @@ values are
 
 - SSDD8S (standard 8" Single Side Double Density floppy disk with 77 tracks of 26 sectors with 256 bytes, i.e. 512 kB capacity, standard skew factor 6)
 
-- DSDD8 (standard 8" Double Side Double Density floppy disk with 77 tracks of 26 sectors with 512 bytes, i.e. 1’025 kB capacity, no skew)
+- DSDD8 (standard 8" Double Side Double Density floppy disk with 77 tracks of 26 sectors with 512 bytes, i.e. 1,025 kB capacity, no skew)
 
-- DSDD8S (standard 8" Double Side Double Density floppy disk with 77 tracks of 26 sectors with 512 bytes, i.e. 1’025 kB capacity, standard skew factor 6)
+- DSDD8S (standard 8" Double Side Double Density floppy disk with 77 tracks of 26 sectors with 512 bytes, i.e. 1,025 kB capacity, standard skew factor 6)
 
 - 512SSDD8 (standard 8" Single Side Double Density floppy disk with 77 tracks of 15 sectors with 512 bytes, i.e. 591 kB capacity, no skew)
 
-- 512DSDD8 (standard 8" Double Side Double Density floppy disk with 77 tracks of 15 sectors with 512 bytes, i.e. 1’183 kB capacity, no skew)
+- 512DSDD8 (standard 8" Double Side Double Density floppy disk with 77 tracks of 15 sectors with 512 bytes, i.e. 1,183 kB capacity, no skew)
 
 - APPLE-DO (140 kB, Apple II, DOS 3.3)
 
@@ -1155,7 +1143,7 @@ values are
 
 - MITS (308 kB Altair standard disk with skew)
 
-- MITS2 (1’016 kB Altair extended disk with skew)
+- MITS2 (1,016 kB Altair extended disk with skew)
 
 - V1050 (410 kB, Visual Technology Visual 1050, 512 byte sectors for CP/M 3)
 
@@ -1165,24 +1153,23 @@ values are
 
 - Note<sub>3</sub>: When attaching a file to a hard disk, the format is guessed based on the size of the file. In case there is more than one possibility you may need to change the format after attaching.
 
-SET HDSK\<n\> GEOM=\<t\>/\<s\>/\<l\> Set the hard disk geometry to \<t\>
-tracks with \<s\> sectors with sector length \<l\>. Alternatively you
-can also use GEOM=T:\<t\>/N:\<s\>/S:\<s\>.
+| command | action |
+|---------|--------|
+| `SET HDSK<n> GEOM=<t>/<s>/<l>` | Set the hard disk geometry to `<t>` tracks with `<s>` sectors with sector length `<l>`. Alternatively you can also use `GEOM=T:<t>/N:<s>/S:<s>`. |
 
-Note that the “Attach” command will choose the correct format based on
+Note that the "Attach" command will choose the correct format based on
 the size of the attached file. In case the file does not yet exist it is
 created and the HDSK format will be used with the currently set
 capacity.
 
-The HDSK device supports the following debug flags (set with “SET HDSK
-DEBUG=f1{;f}” or “SET HDSK DEBUG” to enable all of them)
+The HDSK device supports the following debug flags (set with "SET HDSK
+DEBUG=f1{;f}" or "SET HDSK DEBUG" to enable all of them)
 
-READ All read operations of the disk
-
-WRITE All write operations on the disk
-
-VERBOSE All other warning and error messages (e.g. disk is write locked,
-disk is not attached)
+| flag | meaning |
+|------|---------|
+| `READ` | All read operations of the disk |
+| `WRITE` | All write operations on the disk |
+| `VERBOSE` | All other warning and error messages (e.g. disk is write locked, disk is not attached) |
 
 ## The simulated network
 
@@ -1193,28 +1180,22 @@ connected by a network.
 
 The NET device can be configured with
 
-SET NET CLIENT Puts this machine into client mode.
+| command | action |
+|---------|--------|
+| `SET NET CLIENT` | Puts this machine into client mode. |
+| `SET NET SERVER` | Puts this machine into server mode. |
+| `ATTACH NET <IP-addr>:<port>` | Attaches the machine to the given IP address and listening on the specified port. The IP address is given in `a.b.c.d` format (`0 ≤ a, b, c, d ≤ 255`). A typical example is `"ATTACH NET 127.0.0.1:4000"` which attaches to the local host at port 4000. Note that certain "small" port numbers might require special permissions. |
+| `DETACH NET` | Detaches the machine from the network. |
 
-SET NET SERVER Puts this machine into server mode.
+The NET device supports the following debug flags (set with "SET NET
+DEBUG=f1{;f}" or "SET NET DEBUG" to enable all of them)
 
-ATTACH NET \<IP-addr\>:\<port\> Attaches the machine to the given IP
-address and listening on the specified port. The IP address is given in
-a.b.c.d format (0 ≤ a, b, c, d ≤ 255). A typical example is “ATTACH NET
-127.0.0.1:4000” which attaches to the local host at port 4000. Note that
-certain “small” port numbers might require special permissions.
-
-DETACH NET Detaches the machine from the network.
-
-The NET device supports the following debug flags (set with “SET NET
-DEBUG=f1{;f}” or “SET NET DEBUG” to enable all of them)
-
-ACCEPT Show a message when a connection is accepted.
-
-DROP Show a message when a connection is dropped.
-
-IN Show all data received from the network.
-
-OUT Show all data transmitted to the network.
+| flag | meaning |
+|------|---------|
+| `ACCEPT` | Show a message when a connection is accepted. |
+| `DROP` | Show a message when a connection is dropped. |
+| `IN` | Show all data received from the network. |
+| `OUT` | Show all data transmitted to the network. |
 
 # Sample Software
 
@@ -1230,7 +1211,7 @@ is available from <https://schorn.ch/altair.html>.
 ## CP/M Version 2.2
 
 This version is my own port of the standard CP/M to the Altair. There
-were some "official" versions but I don't have them. None were endorsed
+were some “official” versions but I don't have them. None were endorsed
 or sold by MITS to my knowledge, however.
 
 To boot CP/M:
@@ -1245,7 +1226,7 @@ standard CP/M utilities, plus a few common public-domain ones. I also
 include the sources to the customized BIOS and some other small
 programs. TYPE will print an ASCII file. DUMP will dump a binary one. LS
 is a better DIR than DIR. ASM will assemble .ASM files to hex, LOAD will
-"load" them to binary format (.COM). ED is a simple editor, \#A command
+"load" them to binary format (.COM). ED is a simple editor, `#A` command
 will bring the source file to the buffer, T command will "type" lines, L
 will move lines, E exits the editor. 20L20T will move down 20 lines, and
 type 20. Very DECish. DDT is the debugger, DO is a batch-type command
@@ -1254,12 +1235,12 @@ bootable CP/M image (on drive A) is "SYSCPM2.SUB". To run it, type "DO
 SYSCPM2".
 
 In order to efficiently transfer files into the CP/M environment use the
-included program R \<filename.ext\>. If you have a file named foo.ext in
+included program `R <filename.ext>`. If you have a file named `foo.ext` in
 the current directory (i.e. the directory where SIMH is), executing R
 FOO.EXT under CP/M will transfer the file onto the CP/M disk.
 Transferring a file from the CP/M environment to the SIMH environment is
-accomplished by W \<filename.ext\> for text files or by W
-\<filename.ext\> B for binary files. The simplest way for transferring
+accomplished by `W <filename.ext>` for text files or by
+`W <filename.ext> B` for binary files. The simplest way for transferring
 multiple files is to create a ".SUB" batch file which contains the
 necessary R resp. W commands.
 
@@ -1574,10 +1555,10 @@ sim> at net 127.0.0.1:4000
 sim> boot dsk
 ```
 
-You can also execute “AltairZ80 cpnetserver” for the same effect or type
-“do cpnetserver\<return\>” at the `sim>` command prompt. Then connect
-via Telnet (“telnet 127.0.0.1” or “telnet localhost”) to the simulator
-and type “mpm \<return\>” at the `A>` command prompt to start the MP/M
+You can also execute `AltairZ80 cpnetserver` for the same effect or type
+`do cpnetserver<return>` at the `sim>` command prompt. Then connect
+via Telnet (`telnet 127.0.0.1` or `telnet localhost`) to the simulator
+and type `mpm <return>` at the `A>` command prompt to start the MP/M
 CP/NET server.
 
 To bring up a client, start another instance of AltairZ80 and type the
@@ -1597,8 +1578,8 @@ sim> at net 127.0.0.1:4000
 sim> boot dsk
 ```
 
-You can also execute “AltairZ80 cpnetclient” for the same effect or type
-“do cpnetclient\<return\>” at the `sim>` command prompt. Then
+You can also execute `AltairZ80 cpnetclient` for the same effect or type
+`do cpnetclient<return>` at the `sim>` command prompt. Then
 
 ```
 A>cpnetldr<return> ; loads CP/NET client
@@ -1612,7 +1593,7 @@ you can repeat the previous procedure for a second client if you wish.
 
 Note that all system specific sources (SNIOS.MAC, NETWRKIF.MAC,
 MPMXIOS.MAC) are included on cpnetclient.dsk respectively
-cpnetserver.dsk. When executing “GENSYS” for re-creating MP/M, keep in
+cpnetserver.dsk. When executing "GENSYS" for re-creating MP/M, keep in
 mind to include SERVER.RSP and NETWRKIF.RSP as this is not automatically
 suggested by GENSYS.
 
@@ -1637,15 +1618,15 @@ sim> load cpnos.com f000
 sim> g f000
 ```
 
-For the same effect you can also execute “AltairZ80 cpnos” or type “do
-cpnos\<return\>” at the `sim>` command prompt. At the `LOGIN=` prompt,
+For the same effect you can also execute `AltairZ80 cpnos` or type `do
+cpnos<return>` at the `sim>` command prompt. At the `LOGIN=` prompt,
 just type return and you will see the familiar `A>` prompt but the
 drive is the A: drive of the MP/M CP/NET server (you can also attach
 other disks to the server and they will become available to the CPNOS
 client). You can also connect a second CPNOS client to the same CP/NET
 server – further connection attempts will block after logging in until
 another CPNOS client is disconnected (e.g. by typing ^E to stop the
-simulator and then typing “bye\<return\>” at the simh command prompt).
+simulator and then typing `bye<return>` at the simh command prompt).
 It is also possible to have both a CP/NET client and a CPNOS thin client
 connect to the same CP/NET server.
 
@@ -1797,9 +1778,9 @@ COPYRIGHT 1977 BY MITS INC
 
 In order to run the famous 4k Basic, use the following commands (the
 trick is to get the Switch Register right). This software is part of the
-archive **altsw.zip**. You can also use “altairz80 bas432” to run this
-version of Basic. Note that the underscore character (“\_”) can be used
-to cancel the last character entered, i.e. “PRINT 199_8” will print 198.
+archive **altsw.zip**. You can also use "altairz80 bas432" to run this
+version of Basic. Note that the underscore character ("_") can be used
+to cancel the last character entered, i.e. "PRINT 199_8" will print 198.
 
 ```
 sim> set cpu 8080 ;note 4k Basic will not run on a Z80 CPU
@@ -1821,7 +1802,7 @@ OK
 ## Altair Basic 4.0 (4k)
 
 An improved 4K Basic is also as part of the archive **altsw.zip**. You
-can also use “altairz80 bas440” to run this version of Basic.
+can also use "altairz80 bas440" to run this version of Basic.
 
 ```
 sim> set cpu 8080 ;note 4k Basic will not run on a Z80 CPU
@@ -1938,7 +1919,7 @@ OK
 This version of Basic was provided by Martin Eberhard and uses the MHDSK
 device contributed by Mike Douglas. This software is part of the archive
 **althdsw.zip**. To execute use the following commands or type
-“AltairZ80 hdbasic” in a command shell.
+"AltairZ80 hdbasic" in a command shell.
 
 ```
 sim> set sio ansi
@@ -2041,15 +2022,15 @@ Z80.OPCODES 3 20-Dec-78 340 68 Datafile
 
 SYSTEM.ASSMBLER 53 13-Apr-79 343 512 Codefile
 
-\< UNUSED \> 98 396
+< UNUSED > 98 396
 
-19/19 files\<listed/in-dir\>, 396 blocks used, 98 unused, 98 in largest
+19/19 files<listed/in-dir>, 396 blocks used, 98 unused, 98 in largest
 
 ## CP/M-68K
 
 The software is part of the **cpm68k.zip** archive. To run it, type
-“altairz80 cpm68k” at your command prompt or alternatively invoke
-altairz80 and type “do cpm68k” at the `sim>` command prompt.
+"altairz80 cpm68k" at your command prompt or alternatively invoke
+altairz80 and type "do cpm68k" at the `sim>` command prompt.
 
 # Special simulator features
 
@@ -2064,7 +2045,7 @@ breakpoint is triggered when a pre-defined memory location is accessed
 sim> break -m <location>
 ```
 
-Execution will stop whenever an operation accesses \<location\>. Note
+Execution will stop whenever an operation accesses `<location>`. Note
 that a memory access breakpoint is not triggered by fetching code from
 memory (this is the job of regular breakpoints). This feature has been
 implemented by using the typing facility of the SIMH breakpoints.
@@ -2079,7 +2060,7 @@ sim> break -I <first byte of instruction>
 ```
 
 Execution will stop whenever an instruction is executed which starts
-with \<first byte of instruction\>.
+with `<first byte of instruction>`.
 
 ## Breakpoints and instruction history (8080/Z80 only)
 
@@ -2172,11 +2153,11 @@ CPU: C0Z1M0E1I0 A=31 B=0088 D=FF33 H=5C00 S=0000 P=FF28 LDAX D
 
 \# Structure of MBL files is as follows:
 
-\# \<byte\>+ 0x00 0x00
+\# <byte>+ 0x00 0x00
 
-\# (checkSum\<byte\> 0x3c count\<byte\> loadLow\<byte\> loadHigh\<byte\>
+\# (checkSum<byte> 0x3c count<byte> loadLow<byte> loadHigh<byte>
 
-\# \<byte\> \* count)+
+\# <byte> \* count)+
 
 \# where the lower 8 bit of the load address are determined by loadLow
 
@@ -2202,7 +2183,7 @@ import sys
 
 CHR0 = 2 \# i.e. first header is prefixed by 2 chr(0)
 
-if len(sys.argv) \<\> 3:
+if len(sys.argv) <> 3:
 
 print 'Usage %s inputmbl.bin output.bin\n' % sys.argv\[0\]
 
@@ -2224,7 +2205,7 @@ count = ord(b\[i\])
 
 while count and (ord(b\[i - 1\]) == 0x3c):
 
-l = ord(b\[i + 1\]) + (ord(b\[i + 2\]) \<\< 8)
+l = ord(b\[i + 1\]) + (ord(b\[i + 2\]) << 8)
 
 checkSum = 0
 
@@ -2242,11 +2223,11 @@ if k == 1:
 
 receivedCheckSum = previousCheckSum & 255
 
-elif k \> 1:
+elif k > 1:
 
 receivedCheckSum = (previousCheckSum - 1) & 255
 
-if receivedCheckSum \<\> expectedCheckSum:
+if receivedCheckSum <> expectedCheckSum:
 
 print 'Checksum error in record %i. Got %02X and expected %02X ' % (
 
@@ -2287,12 +2268,12 @@ here: <http://bitsavers.org/bits/UCSD_Pascal/ucsd_II.0/>
 U002A.5_Z80_SYS1.raw.gz U012.1_SYS_2.raw.gz ucsd ucsd.dsk
 
 **Step 1**: Get U002A.5_Z80_SYS1.raw.gz and U012.1_SYS_2.raw.gz from the
-distribution and gunzip “gunzip \*gz”.
+distribution and gunzip "gunzip *gz".
 
 **Step 2**: Patch H command with ZAP (H command will otherwise
 indefinitely loop as patched command is a jump to itself). Execute
 altairz80 with "altairz80 ucsd", type ^E and "G 0" at the `sim>`
-command prompt. This brings you back to CP/M. At the "E\>" type "ZAP" to
+command prompt. This brings you back to CP/M. At the "E>" type "ZAP" to
 invoke the disk editor for fixing on drive A: sector 13 on track 5 as
 shown below.
 
@@ -2300,9 +2281,9 @@ shown below.
 
 - Select track/Sector (S command)
 
-- Select Track (T command) - type 5 \<return\>
+- Select Track (T command) - type `5 <return>`
 
-- Select Sector (S command) - type C \<return\>
+- Select Sector (S command) - type `C <return>`
 
 - Edit sector (E command)
 
@@ -2332,7 +2313,7 @@ Offset 0 1 2 3 4 5 6 7 8 9 A B C D E F -----ASCII------
 
 000010 02 E1 22 92 02 D1 EB 22 94 02 EB 2A 90 02 06 08 \|.a"..Qk"..k\*....\|
 
-000020 1A BE C2 BA 1A 23 13 10 F7 21 00 00 E5 2A 94 02 \|.\>B:.#..w!..e\*..\|
+000020 1A BE C2 BA 1A 23 13 10 F7 21 00 00 E5 2A 94 02 \|.>B:.#..w!..e\*..\|
 
 000030 EB 2A 92 02 73 23 72 C3 A4 03 D2 D3 1A 2A 94 02 \|k\*..s#rC\$.RS.\*..\|
 
@@ -2356,7 +2337,7 @@ Offset 0 1 2 3 4 5 6 7 8 9 A B C D E F -----ASCII------
 
 000010 02 E1 22 92 02 D1 EB 22 94 02 EB 2A 90 02 06 08 \|.a"..Qk"..k\*....\|
 
-000020 1A BE C2 BA 1A 23 13 10 F7 21 00 00 E5 2A 94 02 \|.\>B:.#..w!..e\*..\|
+000020 1A BE C2 BA 1A 23 13 10 F7 21 00 00 E5 2A 94 02 \|.>B:.#..w!..e\*..\|
 
 000030 EB 2A 92 02 73 23 72 C3 A4 03 D2 D3 1A 2A 94 02 \|k\*..s#rC\$.RS.\*..\|
 
@@ -2368,8 +2349,8 @@ Offset 0 1 2 3 4 5 6 7 8 9 A B C D E F -----ASCII------
 
 000070 EB 73 23 72 D1 2A 1C 03 EB 73 23 72 C3 B0 03 07 \|ks#rQ\*..ks#rC0..\|
 
-**Step 3**: Proceed to UCSD Pascal by typing "pascal" \<return\> at the
-"E\>" command prompt. Type \<return\> until you see the menu bar:
+**Step 3**: Proceed to UCSD Pascal by typing `pascal <return>` at the
+`E>` command prompt. Type `<return>` until you see the menu bar:
 
 Command: E(dit, R(un, F(ile, C(omp, L(ink, X(ecute, A(ssem, D(ebug,? \[II.0\]
 
@@ -2963,7 +2944,7 @@ BINDER.CODE 6 3-May-79
 
 NEW.MISCINFO 1 10-Feb-79
 
-15/15 files\<listed/in-dir\>, 308 blocks used, 186 unused, 186 in largest
+15/15 files<listed/in-dir>, 308 blocks used, 186 unused, 186 in largest
 
 Filer: G(et, S(ave, W(hat, N(ew, L(dir, R(em, C(hng, T(rans, D(ate, Q(uit \[B\]
 
@@ -2991,13 +2972,13 @@ PROCEDURE FGOTOXY(X,Y:INTEGER);
 
 BEGIN
 
-IF X\<0 THEN X:=0;
+IF X<0 THEN X:=0;
 
-IF X\>79 THEN X:=79;
+IF X>79 THEN X:=79;
 
-IF Y\<0 THEN Y:=0;
+IF Y<0 THEN Y:=0;
 
-IF Y\>23 THEN Y:=23;
+IF Y>23 THEN Y:=23;
 
 WRITE (CHR(27),Y+1,';',X+1,'H')
 
@@ -3009,13 +2990,13 @@ END.
 
 Take SAMPLEGOTO.TEXT as basis and modify using the editor. You can
 delete a complete line by moving the cursor to the line (^J for down, ^K
-for up) and then do D and \<return\> and ^Z.
+for up) and then do `D`, `<return>`, and `^Z`.
 
 **Step 8**: Compile result and save codefile (using Filer Save command).
 
 **Step 9**: Update SYSTEM.PASCAL by X)cuting BINDER. When prompted for
 the file with the procedure type in VT100GOTO. The change takes effect
-after restart: Type H at top level and "pascal" at E\> prompt.
+after restart: Type H at top level and "pascal" at E> prompt.
 
 # Vector Graphic, Inc. Simulation
 
@@ -3092,11 +3073,11 @@ effort.
 
 These additional devices specific to the Vector Graphic systems include:
 
-**MDSK** – Micropolis FD Controller Board, memory mapped to 0xF800-0xFBFF
-
-**VFDHD** – Vector HD-FD Controller Board, I/O Mapped to 0xC0-0xC3
-
-**FWII** – Flashwriter 2 Video Card, memory mapped to 0xF000-0xF800
+| device | simulates |
+|--------|-----------|
+| `MDSK` | Micropolis FD Controller Board, memory mapped to 0xF800-0xFBFF |
+| `VFDHD` | Vector HD-FD Controller Board, I/O Mapped to 0xC0-0xC3 |
+| `FWII` | Flashwriter 2 Video Card, memory mapped to 0xF000-0xF800 |
 
 These devices can be enabled/disabled (installed/uninstalled) from the
 memory map with:
@@ -3125,9 +3106,9 @@ The simulator can be configured for a 48K Vector MZ or a 56K Vector MZ.
 Some boot disk images require a 48K configuration, and some require a
 56K configuration. In the 48K configuration on a real Vector MZ system,
 an older version of the monitor ROM was at address 0xC000. Since the
-image for this ROM has not been obtained, a small “helper” ROM is loaded
+image for this ROM has not been obtained, a small "helper" ROM is loaded
 at address 0xC000, in addition to the 4.0C Monitor at 0xE000. The
-“helper” ROM redirects calls to perform terminal I/O to the
+"helper" ROM redirects calls to perform terminal I/O to the
 corresponding entry points in the 4.0C monitor.
 
 There are several configuration files that configure SIMH to simulate
@@ -3136,11 +3117,11 @@ definitive reference for proper simulator configuration, and should be
 preferred over the following descriptions if there is any discrepancy.
 These configuration files are:
 
-**vgmz48k** Vector 48K MZ with Micropolis FD Controller
-
-**vgmz56k** Vector 56K MZ with Micropolis FD Controller
-
-**vgfdhd** Vector 56K System with HD-FD Disk Controller
+| file | meaning |
+|------|---------|
+| `vgmz48k` | Vector 48K MZ with Micropolis FD Controller |
+| `vgmz56k` | Vector 56K MZ with Micropolis FD Controller |
+| `vgfdhd` | Vector 56K System with HD-FD Disk Controller |
 
 Here are some sample configurations for 48K, 56K, and HD-FD Systems:
 
@@ -3148,7 +3129,7 @@ Here are some sample configurations for 48K, 56K, and HD-FD Systems:
 
 ```
 sim> load MON40C.BIN e000 ; load Vector 4.0C Monitor
-sim> load MONC000.BIN c000 ; load “Helper” ROM at 0xC000
+sim> load MONC000.BIN c000 ; load "Helper" ROM at 0xC000
 sim> set mdsk membase=D800 ; set Micropolis disk controller base address
 sim> set mdsk enabled ; enable Micropolis disk controller
 sim> attach mfdc0 VG02.VGI ; attach disk to MDSK0 drive
@@ -3198,7 +3179,7 @@ sim> g e000
 
 You will then need to start a Telnet session to the simulator to use the
 simulated Flashwriter2. From a console window, do **telnet localhost
-23**, or use your favorite Telnet client, such as “Putty” under Windows.
+23**, or use your favorite Telnet client, such as "Putty" under Windows.
 In the Telnet window, the 4.3 Monitor should sign on and at the `Mon>`
 prompt, you can boot from the disk controller by using the **B** (boot)
 command.
@@ -3207,10 +3188,10 @@ command.
 
 The Vector HD-FD Controller supports four drives, one of which may be a
 Winchester (hard disk) drive. For the included VGBOOT.VGI disk image,
-CP/M is configured such that the VFDHD0 is drive “B” and VFDHD1 is drive
-“A.” VFDHD2 is drive “C” and VFDHD3 is drive “D.” The simulation assumes
-that whatever image is attached to VFDHD0 is a “Hard disk” image, so
-drive “B” using the VGBOOT.VGI disk image is not supported.
+CP/M is configured such that the VFDHD0 is drive "B" and VFDHD1 is drive
+"A." VFDHD2 is drive "C" and VFDHD3 is drive "D." The simulation assumes
+that whatever image is attached to VFDHD0 is a "Hard disk" image, so
+drive "B" using the VGBOOT.VGI disk image is not supported.
 
 ## Notes on the Vector Graphic Disk Image (VGI) File Format
 
@@ -3225,15 +3206,16 @@ The 275-byte sector format is as follows:
 |------|-------|--------|--------|-----------|--------|-----|-----------|
 | 1    | 1     | 1      | 10     | 256       | 1      | 4   | 1         |
 
-| SYNC | One byte, always 0xFF. |
-|----|----|
-| TRACK | Track number that this sector belongs to. |
-| SECTOR | Sector number |
-| UNUSED | Used by the operating system when running Micropolis DOS (MDOS) to store the load address and record length for the sector. This field is not used by CP/M. |
-| USER DATA | 256-bytes of user data |
-| CHECKSUM | An operating system dependent checksum. |
-| ECC | Four bytes of ECC code, generated and checked by the HD-FD Controller, but not used by the Micropolis FD Controller |
-| ECC_VALID | One byte that contains 0xAA if the ECC field is valid. Disks written by the HD-FD controller typically have this field set to 0xAA to indicate that the ECC field should contain valid data. For disk images created by the Micropolis FD controller, this field is 0x00, since ECC is not supported. For disk images that were generated using the CPT program, this field will be 0x00 because the ECC bytes were not recoverable from the original disk. For disk images originally written with the HD-FD Controller, and imaged with Catweasel/Vector Graphic (CWVG) this field will be set to whatever it was set to on the original disk. This should be 0xAA. |
+| field | meaning |
+|-------|---------|
+| `SYNC` | One byte, always 0xFF. |
+| `TRACK` | Track number that this sector belongs to. |
+| `SECTOR` | Sector number |
+| `UNUSED` | Used by the operating system when running Micropolis DOS (MDOS) to store the load address and record length for the sector. This field is not used by CP/M. |
+| `USER DATA` | 256-bytes of user data |
+| `CHECKSUM` | An operating system dependent checksum. |
+| `ECC` | Four bytes of ECC code, generated and checked by the HD-FD Controller, but not used by the Micropolis FD Controller |
+| `ECC_VALID` | One byte that contains 0xAA if the ECC field is valid. Disks written by the HD-FD controller typically have this field set to 0xAA to indicate that the ECC field should contain valid data. For disk images created by the Micropolis FD controller, this field is 0x00, since ECC is not supported. For disk images that were generated using the CPT program, this field will be 0x00 because the ECC bytes were not recoverable from the original disk. For disk images originally written with the HD-FD Controller, and imaged with Catweasel/Vector Graphic (CWVG) this field will be set to whatever it was set to on the original disk. This should be 0xAA. |
 
 # IMSAI 8080 Simulation
 
@@ -3340,8 +3322,8 @@ sim> attach mdsa0 CPM22b14-48K-SDC-HORIZON.NSI ; attach CP/M boot disk
 sim> boot mdsa0 (or go e900) ; boot the disk
 ```
 
-The referenced disk image can be found in the “cpm” folder at the link
-below. NorthStar DOS disk images can be found in the “nsdos” folder.
+The referenced disk image can be found in the "cpm" folder at the link
+below. NorthStar DOS disk images can be found in the "nsdos" folder.
 
 <https://deramp.com/downloads/north_star/horizon/single_density_controller/disk_images/>
 
@@ -3375,9 +3357,9 @@ there is any discrepancy. This configuration file is:
 
 **nshrz** NorthStar Horizon with MDS-AD Disk Controller
 
-Additional Horizon disk images can be found in the “cpm” folder at the
+Additional Horizon disk images can be found in the "cpm" folder at the
 link below. Additional NorthStar DOS disk images can be found in the
-“nsdos” folder.
+"nsdos" folder.
 
 <https://deramp.com/downloads/north_star/horizon/double_density_controller/disk_images/>
 
@@ -3678,7 +3660,7 @@ sim> d MMIOSIZE 100
 
 The M68K simulation supports several CPU variants which can be set as follows:
 
-set CPU \<variant\> - Where variant is one of:
+`set CPU <variant>` - Where variant is one of:
 
 - 68000
 
@@ -4078,7 +4060,7 @@ sim> set tarbell model=sd ; single density controller
 sim> set tarbell debug=ERROR ; show debug ERROR messages
 sim> attach tarbell0 CPM22-48K-SSSD.DSK ; attach CP/M boot disk to
 TARBELL0 drive
-sim> boot tarbell0 ; boot CPM22.DSK (or “g 0”)it
+sim> boot tarbell0 ; boot CPM22.DSK (or "g 0")it
 ```
 
 CP/M disk images supporting the Tarbell MDL-1011 floppy disk interface
@@ -4162,7 +4144,7 @@ file will be created.
 ```
 sim> set jadedd ena ; enable JADE DD Controller
 sim> attach jadedd0 jadedd-sd-sim-56k.dsk ; attach 56K CP/M disk image
-sim> boot jadedd0 ; boot jade56k.dsk (or “g f000”)
+sim> boot jadedd0 ; boot jade56k.dsk (or "g f000")
 ```
 
 CP/M 2.2 disk images supporting the JADE Double D Disk Controller and
@@ -4276,7 +4258,7 @@ will be created.
 sim> set icom ena ; enable iCOM Disk System
 sim> set icom type=3812 ; simulate iCOM/Pertec 3812
 sim> attach icom0 CPM141-48K-DD.DSK ; attach iCOM CP/M disk image
-sim> boot icom ; boot disk (or “g f000”)
+sim> boot icom ; boot disk (or "g f000")
 ```
 
 CP/M 1.41 disk images supporting the iCOM FD3712/FD3812 Flexible Disk
@@ -4368,12 +4350,12 @@ a non-existent disk file, the disk file will be created.
 sim> ;Boot 56K CP/M 2.2
 sim> set dj2d ena ; enable DJ2D disk controller
 sim> attach dj2d0 CPM22-56K-E000.DSK ; attach DJ2D CP/M disk image
-sim> boot dj2d ; boot disk (or “g e000”)
+sim> boot dj2d ; boot disk (or "g e000")
 sim> ;Boot 56K CP/M 2.2 with serial port attached to socket
 sim> set dj2d ena ; enable DJ2D disk controller
 sim> attach dj2d0 CPM22-56K-E000.DSK ; attach DJ2D CP/M disk image
 sim> attach -u dj2d4 127.0.0.1:8800 ; attach DJ2D serial port to socket
-sim> boot dj2d ; boot disk (or “g e000”)
+sim> boot dj2d ; boot disk (or "g e000")
 sim> ;telnet localhost 8800 ; telnet to simulator on port 8800
 ```
 
@@ -4875,7 +4857,7 @@ sim> set sol20t tape=fast ; fast tape reads
 sim> boot sol20 ; enter SOLOS
 ```
 
-At the SOLOS “\>” prompt, enter “XEQ” to load ATC from tape and execute
+At the SOLOS ">" prompt, enter "XEQ" to load ATC from tape and execute
 the program.
 
 ```
@@ -4887,7 +4869,7 @@ sim> attach mdsa0 CPM22b14-48K-SDC-SOL.NSI ; insert CP/M disk in drive 0
 sim> boot sol20 ; enter SOLOS
 ```
 
-At the SOLOS “\>” prompt, enter “EX E800” or press F5 (LOAD) key to boot
+At the SOLOS ">" prompt, enter "EX E800" or press F5 (LOAD) key to boot
 CP/M from disk.
 
 Virtual cassette images and CP/M 2.2 disk images supporting NorthStar
@@ -4901,7 +4883,7 @@ load binary files directly into SOLOS. To load an ENT file, boot the
 Sol-20 simulator into SOLOS then copy and paste the ENT file into the
 SIMH console. The ENT file should appear in the Sol-20 video window. It
 is also possible to attach a socket or serial port to the SOL20S device,
-enter “SET I=1” in SOLOS, then send the ENT file over the serial
+enter "SET I=1" in SOLOS, then send the ENT file over the serial
 interface from your computer’s terminal emulation software.
 
 \
@@ -4999,7 +4981,7 @@ sim> boot JAIR0 ; Enter JAIR BOOT ROM
 ### JAIR Caveats
 
 The JAIR boot ROM uses timing loops during the initial boot process. The
-virtual CPU must be throttled with “SET THROTTLE t/x” to view the
+virtual CPU must be throttled with "SET THROTTLE t/x" to view the
 sign-on banner and choose a firmware HEX file (other than the default
 BIOS.HEX) from the SD card.
 
@@ -5025,7 +5007,7 @@ modulation.
 This device simulates the MM-103 data communications portion but does
 not simulate the MODEM functionality. MODEM functionality must be
 simulated by attaching a host serial port or modem to the PMMI device
-using the “Attach” command.
+using the "Attach" command.
 
 ### PMMI Device Parameters
 
@@ -5058,9 +5040,9 @@ can be downloaded from GitHub using the link below.
 
 Using a breakout box, connect the following pins on your host’s serial port:
 
-RxD \<-\> TxD
+RxD <-> TxD
 
-DTR \<-\> CTS
+DTR <-> CTS
 
 The following example will use MEX under CP/M to simulate dialing a
 phone number and communicating with a remote system by looping back
@@ -5083,9 +5065,9 @@ Version 2.2mits (07/28/80)
 
 Copyright 1980 by Burcon Inc.
 
-A\>b:
+A>b:
 
-B\>mexpmmi
+B>mexpmmi
 
 MEX (Modem Executive) V1.14
 
@@ -5107,13 +5089,13 @@ by NightOwl Software, Inc.
 
 \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 
-\[MEX\] B0\>\> call 5551212
+[MEX] B0>> call 5551212
 
-Dialing: .disc. .off-h. 5551212: Try \#1 .wait.
+Dialing: .disc. .off-h. 5551212: Try #1 .wait.
 
 Connected @300 bps
 
-\[MEX\] \[Term: CTL-J + "?" for help\]
+[MEX] [Term: CTL-J + "?" for help]
 
 Hello, world!
 
@@ -5159,9 +5141,9 @@ The disk images used in the above examples may be downloaded from
 
 The PMMI device and communications software for CP/M depend on
 predicable timing to function properly. This is accomplished by setting
-CPU’s “CLOCK” register and using the M2SIO0 device for console input and
-output. If using the SIO device for console input and output, use “SET
-SIO NOSLEEP” to disable sleeps during keyboard checks as this interferes
+CPU’s "CLOCK" register and using the M2SIO0 device for console input and
+output. If using the SIO device for console input and output, use "SET
+SIO NOSLEEP" to disable sleeps during keyboard checks as this interferes
 with SIMH’s timing.
 
 \
@@ -5180,13 +5162,13 @@ With the exception of a 50ms hardware timer available on the Micromodem
 This device simulates the Micromodem 100 data communications portion but
 does not simulate the MODEM (MOdulator / DEModulator) functionality.
 MODEM functionality must be simulated by attaching a host serial port or
-modem to the HAYES device using the “Attach” command.
+modem to the HAYES device using the "Attach" command.
 
 The Micromodem 100 does not support DTR, RTS, DSR, or CTS modem signals.
 To accommodate using the HAYES device with serial ports and sockets, the
 device will always raise RTS and will raise DTR when RI goes high or
-when the modem goes “off hook” in originate mode. The device will lower
-DTR when the modem goes “on hook” or DCD goes low.
+when the modem goes "off hook" in originate mode. The device will lower
+DTR when the modem goes "on hook" or DCD goes low.
 
 ### HAYES Device Parameters
 
@@ -5216,11 +5198,11 @@ using the link below.
 
 Using a breakout box, connect the following pins on your host’s serial port:
 
-RxD \<-\> TxD
+RxD <-> TxD
 
-DTR \<-\> DCD
+DTR <-> DCD
 
-RTS \<-\> RI
+RTS <-> RI
 
 The following example will use MM100 under CP/M 2.2 to simulate dialing
 a phone number and communicating with a remote system by looping back
@@ -5271,9 +5253,9 @@ The disk images used in the above examples may be downloaded from:
 
 The HAYES device and communications software for CP/M depend on
 predicable timing to function properly. This is accomplished by setting
-the CPU’s “CLOCK” register and using the M2SIO0 device for console input
+the CPU’s "CLOCK" register and using the M2SIO0 device for console input
 and output. If using the SIO device for console input and output, use
-“SET SIO NOSLEEP” to disable sleeps during keyboard checks that
+"SET SIO NOSLEEP" to disable sleeps during keyboard checks that
 interfere with SIMH’s timing. Software that uses the 50ms hardware timer
 on the Micromodem 100 should be able run at any CPU clock speed.
 
@@ -5326,9 +5308,9 @@ C>AUTOST.SUB
 
 AUTOST.SUB?
 
-C\>
+C>
 
-Typing “bbye” at the `C>` command prompt brings you back to SIMH.
+Typing "bbye" at the `C>` command prompt brings you back to SIMH.
 
 # Revision History
 
@@ -5420,7 +5402,7 @@ Typing “bbye” at the `C>` command prompt brings you back to SIMH.
 
 - 17-Sep-2006, Peter Schorn (added Altair Basic 5.0 to the sample software, corrected TTY/ANSI description)
 
-- 21-Aug-2006, Peter Schorn (added MINOL and VTL-2 software, retyping courtesy of Emmanuel ROCHE, fixed a bug in memory breakpoints and added a create (“C”) switch to the attach command)
+- 21-Aug-2006, Peter Schorn (added MINOL and VTL-2 software, retyping courtesy of Emmanuel ROCHE, fixed a bug in memory breakpoints and added a create ("C") switch to the attach command)
 
 - 24-Jan-2006, Peter Schorn (transcribed documentation to Word / PDF format)
 
