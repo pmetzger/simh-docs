@@ -31,7 +31,7 @@ supports the 3050 IMP listing included at least:
 
 I/O instructions in the DDP516 have the following format.
 
-<img src="h316_imp_IO_Device_Codes_assets/image1.png" style="width:6.49514in;height:1.74792in" />
+![DDP516 I/O instruction format](h316_imp_IO_Device_Codes_assets/image1.png)
 
 - Opcode – defines the I/O instruction
 - Function Code – selects a line to pulse (one of 16)
@@ -97,7 +97,7 @@ for two TTY units, but only TTY A is used.
 
 The TTY chart from the DDP519 Programmers’ Reference Manual (page D-3):
 
-<img src="h316_imp_IO_Device_Codes_assets/image2.png" style="width:6.49653in;height:3.21875in" />
+![TTY chart from the DDP519 Programmers' Reference Manual](h316_imp_IO_Device_Codes_assets/image2.png)
 
 ### Interrupt Unit
 
@@ -112,7 +112,7 @@ the IMP apparently includes an extension to allow interrupts on lines
 | 170020 | OTA | 00 | 20 | SMK – set “standard” interrupt mask |
 | 170120 | OTA | 00 | 20 | SMK – set extension interrupt mask lines 1-16 |
 
-<img src="h316_imp_IO_Device_Codes_assets/image3.png" style="width:6.50764in;height:1.45278in" />
+![Interrupt unit diagram](h316_imp_IO_Device_Codes_assets/image3.png)
 
 ### Watch Dog Timer and Status Light Box
 
@@ -220,7 +220,7 @@ group “0” of four interrupts from 000060 to 000063, which are fixed.
 Here is a table from the Programmer’s Reference Manual related to the
 interrupt groups:
 
-<img src="h316_imp_IO_Device_Codes_assets/image4.png" style="width:6.49514in;height:3.99861in" />
+![Interrupt groups table from the Programmer's Reference Manual](h316_imp_IO_Device_Codes_assets/image4.png)
 
 The IMP uses interrupt groups 1 through 4. As shown below, these
 addresses have not all been verified.
@@ -269,7 +269,7 @@ allowed host/modem configurations.
 The DDP516 has certain low memory locations that are dedicated as shown
 in the table below.
 
-<img src="h316_imp_IO_Device_Codes_assets/image6.png" style="width:6.49861in;height:5.40347in" />
+![Dedicated locations table from the Programmer's Reference Manual](h316_imp_IO_Device_Codes_assets/image6.png)
 
 ## Interrupt Masks
 
@@ -283,7 +283,7 @@ to the set mask instructions that control each bank.
 Mask bits in the standard interrupt bank are applied according to the
 following table:
 
-<img src="h316_imp_IO_Device_Codes_assets/image7.png" style="width:6.50556in;height:2.53819in" />
+![Standard interrupt bank mask table from the Programmer's Reference Manual](h316_imp_IO_Device_Codes_assets/image7.png)
 
 The interrupts for the IMP specific devices are related to their device
 address as shown in the table of IMP special interrupts. Interrupts for
@@ -317,7 +317,7 @@ allowed. Specifically:
 - 4 Modems and 3 Hosts
 - 3 Modems and 4 Hosts
 
-<img src="h316_imp_IO_Device_Codes_assets/image8.png" style="width:6.5in;height:1.64236in" />
+![Allowed host and modem configurations](h316_imp_IO_Device_Codes_assets/image8.png)
 
 ## DMC Channel Numbers
 
@@ -328,7 +328,7 @@ the IMP does not include any of these peripherals, so their channel
 assignments are freed up for use by the host and modems as shown
 following this table.
 
-<img src="h316_imp_IO_Device_Codes_assets/image9.png" style="width:6.5in;height:4.87708in" />
+![DDP516 DMC channel assignments table from the Programmer's Reference Manual](h316_imp_IO_Device_Codes_assets/image9.png)
 
 DMC pointers occur in pairs. For each DMC channel there are two
 consecutive words. The first word is the starting address for the
