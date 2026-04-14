@@ -85,11 +85,16 @@ interrupt and the IMP identification number, and to IO address
 42<sub>8</sub>, which implements the MLC test. The IMP device may be
 enabled with the standard command
 
+```
 SET IMP ENABLED
+```
 
-The IMP address, which is returned by the RDIMPN (INA 1041) instruction, may be set with the command
+The IMP address, which is returned by the `RDIMPN` (`INA 1041`)
+instruction, may be set with the command:
 
-SET IMP NUM=n set IMP station address to n
+| Command | Action |
+|---------|--------|
+| `SET IMP NUM=n` | set IMP station address to n |
 
 This value was apparently hardwired into each original IMP/TIP station.
 The IMP device also implements the AMIMLC (SKS 0042) instruction, which
@@ -107,7 +112,9 @@ The IMP device implements the following registers:
 
 These registers can be viewed with the command
 
+```
 EXAMINE IMP STATE
+```
 
 The IMP device implements these debugging flags:
 
@@ -132,11 +139,11 @@ devices and both can be enabled simultaneously.
 
 The RTC device supports the following SET commands:
 
-SET RTC ENABLED enable RTC emulation
-
-SET RTC INTERVAL=i set the RTC tick interval to i microseconds
-
-SET RTC QUANTUM=q set the RTC resolution to q ticks
+| Command | Action |
+|---|---|
+| `SET RTC ENABLED` | enable RTC emulation |
+| `SET RTC INTERVAL=i` | set the RTC tick interval to `i` microseconds |
+| `SET RTC QUANTUM=q` | set the RTC resolution to `q` ticks |
 
 The INTERVAL parameter sets the interval between RTC clock ticks, in
 microseconds and the QUANTUM parameter sets how often, as a number of
@@ -170,7 +177,9 @@ The RTC device implements the following registers:
 
 These registers can be viewed with the command
 
+```
 EXAMINE RTC STATE
+```
 
 The RTC device implements these debugging flags:
 
@@ -195,9 +204,10 @@ was a H316 or DDP-516.
 
 The WDT device supports the following SET commands
 
-SET WDT ENABLED enable WDT emulation
-
-SET WDT DELAY=n set the WDT delay to n milliseconds
+| Command | Action |
+|---|---|
+| `SET WDT ENABLED` | enable WDT emulation |
+| `SET WDT DELAY=n` | set the WDT delay to `n` milliseconds |
 
 The DELAY parameter sets the WDT timeout, in milliseconds. This is a 16
 bit unsigned value, so the maximum WDT delay is just over a minute. Note
@@ -209,7 +219,9 @@ disabled state of the interrupt system.
 
 Setting the WDT delay to zero
 
+```
 SET WDT DELAY=0
+```
 
 prevents the WDT from ever generating a timeout. This special feature
 allows the WDT device to be enabled, so that code which executes WDT,
@@ -218,27 +230,26 @@ without inadvertently triggering a WDT timeout.
 
 The WDT device implements the following registers
 
-<u>name size comments</u>
-
-COUNT 16 current countdown
-
-TMO 1 WDT timed out
-
-LIGHTS 16 last “set status lights”
-
-WAIT 24 calcuated time until the next tick
+| Name | Size | Comments |
+|---|---|---|
+| `COUNT` | 16 | current countdown |
+| `TMO` | 1 | WDT timed out |
+| `LIGHTS` | 16 | last "set status lights" |
+| `WAIT` | 24 | calculated time until the next tick |
 
 These registers can be viewed with the command
 
+```
 EXAMINE WDT STATE
+```
 
 The WDT device implements these debugging flags:
 
-SET WDT DEBUG=WARN print warnings for unusual conditions
-
-SET WDT DEBUG=IO trace all WDT device I/O instructions
-
-SET WDT DEBUG=LIGHTS trace IMP status light changes
+| Command | Action |
+|---|---|
+| `SET WDT DEBUG=WARN` | print warnings for unusual conditions |
+| `SET WDT DEBUG=IO` | trace all WDT device I/O instructions |
+| `SET WDT DEBUG=LIGHTS` | trace IMP status light changes |
 
 Remember that you must enable debugging output first before these
 settings will be effective; refer to the *SIMH User’s Guide*,
@@ -262,80 +273,70 @@ Simh implements five modem interfaces, MI1 thru MI5. Initially MI1 thru
 3 are enabled and MI4 and 5 are not, however this can be changed with
 the commands:
 
-SET MIn ENABLED enable modem line n
-
-SET MIn DISABLED disable modem line n
+| Command | Action |
+|---|---|
+| `SET MIn ENABLED` | enable modem line `n` |
+| `SET MIn DISABLED` | disable modem line `n` |
 
 A limitation of the original IMP hardware is that the DMC channels used
 by modem lines 4 and 5 conflict with those used by host interfaces 3 and
-4. Thus it not possible to enable all modem lines and all host
+4. Thus it is not possible to enable all modem lines and all host
 interfaces at the same time (see 3.2.1.2).
 
 Modem interfaces implement one parameter which may be explicitly set:
 
+```
 SET MIn BPS=56000
+```
 
 This parameter sets the simulated line speed, in bits per second, for
 UDP/IP virtual modem connections.
 
 Modem interfaces also implement an interface (local) and a line (remote)
-loopback feature. This cause the modem to receive its own transmitted
+loopback feature. This causes the modem to receive its own transmitted
 messages, and are analogous to features in the IMP modem hardware.
 Loopback may be enabled or disabled with these commands
 
-SET MIn LOOPINTERFACE enable interface loopback on line n
-
-SET MIn NOLOOPINTERFACE disable interface loopback
-
-SET MIn LOOPLINE enable line loopback on line n
-
-SET MIn NOLOOPLINE disable line loopback
+| Command | Action |
+|---|---|
+| `SET MIn LOOPINTERFACE` | enable interface loopback on line `n` |
+| `SET MIn NOLOOPINTERFACE` | disable interface loopback |
+| `SET MIn LOOPLINE` | enable line loopback on line `n` |
+| `SET MIn NOLOOPLINE` | disable line loopback |
 
 Modem interfaces support the following registers:
 
-<u>name size comments</u>
-
-RXPOLL 32 receiver polling interval
-
-RXPEND 1 receiver waiting for input
-
-RXERR 1 receiver error flag
-
-RXIEN 1 receiver interrupt enable
-
-RXIRQ 1 receiver interrupt request
-
-RXTOT 32 count of total messages received
-
-TXDLY 32 calculated delay before transmitter done
-
-TXIEN 1 transmitter interrupt enable
-
-TXIRQ 1 transmitter interrupt request
-
-TXTOT 32 count of total messages transmitted
-
-LINK 32 link number for h316_udp module
-
-BPS 32 simulated line speed for UDP connections
-
-ILOOP 1 interface (local) loopback enabled
-
-LLOOP 1 line (remote) loopback enabled
+| Name | Size | Comments |
+|---|---|---|
+| `RXPOLL` | 32 | receiver polling interval |
+| `RXPEND` | 1 | receiver waiting for input |
+| `RXERR` | 1 | receiver error flag |
+| `RXIEN` | 1 | receiver interrupt enable |
+| `RXIRQ` | 1 | receiver interrupt request |
+| `RXTOT` | 32 | count of total messages received |
+| `TXDLY` | 32 | calculated delay before transmitter done |
+| `TXIEN` | 1 | transmitter interrupt enable |
+| `TXIRQ` | 1 | transmitter interrupt request |
+| `TXTOT` | 32 | count of total messages transmitted |
+| `LINK` | 32 | link number for `h316_udp` module |
+| `BPS` | 32 | simulated line speed for UDP connections |
+| `ILOOP` | 1 | interface (local) loopback enabled |
+| `LLOOP` | 1 | line (remote) loopback enabled |
 
 These registers can be viewed with the command
 
+```
 EXAMINE MIn STATE
+```
 
 The modem device implements these debugging flags:
 
-SET MIn DEBUG=WARN print warnings for unusual conditions
-
-SET MIn DEBUG=IO trace all modem interface I/O instructions
-
-SET MIn DEBUG=UDP trace all UDP packets and connections
-
-SET MIn DEBUG=MSG trace all IMP messages sent or received
+| Command | Action |
+|---|---|
+| `SET MIn DEBUG=WARN` | print warnings for unusual conditions |
+| `SET MIn DEBUG=IO` | trace all modem interface I/O instructions |
+| `SET MIn DEBUG=UDP` | trace all UDP packets and connections |
+| `SET MIn DEBUG=MSG` | trace all IMP messages sent or received |
 
 Remember that you must enable debugging output first before these
 settings will be effective; refer to the *SIMH User’s Guide*,
@@ -353,9 +354,12 @@ connections must be one to one*. Connecting more than one modem output
 to the same modem input will not cause any problems for SIMH, but the
 IMP software will become hopelessly confused.
 
-The general form of a virtual modem ATTACH command for UDP connections is like this
+The general form of a virtual modem `ATTACH` command for UDP
+connections is like this
 
+```
 ATTACH MIn llll:w.x.y.z:rrrr
+```
 
 This will listen for incoming packets on port “llll”, which should be a
 decimal number, and will transmit outgoing packets to port “rrrr” on the
@@ -365,13 +369,17 @@ other network applications.
 
 The UDP attach command also has a few alternative forms; for example
 
+```
 ATTACH MIn 4431:imp.jfcl.com:4432
+```
 
 will listen on port 4431 of the current host, do a DNS lookup to
-determine the IP of the host “imp.jfcl.com”, and then transmit to port
-4432 on that host. In another example
+determine the IP of the host `"imp.jfcl.com"`, and then transmit to
+port 4432 on that host. In another example
 
+```
 ATTACH MIn 1201::1202
+```
 
 will listen to port 1201 on the current, local, host and transmit to
 port 1202 also on the local host. This is useful when both SIMH
@@ -381,13 +389,17 @@ the modem will transmit to itself!
 
 Either end of the UDP connection may be disconnected with the command
 
+```
 DETACH MIn
+```
 
 #### Physical Serial Tunnels
 
 The command
 
-ATTACH –p MIn COMnn
+```
+ATTACH -p MIn COMnn
+```
 
 is reserved for a possible future option to attach a physical serial
 port to a virtual modem. This functionality is not currently
@@ -406,43 +418,38 @@ four host interface cards; in simh these are the devices HI1 thru HI4.
 Initially HI1 and 2 are enabled and HI3 and 4 are not, however this can
 be changed with the commands:
 
-SET HIn ENABLED enable host interface n
-
-SET HIn DISABLED disable host interface n
+| Command | Action |
+|---|---|
+| `SET HIn ENABLED` | enable host interface `n` |
+| `SET HIn DISABLED` | disable host interface `n` |
 
 Host interfaces support the following registers:
 
-<u>name size comments</u>
-
-POLL 32 host polling interval
-
-RXIEN 1 receiver interrupt enable
-
-RXIRQ 1 receiver interrupt request
-
-RXTOT 32 count of total messages received
-
-TXIEN 1 transmitter interrupt enable
-
-TXIRQ 1 transmitter interrupt request
-
-TXTOT 32 count of total messages transmitted
-
-READY 1 host ready
-
-FULL 1 host buffer full
-
-ERROR 1 host error
-
-LLOOP 1 local loopback enabled
+| Name | Size | Comments |
+|---|---|---|
+| `POLL` | 32 | host polling interval |
+| `RXIEN` | 1 | receiver interrupt enable |
+| `RXIRQ` | 1 | receiver interrupt request |
+| `RXTOT` | 32 | count of total messages received |
+| `TXIEN` | 1 | transmitter interrupt enable |
+| `TXIRQ` | 1 | transmitter interrupt request |
+| `TXTOT` | 32 | count of total messages transmitted |
+| `READY` | 1 | host ready |
+| `FULL` | 1 | host buffer full |
+| `ERROR` | 1 | host error |
+| `LLOOP` | 1 | local loopback enabled |
 
 These registers can be viewed with the command
 
+```
 EXAMINE HIn STATE
+```
 
 The modem device implements these debugging flags:
 
-SET HIn DEBUG=IO trace all host interface I/O instructions
+| Command | Action |
+|---|---|
+| `SET HIn DEBUG=IO` | trace all host interface I/O instructions |
 
 Remember that you must enable debugging output first before these
 settings will be effective; refer to the *SIMH User’s Guide*,
@@ -455,11 +462,15 @@ simh instances that simulate the host mainframe and run the Arpanet host
 operating system. The ATTACH command is used to connect a host interface
 to this other simh instance
 
-ATTACH HIn *tba*
+```
+ATTACH HIn tba
+```
 
 The host connection may be broken with the command
 
+```
 DETACH HIn
+```
 
 # Summary
 
@@ -472,118 +483,35 @@ interrupts and so interrupt 1, for example, corresponds to A bit 1 in
 the SMK 120 instruction. Table 2 shows the extended interrupt mask
 associated with these devices.
 
-<table> <caption><p>Table 1 - IMP/TIP Devices</p></caption> <colgroup>
-<col style="width: 10%" /> <col style="width: 15%" /> <col style="width:
-15%" /> <col style="width: 12%" /> <col style="width: 11%" /> <col
-style="width: 34%" /> </colgroup> <tbody> <tr> <td colspan="2"
-style="text-align: center;"><strong>DEVICE</strong></td> <td colspan="2"
-style="text-align: center;"><strong>INTERRUPT</strong></td> <td
-rowspan="2" style="text-align:
-center;"><strong>DMC<sub>10</sub></strong></td> <td
-rowspan="2"><strong>DESCRIPTION</strong></td> </tr> <tr> <td
-style="text-align: center;"><strong>Name</strong></td> <td
-style="text-align: center;"><strong>Address<sub>8</sub></strong></td>
-<td style="text-align:
-center;"><strong>Number<sub>10</sub></strong></td> <td
-style="text-align: center;"><strong>Vector<sub>8</sub></strong></td>
-</tr> <tr> <td style="text-align: center;">WDT</td> <td
-style="text-align: center;">26</td> <td style="text-align:
-center;"></td> <td style="text-align: center;">000062</td> <td
-style="text-align: center;"></td> <td><em>Watch Dog Timer</em></td>
-</tr> <tr> <td style="text-align: center;">RTC</td> <td
-style="text-align: center;">40</td> <td style="text-align:
-center;">15</td> <td style="text-align: center;">000102</td> <td
-style="text-align: center;"></td> <td><em>Real Time Clock</em></td>
-</tr> <tr> <td style="text-align: center;">IMP</td> <td
-style="text-align: center;">41</td> <td style="text-align:
-center;">16</td> <td style="text-align: center;">000103</td> <td
-style="text-align: center;"></td> <td><em>Task Switch</em></td> </tr>
-<tr> <td style="text-align: center;">IMP</td> <td style="text-align:
-center;">42</td> <td style="text-align: center;"></td> <td
-style="text-align: center;"></td> <td style="text-align: center;"></td>
-<td><em>MLC support</em></td> </tr> <tr> <td rowspan="2"
-style="text-align: center;">HI4<a href="#fn1" class="footnote-ref"
-id="fnref1" role="doc-noteref"><sup>1</sup></a></td> <td rowspan="2"
-style="text-align: center;">50</td> <td style="text-align:
-center;">9</td> <td style="text-align: center;">000074</td> <td
-style="text-align: center;">10</td> <td><em>Host Interface #4
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">4</td> <td
-style="text-align: center;">000067</td> <td style="text-align:
-center;">5</td> <td><em>Host Interface #4 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">HI3<a href="#fn2"
-class="footnote-ref" id="fnref2"
-role="doc-noteref"><sup>2</sup></a></td> <td rowspan="2"
-style="text-align: center;">51</td> <td style="text-align:
-center;">10</td> <td style="text-align: center;">000075</td> <td
-style="text-align: center;">16</td> <td><em>Host Interface #3
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">5</td> <td
-style="text-align: center;">000070</td> <td style="text-align:
-center;">15</td> <td><em>Host Interface #3 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">HI2</td> <td rowspan="2"
-style="text-align: center;">60</td> <td style="text-align:
-center;">14</td> <td style="text-align: center;">000101</td> <td
-style="text-align: center;">14</td> <td><em>Host Interface #2
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">12</td> <td
-style="text-align: center;">000077</td> <td style="text-align:
-center;">12</td> <td><em>Host Interface #2 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">HI1</td> <td rowspan="2"
-style="text-align: center;">70</td> <td style="text-align:
-center;">13</td> <td style="text-align: center;">000100</td> <td
-style="text-align: center;">13</td> <td><em>Host Interface #1
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">11</td> <td
-style="text-align: center;">000076</td> <td style="text-align:
-center;">11</td> <td><em>Host Interface #1 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">MI1</td> <td rowspan="2"
-style="text-align: center;">71</td> <td style="text-align:
-center;">1</td> <td style="text-align: center;">000064</td> <td
-style="text-align: center;">1</td> <td><em>Modem Interface #1
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">6</td> <td
-style="text-align: center;">000071</td> <td style="text-align:
-center;">6</td> <td><em>Modem Interface #1 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">MI2</td> <td rowspan="2"
-style="text-align: center;">72</td> <td style="text-align:
-center;">2</td> <td style="text-align: center;">000065</td> <td
-style="text-align: center;">2</td> <td><em>Modem Interface #2
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">7</td> <td
-style="text-align: center;">000072</td> <td style="text-align:
-center;">7</td> <td><em>Modem Interface #2 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">MI3</td> <td rowspan="2"
-style="text-align: center;">73</td> <td style="text-align:
-center;">3</td> <td style="text-align: center;">000066</td> <td
-style="text-align: center;">3</td> <td><em>Modem Interface #3
-(RX)</em></td> </tr> <tr> <td style="text-align: center;">8</td> <td
-style="text-align: center;">000073</td> <td style="text-align:
-center;">8</td> <td><em>Modem Interface #3 (TX)</em></td> </tr> <tr> <td
-rowspan="2" style="text-align: center;">MI4Error: Reference source not
-found</td> <td rowspan="2" style="text-align: center;">74</td> <td
-style="text-align: center;">4</td> <td style="text-align:
-center;">000067</td> <td style="text-align: center;">4</td>
-<td><em>Modem Interface #4 (RX)</em></td> </tr> <tr> <td
-style="text-align: center;">9</td> <td style="text-align:
-center;">000074</td> <td style="text-align: center;">9</td>
-<td><em>Modem Interface #4 (TX)</em></td> </tr> <tr> <td rowspan="2"
-style="text-align: center;">MI5Error: Reference source not found</td>
-<td rowspan="2" style="text-align: center;">75</td> <td
-style="text-align: center;">5</td> <td style="text-align:
-center;">000070</td> <td style="text-align: center;">5</td>
-<td><em>Modem Interface #5 (RX)</em></td> </tr> <tr> <td
-style="text-align: center;">10</td> <td style="text-align:
-center;">000075</td> <td style="text-align: center;">10</td>
-<td><em>Modem Interface #5 (TX)</em></td> </tr> </tbody> </table>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes"> <hr /> <ol> <li id="fn1"><p>The modem 4 interrupt
-and DMC conflict with host 4 – only one of the two may be active.<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The modem 5 interrupt and DMC conflict with host 3 –
-only one of the two may be active.<a href="#fnref2"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li> </ol>
-</section>
+| Name | Address<sub>8</sub> | Number<sub>10</sub> | Vector<sub>8</sub> | DMC<sub>10</sub> | Description |
+|---|---|---|---|---|---|
+| `WDT` | 26 |  | 000062 |  | Watch Dog Timer |
+| `RTC` | 40 | 15 | 000102 |  | Real Time Clock |
+| `IMP` | 41 | 16 | 000103 |  | Task Switch |
+| `IMP` | 42 |  |  |  | MLC support |
+| `HI4` | 50 | 9 | 000074 | 10 | Host Interface #4 (RX) |
+|  |  | 4 | 000067 | 5 | Host Interface #4 (TX) |
+| `HI3` | 51 | 10 | 000075 | 16 | Host Interface #3 (RX) |
+|  |  | 5 | 000070 | 15 | Host Interface #3 (TX) |
+| `HI2` | 60 | 14 | 000101 | 14 | Host Interface #2 (RX) |
+|  |  | 12 | 000077 | 12 | Host Interface #2 (TX) |
+| `HI1` | 70 | 13 | 000100 | 13 | Host Interface #1 (RX) |
+|  |  | 11 | 000076 | 11 | Host Interface #1 (TX) |
+| `MI1` | 71 | 1 | 000064 | 1 | Modem Interface #1 (RX) |
+|  |  | 6 | 000071 | 6 | Modem Interface #1 (TX) |
+| `MI2` | 72 | 2 | 000065 | 2 | Modem Interface #2 (RX) |
+|  |  | 7 | 000072 | 7 | Modem Interface #2 (TX) |
+| `MI3` | 73 | 3 | 000066 | 3 | Modem Interface #3 (RX) |
+|  |  | 8 | 000073 | 8 | Modem Interface #3 (TX) |
+| `MI4` | 74 | 4 | 000067 | 4 | Modem Interface #4 (RX) |
+|  |  | 9 | 000074 | 9 | Modem Interface #4 (TX) |
+| `MI5` | 75 | 5 | 000070 | 5 | Modem Interface #5 (RX) |
+|  |  | 10 | 000075 | 10 | Modem Interface #5 (TX) |
 
-|      |      |      |      |      |      |      |      |      |      |      |      |      |      |     |      |
-|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:---:|:----:|
-|  1   |  2   |  3   |  4   |  5   |  6   |  7   |  8   |  9   |  10  |  11  |  12  |  13  |  14  | 15  |  16  |
-| M1RX | M2RX | M3RX | M4RX | M5RX | M1TX | M2TX | M3TX | M4TX | M5TX | H1TX | H2TX | H1RX | H2RX | RTC | TASK |
-|      |      |      | H4TX | H3TX |      |      |      | H4RX | H3RX |      |      |      |      |     |      |
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `M1RX` | `M2RX` | `M3RX` | `M4RX` | `M5RX` | `M1TX` | `M2TX` | `M3TX` | `M4TX` | `M5TX` | `H1TX` | `H2TX` | `H1RX` | `H2RX` | `RTC` | `TASK` |
+|  |  |  | `H4TX` | `H3TX` |  |  |  | `H4RX` | `H3RX` |  |  |  |  |  |  |
 
 Table 2 - Extended Interrupt Mask
 
@@ -593,15 +521,14 @@ Table 3 summarizes the modem interface I/O instructions. In this table,
 “n” represents the modem number, (1 thru 5), and “dd” is the device I/O
 address assigned to that modem (71<sub>8</sub> thru 75<sub>8</sub>).
 
-|              |            |                                |
-|--------------|:----------:|--------------------------------|
-| `Mnemonic` | `Opcode` | `Operation` |
-| MnOUT        |   0300dd   | *start modem output*           |
-| MnUNXP       |   0301dd   | *un-cross patch modem*         |
-| MnLXP        |   0302dd   | *enable line cross patch*      |
-| MnIXP        |   0303dd   | *enable interface cross patch* |
-| MnIN         |   0304dd   | *start modem input*            |
-| MnERR        |   0704dd   | *skip on modem error*          |
+| Mnemonic | Opcode | Operation |
+|---|---|---|
+| `MnOUT` | `0300dd` | start modem output |
+| `MnUNXP` | `0301dd` | un-cross patch modem |
+| `MnLXP` | `0302dd` | enable line cross patch |
+| `MnIXP` | `0303dd` | enable interface cross patch |
+| `MnIN` | `0304dd` | start modem input |
+| `MnERR` | `0704dd` | skip on modem error |
 
 Table 3 – Modem Instructions
 
@@ -612,19 +539,18 @@ Table 4 summarizes the host interface I/O instructions. In this table,
 address assigned to that host (50<sub>8</sub>, 51<sub>8</sub>,
 60<sub>8</sub>, or 70<sub>8</sub>).
 
-|              |            |                                |
-|--------------|:----------:|--------------------------------|
-| `Mnemonic` | `Opcode` | `Operation` |
-| HnROUT       |   0300dd   | *start regular output to host* |
-| HnIN         |   0301dd   | *start host input*             |
-| HnFOUT       |   0302dd   | *start host final output*      |
-| HnXP         |   0303dd   | *cross patch host*             |
-| HnUNXP       |   0304dd   | *un-cross patch host*          |
-| HnENAB       |   0305dd   | *enable host interface*        |
-| HnERR        |   0700dd   | *skip on host error*           |
-| HnRDY        |   0701dd   | *skip on host ready*           |
-| HnEOM        |   0702dd   | *skip on end of host message*  |
-| HnFULL       |   0705dd   | *skip on host buffer full*     |
+| Mnemonic | Opcode | Operation |
+|---|---|---|
+| `HnROUT` | `0300dd` | start regular output to host |
+| `HnIN` | `0301dd` | start host input |
+| `HnFOUT` | `0302dd` | start host final output |
+| `HnXP` | `0303dd` | cross patch host |
+| `HnUNXP` | `0304dd` | un-cross patch host |
+| `HnENAB` | `0305dd` | enable host interface |
+| `HnERR` | `0700dd` | skip on host error |
+| `HnRDY` | `0701dd` | skip on host ready |
+| `HnEOM` | `0702dd` | skip on end of host message |
+| `HnFULL` | `0705dd` | skip on host buffer full |
 
 Table 4 - Host Instructions
 
@@ -632,25 +558,25 @@ Table 4 - Host Instructions
 
 Table 5 summarizes the additional miscellaneous I/O instructions.
 
-|  |  |  |  |
-|----|:--:|:--:|----|
 | Mnemonic | Opcode | Device | Operation |
-| SMK 120 | 170120 | CPU | *set extended interrupt mask* |
-|  | 030026 | WDT | *reset watch dog timer* |
-|  | 170026 | WDT | *set status lights* |
-| AMI512 | 070026 | WDT | *skip if this machine is a DDP-516*[^1] |
-| CLKON | 030040 | RTC | *enable RTC* |
-| CLKOFF | 031040 | RTC | *disable RTC* |
-| RDCLOK | 131040 | RTC | *read RTC count and always skip* |
-| TASK | 030041 | IMP | *cause task switch interrupt* |
-| RDIMPN | 131041 | IMP | *read IMP number and skip* |
-| AMIMLC | 070042 | IMP | *skip if this machine is a multi-line controller*[^2] |
+|---|---|---|---|
+| `SMK 120` | `170120` | `CPU` | set extended interrupt mask |
+|  | `030026` | `WDT` | reset watch dog timer |
+|  | `170026` | `WDT` | set status lights |
+| `AMI512` | `070026` | `WDT` | skip if this machine is a DDP-516 |
+| `CLKON` | `030040` | `RTC` | enable RTC |
+| `CLKOFF` | `031040` | `RTC` | disable RTC |
+| `RDCLOK` | `131040` | `RTC` | read RTC count and always skip |
+| `TASK` | `030041` | `IMP` | cause task switch interrupt |
+| `RDIMPN` | `131041` | `IMP` | read IMP number and skip |
+| `AMIMLC` | `070042` | `IMP` | skip if this machine is a multi-line controller |
 
 Table 5 - Other Instructions
 
-[^1]: On simh this instruction is a NOP and never skips (simh simulates
-an H316, not the DDP-516).
+Notes:
 
-[^2]: “Multi-line controller” was the official name for the TIP. MLC
-support is not implemented and this instruction is currently a NOP and
-never skips.
+- On simh, `AMI512` is a NOP and never skips, because simh simulates an
+  H316, not the DDP-516.
+- “Multi-line controller” was the official name for the TIP. MLC
+  support is not implemented, and `AMIMLC` is currently a NOP and never
+  skips.
