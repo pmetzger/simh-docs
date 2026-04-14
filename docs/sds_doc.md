@@ -85,8 +85,8 @@ The SDS-940 simulator is configured as follows:
 Most devices can be disabled or enabled with the `SET <dev> DISABLED`
 and `SET <dev> ENABLED` commands, respectively.
 
-The LOAD command is used to load a line printer carriage-control tape.
-The DUMP command is not implemented.
+The `LOAD` command is used to load a line printer carriage-control tape.
+The `DUMP` command is not implemented.
 
 ## CPU
 
@@ -141,8 +141,8 @@ control registers for the interrupt system.
 | `WRU` | 8 | interrupt character |
 
 The CPU can maintain a history of the most recently executed
-instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
-HISTORY commands:
+instructions. This is controlled by the `SET CPU HISTORY` and
+`SHOW CPU HISTORY` commands:
 
 | Command | Action |
 |---|---|
@@ -174,17 +174,18 @@ controlled by command line switches:
 | `-n` | break if P equals address, machine in normal (SDS 930) mode |
 | `-u` | break if P equals address, machine in user mode |
 
-Breakpoint commands default to –e behavior if no switch is specified.
+Breakpoint commands default to `-e` behavior if no switch is specified.
 
 ### Next Command
 
-The Next command is supported to step over a BRM, POP, or SYSPOP
+The `Next` command is supported to step over a BRM, POP, or SYSPOP
 instruction by installing temporary breakpoints at P+1 and P+2 (and P+3
 in the case of a BRM) and then executing the Go command. The temporary
 breakpoints are removed should execution be interrupted for any other
-reason. For other instructions, Next is converted to a Step command.
+reason. For other instructions, `Next` is converted to a `Step`
+command.
 
-Like the Step command, the Next command accepts a repeat count as an
+Like the `Step` command, the `Next` command accepts a repeat count as an
 argument. Given this code sequence:
 
 ```

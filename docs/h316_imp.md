@@ -32,17 +32,17 @@ written by Robert M Supnik.
 
 # Introduction
 
-This memorandum documents the extensions made to the simh Honeywell H316
+This memorandum documents the extensions made to the SIMH Honeywell H316
 simulator to allow it to run the ARPANET Interface Message Processor
 (aka IMP) and Terminal Interface Processor (TIP) software. A single IMP
 or TIP instance isn’t very useful, however these extensions allow
-multiple simh instances, each running a copy of the IMP or TIP code, to
+multiple SIMH instances, each running a copy of the IMP or TIP code, to
 communicate using virtual modem connections implemented with physical
 serial ports on the host computer. Alternatively, virtual modem
-connections may be tunneled over TCP/IP to a remote simh IMP/TIP
-instance anywhere in the world. Moreover, each simh IMP instance can
+connections may be tunneled over TCP/IP to a remote SIMH IMP/TIP
+instance anywhere in the world. Moreover, each SIMH IMP instance can
 then be connected via virtual host interface cards to other local PDP-10
-or PDP-11 simh instances running ARPANET host software.
+or PDP-11 SIMH instances running ARPANET host software.
 
 **NOTE**
 
@@ -53,7 +53,7 @@ all.
 
 # Simulator Files
 
-These additional IMP/TIP specific files are added to simh:
+These additional IMP/TIP specific files are added to SIMH:
 
 | Subdirectory | File | Contains |
 |---|---|---|
@@ -80,8 +80,8 @@ The IMP/TIP adds the following devices to the H316 configuration:
 
 The IMP pseudo device implements two sets of miscellaneous I/O
 instructions in the original IMP/TIP hardware. This device responds both
-to IO address 41<sub>8</sub>, which implements the TASK switching
-interrupt and the IMP identification number, and to IO address
+to I/O address 41<sub>8</sub>, which implements the TASK switching
+interrupt and the IMP identification number, and to I/O address
 42<sub>8</sub>, which implements the MLC test. The IMP device may be
 enabled with the standard command
 
@@ -147,14 +147,14 @@ The RTC device supports the following SET commands:
 
 The INTERVAL parameter sets the interval between RTC clock ticks, in
 microseconds and the QUANTUM parameter sets how often, as a number of
-clock ticks, simh updates the RTC count. To give an example, if INTERVAL
-was set to 20 and QUANTUM was 1, simh would attempt to increment the RTC
+clock ticks, SIMH updates the RTC count. To give an example, if INTERVAL
+was set to 20 and QUANTUM was 1, SIMH would attempt to increment the RTC
 count by one at a rate of 50,000 times per second. Modern PCs are very
-fast and it would probably be possible for simh to do this, but the
+fast and it would probably be possible for SIMH to do this, but the
 amount of overhead would be huge and it would be impractical.
 
 Instead, for example, if INTERVAL was still set to 20 but QUANTUM was
-now set to 50, simh would add 50 to the RTC count at a rate of 1000
+now set to 50, SIMH would add 50 to the RTC count at a rate of 1000
 times per second. This represents much less overhead and yet gives the
 same net counting rate as before. However, now the clock count jumps in
 increments of 50 rather than 1. Most software wouldn’t notice, but it’s
@@ -195,8 +195,8 @@ first before these settings will be effective.
 ### Watch Dog Timer
 
 The IMP/TIP hardware also had a custom watch dog timer implementation
-which would force a non-maskable interrupt if was ever allowed to
-expire. The WDT device in simh implements this feature. The IMP/TIP
+which would force a non-maskable interrupt if it was ever allowed to
+expire. The WDT device in SIMH implements this feature. The IMP/TIP
 watch dog timer also implemented a couple of other unrelated features –
 these include the status display panel, which you can see featured
 prominently in some IMP photos, and a flag to indicate whether the CPU
@@ -265,7 +265,7 @@ each IMP/TIP modem communicated with exactly one other modem attached to
 exactly one other IMP/TIP. SIMH simulates these modem interfaces and
 allows them to be attached to either a real, physical, serial port on
 the host computer or to a virtual UDP/IP port. Either can then be
-connected to another simh instance running the IMP/TIP software, or even
+connected to another SIMH instance running the IMP/TIP software, or even
 a real IMP or TIP if someone gets one working again, and a network can
 be assembled.
 
@@ -329,7 +329,7 @@ These registers can be viewed with the command
 EXAMINE MIn STATE
 ```
 
-The modem device implements these debugging flags:
+The modem interface device implements these debugging flags:
 
 | Command | Action |
 |---|---|
@@ -344,7 +344,7 @@ settings will be effective; refer to the *SIMH User’s Guide*,
 
 #### UDP/IP Tunnels
 
-A virtual modem may also be tunneled using UDP/IP to another simh
+A virtual modem may also be tunneled using UDP/IP to another SIMH
 instance. UDP connections are symmetrical – each virtual modem listens
 for incoming packets on a port which you define, and transmit outgoing
 packets to another host and port which you also define. It’s your
@@ -414,7 +414,7 @@ implemented.
 The IMP used the host interface to connect the H316 to an Arpanet host
 mainframe. This could be a PDP-10, an SDS Sigma 7, a CDC 6600, an IBM
 360, or any one of many other machines. Each IMP could support up to
-four host interface cards; in simh these are the devices HI1 thru HI4.
+four host interface cards; in SIMH these are the devices HI1 thru HI4.
 Initially HI1 and 2 are enabled and HI3 and 4 are not, however this can
 be changed with the commands:
 
@@ -445,7 +445,7 @@ These registers can be viewed with the command
 EXAMINE HIn STATE
 ```
 
-The modem device implements these debugging flags:
+The host interface device implements these debugging flags:
 
 | Command | Action |
 |---|---|
@@ -457,10 +457,10 @@ settings will be effective; refer to the *SIMH User’s Guide*,
 
 #### UDP/IP Tunnels
 
-In simh host interfaces are simulated using UDP connections to other
-simh instances that simulate the host mainframe and run the Arpanet host
-operating system. The ATTACH command is used to connect a host interface
-to this other simh instance
+In SIMH, host interfaces are simulated using UDP connections to other
+SIMH instances that simulate the host mainframe and run the Arpanet host
+operating system. The `ATTACH` command is used to connect a host
+interface to this other SIMH instance
 
 ```
 ATTACH HIn tba
@@ -476,7 +476,7 @@ DETACH HIn
 
 ## Additional Devices
 
-Table 1 lists the IMP/TIP specific devices added to simh along with
+Table 1 lists the IMP/TIP specific devices added to SIMH along with
 their I/O address, interrupt number and vector, and DMC channel
 assignment. Note that all the IMP/TIP devices use the H316 extended
 interrupts and so interrupt 1, for example, corresponds to A bit 1 in
@@ -575,7 +575,7 @@ Table 5 - Other Instructions
 
 Notes:
 
-- On simh, `AMI512` is a NOP and never skips, because simh simulates an
+- On SIMH, `AMI512` is a NOP and never skips, because SIMH simulates an
   H316, not the DDP-516.
 - “Multi-line controller” was the official name for the TIP. MLC
   support is not implemented, and `AMIMLC` is currently a NOP and never

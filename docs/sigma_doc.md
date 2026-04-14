@@ -28,7 +28,7 @@ X11-style open source license; the precise terms are available at:
 [2.13 723X Nine-Track Magnetic Tape (MT)](#x-nine-track-magnetic-tape-mt)
 [3 Symbolic Display and Input](#symbolic-display-and-input)
 
-This memorandum documents the SDS 940 simulator.
+This memorandum documents the XDS Sigma simulator.
 
 # Simulator Files
 
@@ -50,7 +50,7 @@ This memorandum documents the SDS 940 simulator.
 |  | `sim_tape.c` |
 |  | `sim_timer.c` |
 |  | `sim_tmxr.c` |
-| `sim/sds/` | `sigma_defs.h` |
+| `sim/sigma/` | `sigma_defs.h` |
 |  | `sigma_io_defs.h` |
 |  | `sigma_cis.c` |
 |  | `sigma_coc.c` |
@@ -87,10 +87,10 @@ The XDS Sigma 32b simulator is configured as follows:
 | `RAD` | 7211/7212 or 7231/7232 fixed head disk |
 | `MT` | 732X 9-track magnetic tape with up to 8 drives |
 
-Most devices can be disabled or enabled with the SET \<dev\> DISABLED
-and SET \<dev\> ENABLED commands, respectively.
+Most devices can be disabled or enabled with the `SET <dev> DISABLED`
+and `SET <dev> ENABLED` commands, respectively.
 
-The LOAD and DUMP commands are not implemented.
+The `LOAD` and `DUMP` commands are not implemented.
 
 ## Central Processor (CPU)
 
@@ -367,8 +367,8 @@ The paper tape controller implements these registers:
 | `PTIME` | 24 | time from punch I/O initiation to response |
 | `PSTOP_IOE` | 1 | punch stop on I/O error |
 
-The paper-tape reader supports the BOOT command. BOOT PT0 simulates the
-standard console fill sequence.
+The paper-tape reader supports the `BOOT` command. `BOOT PT0`
+simulates the standard console fill sequence.
 
 Reader error handling is as follows:
 
@@ -706,9 +706,9 @@ include the ability to make units write enabled or write locked.
 | `SET MTn CAPAC=m` | Set unit `n` capacity to `m` MB (`0` = unlimited) |
 | `SHOW MTn CAPAC` | Show unit `n` capacity in MB |
 
-Units can also be set ENABLED or DISABLED. The magnetic tape controller
-supports the BOOT command. BOOT MTn simulates the standard console fill
-sequence for unit n.
+Units can also be set `ENABLED` or `DISABLED`. The magnetic tape
+controller supports the `BOOT` command. `BOOT MTn` simulates the
+standard console fill sequence for unit `n`.
 
 The magnetic tape implements these registers:
 

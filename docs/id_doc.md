@@ -107,8 +107,8 @@ The Interdata simulator implements two unique stop conditions:
 
 - Runaway carriage control tape in the line printer
 
-The LOAD command is used to load a carriage control tape for the line
-printer. The DUMP command is used to dump a contiguous portion of memory
+The `LOAD` command is used to load a carriage control tape for the line
+printer. The `DUMP` command is used to dump a contiguous portion of memory
 as a self-loading bootstrap paper tape. The syntax for the DUMP command
 is:
 

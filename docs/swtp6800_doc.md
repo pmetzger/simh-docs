@@ -100,9 +100,10 @@ SWTP6800MP-A2, one for each of the processor boards available.
 
 Most devices can be disabled or enabled, by the commands:
 
-SET \<dev\> DISABLED
-
-SET \<dev\> ENABLED
+```
+SET <dev> DISABLED
+SET <dev> ENABLED
+```
 
 The SWTP 6800 simulator implements several unique stop conditions:
 
@@ -112,9 +113,10 @@ The SWTP 6800 simulator implements several unique stop conditions:
 
 - If an undefined interrupt occurs and ITRAP is enabled, a STOP_INST is set
 
-The LOAD command supports both S19 format and BIN format tapes. If the
-file extension is .S19, or the h switch is specified with LOAD, the file
-is assumed to be S19 format; if the file extension is .BIN, or the -b
+The `LOAD` command supports both S19 format and BIN format tapes. If the
+file extension is `.S19`, or the `-h` switch is specified with `LOAD`,
+the file is assumed to be S19 format; if the file extension is `.BIN`,
+or the `-b`
 switch is specified, the file is assumed to be BIN format.
 
 ## Motherboard
@@ -147,8 +149,7 @@ LFD-400 used CC00-CC0FH for its I/O address space.
 The simulator for the SWTP 6800 MP-A uses several files. The simulator
 is depicted in Figure 1.
 
-<img src="mdbook/src/swtp6800_doc_assets/image1.png"
-style="width:6.66875in;height:5.57361in" />
+![MP-A simulator block diagram](swtp6800_doc_assets/image1.png)
 
 **Figure 1. MP-A Simulator**
 
@@ -158,106 +159,98 @@ The MP-A CPU has several available options.
 
 The BOOTROM allows selection of the size of the ROM:
 
-SET BOOTROM NONE No Boot PROM
-
-SET BOOTROM 2704 0.5K PROM
-
-SET BOOTROM 2708 1K PROM
-
-SET BOOTROM 2716 2K PROM
-
-SET BOOTROM 2732 4K PROM
-
-SET BOOTROM 2764 8K PROM
+| Command | Action |
+|---|---|
+| `SET BOOTROM NONE` | No Boot PROM |
+| `SET BOOTROM 2704` | 0.5K PROM |
+| `SET BOOTROM 2708` | 1K PROM |
+| `SET BOOTROM 2716` | 2K PROM |
+| `SET BOOTROM 2732` | 4K PROM |
+| `SET BOOTROM 2764` | 8K PROM |
 
 The BOOTROM device assigns the base of the ROM image to 0E000H of
 simulated memory.
 
 The BOOTROM image file is attached to the BOOTROM device as follows:
 
+```
 ATTACH BOOTROM SWTBUG.BIN
+```
 
 ### CPU Device
 
 The CPU device allows setting the simulated behavior for interrupts and
 references to unimplemented memory.
 
-SET CPU ITRAP Trap interrupts
-
-SET CPU NOITRAP Don’t trap interrupts
-
-SET CPU MTRAP Trap unimplemented memory
-
-SET CPU NOMTRAP Don’t trap unimplemented memory
-
-SET CPU HISTORY Enable the collection of history
+| Command | Action |
+|---|---|
+| `SET CPU ITRAP` | Trap interrupts |
+| `SET CPU NOITRAP` | Don’t trap interrupts |
+| `SET CPU MTRAP` | Trap unimplemented memory |
+| `SET CPU NOMTRAP` | Don’t trap unimplemented memory |
+| `SET CPU HISTORY` | Enable the collection of history |
 
 ### M6800 Registers
 
 The CPU registers include the visible state of the processor as well as
 the control registers for the interrupt system.
 
-name size comments
-
-PC 16 program counter
-
-SP 16 stack pointer
-
-A 8 accumulator a
-
-B 8 accumulator b
-
-IX 16 index register
-
-CCR 8 condition code register
+| Name | Size | Comments |
+|---|---|---|
+| `PC` | 16 | program counter |
+| `SP` | 16 | stack pointer |
+| `A` | 8 | accumulator a |
+| `B` | 8 | accumulator b |
+| `IX` | 16 | index register |
+| `CCR` | 8 | condition code register |
 
 The CPU display radix can be set for octal, decimal or hexadecimal. The
 commands are as follows:
 
+```
 SET CPU OCT
-
 SET CPU DEC
-
 SET CPU HEX
+```
 
 The current CPU display radix can be found with:
 
+```
 SHOW CPU RADIX
+```
 
 ## MP-A2 CPU Card
 
-The simulator for the SWTP 6800 MP-A uses several files. The simulator
+The simulator for the SWTP 6800 MP-A2 uses several files. The simulator
 is depicted in Figure 2.
 
-<img src="mdbook/src/swtp6800_doc_assets/image2.png"
-style="width:6.66875in;height:6.04722in" />
+![MP-A2 simulator block diagram](swtp6800_doc_assets/image2.png)
 
 **Figure 2. MP-A2 Simulator**
 
-The MP-A CPU has several available options.
+The MP-A2 CPU has several available options.
 
 ### BOOTROM Device
 
 The BOOTROM allows selection of the size of the ROM:
 
-SET BOOTROM NONE No Boot PROM
-
-SET BOOTROM 2704 0.5K PROM
-
-SET BOOTROM 2708 1K PROM
-
-SET BOOTROM 2716 2K PROM
-
-SET BOOTROM 2732 4K PROM
-
-SET BOOTROM 2764 8K PROM
+| Command | Action |
+|---|---|
+| `SET BOOTROM NONE` | No Boot PROM |
+| `SET BOOTROM 2704` | 0.5K PROM |
+| `SET BOOTROM 2708` | 1K PROM |
+| `SET BOOTROM 2716` | 2K PROM |
+| `SET BOOTROM 2732` | 4K PROM |
+| `SET BOOTROM 2764` | 8K PROM |
 
 The BOOTROM device assigns the base of the ROM image to 0E000H of
 simulated memory.
 
 The BOOTROM image file is attached to the BOOTROM device as follows:
 
+```
 ATTACH BOOTROM SWTBUG.BIN
+```
 
 ### I2716 Device
 
@@ -266,52 +259,50 @@ on the MP-A2 CPU board. They are i27160 to i27163.
 
 The i2716 ROM image file is attached to one of the i2716 devices as follows:
 
+```
 ATTACH I27160 FILE0.BIN
+```
 
 ### CPU Device
 
 The CPU device allows setting the simulated behavior for interrupts and
 references to unimplemented memory.
 
-SET CPU ITRAP Trap interrupts
-
-SET CPU NOITRAP Don’t trap interrupts
-
-SET CPU MTRAP Trap unimplemented memory
-
-SET CPU NOMTRAP Don’t trap unimplemented memory
+| Command | Action |
+|---|---|
+| `SET CPU ITRAP` | Trap interrupts |
+| `SET CPU NOITRAP` | Don’t trap interrupts |
+| `SET CPU MTRAP` | Trap unimplemented memory |
+| `SET CPU NOMTRAP` | Don’t trap unimplemented memory |
 
 ### M6800 Registers
 
 The CPU registers include the visible state of the processor as well as
 the control registers for the interrupt system.
 
-name size comments
-
-PC 16 program counter
-
-SP 16 stack pointer
-
-A 8 accumulator a
-
-B 8 accumulator b
-
-IX 16 index register
-
-CCR 8 condition code register
+| Name | Size | Comments |
+|---|---|---|
+| `PC` | 16 | program counter |
+| `SP` | 16 | stack pointer |
+| `A` | 8 | accumulator a |
+| `B` | 8 | accumulator b |
+| `IX` | 16 | index register |
+| `CCR` | 8 | condition code register |
 
 The CPU display radix can be set for octal, decimal or hexadecimal. The
 commands are as follows:
 
+```
 SET CPU OCT
-
 SET CPU DEC
-
 SET CPU HEX
+```
 
 The current CPU display radix can be found with:
 
+```
 SHOW CPU RADIX
+```
 
 ## Programmed I/O Devices
 
@@ -326,32 +317,35 @@ support the console.
 
 Console mode can be set as follows:
 
+```
 SET MP-S ANSI
-
 SET MP-S TTY
+```
 
 Current console status can be shown with the following command:
 
+```
 SHOW MP-S
+```
 
 The MP-S driver simulates the paper tape reader (PTR) and paper tape
 punch (PTP) devices. These devices need to be attached to files before
 use. If the file specified is not present, then a new file is created.
 The attach and detach commands are as follows:
 
+```
 ATTACH PTR TEST
-
 ATTACH PTP TEST1
-
 DETACH PTR
-
 DETACH PTP
+```
 
 Current PTP and PTR status can be shown with the following commands:
 
+```
 SHOW PTP
-
 SHOW PTR
+```
 
 ### DC-4 Quad Double-Sided Single-/Double-Density 5-1/4” Floppy Disk Controller Board
 
@@ -366,13 +360,16 @@ DC-43. These devices need to be attached to files before use. If the
 file specified is not present, then a new file is created. The units can
 be attached and detached to files as follows:
 
+```
 ATTACH DC-40 BOOT.IMG
-
 DETACH DC-43
+```
 
-Current DC-4 status can be displayed with the following command:
+Current LFD-400 status can be displayed with the following command:
 
+```
 SHOW DC-4
+```
 
 ### LFD-400 Quad Single-Density 5-1/4” Floppy Disk Controller Board
 
@@ -381,22 +378,25 @@ this board connects to a dual drive SSSD 5-1/4” floppy system. In this
 emulation, I have provided for 4 drives, the maximum the WD1791 can
 support.
 
-The LDF-400 simulator provides for four drive units. The units are
-LDF-4000 to LDF-4003. The LDF-400 needs to be enabled before use as
+The LFD-400 simulator provides for four drive units. The units are
+LFD-4000 to LFD-4003. The LFD-400 needs to be enabled before use as
 follows:
 
-SET LDS-400 ENABLE
+```
+SET LFD-400 ENABLE
+```
 
 These devices need to be attached to files before use. If the file
 specified is not present, then a new file is created. The units can be
 attached and detached to files as follows:
 
-ATTACH LDF-4000 BOOT.IMG
-
-DETACH LDS-4002
+```
+ATTACH LFD-4000 BOOT.IMG
+DETACH LFD-4002
+```
 
 Current DC-4 status can be displayed with the following command:
 
-SHOW LDF-4000
-
-### 
+```
+SHOW LFD-4000
+```

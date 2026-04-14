@@ -23,7 +23,7 @@ The IBM 701 simulator was written by Richard Cornwell.
 [3.3.2 721 Card Punch (CDP)](#card-punch-cdp)
 [3.3.3 716 Line Printer (LP)](#line-printer-lp)
 [3.3.4 729 Magnetic Tape (MT)](#magnetic-tape-mt)
-[2.3.4 733 Drum (DR)](#drum-dr)
+[3.3.5 733 Drum (DR)](#drum-dr)
 [4 Symbolic Display and Input](#symbolic-display-and-input)
 [5 Sim Load](#sim-load)
 [6 Character Codes](#character-codes)
@@ -44,35 +44,33 @@ replaced by 704 and 702. A total of 19 machines were installed.
 To compile the IBM 701, you must define USE_INT64 and I701 as part of
 the compilation command line.
 
-|                    |              |                                         |
-|--------------------|--------------|-----------------------------------------|
-| Subdirectory | File   | Contains                          |
-| `I7000`          | i7000_defs.h | IBM 7000 simulators general definitions |
-|                    | i701_defs.h  | IBM 701 simulator specific definitions  |
-|                    | i7000_chan.c | Generic channel interface.              |
-|                    | i701_cpu.c   | 701 CPU, Channel, interface             |
-|                    | i701_chan.c  | 701 Channel.                            |
-|                    | i701_sys.c   | 701 System interface                    |
-|                    | i7090_cdr.c  | 711 Card reader                         |
-|                    | i7090_cdp.c  | 721 Card punch                          |
-|                    | i7090_lpr.c  | 716 Line printer                        |
-|                    | i7090_drum.c | 733 Drum memory interface.              |
-|                    | i7000_mt.c   | 729 Tape controller.                    |
+| Subdirectory | File | Contains |
+|---|---|---|
+| `I7000` | `i7000_defs.h` | IBM 7000 simulators general definitions |
+|  | `i701_defs.h` | IBM 701 simulator specific definitions |
+|  | `i7000_chan.c` | Generic channel interface |
+|  | `i701_cpu.c` | 701 CPU, channel, interface |
+|  | `i701_chan.c` | 701 channel |
+|  | `i701_sys.c` | 701 system interface |
+|  | `i7090_cdr.c` | 711 card reader |
+|  | `i7090_cdp.c` | 721 card punch |
+|  | `i7090_lpr.c` | 716 line printer |
+|  | `i7090_drum.c` | 733 drum memory interface |
+|  | `i7000_mt.c` | 729 tape controller |
 
 # 3. IBM 701 Features
 
 The IBM 701 simulator is configured as follows:
 
-|                    |                              |
-|--------------------|------------------------------|
 | Device Name(s) | Simulates |
-| `CPU`            | 701 CPU with 2KW of memory   |
-| `CH`             | 701 Channel Device           |
-| `MT`             | 729 Magnetic Tape Controller |
-| `CDR`            | 711 Card Reader              |
-| `CDP`            | 721 Card Punch               |
-| `LP`             | 716 Line Printer             |
-| `DR0`            | 733 Drum                     |
+|---|---|
+| `CPU` | 701 CPU with 2KW of memory |
+| `CH` | 701 channel device |
+| `MT` | 729 magnetic tape controller |
+| `CDR` | 711 card reader |
+| `CDP` | 721 card punch |
+| `LP` | 716 line printer |
+| `DR0` | 733 drum |
 
 The 701 simulator implements several unique stop condition:
 
@@ -130,38 +128,36 @@ as ASCII lines with terminating newlines. Card reader files can either
 be text (one character per column) or column binary (two characters per
 column). The file type can be specified with a set command:
 
-|                       |                                     |
-|-----------------------|-------------------------------------|
-| SET CDR FORMAT=TEXT   | Sets ASCII text mode                |
-| SET CDR FORMAT=BINARY | Sets for binary card images.        |
-| SET CDR FORMAT=BCD    | Sets for BCD records.               |
-| SET CDR FORMAT=CBN    | Sets for column binary BCD records. |
-| SET CDR FORMAT=AUTO   | Automatically determines format.    |
+| Command | Action |
+|---|---|
+| `SET CDR FORMAT=TEXT` | sets ASCII text mode |
+| `SET CDR FORMAT=BINARY` | sets binary card-image mode |
+| `SET CDR FORMAT=BCD` | sets BCD-record mode |
+| `SET CDR FORMAT=CBN` | sets column-binary BCD-record mode |
+| `SET CDR FORMAT=AUTO` | automatically determines format |
 
 or in the ATTACH command:
 
-|  |  |
-|----|----|
-| ATTACH CDR *\<file\>* | Attaches a file |
-| ATTACH CDR -f *\<format\> \<file\>* | Attaches a file with the given format. |
-| ATTACH CDR -s \<*file*\> | Added file onto current cards to read. |
-| ATTACH CDR -e \<*file\>* | After file is read in, the reader will receive and end of file flag. |
+| Command | Action |
+|---|---|
+| `ATTACH CDR <file>` | attaches a file |
+| `ATTACH CDR -f <format> <file>` | attaches a file with the given format |
+| `ATTACH CDR -s <file>` | adds a file onto the current cards to read |
+| `ATTACH CDR -e <file>` | sets an end-of-file flag after the file is read |
 
 The card reader can be booted with the:
 
-|          |                              |
-|----------|------------------------------|
-| BOOT CDR | Loads first 3 words of card. |
+| Command | Action |
+|---|---|
+| `BOOT CDR` | loads the first 3 words of the card |
 
 Error handling is as follows:
 
-error processed as
-
-not attached report error and stop
-
-end of file out of cards
-
-OS I/O error report error and stop
+| Error | Processed As |
+|---|---|
+| not attached | report error and stop |
+| end of file | out of cards |
+| OS I/O error | report error and stop |
 
 ### 3.3.2 721 Card Punch (CDP)
 
@@ -170,28 +166,27 @@ ASCII lines with terminating newlines. Card punch files can either be
 text (one character per column) or column binary (two characters per
 column). The file type can be specified with a set command:
 
-|                       |                                     |
-|-----------------------|-------------------------------------|
-| SET CDP FORMAT=TEXT   | Sets ASCII text mode                |
-| SET CDP FORMAT=BINARY | Sets for binary card images.        |
-| SET CDP FORMAT=BCD    | Sets for BCD records.               |
-| SET CDP FORMAT=CBN    | Sets for column binary BCD records. |
-| SET CDP FORMAT=AUTO   | Automatically determines format.    |
+| Command | Action |
+|---|---|
+| `SET CDP FORMAT=TEXT` | sets ASCII text mode |
+| `SET CDP FORMAT=BINARY` | sets binary card-image mode |
+| `SET CDP FORMAT=BCD` | sets BCD-record mode |
+| `SET CDP FORMAT=CBN` | sets column-binary BCD-record mode |
+| `SET CDP FORMAT=AUTO` | automatically determines format |
 
 or in the ATTACH command:
 
-|                                   |                                        |
-|-----------------------------------|----------------------------------------|
-| ATTACH CDP \<file\>               | Attaches a file                        |
-| ATTACH CDP -f \<format\> \<file\> | Attaches a file with the given format. |
+| Command | Action |
+|---|---|
+| `ATTACH CDP <file>` | attaches a file |
+| `ATTACH CDP -f <format> <file>` | attaches a file with the given format |
 
 Error handling is as follows:
 
-error processed as
-
-not attached report error and stop
-
-OS I/O error report error and stop
+| Error | Processed As |
+|---|---|
+| not attached | report error and stop |
+| OS I/O error | report error and stop |
 
 ### 3.3.3 716 Line Printer (LP)
 
@@ -199,33 +194,31 @@ The line printer (LP) writes data to a disk file as ASCII text with
 terminating newlines. Currently set to handle standard signals to
 control paper advance.
 
-|                           |                                                 |
-|---------------------------|-------------------------------------------------|
-| SET LP NO/ECHO            | Sets echoing to console of line-printer output. |
-| SET LP LINESPERPAGE=*lpp* | Sets number of lines per page on printer.       |
+| Command | Action |
+|---|---|
+| `SET LP NO/ECHO` | sets echoing of line-printer output to the console |
+| `SET LP LINESPERPAGE=lpp` | sets the number of lines per page |
 
 The Printer supports the following SPRA *n* selection pulses for
 controlling spacing (spacing occurs before the line is printed):
 
-|        |                                                         |
-|--------|---------------------------------------------------------|
-| SPRA 1 | To top of form.                                         |
-| SPRA 2 | Single space.                                           |
-| SPRA 3 | Double space. Before printing line.                     |
-| SPRA 4 | Triple space. Before printing line.                     |
-| SPRA 9 | Suppress linefeed after print. Prints characters 73-120 |
-|        |                                                         |
-| SPT    | Will skip if any printer line has been pulsed.          |
+| Pulse | Action |
+|---|---|
+| `SPRA 1` | top of form |
+| `SPRA 2` | single space |
+| `SPRA 3` | double space before printing |
+| `SPRA 4` | triple space before printing |
+| `SPRA 9` | suppress linefeed after print; prints characters 73-120 |
+| `SPT` | skips if any printer line has been pulsed |
 
 Default with no SPRA is to single space before printing.
 
 Error handling is as follows:
 
-error processed as
-
-not attached report error and stop
-
-OS I/O error report error and stop
+| Error | Processed As |
+|---|---|
+| not attached | report error and stop |
+| OS I/O error | report error and stop |
 
 ### 3.3.4 729 Magnetic Tape (MT)
 
@@ -250,7 +243,7 @@ Tape drives can be booted with:
 |------------|--------------------------------------|
 | BOOT MT*n* | Read in first three words of record. |
 
-### 2.3.4 733 Drum (DR)
+### 3.3.5 733 Drum (DR)
 
 Up to 16 units can be attached to the CPU, all are on pseudo channel 0.
 Each drum is 2048K words in size. They are all stored in one file.
@@ -277,9 +270,11 @@ commands:
 | -c  | Display/Enter BCD Characters        |
 |     | Display/Enter Octal data.           |
 
-The symbolic input/display supports 1 format for instruction display:
+The symbolic input/display supports one instruction-display format:
 
-- \<opcode\>,\<sign\>\<octal address\>,\<opcode\>,\<sign\>\<octal address\>
+```
+<opcode>,<sign><octal address>,<opcode>,<sign><octal address>
+```
 
 A negative address specifies the lower 18 bits of the given memory location.
 
@@ -288,16 +283,11 @@ A negative address specifies the lower 18 bits of the given memory location.
 The load command looks at the extension of the file to determine how to
 load the file.
 
-<table> <colgroup> <col style="width: 17%" /> <col style="width: 82%" />
-</colgroup> <tbody> <tr> <td>.crd</td> <td><p>Loads a card image file
-into memory.</p> <p>standard 709 format + 1 card loader.</p></td> </tr>
-<tr> <td>.oct</td> <td><p>Loads an octal deck:</p> <p>address
-&lt;blank&gt; octal &lt;blank&gt; octal...</p></td> </tr> <tr>
-<td>.sym</td> <td><p>Loads a 709 symbolic deck.</p> <p>address
-instruction..</p> <p>address BCD string</p> <p>address OCT octal</p>
-<p>octal</p></td> </tr> </tbody> </table>
-
-#  
+| Extension | Description |
+|---|---|
+| `.crd` | Loads a card-image file into memory in standard 709 format plus a one-card loader. |
+| `.oct` | Loads an octal deck: `address <blank> octal <blank> octal...` |
+| `.sym` | Loads a 709 symbolic deck: `address instruction..`, `address BCD string`, `address OCT octal`, `octal` |
 
 # 6 Character Codes
 
@@ -314,12 +304,12 @@ instruction..</p> <p>address BCD string</p> <p>address OCT octal</p>
 | 8          |            | 0     | 10  | 8      |              |
 | 9          |            | 0     | 11  | 9      |              |
 | 0          |            | 0     | 12  | 10     |              |
-| \#         | =          | =     | 13  | 3-8    |              |
+| `#`        | `=`        | `=`   | 13  | 3-8    |              |
 | @          | '          | '/@   | 14  | 4-8    |              |
 | :          |            | :     | 15  | 5-8    |              |
-| \>         |            | \>    | 16  | 6-8    |              |
+| `>`        |            | `>`   | 16  | 6-8    |              |
 | √          |            | "     | 17  | 7-8    | Tape Mark    |
-| ƀ          |            | \_    | 20  | 2-8    |              |
+| ƀ          |            | `_`   | 20  | 2-8    |              |
 | /          |            | /     | 21  | 10-1   |              |
 | S          |            | S     | 22  | 10-1   |              |
 | T          |            | T     | 23  | 10-2   |              |
@@ -329,16 +319,16 @@ instruction..</p> <p>address BCD string</p> <p>address OCT octal</p>
 | X          |            | X     | 27  | 10-6   |              |
 | Y          |            | Y     | 30  | 10-7   |              |
 | Z          |            | Z     | 31  | 10-8   |              |
-| \#         |            | \#    | 32  | 10-2-8 | Word Mark    |
+| `#`        |            | `#`   | 32  | 10-2-8 | Word Mark    |
 | ,          |            | ,     | 33  | 10-3-8 |              |
 | %          | (          | %/(   | 34  | 10-4-8 |              |
-| \`         |            | \`    | 35  | 10-5-8 |              |
-| \\         |            | \\    | 36  | 10-6-8 |              |
+| `` ` ``    |            | `` ` `` | 35  | 10-5-8 |              |
+| `\`        |            | `\`   | 36  | 10-6-8 |              |
 | ⧻          |            | {     | 37  | 10-7-8 | Segment Mark |
 
 | Commercial | Scientific | ASCII | BCD | Card   | Remark     |
 |------------|------------|-------|-----|--------|------------|
-| \-         |            | \-    | 40  | 11     | also -0    |
+| `-`        |            | `-`   | 40  | 11     | also -0    |
 | J          |            | J     | 41  | 11-1   |            |
 | K          |            | K     | 42  | 11-2   |            |
 | L          |            | L     | 43  | 11-3   |            |
@@ -349,12 +339,12 @@ instruction..</p> <p>address BCD string</p> <p>address OCT octal</p>
 | Q          |            | Q     | 50  | 11-8   |            |
 | R          |            | R     | 51  | 11-9   |            |
 | !          |            | !     | 52  | 11-2-8 |            |
-| \$         |            | \$    | 53  | 11-3-8 |            |
-| \*         |            | \*    | 54  | 11-4-8 |            |
-| \]         |            | \]    | 55  | 11-5-8 |            |
+| `$`        |            | `$`   | 53  | 11-3-8 |            |
+| `*`        |            | `*`   | 54  | 11-4-8 |            |
+| `]`        |            | `]`   | 55  | 11-5-8 |            |
 | ;          |            | ;     | 56  | 11-6-8 |            |
 | △          |            | ^     | 57  | 11-7-8 |            |
-| &          | \+         | &/+   | 60  | 12     | also +0    |
+| `&`        | `+`        | `&/+` | 60  | 12     | also +0    |
 | A          |            | A     | 61  | 12-1   |            |
 | B          |            | B     | 62  | 12-2   |            |
 | C          |            | C     | 63  | 12-3   |            |
@@ -367,6 +357,6 @@ instruction..</p> <p>address BCD string</p> <p>address OCT octal</p>
 | ?          |            | ?     | 72  | 12-2-8 |            |
 | .          |            | .     | 73  | 12-3-8 |            |
 | ⌑          | )          | )     | 74  | 12-4-8 | Lozenge    |
-| \[         |            | \[    | 75  | 12-5-8 |            |
-| \<         |            | \<    | 76  | 12-3-8 |            |
-| ⧻\*        |            | \|    | 77  | 12-7-8 | Group Mark |
+| `[`        |            | `[`   | 75  | 12-5-8 |            |
+| `<`        |            | `<`   | 76  | 12-3-8 |            |
+| `⧻*`       |            | `|`   | 77  | 12-7-8 | Group Mark |

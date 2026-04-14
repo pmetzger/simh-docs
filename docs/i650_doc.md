@@ -147,19 +147,14 @@ The computer programming and its operation are described in IBM 650 magnetic dru
 
 The IBM 650 simulator contains the following device simulations:
 
-<table> <colgroup> <col style="width: 31%" /> <col style="width: 68%" />
-</colgroup> <thead> <tr> <th><em><strong>Device
-Name(s)</strong></em></th> <th><em><strong>Simulates</strong></em></th>
-</tr> </thead> <tbody> <tr> <td><strong>CPU</strong></td> <td><p>IBM 650
-Drum Data Processing Machine</p> <p>IBM 652 Control Unit</p> <p>IBM 653
-Storage Unit</p> <p>1K word, 2K word or 4K drum</p></td> </tr> <tr>
-<td></td> <td></td> </tr> <tr> <td><strong>CDR1 to CDR3</strong></td>
-<td>IBM 533 Card Reader</td> </tr> <tr> <td><strong>CDP1 to
-CDP3</strong></td> <td>IBM 533 Card Punch</td> </tr> <tr>
-<td><strong>CDP0</strong></td> <td>IBM 407 Printing</td> </tr> <tr>
-<td><strong>MT0 to MT5</strong></td> <td>IBM 727 Magnetic Tape</td>
-</tr> <tr> <td><strong>DSK0 to DSK3</strong></td> <td>IBM 355 RAMAC Disk
-Storage</td> </tr> </tbody> </table>
+| Device Name(s) | Simulates |
+|---|---|
+| `CPU` | IBM 650 Drum Data Processing Machine; IBM 652 Control Unit; IBM 653 Storage Unit; 1K word, 2K word or 4K drum |
+| `CDR1` to `CDR3` | IBM 533 Card Reader |
+| `CDP1` to `CDP3` | IBM 533 Card Punch |
+| `CDP0` | IBM 407 Printing |
+| `MT0` to `MT5` | IBM 727 Magnetic Tape |
+| `DSK0` to `DSK3` | IBM 355 RAMAC Disk Storage |
 
 The simulator has been tested with and supports the following software:
 
@@ -190,28 +185,28 @@ simulation console are used to perform hardware actions. The simulation
 commands that substitute for IBM 650 console actions are:
 
 | Hardware Console Action | Equivalent Simulation Command |
-|--------------------------------------|-------------------------------------|
-| `Set PROGRAMMED switch to RUN \` | STOP | DEPOSIT CSWPS 0 \ | 1 |
-| `Set OVERFLOW switch to SENSE \` | STOP | DEPOSIT CSWOS 0 \ | 1 |
-| `Set HALF CYCLE switch to RUN \` | HALF | DEPOSIT HALF 0 \ | 1 |
+|---|---|
+| Set PROGRAMMED switch to `RUN` / `STOP` | `DEPOSIT CSWPS 0` / `1` |
+| Set OVERFLOW switch to `SENSE` / `STOP` | `DEPOSIT CSWOS 0` / `1` |
+| Set HALF CYCLE switch to `RUN` / `HALF` | `DEPOSIT HALF 0` / `1` |
 | Set ERROR switch | Not simulated |
-| Set CONTROL to ADDRESS STOP | BREAK \<address\> |
-| Setting the Console Switches | DEPOSIT CSW \<value\> |
-| Display Lower Accumulator | EXAMINE ACCLO |
-| Display Upper Accumulator | EXAMINE ACCUP |
-| Display Distributor | EXAMINE DIST |
-| Display Program Register | EXAMINE PR |
-| Display Read-Out Storage | EXAMINE \<address\> |
-| Display Read-In Storage | DEPOSIT \<address\> \<value\> |
-| Press TRANSFER Key | DEPOSIT AR \<address\> |
-| Press PROGRAM START Key | GO |
-| Press PROGRAM STOP Key | ^E on console |
-| Press COMPUTER RESET Key | RESET |
+| Set CONTROL to ADDRESS STOP | `BREAK <address>` |
+| Setting the Console Switches | `DEPOSIT CSW <value>` |
+| Display Lower Accumulator | `EXAMINE ACCLO` |
+| Display Upper Accumulator | `EXAMINE ACCUP` |
+| Display Distributor | `EXAMINE DIST` |
+| Display Program Register | `EXAMINE PR` |
+| Display Read-Out Storage | `EXAMINE <address>` |
+| Display Read-In Storage | `DEPOSIT <address> <value>` |
+| Press TRANSFER Key | `DEPOSIT AR <address>` |
+| Press PROGRAM START Key | `GO` |
+| Press PROGRAM STOP Key | `^E` on console |
+| Press COMPUTER RESET Key | `RESET` |
 
-Mounting media on a peripheral device is simulated by the ***ATTACH***
-command. For example, entering the ***ATTACH CDR1
-\<card-deck-image-filename\>*** command is equivalent to loading the
-card deck into the read hopper of the IBM 533. .
+Mounting media on a peripheral device is simulated by the `ATTACH`
+command. For example, entering the `ATTACH CDR1
+<card-deck-image-filename>` command is equivalent to loading the
+card deck into the read hopper of the IBM 533.
 
 ## Simulator Specific Commands
 
@@ -230,10 +225,10 @@ default numeric mode, as follows:
 | `–C` | String of up to five character |
 | `–M` | A CPU instruction opcode |
 
-If the ***–C*** switch is specified, the value is displayed as five
+If the `–C` switch is specified, the value is displayed as five
 characters delimited by single quotes.
 
-Depositing with ***–C*** accepts up to five displayable characters. They
+Depositing with `–C` accepts up to five displayable characters. They
 can optionally be enclosed by quotes (single or double). If less than
 five are supplied, the command pads on right side with spaces up to five
 characters. If more than five are supplied, the sixth and following
@@ -242,7 +237,7 @@ character set is supplied, it is interpreted as space. If a character
 not belonging to the IBM 650 character set is displayed, it is shown as
 ~. Lowercase letters are converted to uppercase.
 
-If the ***–M*** switch is specified, the value is displayed or accepted
+If the `–M` switch is specified, the value is displayed or accepted
 as a CPU machine instruction opcode mnemonic, as described in the
 Operation Manual. Note that the names of opcodes can range from two
 letters such as RD up to five letters such as BRMIN. The names used are
@@ -257,48 +252,39 @@ A negative zero (minus zero) value is allowed.
 
 Memory addresses are entered as 4 decimal digits without intervening spaces.
 
-Examples
+Examples:
 
-> examine 0100
->
-> 100: 9011112222-
->
-> examine –c 0100
->
-> 100: 9011112222- '0\~\~\~~'
->
-> examine –m 0100
->
-> BRD10 1111 2222
->
-> deposit –c 0100 hola
->
-> examine –c 0100
->
-> 100: 6876736100+ 'HOLA '
->
-> deposit –c 0100 ' HOLA'
->
-> examine –c 0100
->
-> 100: 0068767361+ ' HOLA'
+```
+examine 0100
+100: 9011112222-
+examine –c 0100
+100: 9011112222- '0~~~~'
+examine –m 0100
+BRD10 1111 2222
+deposit –c 0100 hola
+examine –c 0100
+100: 6876736100+ 'HOLA '
+deposit –c 0100 ' HOLA'
+examine –c 0100
+100: 0068767361+ ' HOLA'
+```
 
-The ***DEPOSIT*** and ***EXAMINE*** SCP command accepts addresses in the
+The `DEPOSIT` and `EXAMINE` SCP command accepts addresses in the
 drum range, from 0 to 999, or to 1999 depending on the size of drum
-memory. ***EXAMINE*** accept addresses of 8000 and beyond for the
+memory. `EXAMINE` accept addresses of 8000 and beyond for the
 console, distributor, and lower and upper accumulators; and (if Storage
 Unit enabled) index registers and IAS storage contents.
 
 ### RESET
 
-The ***RESET*** command is equivalent in hardware to pressing the
+The `RESET` command is equivalent in hardware to pressing the
 COMPUTER RESET console button.
 
 The PROGRAM RESET and ACCUMULATOR RESET console buttons are not simulated.
 
 ### RUN and GO
 
-The ***RUN*** and ***GO*** commands do not accept any parameter
+The `RUN` and `GO` commands do not accept any parameter
 addresses. Execution will start at the address specified by the AR
 register.
 
@@ -331,13 +317,13 @@ As this IC register has no use in the simulated CPU, altering its value
 has no effect. This is why it is necessary to deposit the address in the
 AR register to set the address of the next instruction to execute.
 
-The ***RUN*** command does an implied ***RESET***, so it is equivalent
+The `RUN` command does an implied `RESET`, so it is equivalent
 in hardware to pressing the console panel RESET COMPUTER key, then the
 TRANSFER key, and finally the PROGRAM START key. As reset clears all of
 the registers, AR will be zero, so execution starts at drum address
 zero.
 
-The ***GO*** command is equivalent to pressing the TRANSFER key on the
+The `GO` command is equivalent to pressing the TRANSFER key on the
 console and is the way to start or resume execution after a programmed
 halt. Execution starts at the instruction addressed by the AR register
 value.
@@ -349,16 +335,16 @@ because there is an error to notify to the computer operator. Normally
 the error code is the contents of DA part of STOP instruction, shown on
 computer console as AR register value.
 
-When cpu halted on STOP instruction, if the user enters a ***GO***
+When cpu halted on STOP instruction, if the user enters a `GO`
 command on SCP console, then the program execution will resume using
 STOP’s instruction IA address, instead of current AR contents.
 
-This allows using the ***GO*** command to resume the execution after a
+This allows using the `GO` command to resume the execution after a
 programmed stop.
 
 ### STEP
 
-The ***STEP*** command is used to execute program instructions on a one
+The `STEP` command is used to execute program instructions on a one
 by one basis.
 
 By default, when the simulator steps, it executes a full instruction
@@ -366,16 +352,20 @@ cycle (an I-Cycle and a D-Cycle) and then stops.
 
 On real hardware, stepping is done only by cycle halves. This is simulated with:
 
-***DEPOSIT HALF 1***
+```
+DEPOSIT HALF 1
+```
 
-In this case, ***STEP*** will only execute an I-Cycle or a D-Cycle
+In this case, `STEP` will only execute an I-Cycle or a D-Cycle
 alternatively. Examining the HALF CPU register will show which cycle
 will be done on next step: 1 for an I-Cycle, or 2 for a D-Cycle.
 
 To return to normal full instruction cycle execution on stepping, set
 the value to zero:
 
-***DEPOSIT HALF 0***
+```
+DEPOSIT HALF 0
+```
 
 During stepping, the IC register will show the next instruction to be
 executed. If the CPU stopped because of an error, IC points to the
@@ -389,7 +379,9 @@ This command allows to manipulate card deck files.
 
 The general syntax is:
 
-***CARDDECK \[-Q\] \<operation\> \<parameters ... \>***
+```
+CARDDECK [-Q] <operation> <parameters ...>
+```
 
 Allowed operations are
 
@@ -402,46 +394,59 @@ Allowed operations are
 Default format for card files is AUTO, this allow mix source decks with
 different formats. To set the format for carddeck operations use.
 
-***SET CDR0 FORMAT=\<format\>***
+```
+SET CDR0 FORMAT=<format>
+```
 
 See section IBM 533 Card Reader/Puncher (CDR) for details on formats.
 
 Switches:
 
-**-Q** quiet operation. Suppress messages.
+`-Q` quiet operation. Suppress messages.
 
 #### CARDDECK SPLIT
 
 Split either the source deck file or the deck being punched in IBM 533
 device in two separate destination decks.
 
-***CARDDECK SPLIT \<count\> \< dev** \| **file0 \> \<file1\> \<file2\>***
+```
+CARDDECK SPLIT <count> <dev | file0> <file1> <file2>
+```
 
 Parameters:
 
-***\<count\>*** Split the source deck based on number of cards.
+`<count>` Split the source deck based on number of cards.
 
 > \<count\> is the number of cards in the first destination deck, remaining cards goes to second destination deck.
 >
 > If \<count\> is negative, it indicates the number of cards to be kept in second destination deck, remaining cards goes to first destination deck.
 >
-> If \<count\> is **5CD**, the command assumes that the source deck contains 5-word-per-load-card. The command will put 5-word-per-load-cards in second destination deck, and the rest of cards in first destination deck.
+> If `<count>` is `5CD`, the command assumes that the source deck
+> contains 5-word-per-load-card. The command will put
+> 5-word-per-load-cards in second destination deck, and the rest of
+> cards in first destination deck.
 >
-> If \<count\> is **PAT**, the command assumes that the source deck contains SOAP availability cards (as result of a PAT pseudoop execution during assembly). The command will put availability cards in second destination deck, and the rest of cards in first destination deck.
+> If `<count>` is `PAT`, the command assumes that the source deck
+> contains SOAP availability cards (as result of a PAT pseudoop
+> execution during assembly). The command will put availability cards in
+> second destination deck, and the rest of cards in first destination
+> deck.
 >
-> ***\< dev** \| **file0 \>*** If this parameter is **CDP1**, **CDP2** or **CDP3,** the source deck will be taken from attached file to the device (a file must be attached, and it is automatically detached).
+> `<dev | file0>` If this parameter is `CDP1`, `CDP2`, or `CDP3`, the
+> source deck will be taken from the file attached to the device (a file
+> must be attached, and it is automatically detached).
 >
 > If not a device, this parameter indicates the filename for source deck.
 
-***\<file1\>*** First destination deck file
+`<file1>` First destination deck file
 
-***\<file2\>*** Second destination deck file
+`<file2>` Second destination deck file
 
 Files are overwritten if already exists
 
 Both \<file1\> or \<file2\> can have same name as source deck (either the given \<file0\> or the attached file to cdp device)
 
-If **5CD** or **PAT** is used, the selected cards will go to second
+If `5CD` or `PAT` is used, the selected cards will go to second
 deck. If no card is found in source deck, the second deck will contain
 no cards and in consequence, \<file2\> will have a size of zero bytes.
 In this case, the command deletes \<file2\> to avoid generating an empty
@@ -473,19 +478,19 @@ Examples:
 
 Join several source deck files in one destination deck file.
 
-***CARDDECK JOIN \<file1\> \<file2\> … \<file N\> AS \<file\>***
+`CARDDECK JOIN \<file1\> \<file2\> … \<file N\> AS \<file\>`
 
 Parameters:
 
-***\<file1\>*** First source deck file
+`\<file1\>` First source deck file
 
-***\<file2\>*** Second source deck file
+`\<file2\>` Second source deck file
 
 …
 
-***\<file N\>*** Nth source deck file
+`\<file N\>` Nth source deck file
 
-***\<file\>*** Destination deck file
+`\<file\>` Destination deck file
 
 Destination file is overwritten if already exists
 
@@ -513,23 +518,24 @@ TEXT
 
 Print deck on console and on simulated IBM 407 is any file is attached to cpd0
 
-***CARDDECK PRINT \<file\>***
+`CARDDECK PRINT \<file\>`
 
 Parameters:
 
-***\<file\>*** Deck to print
+`\<file\>` Deck to print
 
 #### CARDDECK ECHOLAST
 
 Display on console (but do not print on simulated IBM 407) the lasts cards that has being processed and are in the card reader take stacker of IBM 533 Card Read-Punch
 
-***CARDDECK ECHOLAST \<count\> \<dev\>***
+`CARDDECK ECHOLAST \<count\> \<dev\>`
 
 Parameters:
 
-***\<count\>*** The command will display \<count\> last cards arrived to take hopper
+`\<count\>` The command will display \<count\> last cards arrived to take hopper
 
-> ***\< dev \>*** This parameter should be **CDR1**, **CDR2** or **CDR3.** Is the device unit to use when looking for cards in take hopper.
+> `<dev>` This parameter should be `CDR1`, `CDR2`, or `CDR3`. It is the
+> device unit to use when looking for cards in the take hopper.
 
 Examples:
 
@@ -542,8 +548,10 @@ Examples:
 Most devices support user configuration. The general forms of the
 configuration commands are:
 
-***SET {\<switch\> ...} \<device\> \<option\>{,\<option\> ...}  
-SET {\<switch\> ...} \<unit\> \<option\>{,\<option\> ...}***
+```
+SET {<switch> ...} <device> <option>{,<option> ...}
+SET {<switch> ...} <unit> <option>{,<option> ...}
+```
 
 The options available and applicable switches are described in the
 individual device descriptions below.
@@ -573,15 +581,21 @@ independently.
 
 To obtain a trace, two SCP commands must be given.
 
-> First, a *debug log* must be established with the ***SET DEBUG \<target\>*** command. This command is described in detail in the “Controlling Debugging” section of the *SIMH Users' Guide* manual. The target can be a text file, so that the trace may be reviewed after capture, or stdout to display the trace data on the console as it is generated.
+> First, a *debug log* must be established with the `SET DEBUG <target>`
+> command. This command is described in detail in the “Controlling
+> Debugging” section of the *SIMH Users' Guide* manual. The target can
+> be a text file, so that the trace may be reviewed after capture, or
+> `stdout` to display the trace data on the console as it is generated.
 >
-> Second, tracing must be enabled for the desired devices with ***SET \<device\> DEBUG=\<option\>*** commands. The formats of the trace outputs are specific to the devices being traced. All traces for a device can be enabled at once with a ***SET \<device\> DEBUG*** command.
+> Second, tracing must be enabled for the desired devices with
+> `SET <device> DEBUG=<option>` commands. The formats of the trace
+> outputs are specific to the devices being traced. All traces for a
+> device can be enabled at once with a `SET <device> DEBUG` command.
 
 Tracing does impose some overhead on the simulator, with more detailed
 tracing slowing the simulator more than higher-level tracing. No
-overhead is incurred when tracing is suspended with the ***SET
-NODEBUG*** command, even if individual device tracing options remain in
-effect.
+overhead is incurred when tracing is suspended with the `SET NODEBUG`
+command, even if individual device tracing options remain in effect.
 
 # Processor Device Simulations
 
@@ -591,7 +605,7 @@ The IBM 650 computer console contains the machine-instruction execution
 unit and the main drum memory. The CPU is configured with commands of
 the form:
 
-***SET CPU \<option\>***
+`SET CPU <option>`
 
 Device options that may be specified are:
 
@@ -625,7 +639,7 @@ microseconds (stated as 0.096 milliseconds in manual)
 Word time is also the basic timing unit on simulator. By issuing the SCP
 command:
 
-***SET THROTTLE 11K***
+`SET THROTTLE 11K`
 
 … it is possible to simulate the speed of real hardware. Note that
 throllelling needs some seconds to calibrate, during this time CPU will
@@ -633,7 +647,7 @@ execute at faster speed. As an alternative, to simulate real hardware
 speed starting at the first simulated instruction, use the already
 calibrated form of command:
 
-***SET THROTTLE 55/5***
+`SET THROTTLE 55/5`
 
 This will pause host computer 5 msec each 55 simulated word times.
 
@@ -653,11 +667,10 @@ to 103 word times.
 The user can disable the simulation of execution time, so all
 instructions will need only one word time to execute.
 
-**SET CPU FAST** each instruction needs only one word time to execute
-
-**SET CPU REALTIME** simulate real number of word times needed by instruction
-
-> to execute (default)
+| Command | Action |
+| --- | --- |
+| `SET CPU FAST` | Each instruction needs only one word time to execute |
+| `SET CPU REALTIME` | Simulate the real number of word times needed by an instruction to execute (default) |
 
 ### Mnemonics
 
@@ -677,12 +690,12 @@ IBM 650 Data Processing System Bulletins, Forms 24-5000-0 up to
 
 Simulator allows to choose the mnemonics to be used with the following options
 
-***SET CPU SOAPMNE*** to use SOAP mnemonics
+`SET CPU SOAPMNE` to use SOAP mnemonics
 
-***SET CPU DEFAULTMNE*** to use regular mnemonics (default)
+`SET CPU DEFAULTMNE` to use regular mnemonics (default)
 
-Simulator will accept both mnemonic types on ***DEPOSIT*** SCP command
-whatever this setting is. ***EXAMINE –M*** command will take the setting
+Simulator will accept both mnemonic types on `DEPOSIT` SCP command
+whatever this setting is. `EXAMINE –M` command will take the setting
 in consideration when displaying the opcode mnemonic.
 
 ### Storage unit
@@ -700,19 +713,21 @@ additional features:
 
 Storage unit can be enabled using the following options
 
-***SET CPU STORAGEUNIT*** enable IBM 653
+`SET CPU STORAGEUNIT` enable IBM 653
 
-***SET CPU NOSTORAGEUNIT*** disable (default)
+`SET CPU NOSTORAGEUNIT` disable (default)
 
 When Storage unit is enabled, the simulator
 
 - recognizes and executes the additional instruction opcodes for IAS, Index, etc.
 
-- displays the new opcodes with ***EXAMINE** **–M*** command
+- displays the new opcodes with the `EXAMINE –M` command
 
-- allows to enter the new opcodes with ***DEPOSIT –C*** command
+- allows to enter the new opcodes with `DEPOSIT –C` command
 
-- allows the command ***EXANIME*** to display the contents of Index registers at address 8005, 8006 and 8006, and IAS storage at address 9000-9059
+- allows the `EXAMINE` command to display the contents of index
+  registers at addresses 8005, 8006, and 8007, and IAS storage at
+  addresses 9000-9059
 
 ### Simulation Stops
 
@@ -763,21 +778,14 @@ are allowed.
 
 If size is 10, sign is also included.
 
-In addition, these register are implemented in simulator for convenience
+In addition, these registers are implemented in the simulator for
+convenience:
 
-<table> <colgroup> <col style="width: 15%" /> <col style="width: 12%" />
-<col style="width: 72%" /> </colgroup> <thead> <tr>
-<th><em><strong>Name</strong></em></th> <th style="text-align:
-center;"><em><strong>Size</strong></em></th>
-<th><em><strong>Description</strong></em></th> </tr> </thead> <tbody>
-<tr> <td><strong>IC</strong></td> <td style="text-align: center;">4</td>
-<td>Current Instruction address</td> </tr> <tr>
-<td><strong>HALF</strong></td> <td style="text-align: center;">1</td>
-<td><p>Deposit: enable (1) /disable (0) half cycle stepping</p>
-<p>Examine: executing I-Cycle (1) or D-Cycle (2)</p></td> </tr> <tr>
-<td><strong>PROP</strong></td> <td style="text-align: center;">2</td>
-<td>Last executed Instruction Operation Code</td> </tr> </tbody>
-</table>
+| Name | Size | Description |
+|---|---:|---|
+| `IC` | 4 | Current instruction address |
+| `HALF` | 1 | Deposit: enable (`1`) or disable (`0`) half-cycle stepping. Examine: executing I-Cycle (`1`) or D-Cycle (`2`). |
+| `PROP` | 2 | Last executed instruction operation code |
 
 PROP pseudo register is very useful to allow SCP script to test for
 example if cpu has stopped because last instruction was HLT.
@@ -792,19 +800,19 @@ Card reader files can be either text (one character per column) or
 column binary (two characters per column). The file type can be
 specified with a SET command:
 
-***SET CDR1 FORMAT=TEXT*** sets ASCII text mode
+`SET CDR1 FORMAT=TEXT` sets ASCII text mode
 
-***SET CDR1 FORMAT=BINARY*** sets for binary card images.
+`SET CDR1 FORMAT=BINARY` sets for binary card images.
 
-***SET CDR1 FORMAT=BCD*** sets for BCD records.
+`SET CDR1 FORMAT=BCD` sets for BCD records.
 
-***SET CDR1 FORMAT=CBN*** sets for column binary BCD records.
+`SET CDR1 FORMAT=CBN` sets for column binary BCD records.
 
-***SET CDR1 FORMAT=AUTO*** automatically determines format.
+`SET CDR1 FORMAT=AUTO` automatically determines format.
 
 The ATTACH command simulates putting a card deck in the reader hopper:
 
-***ATTACH CDR1 \<file\>***
+`ATTACH CDR1 \<file\>`
 
 ### Symbolic Information Load
 
@@ -813,10 +821,10 @@ attached with the –L switch, and it is a standard 1-word load card at
 address 1951, then the symbolic information will be associated with the
 machine address where the load card deposit the word.
 
-***ATTACH CDR1 –L \<file\>***
+`ATTACH CDR1 –L \<file\>`
 
 The symbolic information loaded remains associated with the machine
-address until a ***SET CPU \<size\>*** command is issued. When this
+address until a `SET CPU \<size\>` command is issued. When this
 happens, all symbolic information for all addresses is removed.
 
 For example, given the card deck text file (deck.dck) in one-word load format:
@@ -831,7 +839,7 @@ For example, given the card deck text file (deck.dck) in one-word load format:
 >
 > 6I1954195C 0019240003800?150006006A alob f
 >
-> 6I1954195C 002024<span class="mark">0061</span>800?<span class="mark">608002001I</span> rau 8002
+> 6I1954195C 0020240061800?608002001I rau 8002
 
 …
 
@@ -892,9 +900,7 @@ DBG()\> CPU DATA: ... Read 0006: 0000000003+
 
 DBG()\> CPU DETAIL: ... ACC: 0000000000 0000000005+, OV: 0
 
-DBG()\> CPU CMD: Exec <span class="mark">0061</span>: <span
-class="mark">60</span> RAU <span class="mark">8002</span> <span
-class="mark">0019</span> symb: rau 8002
+DBG()\> CPU CMD: Exec 0061: 60 RAU 8002 0019 symb: rau 8002
 
 ...
 
@@ -905,8 +911,7 @@ Address
 The standard IBM 026 KeyPunch has two available character sets for
 creating punched cards:
 
-<img src="mdbook/src/i650_doc_assets/image1.png"
-style="width:5.90833in;height:0.99028in" />
+![IBM 026 keypunch character sets](i650_doc_assets/image1.png)
 
 The IBM 650 simulator always uses the FORT character set.
 
@@ -966,8 +971,7 @@ IBM 650 stores alphabetic characters using two digits. The following
 table describes the 650 code for each character, and it card punch
 equivalent code
 
-<img src="mdbook/src/i650_doc_assets/image3.png"
-style="width:5.90139in;height:2.97153in" />
+![IBM 650 alphabetic code and punch equivalents](i650_doc_assets/image3.png)
 
 (table taken from <http://bitsavers.org/pdf/ibm/650/29-4047_FORTRAN.pdf>
 page 36)
@@ -981,20 +985,20 @@ Card punch files can be either text (one character per column) or column
 binary (two characters per column). The file type can be specified with
 a SET command:
 
-***SET CDP1 FORMAT=TEXT*** sets ASCII text mode
+`SET CDP1 FORMAT=TEXT` sets ASCII text mode
 
-***SET CDP1 FORMAT=BINARY*** sets for binary card images.
+`SET CDP1 FORMAT=BINARY` sets for binary card images.
 
-***SET CDP1 FORMAT=BCD*** sets for BCD records.
+`SET CDP1 FORMAT=BCD` sets for BCD records.
 
-***SET CDP1 FORMAT=CBN*** sets for column binary BCD records.
+`SET CDP1 FORMAT=CBN` sets for column binary BCD records.
 
-***SET CDP1 FORMAT=AUTO*** automatically determines format.
+`SET CDP1 FORMAT=AUTO` automatically determines format.
 
 The ATTACH command simulates putting a blank card deck into the card
 punch feed hopper:
 
-***ATTACH CDP1 \<file\>***
+`ATTACH CDP1 \<file\>`
 
 ## IBM 727 Magnetic Tape (MT)
 
@@ -1005,30 +1009,30 @@ To use tapes, both IBM 652 Control Unit and IBM 653 Storage Unit must be
 enabled. If not, tape opcodes will be not available, and cpu will halt
 on trying to execute them with undefined opcode error.
 
-Six tapes are allowed, ranging from **MT0** to **MT5**. MT0 maps to 8010
+Six tapes are allowed, ranging from `MT0` to `MT5`. `MT0` maps to 8010
 address, MT5 to 8015 address.
 
 The ATTACH command simulates mounting and loading a tape reel in tape unit:
 
-***ATTACH MTn \<file\>***
+`ATTACH MTn \<file\>`
 
 Each individual tape drive support several options:
 
-***SET MTn REWIND*** Sets the mag tape to the load point.
+`SET MTn REWIND` Sets the mag tape to the load point.
 
-***SET MTn LOCKED*** Sets the mag tape to be read only.
+`SET MTn LOCKED` Sets the mag tape to be read only.
 
-***SET MTn WRITEENABLE*** Sets the mag tape to be writeable.
+`SET MTn WRITEENABLE` Sets the mag tape to be writeable.
 
-***SET MTn LENGHT*** Set tape medium length (50 to 10000 foot).
+`SET MTn LENGHT` Set tape medium length (50 to 10000 foot).
 
-***SET MTn FORMAT=SIMH*** Sets SIMH tape format
+`SET MTn FORMAT=SIMH` Sets SIMH tape format
 
-***SET MTn FORMAT=E11*** Sets E11 format.
+`SET MTn FORMAT=E11` Sets E11 format.
 
-***SET MTn FORMAT=TPC*** Sets TPC format.
+`SET MTn FORMAT=TPC` Sets TPC format.
 
-***SET MTn FORMAT=P7B*** Sets P7B format.
+`SET MTn FORMAT=P7B` Sets P7B format.
 
 By default, tapes have a length of 2400 foots.
 
@@ -1041,11 +1045,11 @@ To use RAMAC, both IBM 652 Control Unit and IBM 653 Storage Unit must be
 enabled. If not, disk opcodes will be not available, and cpu will halt
 on trying to execute them with undefined opcode error.
 
-Four disk units are allowed, ranging from **DSK0** to **DSK3**.
+Four disk units are allowed, ranging from `DSK0` to `DSK3`.
 
 The ATTACH command simulates powering on disk unit:
 
-***ATTACH DSKn \<file\>***
+`ATTACH DSKn \<file\>`
 
 ## Panel Wiring
 
@@ -1066,11 +1070,11 @@ This wiring is outside the scope of the current simulation. In order to
 use the IBM 533, several predefined wirings have been defined. These can
 be selected using
 
-***SET CDR1 WIRING=\<option\>***
+`SET CDR1 WIRING=\<option\>`
 
 or
 
-***SET CDP1 WIRING=\<option\>***
+`SET CDP1 WIRING=\<option\>`
 
 Where \<option\> can be one of the following:
 
@@ -1129,106 +1133,20 @@ printed format of each punched card to the console.
 The SCP command set cdp1 print instructs the simulator to send the
 printed format of each punched card to the file attached to device CDP0.
 
-# Software Support
+## Software Support
 
 This IBM 650 release supports the following software:
 
-<table> <colgroup> <col style="width: 18%" /> <col style="width: 81%" />
-</colgroup> <thead> <tr> <th><em><strong>Software</strong></em></th>
-<th><em><strong>Notes</strong></em></th> </tr> </thead> <tbody> <tr>
-<td><p>Interpretive Floating Decimal System</p> <p>Date:
-<strong>Sep/1954</strong></p></td> <td><p>Description: Interpreter for
-floating point calculation.</p> <p>Hardware needed: basic IBM 650, 2k
-drum, IBM 533 card read-punch</p> <p>Documentation: Appl Sci Tech
-Newletter 08 Sep54.pdf (pages 18-37)</p> <p>Documentation URL: <a
-href="http://www.bitsavers.org/pdf/ibm/periodicals/Applied_Sci_Tech_Newsletter/%20">http://www.bitsavers.org/pdf/ibm/periodicals/Applied_Sci_Tech_Newsletter/</a></p>
-<p>CDR/CDP Wiring: FDS</p> <p>Card deck: fds.dck</p> <p>Source: (no
-source)</p> <p><strong>Comments</strong>: This is an Interpreter for
-floating point calculation, developed by IBM. Available on IBM 650
-launch. Allows mixing interpretive instructions with native 650
-instructions.</p></td> </tr> <tr> <td><p>Regional Assembly Routine</p>
-<p>Date: <strong>Jun/1955</strong></p></td> <td><p>Description: Regional
-assembler.</p> <p>Hardware needed: basic IBM 650, 2k drum, IBM 533 card
-read-punch</p> <p>Documentation: Appl Sci Tech Newletter 10 Oct55.pdf
-(pages 32-49)</p> <p>Documentation URL: <a
-href="http://www.bitsavers.org/pdf/ibm/periodicals/Applied_Sci_Tech_Newsletter/%20">http://www.bitsavers.org/pdf/ibm/periodicals/Applied_Sci_Tech_Newsletter/</a></p>
-<p>CDR/CDP Wiring: RA</p> <p>Card deck: ra.dck (five-field per card)</p>
-<p>Source: (no source)</p> <p><strong>Comments</strong>: This is
-regional Assembler developed at Missile Systems Division Lockheed
-Aircraft Corporation. It is a regional assembler (as IBM 701 Regional
-Assemble) but not symbolic: that is, no mnemonics allowed.</p></td>
-</tr> <tr> <td><p>Floating Point Interpretive System</p> <p>(BELL
-interpreter)</p> <p>Date: <strong>Mar/1956</strong></p></td>
-<td><p>Description: Interpreter for floating point calculation</p>
-<p>Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch</p>
-<p>Documentation: 28-4024_FltDecIntrpSys.pdf</p> <p>Documentation URL:
-<a
-href="http://www.bitsavers.org/pdf/ibm/650/">http://www.bitsavers.org/pdf/ibm/650/</a></p>
-<p>CDR/CDP Wiring: IS</p> <p>Card deck: is.dck (1-word per card load
-cards)</p> <p>Source: is_main_src.txt</p> <p><strong>Comments</strong>:
-This is also known as the BELL interpreter, and it is a descendent of
-the IBM 701 SpeedCoding system. It predates SOAP, so source is given as
-list of words to be loaded in drum. Optional decks are available:
-is_trace_src.txt to enable tracing, and is_set_loopbox.txt to allow
-calculated indexing (needed by is_example_1_src.txt).</p></td> </tr>
-<tr> <td><p>Internal Translator</p> <p>(IT Compiler)</p> <p>Date:
-<strong>1956</strong></p></td> <td><p>Description: Algebraic
-Compiler</p> <p>Hardware needed: basic IBM 650, 2k drum, IBM 533 card
-read-punch</p> <p>Documentation: CarnegieInternalTranslator.pdf</p>
-<p>Documentation URL: <a
-href="http://www.bitsavers.org/pdf/ibm/650/">http://www.bitsavers.org/pdf/ibm/650/</a></p>
-<p>CDR/CDP Wiring: IT</p> <p>Card deck: it_compiler.dck (1-word per card
-load cards),</p> <p>Source: it_compiler_listing.txt</p>
-<p><strong>Comments</strong>: IT source listing requires SOAP I. As it
-is not available, it has been slightly modified to be assembled with
-SOAP II. Also, the SOAP patches stated in listing are to be applied on
-SOAP I deck. They have been modified to be applied to SOAP II
-instead.</p></td> </tr> <tr> <td><p>SOAP II</p> <p>Date:
-<strong>1957</strong></p></td> <td><p>Description: Assembler</p>
-<p>Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch</p>
-<p>Documentation: 24-4000-0_SOAPII.pdf</p> <p>Documentation URL: <a
-href="http://www.bitsavers.org/pdf/ibm/650/">http://www.bitsavers.org/pdf/ibm/650/</a></p>
-<p>CDR/CDP Wiring: SOAP</p> <p>Card deck: soapII.dck (1-word per card
-load cards), soapII_condensed_card.dck (7 words per card load cards)</p>
-<p>Source: soap_src.txt</p> <p><strong>Comments</strong>: Many versions
-were produced. SOAP (first version 1956), SOAP II (mid-1957), SOAP IIA
-(end-1957). Versions also exists for specific hardware configurations:
-SOAP IIA 4000 (for 4k drum machines) and Tape SOAP II (for tape
-machines)</p></td> </tr> <tr> <td><p>FOR TRANSIT</p> <p>Date:
-<strong>Aug/1957</strong></p></td> <td><p>Description: Fortran
-Compiler</p> <p>Hardware needed: IBM 650 with IBM 653 Storage Unit, 2k
-drum, IBM 533 card read-punch</p> <p>Documentation:
-28-4028_FOR_TRANSIT.pdf (the program listing is in
-CarnegieInternalTranslator.pdf file)</p> <p>Documentation URL: <a
-href="http://www.bitsavers.org/pdf/ibm/650/">http://www.bitsavers.org/pdf/ibm/650/</a></p>
-<p>CDR/CDP Wiring: FORTRANSIT</p> <p>Card deck:
-fortransit_translator.dck and fortransit_it_compiler.dck (1-word per
-card load cards),</p> <p>Source:
-fortransit_translator_compiler_listing.txt</p>
-<p><strong>Comments</strong>: There were 4 versions: Fortransit I, II, I
-(S), II (S). “I” and “II” indicates the it_compiler to be used. “I” is
-for basic IBM 650, and “II” is for IBM 650 + IBM 653. “S” indicates the
-version of fortransit translator to be used. “S” is to be used when IBM
-533 included the special character option. The available version is
-Fortransit II (S).</p></td> </tr> <tr> <td><p>SOAP IIA-4000</p> <p>Date:
-<strong>1959</strong></p></td> <td><p>Description: Assembler</p>
-<p>Hardware needed: basic IBM 650, 4k drum, IBM 533 card read-punch</p>
-<p>Documentation: SOAPIIA-4000_listing.pdf (24-5013-0_SOAP2L.pdf
-contains al complete description of assembler)</p> <p>Documentation URL:
-<a
-href="http://www.bitsavers.org/pdf/ibm/650/">http://www.bitsavers.org/pdf/ibm/650/</a></p>
-<p>CDR/CDP Wiring: SOAPA</p> <p>Card deck: soap4.dck</p> <p>Source:
-soa4p_src.txt</p> <p><strong>Comments</strong>: Supports tape library
-and multipass assembling</p></td> </tr> <tr> <td><p>SuperSoap</p>
-<p>Date; <strong>1959</strong></p></td> <td><p>Description:
-Assembler</p> <p>Hardware needed: basic IBM 650, 2k drum, IBM 533 card
-read-punch, RAMAC disk unit, TLE feature enabled</p> <p>Documentation:
-102784983-05-01-acc.pdf</p> <p>Documentation URL: <a
-href="https://archive.computerhistory.org/resources/access/text/2018/07/">https://archive.computerhistory.org/resources/access/text/2018/07/</a></p>
-<p>CDR/CDP Wiring: SUPERSOAP</p> <p>Card deck: ssoap_main.dck</p>
-<p>Source: ssoap_main_core_src.txt</p> <p><strong>Comments</strong>:
-This assembler resides in RAMAC. Supports tape/disk or card
-output</p></td> </tr> </tbody> </table>
+| Software | Notes |
+|---|---|
+| Interpretive Floating Decimal System. Date: **Sep/1954** | Description: Interpreter for floating point calculation. Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch. Documentation: `Appl Sci Tech Newletter 08 Sep54.pdf` (pages 18-37). Documentation URL: <http://www.bitsavers.org/pdf/ibm/periodicals/Applied_Sci_Tech_Newsletter/>. CDR/CDP wiring: `FDS`. Card deck: `fds.dck`. Source: none. Comments: developed by IBM and available at IBM 650 launch; allows mixing interpretive instructions with native 650 instructions. |
+| Regional Assembly Routine. Date: **Jun/1955** | Description: Regional assembler. Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch. Documentation: `Appl Sci Tech Newletter 10 Oct55.pdf` (pages 32-49). Documentation URL: <http://www.bitsavers.org/pdf/ibm/periodicals/Applied_Sci_Tech_Newsletter/>. CDR/CDP wiring: `RA`. Card deck: `ra.dck` (five-field per card). Source: none. Comments: developed at Missile Systems Division, Lockheed Aircraft Corporation; regional but not symbolic, so no mnemonics are allowed. |
+| Floating Point Interpretive System (BELL interpreter). Date: **Mar/1956** | Description: Interpreter for floating point calculation. Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch. Documentation: `28-4024_FltDecIntrpSys.pdf`. Documentation URL: <http://www.bitsavers.org/pdf/ibm/650/>. CDR/CDP wiring: `IS`. Card deck: `is.dck` (1-word-per-card load cards). Source: `is_main_src.txt`. Comments: descendent of IBM 701 SpeedCoding; predates SOAP, so source is given as a list of words to be loaded in drum. Optional decks are available: `is_trace_src.txt` to enable tracing, and `is_set_loopbox.txt` to allow calculated indexing. |
+| Internal Translator (IT Compiler). Date: **1956** | Description: Algebraic compiler. Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch. Documentation: `CarnegieInternalTranslator.pdf`. Documentation URL: <http://www.bitsavers.org/pdf/ibm/650/>. CDR/CDP wiring: `IT`. Card deck: `it_compiler.dck` (1-word-per-card load cards). Source: `it_compiler_listing.txt`. Comments: IT source listing requires SOAP I; it has been modified slightly to assemble with SOAP II, and the listed SOAP patches were adjusted from SOAP I to SOAP II. |
+| SOAP II. Date: **1957** | Description: Assembler. Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch. Documentation: `24-4000-0_SOAPII.pdf`. Documentation URL: <http://www.bitsavers.org/pdf/ibm/650/>. CDR/CDP wiring: `SOAP`. Card deck: `soapII.dck` (1-word-per-card load cards), `soapII_condensed_card.dck` (7 words per card load cards). Source: `soap_src.txt`. Comments: several variants were produced: SOAP, SOAP II, SOAP IIA, SOAP IIA 4000, and Tape SOAP II. |
+| FOR TRANSIT. Date: **Aug/1957** | Description: Fortran compiler. Hardware needed: IBM 650 with IBM 653 Storage Unit, 2k drum, IBM 533 card read-punch. Documentation: `28-4028_FOR_TRANSIT.pdf` (program listing is in `CarnegieInternalTranslator.pdf`). Documentation URL: <http://www.bitsavers.org/pdf/ibm/650/>. CDR/CDP wiring: `FORTRANSIT`. Card deck: `fortransit_translator.dck` and `fortransit_it_compiler.dck` (1-word-per-card load cards). Source: `fortransit_translator_compiler_listing.txt`. Comments: there were 4 versions, Fortransit I, II, I (S), and II (S); the available version is Fortransit II (S). |
+| SOAP IIA-4000. Date: **1959** | Description: Assembler. Hardware needed: basic IBM 650, 4k drum, IBM 533 card read-punch. Documentation: `SOAPIIA-4000_listing.pdf` and `24-5013-0_SOAP2L.pdf`. Documentation URL: <http://www.bitsavers.org/pdf/ibm/650/>. CDR/CDP wiring: `SOAPA`. Card deck: `soap4.dck`. Source: `soap4p_src.txt`. Comments: supports tape library and multipass assembling. |
+| SuperSoap. Date: **1959** | Description: Assembler. Hardware needed: basic IBM 650, 2k drum, IBM 533 card read-punch, RAMAC disk unit, TLE feature enabled. Documentation: `102784983-05-01-acc.pdf`. Documentation URL: <https://archive.computerhistory.org/resources/access/text/2018/07/>. CDR/CDP wiring: `SUPERSOAP`. Card deck: `ssoap_main.dck`. Source: `ssoap_main_core_src.txt`. Comments: resides in RAMAC and supports tape, disk, or card output. |
 
 # Simulator Usage
 
@@ -1244,45 +1162,18 @@ output</p></td> </tr> </tbody> </table>
 The following steps are described on page 15 of the SOAP II manual
 (24-4000-0) in the "Machine Operator's Guide" section:
 
-<table> <colgroup> <col style="width: 31%" /> <col style="width: 28%" />
-<col style="width: 40%" /> </colgroup> <thead> <tr> <th><em><strong>SCP
-Commands</strong></em></th> <th><em><strong>Comment</strong></em></th>
-<th><em><strong>Real Hardware equivalent</strong></em></th> </tr>
-</thead> <tbody> <tr> <td><p>set cpu 2k</p> <p>set cdr1 wiring=soap</p>
-<p>att cdr1 soapII.dck</p> <p>set cdp1 wiring=soap</p> <p>att cdp1
-deck_out.dck</p></td> <td><p>Use a 2k machine</p> <p>Set SOAP wiring</p>
-<p>Attach soap assembler</p> <p>Attach file for assembled program
-output</p></td> <td><p>SOAP II needs a 2k machine.</p> <p>In IBM 533
-Read-Punch unit:</p> <p>Insert SOAP II control panel</p> <p>Place SOAP
-deck in read hopper</p> <p>Ready punch feed with blank cards</p></td>
-</tr> <tr> <td><p>dep cswps 1</p> <p>dep half 0</p> <p>dep cswos
-0</p></td> <td>These are the defaults and can be omitted</td> <td><p>Set
-programmed switch to STOP</p> <p>Set half cycle switch to RUN</p> <p>Set
-control switch to RUN</p> <p>Set display switch to DISTRIBUTOR</p>
-<p>Set overflow switch to SENSE</p> <p>Set error switch to STOP</p></td>
-</tr> <tr> <td><p>dep csw 7019519999</p> <p>dep ar 8000</p>
-<p>go</p></td> <td>Load a read card (RD) opcode at address 8000 (the
-storage entry switches address), and execute it.</td> <td><p>SOAP is
-being loaded, set (70, 1951, 9999) in storage entry switches</p>
-<p>Press computer-reset key</p> <p>Press program-start key (Computer
-stops when finished loading SOAP deck into drum)</p></td> </tr> <tr>
-<td><p>att cdr1 source.dck</p> <p>set cdp1 echo, print</p> <p>att cdp0
-print.txt</p></td> <td>Set up the simulated IBM 407 for printing the
-punched cards that will be generated. Set up to print and display cards
-punched as they are generated</td> <td>Put source deck in read
-hopper</td> </tr> <tr> <td><p>dep csw 0000001000</p> <p>dep ar 8000</p>
-<p>go</p></td> <td>Start SOAP at address 1000</td> <td><p>Set (00, 0000,
-1000) in storage entry switches</p> <p>Press computer-reset key</p>
-<p>Press program-start key</p></td> </tr> <tr> <td><p>det cdp1</p>
-<p>det cdp0</p></td> <td>The deck_out.dck file has the assembled program
-punched cards, and the Print.txt file has the assembly listing in a
-readable format</td> <td>Get cards punched from the IBM 533 output
-stacker. Move them to the IBM 407 input feed to print the assembly
-listing</td> </tr> </tbody> </table>
+| SCP Commands | Comment | Real Hardware equivalent |
+|---|---|---|
+| `set cpu 2k`<br>`set cdr1 wiring=soap`<br>`att cdr1 soapII.dck`<br>`set cdp1 wiring=soap`<br>`att cdp1 deck_out.dck` | Use a 2k machine. Set SOAP wiring. Attach SOAP assembler. Attach file for assembled program output. | SOAP II needs a 2k machine. In IBM 533 Read-Punch unit: insert SOAP II control panel, place SOAP deck in read hopper, and ready punch feed with blank cards. |
+| `dep cswps 1`<br>`dep half 0`<br>`dep cswos 0` | These are the defaults and can be omitted. | Set programmed switch to `STOP`, half-cycle switch to `RUN`, control switch to `RUN`, display switch to `DISTRIBUTOR`, overflow switch to `SENSE`, and error switch to `STOP`. |
+| `dep csw 7019519999`<br>`dep ar 8000`<br>`go` | Load a read-card (`RD`) opcode at address `8000` (the storage entry switches address), and execute it. | SOAP is being loaded; set `(70, 1951, 9999)` in storage entry switches, press computer-reset, and then press program-start. |
+| `att cdr1 source.dck`<br>`set cdp1 echo, print`<br>`att cdp0 print.txt` | Set up the simulated IBM 407 for printing the punched cards that will be generated, and print/display cards as they are generated. | Put source deck in read hopper. |
+| `dep csw 0000001000`<br>`dep ar 8000`<br>`go` | Start SOAP at address `1000`. | Set `(00, 0000, 1000)` in storage entry switches, press computer-reset, and then press program-start. |
+| `det cdp1`<br>`det cdp0` | `deck_out.dck` has the assembled-program punched cards, and `print.txt` has the assembly listing in a readable format. | Get cards punched from the IBM 533 output stacker and move them to the IBM 407 input feed to print the assembly listing. |
 
 ## Available Software 
 
-The available software files are in **i650/sw** directory. These files
+The available software files are in `i650/sw` directory. These files
 have been typed from listings information from documents available on
 BitSavers.
 
@@ -1290,7 +1181,7 @@ xxx_run.ini script will allow to load and run source program given as parameter.
 
 build_xxx.ini will allow to build the main program deck.
 
-All ini files an in **i650/sw** directory. The language files in its own folder
+All ini files are in `i650/sw`. The language files are in their own folders
 
 ### Interpretive Floating Decimal System 
 
@@ -1477,31 +1368,22 @@ How to run:
 
 ### SuperSoap
 
-<table> <colgroup> <col style="width: 46%" /> <col style="width: 53%" />
-</colgroup> <thead> <tr> <th><em><strong>Files</strong></em></th>
-<th><em><strong>Description</strong></em></th> </tr> </thead> <tbody>
-<tr> <td>build_ssoap_ramac_from_decks.ini</td> <td>SimH script to build
-SuperSoap into RAMAC for later use</td> </tr> <tr>
-<td><p>run_supersoap.ini</p> <p>run_supersoap_ramac.ini</p></td>
-<td>SimH script to assemble and run a supersoap source program using
-supersoap main deck/using already built supersoap into RAMAC</td> </tr>
-<tr> <td>supersoap/</td> <td>Folder contents:</td> </tr> <tr>
-<td>00_readme.txt</td> <td>Restoration comments</td> </tr> <tr>
-<td>ssoap.txt</td> <td>SuperSoap assembled listing recovered from
-doc</td> </tr> <tr> <td>ssoap_main_core_src.txt</td> <td>SuperSoap
-source code</td> </tr> <tr> <td></td> <td></td> </tr> <tr>
-<td>ssoap_main.dck</td> <td>SuperSoap assembled main deck (resides on
-drum)</td> </tr> <tr> <td>ssoap_core.dck</td> <td>SuperSoap assembled
-core deck (resides on core)</td> </tr> <tr>
-<td>ssoap_loader_src.txt</td> <td>SuperSoap loader source code</td>
-</tr> <tr> <td>build_ssoap_ramac_src.txt</td> <td>Build loader+main+core
-into RAMAC</td> </tr> <tr> <td>ssoap_calling_card.txt</td> <td>SuperSoap
-calling card listing from doc</td> </tr> <tr>
-<td>ssoap_calling_card.dck</td> <td>SuperSoap calling card deck</td>
-</tr> <tr> <td>ssoap_example.txt</td> <td>SuperSoap example listing from
-doc</td> </tr> <tr> <td>ssoap_example_src.txt</td> <td>Example source
-code</td> </tr> <tr> <td>ssoap_example_src.txt</td> <td>Example source
-code</td> </tr> </tbody> </table>
+| Files | Description |
+|---|---|
+| `build_ssoap_ramac_from_decks.ini` | SimH script to build SuperSoap into RAMAC for later use |
+| `run_supersoap.ini`<br>`run_supersoap_ramac.ini` | SimH scripts to assemble and run a SuperSoap source program using the SuperSoap main deck or an already-built SuperSoap in RAMAC |
+| `supersoap/` | Folder contents: |
+| `00_readme.txt` | Restoration comments |
+| `ssoap.txt` | SuperSoap assembled listing recovered from doc |
+| `ssoap_main_core_src.txt` | SuperSoap source code |
+| `ssoap_main.dck` | SuperSoap assembled main deck (resides on drum) |
+| `ssoap_core.dck` | SuperSoap assembled core deck (resides on core) |
+| `ssoap_loader_src.txt` | SuperSoap loader source code |
+| `build_ssoap_ramac_src.txt` | Build loader+main+core into RAMAC |
+| `ssoap_calling_card.txt` | SuperSoap calling card listing from doc |
+| `ssoap_calling_card.dck` | SuperSoap calling card deck |
+| `ssoap_example.txt` | SuperSoap example listing from doc |
+| `ssoap_example_src.txt` | Example source code |
 
 How to run:
 

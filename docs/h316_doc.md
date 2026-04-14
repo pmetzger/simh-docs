@@ -81,15 +81,15 @@ The Honeywell 316/516 simulator is configured as follows:
 | `MT` | 4100 seven track magnetic tape with four drives |
 | `CLK` | 316/516-12 real time clock |
 | `FHD` | 4400 fixed head disk |
-| `DP` | 4623/4653/4720 disk pack controller with eight drives |
+| `DP` | 4623/4651/4720 disk pack controller with eight drives |
 | `WDT` | watch dog timer |
 | `RTC` | IMP/TIP real time clock |
-| `IMP` | IM/TIP Specific Hardware |
-| `MI1` | IM/TIP Modem Interface |
-| `MI2` | IM/TIP Modem Interface |
-| `MI3` | IM/TIP Modem Interface |
-| `MI4` | IM/TIP Modem Interface |
-| `MI5` | IM/TIP Modem Interface |
+| `IMP` | IMP/TIP specific hardware |
+| `MI1` | IMP/TIP modem interface |
+| `MI2` | IMP/TIP modem interface |
+| `MI3` | IMP/TIP modem interface |
+| `MI4` | IMP/TIP modem interface |
+| `MI5` | IMP/TIP modem interface |
 | `HI1` | IMP Host Interface |
 | `HI2` | IMP Host Interface |
 | `HI3` | IMP Host Interface |
@@ -108,7 +108,7 @@ The H316/H516 simulator implements several unique stop conditions:
   the track on the real system)
 - A disk track has an illegal format
 
-The LOAD and DUMP commands are not implemented.
+The `LOAD` and `DUMP` commands are not implemented.
 
 ## CPU
 
@@ -161,8 +161,8 @@ Only 16 extended interrupts (out of a possible 48) are currently implemented.
 
 ### DMA channels
 
-The CPU includes a special show command to display the state of the DMA
-channels:
+The CPU includes a special `SHOW` command to display the state of the
+DMA channels:
 
 | Command | Description |
 |---|---|
@@ -258,7 +258,7 @@ ASCII mode:
 | `SET PTR ASCII` | ASCII mode |
 | `SET PTR UASCII` | Unix ASCII mode |
 
-The mode can also be set by a switch setting in the ATTACH command:
+The mode can also be set by a switch setting in the `ATTACH` command:
 
 | Command | Description |
 |---|---|
@@ -270,8 +270,8 @@ In ASCII or Unix ASCII mode, all non-zero characters have the high order
 bit forced on. In Unix ASCII mode, newline is converted to CR, and LF is
 inserted as the following character.
 
-The paper tape reader supports the BOOT command. BOOT PTR copies the
-absolute binary loader into memory and starts it running.
+The paper tape reader supports the `BOOT` command. `BOOT PTR` copies
+the absolute binary loader into memory and starts it running.
 
 The paper tape reader implements these registers:
 
@@ -300,8 +300,8 @@ Error handling is as follows:
 The paper tape punch (PTP) writes data to a disk file. The POS register
 specifies the number of the next data item to be written. Thus, by
 changing POS, the user can backspace or advance the punch. The default
-position after ATTACH is to position at the end of an existing file. A
-new file can be created if you attach with the -N switch.
+position after `ATTACH` is to position at the end of an existing file.
+A new file can be created if you attach with the `-N` switch.
 
 The paper tape punch can be set to operate in binary, ASCII, or Unix
 ASCII mode:
@@ -312,7 +312,7 @@ ASCII mode:
 | `SET PTP ASCII` | ASCII mode |
 | `SET PTP UASCII` | Unix ASCII mode |
 
-The mode can also be set by a switch setting in the ATTACH command:
+The mode can also be set by a switch setting in the `ATTACH` command:
 
 | Command | Description |
 |---|---|
@@ -379,7 +379,7 @@ or Unix ASCII mode:
 | `SET TTY2 ASCII` | ASCII mode |
 | `SET TTY2 UASCII` | Unix ASCII mode |
 
-The mode can also be set by a switch setting in the ATTACH command:
+The mode can also be set by a switch setting in the `ATTACH` command:
 
 | Command | Description |
 |---|---|
@@ -404,7 +404,7 @@ ASCII, or Unix ASCII mode:
 | `SET TTY3 ASCII` | ASCII mode |
 | `SET TTY3 UASCII` | Unix ASCII mode |
 
-The mode can also be set by a switch setting in the ATTACH command:
+The mode can also be set by a switch setting in the `ATTACH` command:
 
 | Command | Description |
 |---|---|
@@ -462,12 +462,12 @@ The clock implements these registers:
 The real-time clock autocalibrates; the clock interval is adjusted up or
 down so that the clock tracks actual elapsed time.
 
-Note that previous releases of simh did not allow the CLK device to be
+Note that previous releases of SIMH did not allow the CLK device to be
 disabled. However, this device was optional and it was possible to
 configure an H316 system without one (although this apparently rarely
-happened). Current simh releases will allow the CLK device to be
-disabled. When the CLK device is disabled it does not respond to the
-clock specific IO instructions; it does not increment location
+happened). Current SIMH releases allow the CLK device to be disabled.
+When the CLK device is disabled it does not respond to the
+clock-specific I/O instructions; it does not increment location
 61<sub>8</sub>, and it does not generate interrupts. The SMK and OTK
 instructions are unaffected.
 
@@ -476,8 +476,8 @@ instructions are unaffected.
 The line printer (LPT) writes data to a disk file. The POS register
 specifies the number of the next data item to be written. Thus, by
 changing POS, the user can backspace or advance the printer. The default
-position after ATTACH is to position at the end of an existing file. A
-new file can be created if you attach with the -N switch.
+position after `ATTACH` is to position at the end of an existing file.
+A new file can be created if you attach with the `-N` switch.
 
 The line printer can be connected to the IO bus, a DMC channel, or a DMA
 channel:
@@ -594,7 +594,7 @@ unlimited capacity:
 | `SET MTn CAPAC=m` | Set unit `n` capacity to `m` MB (`0` = unlimited) |
 | `SHOW MTn CAPAC` | Show unit `n` capacity in MB |
 
-Units can also be set ENABLED or DISABLED.
+Units can also be set `ENABLED` or `DISABLED`.
 
 The magnetic tape controller can be connected to the IO bus, a DMC
 channel, or a DMA channel:
@@ -659,7 +659,7 @@ Individual units can be write enabled or write locked:
 | `SET DPn LOCKED` | Set unit `n` write locked |
 | `SET DPn WRITEENABLED` | Set unit `n` write enabled |
 
-Units can be also be set ENABLED or DISABLED.
+Units can also be set `ENABLED` or `DISABLED`.
 
 The disk pack controller can be connected to a DMC channel or a DMA
 channel; it cannot be connected to the IO bus:

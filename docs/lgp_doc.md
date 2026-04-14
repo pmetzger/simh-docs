@@ -64,7 +64,7 @@ The LGP simulator implements the following unique stop conditions:
 
 - LGP-21 only: reference to undefined I/O device.
 
-The LOAD and DUMP commands are not implemented.
+The `LOAD` and `DUMP` commands are not implemented.
 
 ## CPU
 

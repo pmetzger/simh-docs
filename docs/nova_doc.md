@@ -97,8 +97,8 @@ Novas. Some DG diagnostics test thousands of levels of indirect
 addressing. INDMAX may have to be set to 32,000 to get diagnostics to
 run properly.
 
-The LOAD command supports standard binary format tapes. The DUMP command
-is not implemented.
+The `LOAD` command supports standard binary format tapes. The `DUMP`
+command is not implemented.
 
 All devices except TTI can be disabled or enabled with these commands:
 
@@ -152,8 +152,8 @@ If memory size is being reduced, and the memory being truncated contains
 non-zero data, the simulator asks for confirmation. Data in the
 truncated portion of memory is lost. Initial memory size is 32K.
 
-The CPU supports the BOOT command. BOOT CPU simulates the Nova hardware
-APL (automatic program load) feature. The switch register (SR) bits
+The CPU supports the `BOOT` command. `BOOT CPU` simulates the Nova
+hardware APL (automatic program load) feature. The switch register (SR) bits
 12:17 must contain the device code of the device to be booted. If the
 device is a "high-speed" (channel) device, SR bit 0 should also be set.
 
