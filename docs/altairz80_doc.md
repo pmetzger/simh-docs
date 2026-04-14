@@ -345,99 +345,97 @@ This memorandum documents the Altair 8800 Simulator.
 
 # Simulator Files
 
-| Subdirectory      | File                  | Comment |
+| Directory          | File                  | Comment |
 |---|---|---|
-| `sim/`            | `scp.h`               |  |
-|                   | `sim_console.h`       |  |
-|                   | `sim_defs.h`          |  |
-|                   | `sim_fio.h`           |  |
-|                   | `sim_rev.h`           |  |
-|                   | `sim_sock.h`          |  |
-|                   | `sim_timer.h`         |  |
-|                   | `sim_tmxr.h`          |  |
-|                   | `sim_serial.h`        |  |
-|                   | `sim_tape.c`          |  |
-|                   | `sim_disk.c`          |  |
-|                   | `sim_ether.c`         |  |
-|                   | `scp.c`               |  |
-|                   | `sim_console.c`       |  |
-|                   | `sim_fio.c`           |  |
-|                   | `sim_sock.c`          |  |
-|                   | `sim_timer.c`         |  |
-|                   | `sim_tmxr.c`          |  |
-|                   | `sim_serial.c`        |  |
-|                   | `sim_tape.c`          |  |
-|                   | `sim_disk.c`          |  |
-|                   | `sim_ether.c`         |  |
-|                   | `sim_imd.c`           | ImageDisk Disk Image File access module by Howard M. Harte |
-|                   | `sim_imd.h`           | ImageDisk Disk Image File access module by Howard M. Harte |
-| `AltairZ80/`      | `altairz80_defs.h`   |  |
-|                   | `altairz80_cpu_nommu.c` |  |
-|                   | `altairz80_cpu.c`    |  |
-|                   | `altairz80_dsk.c`    |  |
-|                   | `altairz80_hdsk.c`   |  |
-|                   | `altairz80_mhdsk.c`  | MITS/Pertec 88-HDSK hard disk support by Mike Douglas |
-|                   | `altairz80_net.c`    |  |
-|                   | `altairz80_sio.c`    |  |
-|                   | `altairz80_sys.c`    |  |
-|                   | `flashwriter2.c`     | Vector Graphic, Inc. Flashwriter II support by Howard M. Harte |
-|                   | `i8272.c`            | Generic Intel 8272 Disk Controller by Howard M. Harte |
-|                   | `i8272.h`            | Generic Intel 8272 Disk Controller by Howard M. Harte |
-|                   | `mfdc.c`             | Micropolis FDC support by Howard M. Harte |
-|                   | `mmd.c`              | Morrow Micro-Decision support by Patrick Linstruth |
-|                   | `n8vem.c`            | N8VEM Single-Board Computer I/O module by Howard M. Harte |
-|                   | `sol20.c`            | Processor Technology Sol-20 Terminal Computer by Patrick Linstruth |
-|                   | `s100_2sio.c`        | MITS 88-2SIO Serial Adapter by Patrick Linstruth |
-|                   | `s100_64fdc.c`       | Cromemco 4FDC/16FDC/64FDC Floppy Controller by Howard M. Harte |
-|                   | `s100_adcs6.c`       | Advanced Digital Corporation (ADC) Super-Six CPU Board by Howard M. Harte |
-|                   | `s100_disk1a.c`      | CompuPro DISK1A Floppy Controller by Howard M. Harte |
-|                   | `s100_disk2.c`       | CompuPro DISK2 Hard Disk Controller by Howard M. Harte |
-|                   | `s100_disk3.c`       | CompuPro DISK3 Hard Disk Controller by Howard M. Harte |
-|                   | `s100_dj2d.c`        | Morrow Disk Jockey 2D Model B Disk Controller by Patrick Linstruth |
-|                   | `s100_djhdc.c`       | Morrow Disk Jockey HDC-DMA Hard Disk Controller by Howard M. Harte |
-|                   | `s100_fif.c`         | IMSAI FIF Disk Controller by Ernie Price |
-|                   | `s100_hayes.c`       | Hayes 80-103A and Micromodem 100 by Patrick Linstruth |
-|                   | `s100_hdc1001.c`     | Advanced Digital Corporation (ADC) HDC-1001 Hard Disk Controller by Howard M. Harte |
-|                   | `s100_icom.c`        | iCOM FD3712/FD3812 Flexible Disk System by Patrick Linstruth |
-|                   | `s100_if3.c`         | CompuPro System Support 1 by Howard M. Harte |
-|                   | `s100_jadedd.c`      | JADE Double D Disk Controller by Patrick Linstruth |
-|                   | `s100_jair.c`        | JAIR Single Board Computer by Patrick Linstruth |
-|                   | `s100_mdriveh.c`     | CompuPro M-DRIVE/H Controller by Howard M. Harte |
-|                   | `s100_mdsa.c`        | NorthStar MDS-A Single Density Disk Controller by Mike Douglas |
-|                   | `s100_mdsad.c`       | NorthStar MDS-AD disk controller by Howard M. Harte |
-|                   | `s100_pmmi.c`        | PMMI MM-103 MODEM by Patrick Linstruth |
-|                   | `s100_scp300f.c`     | Seattle Computer Products SCP300F Support Board module by Howard M. Harte |
-|                   | `s100_selchan.c`     | CompuPro Selector Channel module by Howard M. Harte |
-|                   | `s100_ss1.c`         | CompuPro System Support 1 module by Howard M. Harte |
-|                   | `s100_tarbell.c`     | Altair Tarbell controller by Patrick Linstruth |
-|                   | `s100_tdd.c`         | Tarbell Double-Density Floppy Controller by Howard M. Harte |
-|                   | `s100_vdm1.c`        | Processor Technology VDM-1 Video Display Module by Patrick Linstruth |
-|                   | `vfdhd.c`            | Micropolis FDC support by Howard M. Harte |
-|                   | `vfdhd.h`            | Micropolis FDC support by Howard M. Harte |
-|                   | `wd179x.h`           | WD179X support by Howard M. Harte |
-|                   | `wd179x.c`           | WD179X support by Howard M. Harte |
-|                   | `insns.h`            | 8086 Disassembler by Simon Tatham and Julian Hall |
-|                   | `nasm.h`             | 8086 Disassembler by Simon Tatham and Julian Hall |
-|                   | `disasm.c`           | 8086 Disassembler by Simon Tatham and Julian Hall |
-|                   | `insnsd.c`           | 8086 Disassembler by Simon Tatham and Julian Hall |
-|                   | `i86.h`              | 8086 CPU by Jim Hudgens |
-|                   | `i86_decode.c`       | 8086 CPU by Jim Hudgens |
-|                   | `i86_ops.c`          | 8086 CPU by Jim Hudgens |
-|                   | `i86_prim_ops.c`     | 8086 CPU by Jim Hudgens |
-|                   | `m68ksim.c`          | CPU driver for CP/M-68K simulation, based on work by David W. Schultz |
-|                   | `m68ksim.h`          | CPU driver for CP/M-68K simulation, based on work by David W. Schultz |
-| `AltairZ80/m68k/` | `m68k.h`             | Motorola M68000 CPU by Karl Stenerud |
-|                   | `m68kasm.y(.txt)`   | Motorola M68000 assembler by Holger Veit, Bison source |
-|                   | `m68kasm.c`          | Motorola M68000 assembler by Holger Veit, Bison output |
-|                   | `m68kconf.h`         | Motorola M68000 CPU by Karl Stenerud |
-|                   | `m68kcpu.c`          | Motorola MC68000 CPU by Karl Stenerud |
-|                   | `m68kcpu.h`          | Motorola MC68000 CPU by Karl Stenerud |
-|                   | `m68kdasm.c`         | Motorola MC68000 CPU by Karl Stenerud, disassembler |
-|                   | `m68kopac.c`         | Motorola MC68000 CPU by Karl Stenerud |
-|                   | `m68kopdm.c`         | Motorola MC68000 CPU by Karl Stenerud |
-|                   | `m68kopnz.c`         | Motorola MC68000 CPU by Karl Stenerud |
-|                   | `m68kops.c`          | Motorola MC68000 CPU by Karl Stenerud |
-|                   | `m68kops.h`          | Motorola MC68000 CPU by Karl Stenerud |
+| `sim/`             | `scp.h`               |  |
+|                    | `sim_defs.h`          |  |
+|                    | `sim_rev.h`           |  |
+|                    | `scp.c`               |  |
+|                    | `sim_console.h`       |  |
+|                    | `sim_fio.h`           |  |
+|                    | `sim_sock.h`          |  |
+|                    | `sim_timer.h`         |  |
+|                    | `sim_tmxr.h`          |  |
+|                    | `sim_serial.h`        |  |
+|                    | `sim_tape.h`          |  |
+|                    | `sim_console.c`       |  |
+|                    | `sim_fio.c`           |  |
+|                    | `sim_sock.c`          |  |
+|                    | `sim_timer.c`         |  |
+|                    | `sim_tmxr.c`          |  |
+|                    | `sim_serial.c`        |  |
+|                    | `sim_tape.c`          |  |
+|                    | `sim_disk.c`          |  |
+|                    | `sim_ether.c`         |  |
+|                    | `sim_imd.c`           | ImageDisk Disk Image File access module by Howard M. Harte |
+|                    | `sim_imd.h`           | ImageDisk Disk Image File access module by Howard M. Harte |
+| `AltairZ80/`       | `altairz80_defs.h`   |  |
+|                    | `altairz80_cpu_nommu.c` |  |
+|                    | `altairz80_cpu.c`    |  |
+|                    | `altairz80_dsk.c`    |  |
+|                    | `altairz80_hdsk.c`   |  |
+|                    | `altairz80_mhdsk.c`  | MITS/Pertec 88-HDSK hard disk support by Mike Douglas |
+|                    | `altairz80_net.c`    |  |
+|                    | `altairz80_sio.c`    |  |
+|                    | `altairz80_sys.c`    |  |
+|                    | `flashwriter2.c`     | Vector Graphic, Inc. Flashwriter II support by Howard M. Harte |
+|                    | `i8272.c`            | Generic Intel 8272 Disk Controller by Howard M. Harte |
+|                    | `i8272.h`            | Generic Intel 8272 Disk Controller by Howard M. Harte |
+|                    | `mfdc.c`             | Micropolis FDC support by Howard M. Harte |
+|                    | `mmd.c`              | Morrow Micro-Decision support by Patrick Linstruth |
+|                    | `n8vem.c`            | N8VEM Single-Board Computer I/O module by Howard M. Harte |
+|                    | `sol20.c`            | Processor Technology Sol-20 Terminal Computer by Patrick Linstruth |
+|                    | `s100_2sio.c`        | MITS 88-2SIO Serial Adapter by Patrick Linstruth |
+|                    | `s100_64fdc.c`       | Cromemco 4FDC/16FDC/64FDC Floppy Controller by Howard M. Harte |
+|                    | `s100_adcs6.c`       | Advanced Digital Corporation (ADC) Super-Six CPU Board by Howard M. Harte |
+|                    | `s100_disk1a.c`      | CompuPro DISK1A Floppy Controller by Howard M. Harte |
+|                    | `s100_disk2.c`       | CompuPro DISK2 Hard Disk Controller by Howard M. Harte |
+|                    | `s100_disk3.c`       | CompuPro DISK3 Hard Disk Controller by Howard M. Harte |
+|                    | `s100_dj2d.c`        | Morrow Disk Jockey 2D Model B Disk Controller by Patrick Linstruth |
+|                    | `s100_djhdc.c`       | Morrow Disk Jockey HDC-DMA Hard Disk Controller by Howard M. Harte |
+|                    | `s100_fif.c`         | IMSAI FIF Disk Controller by Ernie Price |
+|                    | `s100_hayes.c`       | Hayes 80-103A and Micromodem 100 by Patrick Linstruth |
+|                    | `s100_hdc1001.c`     | Advanced Digital Corporation (ADC) HDC-1001 Hard Disk Controller by Howard M. Harte |
+|                    | `s100_icom.c`        | iCOM FD3712/FD3812 Flexible Disk System by Patrick Linstruth |
+|                    | `s100_if3.c`         | CompuPro System Support 1 by Howard M. Harte |
+|                    | `s100_jadedd.c`      | JADE Double D Disk Controller by Patrick Linstruth |
+|                    | `s100_jair.c`        | JAIR Single Board Computer by Patrick Linstruth |
+|                    | `s100_mdriveh.c`     | CompuPro M-DRIVE/H Controller by Howard M. Harte |
+|                    | `s100_mdsa.c`        | NorthStar MDS-A Single Density Disk Controller by Mike Douglas |
+|                    | `s100_mdsad.c`       | NorthStar MDS-AD disk controller by Howard M. Harte |
+|                    | `s100_pmmi.c`        | PMMI MM-103 MODEM by Patrick Linstruth |
+|                    | `s100_scp300f.c`     | Seattle Computer Products SCP300F Support Board module by Howard M. Harte |
+|                    | `s100_selchan.c`     | CompuPro Selector Channel module by Howard M. Harte |
+|                    | `s100_ss1.c`         | CompuPro System Support 1 module by Howard M. Harte |
+|                    | `s100_tarbell.c`     | Altair Tarbell controller by Patrick Linstruth |
+|                    | `s100_tdd.c`         | Tarbell Double-Density Floppy Controller by Howard M. Harte |
+|                    | `s100_vdm1.c`        | Processor Technology VDM-1 Video Display Module by Patrick Linstruth |
+|                    | `vfdhd.c`            | Micropolis FDC support by Howard M. Harte |
+|                    | `vfdhd.h`            | Micropolis FDC support by Howard M. Harte |
+|                    | `wd179x.h`           | WD179X support by Howard M. Harte |
+|                    | `wd179x.c`           | WD179X support by Howard M. Harte |
+|                    | `insns.h`            | 8086 Disassembler by Simon Tatham and Julian Hall |
+|                    | `nasm.h`             | 8086 Disassembler by Simon Tatham and Julian Hall |
+|                    | `disasm.c`           | 8086 Disassembler by Simon Tatham and Julian Hall |
+|                    | `insnsd.c`           | 8086 Disassembler by Simon Tatham and Julian Hall |
+|                    | `i86.h`              | 8086 CPU by Jim Hudgens |
+|                    | `i86_decode.c`       | 8086 CPU by Jim Hudgens |
+|                    | `i86_ops.c`          | 8086 CPU by Jim Hudgens |
+|                    | `i86_prim_ops.c`     | 8086 CPU by Jim Hudgens |
+|                    | `m68ksim.c`          | CPU driver for CP/M-68K simulation, based on work by David W. Schultz |
+|                    | `m68ksim.h`          | CPU driver for CP/M-68K simulation, based on work by David W. Schultz |
+| `AltairZ80/m68k/`  | `m68k.h`             | Motorola M68000 CPU by Karl Stenerud |
+|                    | `m68kasm.y(.txt)`   | Motorola M68000 assembler by Holger Veit, Bison source |
+|                    | `m68kasm.c`          | Motorola M68000 assembler by Holger Veit, Bison output |
+|                    | `m68kconf.h`         | Motorola M68000 CPU by Karl Stenerud |
+|                    | `m68kcpu.c`          | Motorola MC68000 CPU by Karl Stenerud |
+|                    | `m68kcpu.h`          | Motorola MC68000 CPU by Karl Stenerud |
+|                    | `m68kdasm.c`         | Motorola MC68000 CPU by Karl Stenerud, disassembler |
+|                    | `m68kopac.c`         | Motorola MC68000 CPU by Karl Stenerud |
+|                    | `m68kopdm.c`         | Motorola MC68000 CPU by Karl Stenerud |
+|                    | `m68kopnz.c`         | Motorola MC68000 CPU by Karl Stenerud |
+|                    | `m68kops.c`          | Motorola MC68000 CPU by Karl Stenerud |
+|                    | `m68kops.h`          | Motorola MC68000 CPU by Karl Stenerud |
 
 # Background
 
@@ -4652,9 +4650,9 @@ Typing `bbye` at the `C>` command prompt brings you back to SIMH.
 
 - 22-Nov-2022 Patrick Linstruth (added MEM and REG commands)
 
-- 16-Jan-2022 Howard Harte (updated ADC, CompuPro documentation, added Seattle Computer Products documentation.)
-
 - 19-Nov-2022 Patrick Linstruth (added support for Morrow Micro Decision)
+
+- 16-Jan-2022 Howard Harte (updated ADC, CompuPro documentation, added Seattle Computer Products documentation.)
 
 - 18-Jan-2021 Patrick Linstruth (added support for Morrow Disk Jockey 2D original disk controller)
 
