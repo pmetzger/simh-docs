@@ -112,14 +112,18 @@ printer. The DUMP command is used to dump a contiguous portion of memory
 as a self-loading bootstrap paper tape. The syntax for the DUMP command
 is:
 
-DUMP \<filename\> lowaddr-highaddr
+```
+DUMP <filename> lowaddr-highaddr
+```
 
 The low address must be greater than or equal to X'D0'.
 
 Devices are assigned their default device numbers, as documented in the
 Interdata literature. Device numbers can be changed by the command:
 
-SET \<device\> DEVNO=num
+```
+SET <device> DEVNO=num
+```
 
 Device number conflicts are not checked until simulation starts. If
 there is a device number conflict, simulation stops immediately with an
@@ -128,15 +132,18 @@ error message.
 Selector channel devices are assigned by default to selector channel 0.
 Selector channel assignments can be changed by the command:
 
-SET \<dev\> SELCH=num
+```
+SET <dev> SELCH=num
+```
 
 Selector channel assignments cannot introduce conflicts.
 
-Most devices can be disabled and enabled, with the commands:
+Most devices can be disabled and enabled with these commands:
 
-SET \<dev\> DISABLED
-
-SET \<dev\> ENABLED
+| Command | Action |
+|---|---|
+| `SET <dev> DISABLED` | Disable the device |
+| `SET <dev> ENABLED` | Enable the device |
 
 All devices are enabled by default.
 
@@ -144,43 +151,22 @@ All devices are enabled by default.
 
 The CPU options include memory size and CPU type:
 
-SET CPU I3 Interdata 3 (base instruction set)
-
-SET CPU I4 Interdata 4 (base plus single precision
-
-floating point)
-
-SET CPU 716 Interdata 7/16 (extended instruction set)
-
-(equivalent to Models 5, 70, and 80)
-
-SET CPU 816 Interdata 8/16 (extended plus double
-
-precision floating point)
-
-SET CPU 816E Interdata 8/16E (extended plus double
-
-precision plus expanded memory)
-
-SET CPU 8K set memory size = 8KB
-
-SET CPU 16K set memory size = 16KB
-
-SET CPU 24K set memory size = 24KB
-
-SET CPU 32K set memory size = 32KB
-
-SET CPU 48K set memory size = 48KB
-
-SET CPU 64K set memory size = 64KB
-
-SET CPU 128K set memory size = 128KB (8/16E only)
-
-SET CPU 256K set memory size = 256KB (8/16E only)
-
-SET CPU CONSINT assert console interrupt (7/16, 8/16,
-
-and 8/16E only)
+| Command | Action |
+|---|---|
+| `SET CPU I3` | Interdata 3 (base instruction set) |
+| `SET CPU I4` | Interdata 4 (base plus single-precision floating point) |
+| `SET CPU 716` | Interdata 7/16 (extended instruction set; equivalent to Models 5, 70, and 80) |
+| `SET CPU 816` | Interdata 8/16 (extended plus double-precision floating point) |
+| `SET CPU 816E` | Interdata 8/16E (extended plus double precision plus expanded memory) |
+| `SET CPU 8K` | Set memory size to 8KB |
+| `SET CPU 16K` | Set memory size to 16KB |
+| `SET CPU 24K` | Set memory size to 24KB |
+| `SET CPU 32K` | Set memory size to 32KB |
+| `SET CPU 48K` | Set memory size to 48KB |
+| `SET CPU 64K` | Set memory size to 64KB |
+| `SET CPU 128K` | Set memory size to 128KB (8/16E only) |
+| `SET CPU 256K` | Set memory size to 256KB (8/16E only) |
+| `SET CPU CONSINT` | Assert console interrupt (7/16, 8/16, and 8/16E only) |
 
 If memory size is being reduced, and the memory being truncated contains
 non-zero data, the simulator asks for confirmation. Data in the
@@ -213,76 +199,51 @@ the low order bit is ignored.
 CPU registers include the visible state of the processor as well as the
 control registers for the interrupt system.
 
-name size comments
-
-PC 16 program counter
-
-R0..R15 16 general registers
-
-FR0..F14 32 single precision floating point registers
-
-D0H..D14H 32 double precision floating point registers,
-
-high order
-
-D0L..D14L 32 double precision floating point registers,
-
-low order
-
-PSW 16 processor status word
-
-CC 4 condition codes, PSW\<12:15\>
-
-SR 16 switch register
-
-DR 32 display register low 16 bits
-
-DRX 8 display register extension
-
-DRMOD 1 display mode
-
-DRPOS 2 display pointer position
-
-SRPOS 1 switch pointer position
-
-IRQ\[0:3\] 32 interrupt requests
-
-IEN\[0:3\] 32 interrupt enables
-
-STOP_INST 1 stop on undefined instruction
-
-STOP_WAIT 1 stop if wait state and no I/O events pending
-
-PCQ\[0:63\] 16 PC prior to last branch or interrupt;
-
-most recent PC change first
-
-WRU 8 interrupt character
+| Name | Size | Comments |
+|---|---:|---|
+| `PC` | 16 | program counter |
+| `R0..R15` | 16 | general registers |
+| `FR0..F14` | 32 | single-precision floating-point registers |
+| `D0H..D14H` | 32 | double-precision floating-point registers, high order |
+| `D0L..D14L` | 32 | double-precision floating-point registers, low order |
+| `PSW` | 16 | processor status word |
+| `CC` | 4 | condition codes, `PSW<12:15>` |
+| `SR` | 16 | switch register |
+| `DR` | 32 | display register low 16 bits |
+| `DRX` | 8 | display register extension |
+| `DRMOD` | 1 | display mode |
+| `DRPOS` | 2 | display pointer position |
+| `SRPOS` | 1 | switch pointer position |
+| `IRQ[0:3]` | 32 | interrupt requests |
+| `IEN[0:3]` | 32 | interrupt enables |
+| `STOP_INST` | 1 | stop on undefined instruction |
+| `STOP_WAIT` | 1 | stop if wait state and no I/O events pending |
+| `PCQ[0:63]` | 16 | PC prior to last branch or interrupt; most recent PC change first |
+| `WRU` | 8 | interrupt character |
 
 The CPU detects when the simulator is idle. When idle, the simulator
 does not use any resources on the host system. Idle detection is
-controlled by the SET IDLE and SET NOIDLE commands:
+controlled by the `SET IDLE` and `SET NOIDLE` commands:
 
-SET CPU IDLE enable idle detection
-
-SET CPU NOIDLE disable idle detection
+| Command | Action |
+|---|---|
+| `SET CPU IDLE` | Enable idle detection |
+| `SET CPU NOIDLE` | Disable idle detection |
 
 Idle detection is disabled by default. The CPU is considered idle if the
 WAIT STATE flag is set in the PSW.
 
 The CPU can maintain a history of the most recently executed
-instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
-HISTORY commands:
+instructions. This is controlled by the `SET CPU HISTORY` and
+`SHOW CPU HISTORY` commands:
 
-SET CPU HISTORY clear history buffer
-
-SET CPU HISTORY=0 disable history
-
-SET CPU HISTORY=n enable history, length = n
-
-SHOW CPU HISTORY print CPU history
-
-SHOW CPU HISTORY=n print first n entries of CPU history
+| Command | Action |
+|---|---|
+| `SET CPU HISTORY` | Clear history buffer |
+| `SET CPU HISTORY=0` | Disable history |
+| `SET CPU HISTORY=n` | Enable history, length = `n` |
+| `SHOW CPU HISTORY` | Print CPU history |
+| `SHOW CPU HISTORY=n` | Print first `n` entries of CPU history |
 
 The maximum length for the history is 65536 entries.
 
@@ -290,33 +251,18 @@ The maximum length for the history is 65536 entries.
 
 The CPU options include memory size and CPU type:
 
-SET CPU 732 Interdata 7/32, single precision floating
-
-point
-
-SET CPU DPFP Interdata 7/32, double precision floating
-
-point
-
-SET CPU 832 Interdata 8/32 (double precision floating
-
-point, 8 general register sets)
-
-SET CPU 2RS Interdata 8/32 (double precision floating
-
-point, 2 general register sets)
-
-SET CPU 64K set memory size = 64KB
-
-SET CPU 128K set memory size = 128KB
-
-SET CPU 256K set memory size = 256KB
-
-SET CPU 512K set memory size = 512KB
-
-SET CPU 1M set memory size = 1024KB
-
-SET CPU CONSINT assert console interrupt
+| Command | Action |
+|---|---|
+| `SET CPU 732` | Interdata 7/32, single-precision floating point |
+| `SET CPU DPFP` | Interdata 7/32, double-precision floating point |
+| `SET CPU 832` | Interdata 8/32 (double-precision floating point, 8 general register sets) |
+| `SET CPU 2RS` | Interdata 8/32 (double-precision floating point, 2 general register sets) |
+| `SET CPU 64K` | Set memory size to 64KB |
+| `SET CPU 128K` | Set memory size to 128KB |
+| `SET CPU 256K` | Set memory size to 256KB |
+| `SET CPU 512K` | Set memory size to 512KB |
+| `SET CPU 1M` | Set memory size to 1024KB |
+| `SET CPU CONSINT` | Assert console interrupt |
 
 If memory size is being reduced, and the memory being truncated contains
 non-zero data, the simulator asks for confirmation. Data in the
@@ -349,82 +295,54 @@ the low order bit is ignored.
 CPU registers include the visible state of the processor as well as the
 control registers for the interrupt system.
 
-name size comments
-
-PC 20 program counter
-
-R0..R15 32 active general register set
-
-GREG\[32\] 32 general register sets, 16 x 2
-
-FR0..FR14 32 single precision floating point registers
-
-D0H..D14H 32 double precision floating point registers,
-
-high order
-
-D0L..D14L 32 double precision floating point registers,
-
-low order
-
-PSW 16 processor status word
-
-CC 4 condition codes, PSW\<12:15\>
-
-SR 16 switch register
-
-DR 32 display register low 16 bits
-
-DRX 8 display register extension (x/16 only)
-
-DRMOD 1 display mode
-
-DRPOS 2 display pointer position
-
-SRPOS 1 switch pointer position
-
-MACREG\[0:15\] 32 memory access controller segment registers
-
-MACSTA 5 memory access controller interrupt status
-
-IRQ\[0:3\] 32 interrupt requests
-
-IEN\[0:3\] 32 interrupt enables
-
-STOP_INST 1 stop on undefined instruction
-
-STOP_WAIT 1 stop if wait state and no I/O events pending
-
-PCQ\[0:63\] 20 PC prior to last branch or interrupt;
-
-most recent PC change first
-
-WRU 8 interrupt character
+| Name | Size | Comments |
+|---|---:|---|
+| `PC` | 20 | program counter |
+| `R0..R15` | 32 | active general register set |
+| `GREG[32]` | 32 | general register sets, 16 x 2 |
+| `FR0..FR14` | 32 | single-precision floating-point registers |
+| `D0H..D14H` | 32 | double-precision floating-point registers, high order |
+| `D0L..D14L` | 32 | double-precision floating-point registers, low order |
+| `PSW` | 16 | processor status word |
+| `CC` | 4 | condition codes, `PSW<12:15>` |
+| `SR` | 16 | switch register |
+| `DR` | 32 | display register low 16 bits |
+| `DRX` | 8 | display register extension (x/16 only) |
+| `DRMOD` | 1 | display mode |
+| `DRPOS` | 2 | display pointer position |
+| `SRPOS` | 1 | switch pointer position |
+| `MACREG[0:15]` | 32 | memory access controller segment registers |
+| `MACSTA` | 5 | memory access controller interrupt status |
+| `IRQ[0:3]` | 32 | interrupt requests |
+| `IEN[0:3]` | 32 | interrupt enables |
+| `STOP_INST` | 1 | stop on undefined instruction |
+| `STOP_WAIT` | 1 | stop if wait state and no I/O events pending |
+| `PCQ[0:63]` | 20 | PC prior to last branch or interrupt; most recent PC change first |
+| `WRU` | 8 | interrupt character |
 
 The CPU detects when the simulator is idle. When idle, the simulator
 does not use any resources on the host system. Idle detection is
-controlled by the SET IDLE and SET NOIDLE commands:
+controlled by the `SET IDLE` and `SET NOIDLE` commands:
 
-SET CPU IDLE enable idle detection
-
-SET CPU NOIDLE disable idle detection
+| Command | Action |
+|---|---|
+| `SET CPU IDLE` | Enable idle detection |
+| `SET CPU NOIDLE` | Disable idle detection |
 
 Idle detection is disabled by default. The CPU is considered idle if the
 WAIT STATE flag is set in the PSW.
 
 The CPU can maintain a history of the most recently executed
-instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
-HISTORY commands:
+instructions. This is controlled by the `SET CPU HISTORY` and
+`SHOW CPU HISTORY` commands:
 
-SET CPU HISTORY clear history buffer
-
-SET CPU HISTORY=0 disable history
-
-SET CPU HISTORY=n enable history, length = n
-
-SHOW CPU HISTORY print CPU history
-
-SHOW CPU HISTORY=n print first n entries of CPU history
+| Command | Action |
+|---|---|
+| `SET CPU HISTORY` | Clear history buffer |
+| `SET CPU HISTORY=0` | Disable history |
+| `SET CPU HISTORY=n` | Enable history, length = `n` |
+| `SHOW CPU HISTORY` | Print CPU history |
+| `SHOW CPU HISTORY=n` | Print first `n` entries of CPU history |
 
 The maximum length for the history is 65536 entries.
 
@@ -434,35 +352,28 @@ An Interdata system can have 1 to 4 selector channels (SELCH0, SELCH1,
 SELCH2, SELCH3). The default number of channels is 2. The number of
 channels can be changed with the command:
 
+```
 SET SELCH CHANNELS=num
+```
 
 All the state for a selector channel can be displayed with the command:
 
+```
 SHOW SELCH num
+```
 
 The selector channels implement these registers:
 
-name size comments
-
-SA\[0:3\] 20 start address, channels 0 to 3
-
-EA\[0:3\] 20 end address, channels 0 to 3
-
-CMD\[0:3\] 8 command, channels 0 to 3
-
-DEV\[0:3\] 8 active device, channels 0 to 3
-
-RDP\[0:3\] 2 read byte pointer, channels 0 to 3
-
-WDC\[0:3\] 3 write data counter, channels 0 to 3
-
-IREQ 4 interrupt requests; right to left,
-
-channels 0 to 3
-
-IENB 4 interrupt enables; right to left,
-
-channels 0 to 3
+| Name | Size | Comments |
+|---|---:|---|
+| `SA[0:3]` | 20 | start address, channels 0 to 3 |
+| `EA[0:3]` | 20 | end address, channels 0 to 3 |
+| `CMD[0:3]` | 8 | command, channels 0 to 3 |
+| `DEV[0:3]` | 8 | active device, channels 0 to 3 |
+| `RDP[0:3]` | 2 | read byte pointer, channels 0 to 3 |
+| `WDC[0:3]` | 3 | write data counter, channels 0 to 3 |
+| `IREQ` | 4 | interrupt requests; right to left, channels 0 to 3 |
+| `IENB` | 4 | interrupt enables; right to left, channels 0 to 3 |
 
 ## Programmed I/O Devices
 
@@ -478,74 +389,47 @@ so-called '50 loader' into memory and starts it running.
 
 The paper tape controller implements these registers:
 
-name size comments
-
-RBUF 8 reader buffer
-
-RPOS 32 reader position in the input file
-
-RTIME 24 time from reader start to interrupt
-
-RSTOP_IOE 1 reader stop on I/O error
-
-PBUF 8 punch buffer
-
-PPOS 32 punch position in the output file
-
-PTIME 24 time from punch start to interrupt
-
-PSTOP_IOE 1 punch stop on I/O error
-
-IREQ 1 paper tape interrupt request
-
-IENB 1 paper tape interrupt enable
-
-IARM 1 paper tape interrupt armed
-
-RD 1 paper tape read/write mode
-
-RUN 1 paper tape running
-
-SLEW 1 paper tape reader slew mode
-
-EOF 1 paper tape reader end of file
+| Name | Size | Comments |
+|---|---:|---|
+| `RBUF` | 8 | reader buffer |
+| `RPOS` | 32 | reader position in the input file |
+| `RTIME` | 24 | time from reader start to interrupt |
+| `RSTOP_IOE` | 1 | reader stop on I/O error |
+| `PBUF` | 8 | punch buffer |
+| `PPOS` | 32 | punch position in the output file |
+| `PTIME` | 24 | time from punch start to interrupt |
+| `PSTOP_IOE` | 1 | punch stop on I/O error |
+| `IREQ` | 1 | paper tape interrupt request |
+| `IENB` | 1 | paper tape interrupt enable |
+| `IARM` | 1 | paper tape interrupt armed |
+| `RD` | 1 | paper tape read/write mode |
+| `RUN` | 1 | paper tape running |
+| `SLEW` | 1 | paper tape reader slew mode |
+| `EOF` | 1 | paper tape reader end of file |
 
 Error handling is as follows:
 
-type error STOP_IOE processed as
-
-in,out not attached 1 report error and stop
-
-0 out of tape
-
-in end of file 1 report error and stop
-
-0 out of tape
-
-in,out OS I/O error x report error and stop
+| Type | Error | `STOP_IOE` | Processed as |
+|---|---|---:|---|
+| in,out | not attached | 1 | report error and stop |
+| in,out | not attached | 0 | out of tape |
+| in | end of file | 1 | report error and stop |
+| in | end of file | 0 | out of tape |
+| in,out | OS I/O error | x | report error and stop |
 
 ### Console, Teletype Interface (TT)
 
 The Teletype keyboard (TT0) reads from the console keyboard; the
 Teletype printer (TT1) writes to the simulator console window. The
-Teletype units (TT0, TT1) can be set to one of four modes, KSR, 7P, 7B,
-or 8B:
+Teletype units (TT0, TT1) can be set to one of four modes: `KSR`, `7P`,
+`7B`, or `8B`:
 
-mode input characters output characters
-
-KSR lower case converted lower case converted to upper case,
-
-to upper case, high-order bit cleared,
-
-high-order bit set non-printing characters suppressed
-
-7P high-order bit cleared high-order bit cleared,
-
-non-printing characters suppressed
-
-7B high-order bit cleared high-order bit cleared
-
-8B no changes no changes
+| Mode | Input characters | Output characters |
+|---|---|---|
+| `KSR` | lower case converted to upper case, high-order bit set | lower case converted to upper case, high-order bit cleared, non-printing characters suppressed |
+| `7P` | high-order bit cleared, non-printing characters suppressed | high-order bit cleared |
+| `7B` | high-order bit cleared | high-order bit cleared |
+| `8B` | no changes | no changes |
 
 Changing the mode of either unit changes both. The default mode is KSR.
 
@@ -553,40 +437,29 @@ The Teletype has a BREAK key, which is not present on today's keyboards.
 To simulate pressing the break key, stop the simulator and use the
 command:
 
+```
 SET TT BREAK
+```
 
 Break status will be asserted, and will remain asserted for the interval
 specified by KTIME.
 
 The Teletype interface implements these registers:
 
-name size comments
-
-KBUF 8 input buffer
-
-KPOS 32 number of characters input
-
-KTIME 24 input polling interval (if 0, the keyboard
-
-is polled synchronously with the line clock)
-
-TBUF 8 output buffer
-
-TPOS 32 number of characters output
-
-TTIME 24 time from output start to interrupt
-
-IREQ 1 interrupt request
-
-IENB 1 interrupt enable
-
-IARM 1 interrupt armed
-
-RD 1 read/write mode
-
-FDPX 1 half-duplex
-
-CHP 1 input character pending
+| Name | Size | Comments |
+|---|---:|---|
+| `KBUF` | 8 | input buffer |
+| `KPOS` | 32 | number of characters input |
+| `KTIME` | 24 | input polling interval (if 0, the keyboard is polled synchronously with the line clock) |
+| `TBUF` | 8 | output buffer |
+| `TPOS` | 32 | number of characters output |
+| `TTIME` | 24 | time from output start to interrupt |
+| `IREQ` | 1 | interrupt request |
+| `IENB` | 1 | interrupt enable |
+| `IARM` | 1 | interrupt armed |
+| `RD` | 1 | read/write mode |
+| `FDPX` | 1 | half-duplex |
+| `CHP` | 1 | input character pending |
 
 ### Console, PASLA Interface (TTP)
 
@@ -596,87 +469,73 @@ simulated with a Telnet session on the first PAS line. Alternately, the
 PASLA console can be attached to the simulator console window, using the
 TTP device in place of TT.
 
-To switch the simulator console window to TTP, use the command:
+To switch the simulator console window to TTP, use either of these
+commands:
 
-SET TTP ENABLED or
-
-SET TT DISABLED
+| Command | Action |
+|---|---|
+| `SET TTP ENABLED` | Switch the simulator console window to `TTP` |
+| `SET TT DISABLED` | Switch the simulator console window to `TTP` |
 
 Device TT is automatically disabled and device TTP is enabled. To switch
-the simulator console window back to TT, use the command:
+the simulator console window back to TT, use either of these commands:
 
-SET TT ENABLED or
-
-SET TTP DISABLED
+| Command | Action |
+|---|---|
+| `SET TT ENABLED` | Switch the simulator console window back to `TT` |
+| `SET TTP DISABLED` | Switch the simulator console window back to `TT` |
 
 Device TTP is automatically disabled and device TT is enabled. If TTP is
 enabled at its default device settings, the base address for the PAS
 multiplexer must be changed:
 
+```
 SET PAS DEVNO=12
+```
 
 Otherwise, a device number conflict occurs.
 
 The PASLA keyboard (TTP0) reads from the console keyboard; the PALSA
 printer (TTP1) writes to the simulator console window. The PASLA units
-(TTP0, TTP1) can be set to one of four modes, UC, 7P, 7B, or 8B:
+(TTP0, TTP1) can be set to one of four modes: `UC`, `7P`, `7B`, or
+`8B`:
 
-mode input characters output characters
-
-UC lower case converted lower case converted to upper case,
-
-to upper case, high-order bit cleared,
-
-high-order bit cleared non-printing characters suppressed
-
-7P high-order bit cleared high-order bit cleared,
-
-non-printing characters suppressed
-
-7B high-order bit cleared high-order bit cleared
-
-8B no changes no changes
+| Mode | Input characters | Output characters |
+|---|---|---|
+| `UC` | lower case converted to upper case, high-order bit cleared | lower case converted to upper case, high-order bit cleared, non-printing characters suppressed |
+| `7P` | high-order bit cleared, non-printing characters suppressed | high-order bit cleared |
+| `7B` | high-order bit cleared | high-order bit cleared |
+| `8B` | no changes | no changes |
 
 Changing the mode of either unit changes both. The default mode is 7B.
 
-To simulate pressing the break key, stop the simulator and use the command:
+To simulate pressing the break key, stop the simulator and use the
+command:
 
+```
 SET TTP BREAK
+```
 
 Break status will be asserted, and will remain asserted for the interval
 specified by KTIME.
 
 The PASLA console interface implements these registers:
 
-name size comments
-
-CMD 16 command register
-
-STA 8 status register
-
-KBUF 8 input buffer
-
-KPOS 32 number of characters input
-
-KTIME 24 input polling interval (if 0, the keyboard
-
-is polled synchronously with the line clock)
-
-KIREQ 1 input interrupt request
-
-KIENB 1 input interrupt enabled
-
-KARM 1 input interrupt armed
-
-CHP 1 input character pending
-
-TBUF 8 output buffer
-
-TPOS 32 number of characters output
-
-TTIME 24 time from output start to interrupt
-
-TIREQ 1 output interrupt request
+| Name | Size | Comments |
+|---|---:|---|
+| `CMD` | 16 | command register |
+| `STA` | 8 | status register |
+| `KBUF` | 8 | input buffer |
+| `KPOS` | 32 | number of characters input |
+| `KTIME` | 24 | input polling interval (if 0, the keyboard is polled synchronously with the line clock) |
+| `KIREQ` | 1 | input interrupt request |
+| `KIENB` | 1 | input interrupt enabled |
+| `KARM` | 1 | input interrupt armed |
+| `CHP` | 1 | input character pending |
+| `TBUF` | 8 | output buffer |
+| `TPOS` | 32 | number of characters output |
+| `TTIME` | 24 | time from output start to interrupt |
+| `TIREQ` | 1 | output interrupt request |
 
 TIENB 1 output interrupt enable
 
@@ -716,65 +575,49 @@ The default form is 1 line long, with all columns punched.
 
 The line printer implements these registers:
 
-name size comments
-
-BUF 7 last data item processed
-
-BPTR 8 line buffer pointer
-
-LBUF\[0:131\] 7 line buffer
-
-VFUP 8 vertical forms unit pointer
-
-VFUL 8 vertical forms unit length
-
-VFUT\[0:131\] 8 vertical forms unit table
-
-IREQ 1 line printer interrupt request
-
-IENB 1 line printer interrupt enable
-
-IARM 1 line printer interrupt armed
-
-POS 32 position in the output file
-
-CTIME 24 character processing time
-
-STIME 24 spacing operation time
-
-STOP_IOE 1 stop on I/O error
+| Name | Size | Comments |
+|---|---:|---|
+| `BUF` | 7 | last data item processed |
+| `BPTR` | 8 | line buffer pointer |
+| `LBUF[0:131]` | 7 | line buffer |
+| `VFUP` | 8 | vertical forms unit pointer |
+| `VFUL` | 8 | vertical forms unit length |
+| `VFUT[0:131]` | 8 | vertical forms unit table |
+| `IREQ` | 1 | line printer interrupt request |
+| `IENB` | 1 | line printer interrupt enable |
+| `IARM` | 1 | line printer interrupt armed |
+| `POS` | 32 | position in the output file |
+| `CTIME` | 24 | character processing time |
+| `STIME` | 24 | spacing operation time |
+| `STOP_IOE` | 1 | stop on I/O error |
 
 Error handling is as follows:
 
-error STOP_IOE processed as
-
-not attached 1 report error and stop
-
-0 out of paper
-
-OS I/O error x report error and stop
+| Error | `STOP_IOE` | Processed as |
+|---|---:|---|
+| not attached | 1 | report error and stop |
+| not attached | 0 | out of paper |
+| OS I/O error | x | report error and stop |
 
 ### Line Frequency Clock (LFC)
 
 The line frequency clock (LFC) frequency can be adjusted as follows:
 
-SET LFC 60HZ set frequency to 60Hz
-
-SET LFC 50HZ set frequency to 50Hz
+| Command | Action |
+|---|---|
+| `SET LFC 60HZ` | Set frequency to 60Hz |
+| `SET LFC 50HZ` | Set frequency to 50Hz |
 
 The default is 60Hz.
 
 The line frequency clock implements these registers:
 
-name size comments
-
-IREQ 1 clock interrupt request
-
-IENB 1 clock interrupt enable
-
-IARM 1 clock interrupt armed
-
-TIME 24 clock frequency
+| Name | Size | Comments |
+|---|---:|---|
+| `IREQ` | 1 | clock interrupt request |
+| `IENB` | 1 | clock interrupt enable |
+| `IARM` | 1 | clock interrupt armed |
+| `TIME` | 24 | clock frequency |
 
 The line frequency clock autocalibrates; the clock interval is adjusted
 up or down so that the clock tracks actual elapsed time.
@@ -783,25 +626,17 @@ up or down so that the clock tracks actual elapsed time.
 
 The programmable interval clock (PIC) implements these registers:
 
-name size comments
-
-BUF 16 output buffer
-
-RIC 16 reset interval and rate
-
-CIC 12 current interval
-
-DECR 10 current decrement value
-
-RDP 1 read byte select
-
-OVF 1 interval overflow flag
-
-IREQ 1 clock interrupt request
-
-IENB 1 clock interrupt enable
-
-IARM 1 clock interrupt armed
+| Name | Size | Comments |
+|---|---:|---|
+| `BUF` | 16 | output buffer |
+| `RIC` | 16 | reset interval and rate |
+| `CIC` | 12 | current interval |
+| `DECR` | 10 | current decrement value |
+| `RDP` | 1 | read byte select |
+| `OVF` | 1 | interval overflow flag |
+| `IREQ` | 1 | clock interrupt request |
+| `IENB` | 1 | clock interrupt enable |
+| `IARM` | 1 | clock interrupt armed |
 
 If the interval requested is an exact multiple of 1 millisecond, the
 programmable clock auto-calibrates; if not, it counts instructions.
@@ -811,9 +646,10 @@ programmable clock auto-calibrates; if not, it counts instructions.
 Floppy disk options include the ability to make units write enabled or
 write locked.
 
-SET FDn LOCKED set unit n write locked
-
-SET FDn WRITEENABLED set unit n write enabled
+| Command | Action |
+|---|---|
+| `SET FDn LOCKED` | Set unit `n` write locked |
+| `SET FDn WRITEENABLED` | Set unit `n` write enabled |
 
 Units can also be set ENABLED or DISABLED.
 
@@ -822,43 +658,29 @@ sequence into memory and starts it running.
 
 The floppy disk controller implements these registers:
 
-name size comments
-
-CMD 8 command
-
-STA 8 status
-
-BUF 8 buffer
-
-LRN 16 logical record number
-
-ESTA\[0:5\] 8 extended status bytes
-
-DBUF\[0:127\] 8 transfer buffer
-
-DBPTR 8 transfer buffer pointer
-
-IREQ 1 interrupt request
-
-IENB 1 interrupt enabled
-
-IARM 1 interrupt armed
-
-CTIME 24 command response time
-
-STIME 24 seek time, per cylinder
-
-XTIME 24 transfer time, per byte
-
-STOP_IOE 1 stop on I/O error
+| Name | Size | Comments |
+|---|---:|---|
+| `CMD` | 8 | command |
+| `STA` | 8 | status |
+| `BUF` | 8 | buffer |
+| `LRN` | 16 | logical record number |
+| `ESTA[0:5]` | 8 | extended status bytes |
+| `DBUF[0:127]` | 8 | transfer buffer |
+| `DBPTR` | 8 | transfer buffer pointer |
+| `IREQ` | 1 | interrupt request |
+| `IENB` | 1 | interrupt enabled |
+| `IARM` | 1 | interrupt armed |
+| `CTIME` | 24 | command response time |
+| `STIME` | 24 | seek time, per cylinder |
+| `XTIME` | 24 | transfer time, per byte |
+| `STOP_IOE` | 1 | stop on I/O error |
 
 Error handling is as follows:
 
-error STOP_IOE processed as
-
-not attached 1 report error and stop
-
-0 disk not ready
+| Error | `STOP_IOE` | Processed as |
+|---|---:|---|
+| not attached | 1 | report error and stop |
+| not attached | 0 | disk not ready |
 
 Floppy disk data is buffered in memory; therefore, end of file and OS
 I/O errors cannot occur.
@@ -871,38 +693,33 @@ multiplexers, and 8 line asynchronous multiplexers, with a maximum of 32
 lines. All the lines are modeled as a terminal multiplexer, with PAS as
 the multiplexer controller, and PASL as the individual lines. The PASLAs
 perform input and output through Telnet sessions connected to a
-user-specified port. The ATTACH command specifies the port to be used:
+user-specified port. The `ATTACH` command specifies the port to be used:
 
-ATTACH PAS \<port\> set up listening port
+| Command | Action |
+|---|---|
+| `ATTACH PAS <port>` | Set up listening port |
 
 where port is a decimal number between 1 and 65535 that is not being
 used for other TCP/IP activities.
 
-Each line (each unit of PASL) can be set to one of four modes, UC, 7P,
-7B, or 8B:
+Each line (each unit of PASL) can be set to one of four modes: `UC`,
+`7P`, `7B`, or `8B`:
 
-mode input characters output characters
-
-UC lower case converted lower case converted to upper case,
-
-to upper case, high-order bit cleared,
-
-high-order bit cleared non-printing characters suppressed
-
-7P high-order bit cleared high-order bit cleared,
-
-non-printing characters suppressed
-
-7B high-order bit cleared high-order bit cleared
-
-8B no changes no changes
+| Mode | Input characters | Output characters |
+|---|---|---|
+| `UC` | lower case converted to upper case, high-order bit cleared | lower case converted to upper case, high-order bit cleared, non-printing characters suppressed |
+| `7P` | high-order bit cleared, non-printing characters suppressed | high-order bit cleared |
+| `7B` | high-order bit cleared | high-order bit cleared |
+| `8B` | no changes | no changes |
 
 Each line (each unit of PASL) can also be set for modem control with the
 command SET PASLn DATASET. The defaults are 7b mode and DATASET
 disabled. Finally, each line supports output logging. The SET PASLn LOG
 command enables logging on a line:
 
-SET PASLn LOG=filename log output of line n to filename
+| Command | Action |
+|---|---|
+| `SET PASLn LOG=filename` | Log output of line `n` to `filename` |
 
 The SET PASLn NOLOG command disables logging and closes the open log
 file, if any.
@@ -915,47 +732,33 @@ or a DETACH PAS command.
 
 Other special PASLA commands:
 
-> SHOW PAS CONNECTIONS show current connections
->
-> SHOW PAS STATISTICS show statistics for active connections
->
-> SET PASLn DISCONNECT disconnects the specified line.
+| Command | Action |
+|---|---|
+| `SHOW PAS CONNECTIONS` | Show current connections |
+| `SHOW PAS STATISTICS` | Show statistics for active connections |
+| `SET PASLn DISCONNECT` | Disconnect the specified line |
 
 The controller (PAS) implements these registers:
 
-name size comments
+| Name | Size | Comments |
+|---|---:|---|
+| `STA[0:31]` | 8 | status, lines 0 to 31 |
+| `CMD[0:31]` | 16 | command, lines 0 to 31 |
+| `RBUF[0:31]` | 8 | receive buffer, lines 0 to 31 |
+| `XBUF[0:31]` | 8 | transmit buffer, lines 0 to 31 |
+| `RIREQ` | 32 | receive interrupt requests; right to left, lines 0 to 31 |
+| `RIENB` | 32 | receive interrupt enables |
+| `RARM[0:31]` | 1 | receive interrupt armed |
+| `XIREQ` | 32 | transmit interrupt requests; right to left, lines 0 to 31 |
+| `XIENB` | 32 | transmit interrupt enables |
+| `XARM[0:31]` | 1 | transmit interrupt armed |
+| `RCHP[0:31]` | 1 | receiver character present, lines 0 to 31 |
 
-STA\[0:31\] 8 status, lines 0 to 31
+The lines (PASL) implement these registers:
 
-CMD\[0:31\] 16 command, lines 0 to 31
-
-RBUF\[0:31\] 8 receive buffer, lines 0 to 31
-
-XBUF\[0:31\] 8 transmit buffer, lines 0 to 31
-
-RIREQ 32 receive interrupt requests;
-
-right to left, lines 0 to 31
-
-RIENB 32 receive interrupt enables
-
-RARM\[0:31\] 1 receive interrupt armed
-
-XIREQ 32 transmit interrupt requests;
-
-right to left, lines 0 to 31
-
-XIENB 32 transmit interrupt enables
-
-XARM\[0:31\] 1 transmit interrupt armed
-
-RCHP\[0:31\] 1 receiver character present, lines 0 to 31
-
-The lines (PASL) implements these registers:
-
-name size comments
-
-TIME\[0:31\] 24 transmit time, lines 0 to 31
+| Name | Size | Comments |
+|---|---:|---|
+| `TIME[0:31]` | 24 | transmit time, lines 0 to 31 |
 
 The additional terminals do not support save and restore. All open
 connections are lost when the simulator shuts down or PAS is detached.
@@ -965,13 +768,12 @@ connections are lost when the simulator shuts down or PAS is detached.
 Cartridge disk options include the ability to make units write enabled
 or write locked, and to select the type of drive:
 
-SET DPn LOCKED set unit n write locked
-
-SET DPn WRITEENABLED set unit n write enabled
-
-SET DPn 2315 set unit n to 2315 (2.5MB)
-
-SET DPn 5440 set unit n to 5440 (10MB)
+| Command | Action |
+|---|---|
+| `SET DPn LOCKED` | Set unit `n` write locked |
+| `SET DPn WRITEENABLED` | Set unit `n` write enabled |
+| `SET DPn 2315` | Set unit `n` to 2315 (2.5MB) |
+| `SET DPn 5440` | Set unit `n` to 5440 (10MB) |
 
 Units can also be set ENABLED or DISABLED.
 
@@ -988,90 +790,54 @@ from the first (removable) platter in a 5440; to boot from the second
 
 All drives have 256 8b bytes per sector. The other disk parameters are:
 
-drive cylinders surfaces sectors
-
-2315 203 2 24
-
-5440 408 4 12
+| Drive | Cylinders | Surfaces | Sectors |
+|---|---:|---:|---:|
+| `2315` | 203 | 2 | 24 |
+| `5440` | 408 | 4 | 12 |
 
 The cartridge disk controller implements these registers:
 
-name size comments
-
-CMD 3 current command
-
-STA 8 controller status
-
-BUF 8 controller buffer
-
-HDSC 8 current head/sector select
-
-CYL 8 current cylinder select
-
-DBUF\[0:255\] 8 transfer buffer
-
-DBPTR 16 transfer buffer point
-
-DBLNT 16 transfer buffer length
-
-FIRST 1 first DMA service flag
-
-IREQ 5 interrupt requests; right-to-left,
-
-controller, drives 0 to 3
-
-IENB 5 interrupt enables
-
-IARM\[0:3\] 1 interrupts armed, drives 0 to 3
-
-STIME 24 seek latency, per cylinder
-
-RTIME 24 rotational latency, per sector
-
-WTIME 24 inter-word latency
+| Name | Size | Comments |
+|---|---:|---|
+| `CMD` | 3 | current command |
+| `STA` | 8 | controller status |
+| `BUF` | 8 | controller buffer |
+| `HDSC` | 8 | current head/sector select |
+| `CYL` | 8 | current cylinder select |
+| `DBUF[0:255]` | 8 | transfer buffer |
+| `DBPTR` | 16 | transfer buffer point |
+| `DBLNT` | 16 | transfer buffer length |
+| `FIRST` | 1 | first DMA service flag |
+| `IREQ` | 5 | interrupt requests; right-to-left, controller and drives 0 to 3 |
+| `IENB` | 5 | interrupt enables |
+| `IARM[0:3]` | 1 | interrupts armed, drives 0 to 3 |
+| `STIME` | 24 | seek latency, per cylinder |
+| `RTIME` | 24 | rotational latency, per sector |
+| `WTIME` | 24 | inter-word latency |
 
 Error handling is as follows:
 
-error processed as
-
-not attached disk not ready
-
-end of file assume rest of disk is zero
-
-OS I/O error report error and stop
+| Error | Processed as |
+|---|---|
+| not attached | disk not ready |
+| end of file | assume rest of disk is zero |
+| OS I/O error | report error and stop |
 
 ## Mass Storage Module/Intelligent Disk Controller (DM)
 
 MSM/IDC disk controller options include the ability to make units write
 enabled or write locked, and to select the type of drive:
 
-SET DMn LOCKED set unit n write locked
-
-SET DMn WRITEENABLED set unit n write enabled
-
-SET DMn MSM80 set unit n to storage module, 80MB
-
-(67MB formatted)
-
-SET DMn MSM300 set unit n to storage module, 300MB
-
-(262MB formatted)
-
-SET DMn MCCD16 set unit n to medium capacity, 16MB
-
-(13.5MB formatted)
-
-SET DMn MCCD48 set unit n to medium capacity, 48MB
-
-(40.5MB formatted)
-
-SET DMn MCCD80 set unit n to medium capacity, 80MB
-
-(67MB formatted)
-
-SET DMn MSM330F set unit n to storage module, 330MB
-
-(300MB formatted)
+| Command | Action |
+|---|---|
+| `SET DMn LOCKED` | Set unit `n` write locked |
+| `SET DMn WRITEENABLED` | Set unit `n` write enabled |
+| `SET DMn MSM80` | Set unit `n` to storage module, 80MB (67MB formatted) |
+| `SET DMn MSM300` | Set unit `n` to storage module, 300MB (262MB formatted) |
+| `SET DMn MCCD16` | Set unit `n` to medium capacity, 16MB (13.5MB formatted) |
+| `SET DMn MCCD48` | Set unit `n` to medium capacity, 48MB (40.5MB formatted) |
+| `SET DMn MCCD80` | Set unit `n` to medium capacity, 80MB (67MB formatted) |
+| `SET DMn MSM330F` | Set unit `n` to storage module, 330MB (300MB formatted) |
 
 Units can also be set ENABLED or DISABLED.
 
@@ -1088,87 +854,57 @@ other drives.
 
 All drives have 256 8b bytes per sector. The other disk parameters are:
 
-Drive cylinders surfaces sectors
-
-MSM80 823 5 64
-
-MSM300 823 19 64
-
-MCCD16 823 1 64
-
-MCCD48 823 3 64
-
-MCCD80 823 5 64
-
-MSM300F 1024 16 64
+| Drive | Cylinders | Surfaces | Sectors |
+|---|---:|---:|---:|
+| `MSM80` | 823 | 5 | 64 |
+| `MSM300` | 823 | 19 | 64 |
+| `MCCD16` | 823 | 1 | 64 |
+| `MCCD48` | 823 | 3 | 64 |
+| `MCCD80` | 823 | 5 | 64 |
+| `MSM300F` | 1024 | 16 | 64 |
 
 The MSM/IDC disk controller implements these registers:
 
-name size comments
-
-STA 8 controller status
-
-BUFC 8 controller buffer
-
-SEC 8 current sector select
-
-BUFD 8 drive buffer
-
-DBUF\[0:767\] 8 transfer buffer
-
-DBPTR 16 transfer buffer point
-
-DBLNT 16 transfer buffer length
-
-FIRST 1 first DMA service flag
-
-CWDPTR 2 controller write data byte pointer
-
-DWDPTR 1 drive write data byte pointer
-
-IREQ 5 interrupt requests; right-to-left,
-
-controller, drives 0 to 3
-
-IENB 5 interrupt enables
-
-SIREQ 5 saved interrupt requests
-
-ICARM 1 controller interrupt armed
-
-IDARM\[0:3\] 1 drive interrupts armed, drives 0 to 3
-
-STIME 24 seek latency, per cylinder
-
-RTIME 24 rotational latency, per sector
-
-WTIME 24 inter-word latency
+| Name | Size | Comments |
+|---|---:|---|
+| `STA` | 8 | controller status |
+| `BUFC` | 8 | controller buffer |
+| `SEC` | 8 | current sector select |
+| `BUFD` | 8 | drive buffer |
+| `DBUF[0:767]` | 8 | transfer buffer |
+| `DBPTR` | 16 | transfer buffer point |
+| `DBLNT` | 16 | transfer buffer length |
+| `FIRST` | 1 | first DMA service flag |
+| `CWDPTR` | 2 | controller write data byte pointer |
+| `DWDPTR` | 1 | drive write data byte pointer |
+| `IREQ` | 5 | interrupt requests; right-to-left, controller and drives 0 to 3 |
+| `IENB` | 5 | interrupt enables |
+| `SIREQ` | 5 | saved interrupt requests |
+| `ICARM` | 1 | controller interrupt armed |
+| `IDARM[0:3]` | 1 | drive interrupts armed, drives 0 to 3 |
+| `STIME` | 24 | seek latency, per cylinder |
+| `RTIME` | 24 | rotational latency, per sector |
+| `WTIME` | 24 | inter-word latency |
 
 Error handling is as follows:
 
-error processed as
-
-not attached disk not ready
-
-end of file assume rest of disk is zero
-
-OS I/O error report error and stop
+| Error | Processed as |
+|---|---|
+| not attached | disk not ready |
+| end of file | assume rest of disk is zero |
+| OS I/O error | report error and stop |
 
 ## Magnetic Tape Controller (MT)
 
 Magnetic tape options include the ability to make units write enabled or
 write locked.
 
-SET MTn LOCKED set unit n write locked
-
-SET MTn WRITEENABLED set unit n write enabled
-
-Magnetic tape units can be set to a specific reel capacity in MB, or to
-unlimited capacity:
-
-SET MTn CAPAC=m set unit n capacity to m MB (0 = unlimited)
-
-SHOW MTn CAPAC show unit n capacity in MB
+| Command | Action |
+|---|---|
+| `SET MTn LOCKED` | Set unit `n` write locked |
+| `SET MTn WRITEENABLED` | Set unit `n` write enabled |
+| `SET MTn CAPAC=m` | Set unit `n` capacity to `m` MB (`0` = unlimited) |
+| `SHOW MTn CAPAC` | Show unit `n` capacity in MB |
 
 Units can also be set ENABLED or DISABLED.
 
@@ -1177,73 +913,53 @@ sequence into memory and starts it running.
 
 The magnetic tape controller implements these registers:
 
-name size comments
-
-CMD 8 command
-
-STA 8 status
-
-BUF 8 buffer
-
-DBUF\[0:65535\] 8 transfer buffer
-
-DBPTR 16 transfer buffer pointer
-
-DBLNT 16 transfer buffer length
-
-XFR 1 transfer in progress flag
-
-FIRST 1 first DMA service flag
-
-IREQ 4 interrupt requests; right to left,
-
-drives 0 to 3
-
-IENB 4 interrupt enables
-
-IARM\[0:3\] 1 interrupts armed, drives 0 to 3
-
-STOP_IOE 1 stop on I/O error
-
-WTIME 1 word transfer time
-
-RTIME 1 interrecord latency
-
-UST\[0:3\] 8 unit status, drives 0 to 3
-
-POS\[0:3\] 32 tape position, drives 0 to 3
+| Name | Size | Comments |
+|---|---:|---|
+| `CMD` | 8 | command |
+| `STA` | 8 | status |
+| `BUF` | 8 | buffer |
+| `DBUF[0:65535]` | 8 | transfer buffer |
+| `DBPTR` | 16 | transfer buffer pointer |
+| `DBLNT` | 16 | transfer buffer length |
+| `XFR` | 1 | transfer in progress flag |
+| `FIRST` | 1 | first DMA service flag |
+| `IREQ` | 4 | interrupt requests; right to left, drives 0 to 3 |
+| `IENB` | 4 | interrupt enables |
+| `IARM[0:3]` | 1 | interrupts armed, drives 0 to 3 |
+| `STOP_IOE` | 1 | stop on I/O error |
+| `WTIME` | 1 | word transfer time |
+| `RTIME` | 1 | interrecord latency |
+| `UST[0:3]` | 8 | unit status, drives 0 to 3 |
+| `POS[0:3]` | 32 | tape position, drives 0 to 3 |
 
 Error handling is as follows:
 
-error processed as
-
-not attached tape not ready; if STOP_IOE, stop
-
-end of file set error flag
-
-OS I/O error set error flag; if STOP_IOE, stop
+| Error | Processed as |
+|---|---|
+| not attached | tape not ready; if `STOP_IOE`, stop |
+| end of file | set error flag |
+| OS I/O error | set error flag; if `STOP_IOE`, stop |
 
 # Symbolic Display and Input
 
 The Interdata simulator implements symbolic display and input. Display
 is controlled by command line switches:
 
--a display byte as ASCII character
-
--c display halfword as two packed ASCII characters
-
--m display instruction mnemonics
+| Switch | Action |
+|---|---|
+| `-a` | display byte as ASCII character |
+| `-c` | display halfword as two packed ASCII characters |
+| `-m` | display instruction mnemonics |
 
 Input parsing is controlled by the first character typed in or by
 command line switches:
 
-' or -a ASCII character
-
-" or -c two packed ASCII characters
-
-alphabetic instruction mnemonic
-
-numeric hexadecimal number
+| Input | Meaning |
+|---|---|
+| `'` or `-a` | ASCII character |
+| `"` or `-c` | two packed ASCII characters |
+| alphabetic | instruction mnemonic |
+| numeric | hexadecimal number |
 
 ## 16b Instruction Input
 
@@ -1251,47 +967,59 @@ Instruction input uses standard Interdata assembler syntax. There are
 seven instruction classes: short branch, extended short branch, short
 immediate, register, register-register, memory, and register-memory.
 
-Short branch instructions have the format
+Short branch instructions have the format:
 
+```
 sbop mask,address
+```
 
 where the mask is a hex (decimal) number between 0 and F (15), and the
 address is within +32 (forward branch) or -32 (backward branch) of the
 current location.
 
-Extended short branch instructions have the format
+Extended short branch instructions have the format:
 
+```
 sbxop address
+```
 
 where the address is within +32 or -32 of the current location. For
 extended short branches, the simulator chooses the forward or backward
 direction automatically.
 
-Short immediate instructions have the format
+Short immediate instructions have the format:
 
+```
 siop regnum,immed
+```
 
 where the register number is a hex (decimal) number, optionally preceded
 by R, between 0 and F (15), and the immediate is a hex digit between 0
 and F.
 
-Register instructions have the format
+Register instructions have the format:
 
+```
 rop regnum
+```
 
 where the register number is a hex (decimal) number, optionally preceded
 by R, between 0 and F (15).
 
-Register-register instructions have the format
+Register-register instructions have the format:
 
+```
 rrop regnum,regnum
+```
 
 where the register numbers are hex (decimal) numbers, optionally
 preceded by R, between 0 and F (15).
 
-Memory instructions have the format
+Memory instructions have the format:
 
+```
 mop address{(index)}
+```
 
 where address is a hex number between 0 and 0xFFFF, and the index
 register is a hex (decimal) number, optionally preceded by R, between 1
