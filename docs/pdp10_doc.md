@@ -1061,7 +1061,7 @@ controlled by command line switches:
 | switch | action                                      |
 |--------|---------------------------------------------|
 | `-a`   | display as ASCII character                  |
-| `-c`   | display as six six-bit packed characters    |
+| `-c`   | display as six sixbit packed characters     |
 | `-p`   | display as five packed ASCII (7b) characters |
 | `-m`   | display instruction mnemonics               |
 | `-v`   | interpret address as virtual                |
@@ -1074,7 +1074,7 @@ command line switches:
 | input       | parsed as                               |
 |-------------|-----------------------------------------|
 | `'` or `-a` | ASCII character                         |
-| `"` or `-c` | six six-bit packed characters           |
+| `"` or `-c` | six sixbit packed characters            |
 | `#` or `-p` | five packed ASCII (7b) characters       |
 | alphabetic  | instruction mnemonic                    |
 | numeric     | octal number                            |

@@ -1056,8 +1056,8 @@ controlled by command line switches:
 | switch | action                                      |
 |--------|---------------------------------------------|
 | `-a`   | display as ASCII character                  |
-| `-c`   | display as two packed six-bit characters    |
-| `-t`   | display as two packed TSS/8 six-bit characters |
+| `-c`   | display as two packed sixbit characters     |
+| `-t`   | display as two packed TSS/8 sixbit characters |
 | `-m`   | display instruction mnemonics               |
 
 Input parsing is controlled by the first character typed in or by
@@ -1066,8 +1066,8 @@ command line switches:
 | input       | parsed as                          |
 |-------------|------------------------------------|
 | `'` or `-a` | ASCII character                    |
-| `"` or `-c` | two packed six-bit characters      |
-| `#` or `-t` | two packed TSS/8 six-bit characters |
+| `"` or `-c` | two packed sixbit characters       |
+| `#` or `-t` | two packed TSS/8 sixbit characters |
 | alphabetic  | instruction mnemonic               |
 | numeric     | octal number                       |
 
