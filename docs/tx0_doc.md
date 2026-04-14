@@ -59,7 +59,7 @@ The TX-0 is configured as follows:
 | Device name(s) | Simulates |
 |---|---|
 | `CPU` | TX-0 CPU with up to 64KW of memory |
-| `PETR` | Photo Electric Tape Rader |
+| `PETR` | Photo Electric Tape Reader |
 | `PTP` | Paper Tape Punch |
 | `TTI` | FlexoWriter input |
 | `TTO` | FlexoWriter output |
@@ -71,9 +71,11 @@ The TX-0 simulator implements the following unique stop conditions:
 
 - An invalid interrupt request is made
 
-The LOAD commands has an optional argument to specify the load address:
+The LOAD command has an optional argument to specify the load address:
 
-LOAD \<filename\> {\<starting address\>}
+```
+LOAD <filename> {<starting address>}
+```
 
 The LOAD command loads a paper-tape bootstrap format file at the
 specified address. If no address is specified, loading starts at
@@ -85,30 +87,25 @@ The TX-0 was upgraded over the years from the original 1956 “Standard”
 instruction set to a later “Extended” instruction set completed in 1962.
 In addition, the TX-0 CPU can operate in one of three operating modes:
 
-Read In Mode Instruction words are fetched from the tape.
+| Mode | Meaning |
+|---|---|
+| Read In Mode | Instruction words are fetched from the tape. |
+| Test Mode | Instruction words are fetched from the TBR. |
+| Normal Mode | Instruction words are fetched from memory. |
 
-Test Mode Instruction words are fetched from the TBR.
-
-Normal Mode Instruction words are fetched from memory.
-
-only CPU options are the presence of the extended arithmetic operator
+The only CPU options are the presence of the extended arithmetic operator
 and the size of main memory.
 
-SET CPU TX0STD set CPU model to TX-0 “Standard.”
-
-SET CPU TX0EXT set CPU model to TX-0 “Extended.”
-
-SET CPU NORMAL set CPU mode to Normal Mode
-
-SET CPU TEST set CPU Mode to Test Mode
-
-SET CPU READIN set CPU Mode to Read In Mode
-
-SET CPU 4K set memory size = 4K (T-Memory)
-
-SET CPU 8K set memory size = 8K (T-Memory)
-
-SET CPU 64K set memory size = 64K (Core Memory)
+| Command | Action |
+|---|---|
+| `SET CPU TX0STD` | set CPU model to TX-0 “Standard.” |
+| `SET CPU TX0EXT` | set CPU model to TX-0 “Extended.” |
+| `SET CPU NORMAL` | set CPU mode to Normal Mode |
+| `SET CPU TEST` | set CPU mode to Test Mode |
+| `SET CPU READIN` | set CPU mode to Read In Mode |
+| `SET CPU 4K` | set memory size = 4K (T-Memory) |
+| `SET CPU 8K` | set memory size = 8K (T-Memory) |
+| `SET CPU 64K` | set memory size = 64K (Core Memory) |
 
 If memory size is being reduced, and the memory being truncated contains
 non-zero data, the simulator asks for confirmation. Data in the
@@ -147,25 +144,20 @@ solid state circuitry. Lines without seventh hole punched are ignored by
 the PETR. As each line of the tape is read in, the data is stored into
 an 18-bit BUF register with bits mapped as follows:
 
-Tape BUF
+| Tape | BUF |
+|---|---|
+| 0 | 0 |
+| 1 | 3 |
+| 2 | 6 |
+| 3 | 9 |
+| 4 | 12 |
+| 5 | 15 |
 
-1.  0
-
-2.  3
-
-3.  6
-
-4.  9
-
-5.  12
-
-6.  15
-
-Up to three lines of tape may be read into a single the single BUF
+Up to three lines of tape may be read into the single BUF
 register. Before subsequent lines are read, the BUF register is cycled
 one bit right.
 
-The PETR reads data from or a disk file. The POS register specifies the
+The PETR reads data from a disk file. The POS register specifies the
 number of the next data item to be read. Thus, by changing POS, the user
 can backspace or advance the reader.
 
@@ -188,11 +180,10 @@ punch.
 
 The paper tape punch implements these registers:
 
-name size comments
-
-BUF 8 last data item processed
-
-POS 32 position in the output file
+| Name | Size | Comments |
+|---|---|---|
+| `BUF` | 8 | last data item processed |
+| `POS` | 32 | position in the output file |
 
 ### Console Typewriter Input (TTI), Output (TTO)
 
@@ -205,33 +196,24 @@ ASCII for display on the simulator console window.
 
 The typewriter input implements these registers:
 
-name size comments
-
-BUF 6 typewriter buffer (shared)
-
-UC 1 upper case/lower case state (shared)
-
-DONE 1 input ready flag
-
-POS 32 number of characters input
-
-TIME 24 keyboard polling interval
+| Name | Size | Comments |
+|---|---|---|
+| `BUF` | 6 | typewriter buffer (shared) |
+| `UC` | 1 | upper case/lower case state (shared) |
+| `DONE` | 1 | input ready flag |
+| `POS` | 32 | number of characters input |
+| `TIME` | 24 | keyboard polling interval |
 
 The typewriter output implements these registers:
 
-name size comments
-
-BUF 6 typewriter buffer (shared)
-
-UC 1 upper case/lower case state (shared)
-
-RPLS 1 return restart pulse flag
-
-DONE 1 output done flag
-
-POS 32 number of characters output
-
-TIME 24 time from I/O initiation to interrupt
+| Name | Size | Comments |
+|---|---|---|
+| `BUF` | 6 | typewriter buffer (shared) |
+| `UC` | 1 | upper case/lower case state (shared) |
+| `RPLS` | 1 | return restart pulse flag |
+| `DONE` | 1 | output done flag |
+| `POS` | 32 | number of characters output |
+| `TIME` | 24 | time from I/O initiation to interrupt |
 
 ### Display (DPY)
 
@@ -264,15 +246,13 @@ Several example tapes can be used to test the TX-0 simulation.
 
 The tic-tac-toe game can be run using the tic.simh startup script:
 
-> ; TX-0 Initialization file for the tic-tac-toe game
->
-> set dpy enable
->
-> att petr bin_tic-tac-toe_new_code_12-16-61.bin
->
-> boot petr
->
-> g
+```
+; TX-0 Initialization file for the tic-tac-toe game
+set dpy enable
+att petr bin_tic-tac-toe_new_code_12-16-61.bin
+boot petr
+g
+```
 
 In this game, you simply use the light pen (mouse) to select where you
 want to place the “X” (the TX-0 is “O.”). You must click right on top of
@@ -281,7 +261,7 @@ your “X” into.
 
 ### MOUSE Game
 
-The MOUSE game, written by John E. Ward is a more complex game with
+The MOUSE game, written by John E. Ward, is a more complex game that
 requires involvement not only with the light pen, but also the TAC. In
 simulation, the TAC can be accessed by stopping the simulation and using
 the Deposit command to change the value of the TAC to select various
@@ -289,52 +269,39 @@ modes.
 
 Here is the configuration file, mouse.simh:
 
-> ; TX-0 Initialization file for the Mouse Maze Game
->
-> set dpy enable
->
-> att petr bin_newMouse_3-22-66.bin
->
-> ; The mouse maze game mode is manipulated under TAC control.
->
-> ; 400014 = Erase Wall mode.
->
-> ; 400024 = Write Wall mode.
->
-> ; 400011 = Erase Cheese mode.
->
-> ; 400021 = Write Cheese mode.
->
-> ; 400012 = Erase Mouse mode.
->
-> ; 400022 = Write Mouse mode.
->
-> ; 400002 = "do mouse" (start the mouse searching.)
->
-> ; 400017 = "do over"
->
-> ; Start in "Erase Wall" mode
->
-> d tac 400014
->
-> boot petr
+```
+; TX-0 Initialization file for the Mouse Maze Game
+set dpy enable
+att petr bin_newMouse_3-22-66.bin
+
+; The mouse maze game mode is manipulated under TAC control.
+; 400014 = Erase Wall mode.
+; 400024 = Write Wall mode.
+; 400011 = Erase Cheese mode.
+; 400021 = Write Cheese mode.
+; 400012 = Erase Mouse mode.
+; 400022 = Write Mouse mode.
+; 400002 = "do mouse" (start the mouse searching.)
+; 400017 = "do over"
+
+; Start in "Erase Wall" mode
+d tac 400014
+boot petr
+```
 
 When this game starts, it is in “Erase Wall” mode. Use this mode to
 create the maze, by using the computer mouse to erase unwanted walls
 from the grid. When done, press Control-E to get to the simulator
 command prompt, and change to “Write Cheese” mode:
 
-> C:\\TX-0.exe mouse.simh
->
-> TX-0 simulator V4.0-0
->
-> mouse.simh-16\> boot petr
->
-> Simulation stopped, PC: 000161 (trn 00275 (Transfer Negative))
->
-> sim\> d tac 400021
->
-> sim\> g
+```
+C:\TX-0.exe mouse.simh
+TX-0 simulator V4.0-0
+mouse.simh-16> boot petr
+Simulation stopped, PC: 000161 (trn 00275 (Transfer Negative))
+sim> d tac 400021
+sim> g
+```
 
 Next place the cheese with the computer mouse, and then repeat the
 procedure above to change the TAC to “do mouse” mode. The TX-0 should
