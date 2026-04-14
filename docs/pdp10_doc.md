@@ -115,12 +115,12 @@ The PDP-10 simulator is configured as follows:
 | `DZ`           | DZ11 8-line terminal multiplexer (up to 4) |
 | `LP20`         | LP20 line printer                          |
 | `CR`           | CD20 (CD11) card reader                    |
-| `RP` | RH11 controller with eight RP04/RP05/RP06/RP07,<br>RM03/RM05/RM80 drives |
-| `TU`   | RH11/TM02 controller with eight TU45 drives |
-| `DMR0` | first DMR11 Synchronous network controller  |
-| `DMR1` | second DMR11 Synchronous network controller |
-| `DMR2` | third DMR11 Synchronous network controller  |
-| `DMR3` | fourth DMR11 Synchronous network controller |
+| `RP`   | RH11 controller with eight RP04/RP05/RP06/RP07,<br>RM03/RM05/RM80 drives |
+| `TU`   | RH11/TM02 controller with eight TU45 drives                           |
+| `DMR0` | first DMR11 synchronous network controller                            |
+| `DMR1` | second DMR11 synchronous network controller                           |
+| `DMR2` | third DMR11 synchronous network controller                            |
+| `DMR3` | fourth DMR11 synchronous network controller                           |
 
 The `PTR`, `PTP`, `RX211`, `CR`, `DMR0`, `DMR1`, `DMR2` and `DMR3` are
 initially set `DISABLED`. The `DZ11` and `LP20` can also be set
@@ -156,7 +156,7 @@ The `CPU` options allow the user to specify the operating system to be
 run. This in turn controls the microcode feature set, how system
 idling is detected, and how the system timer runs.
 
-|                  |                                            |
+| command          | action                                     |
 |------------------|--------------------------------------------|
 | `SET CPU TOPS10` | TOPS-10                                    |
 | `SET CPU TOPS20` | TOPS-20                                    |
@@ -166,7 +166,7 @@ idling is detected, and how the system timer runs.
 The `CPU` implements a `SHOW` command to display the I/O space address
 map:
 
-|                    |                            |
+| command            | action                     |
 |--------------------|----------------------------|
 | `SHOW CPU IOSPACE` | show I/O space address map |
 
@@ -202,10 +202,11 @@ the control registers for the interrupt system.
 | `APRENB`    |    8 | APR flags enabled                  |
 | `APRFLG`    |    8 | APR flags active                   |
 | `APRLVL`    |    3 | PI level for APR interrupt         |
-| `IND_MAX`   |    8 | indirect address nesting limit;<br>If 0, no limit<br>XCT_MAX 8 execute chaining limit; if 0, no limit |
+| `IND_MAX`   |    8 | indirect address nesting limit;<br>if 0, no limit |
+| `XCT_MAX`   |    8 | execute chaining limit;<br>if 0, no limit |
 | `PCQ[0:63]` |   18 | PC prior to last jump or interrupt;<br>most recent PC change first |
-| `WRU`        | 8  | interrupt character |
-| `REG[0:127]` | 36 | register sets       |
+| `WRU`       |    8 | interrupt character               |
+| `REG[0:127]` |   36 | register sets                    |
 
 The CPU attempts to detect when the simulator is idle. When idle, the
 simulator does not use any resources on the host system. Idle
@@ -308,7 +309,7 @@ restored for the entire system with the `SET UBA AUTOCONFIGURE`
 command.
 
 The current I/O map can be displayed with the `SHOW CPU IOSPACE`
-command. Addresses that have set by autoconfiguration to Unibus
+command. Addresses that have been set by autoconfiguration to Unibus
 floating addresses or vectors are marked with an asterisk (\*).
 
 All devices support the `SHOW <device> ADDRESS` and `SHOW <device>
@@ -320,7 +321,7 @@ respectively.
 The front end is the system console. The keyboard input is unit 0, the
 console output is unit 1. It supports one option:
 
-|               |                                  |
+| command       | action                           |
 |---------------|----------------------------------|
 | `SET FE STOP` | halt the PDP-10 operating system |
 
@@ -356,10 +357,10 @@ the time of day clock used to get the date and time at system
 startup. Because most PDP-10 software is not Y2K compliant, the timer
 implements one option:
 
-|   |   |
-|---|---|
+| command         | action                                                           |
+|-----------------|------------------------------------------------------------------|
 | `SET TIM NOY2K` | software not Y2K compliant, limit time<br>of day clock to 1999 (default) |
-| `SET TIM Y2K` | software is Y2K compliant |
+| `SET TIM Y2K`   | software is Y2K compliant                                        |
 
 The timer has the following registers:
 
@@ -452,7 +453,7 @@ Error handling is as follows:
 The DZ11 is an 8-line terminal multiplexer. Up to 4 DZ11's (32 lines)
 are supported. The number of lines can be changed with the command
 
-|                  |                       |
+| command          | action                |
 |------------------|-----------------------|
 | `SET DZ LINES=n` | set line count to `n` |
 
@@ -460,11 +461,11 @@ The line count must be a multiple of 8, with a maximum of 32.
 
 The DZ11 supports three character processing modes, `7P`, `7B`, and `8B`:
 
-| mode | input characters | output characters |
-|------|------------------|-------------------|
+| mode | input characters       | output characters                                      |
+|------|------------------------|--------------------------------------------------------|
 | `7P` | high-order bit cleared | high-order bit cleared,<br>non-printing characters suppressed |
-| `7B` | high-order bit cleared | high-order bit cleared |
-| `8B` | no changes no changes  |
+| `7B` | high-order bit cleared | high-order bit cleared                                 |
+| `8B` | no changes             | no changes                                             |
 
 The default is `7B`, for compatibility with TOPS-20.
 
@@ -494,7 +495,7 @@ The terminal lines perform input and output through Telnet sessions
 connected to a user-specified port. The `ATTACH` command specifies the
 port to be used:
 
-|                          |                       |
+| command                  | action                |
 |--------------------------|-----------------------|
 | `ATTACH {-am} DZ <port>` | set up listening port |
 
@@ -514,7 +515,7 @@ open until disconnected by the simulated program, the Telnet client, a
 
 Other special DZ commands:
 
-|                                |                                        |
+| command                        | action                                 |
 |--------------------------------|----------------------------------------|
 | `SHOW DZ CONNECTIONS`          | show current connections               |
 | `SHOW DZ STATISTICS`           | show statistics for active connections |
@@ -546,7 +547,7 @@ lost when the simulator shuts down or the `DZ` is detached.
 The primary, and officially supported networking device for the KS10
 is the `KMC`/`DUP` combination, running COMM IOP-DUP microcode. The
 combination is called a `KDP` device. This combination presents a DMA
-device to the operating system, with the KMC11-A handing DMA and DDCMP
+device to the operating system, with the KMC11-A handling DMA and DDCMP
 message framing, and controlling one or more DUP11 synchronous
 communications interfaces that transmit and receive the serial data on
 a synchronous line. The protocol is DDCMP, and both DECnet and ANF-10
@@ -580,7 +581,7 @@ DETACH DUPn
 ```
 
 The destination parameter determines how the virtual connection to
-another system is established. There are two modes, which effect only
+another system is established. There are two modes, which affect only
 the establishment of the virtual connection; DDCMP itself is
 symmetric.
 
@@ -623,12 +624,12 @@ interoperate.
 The `RP` controller implements the Massbus 18b (RH11) direct interface
 for large disk drives. `RP` options include the ability to set units
 write enabled or write locked, to set the drive type to one of six
-disk types, or autosize:
+disk types, or to autosize:
 
-|                        |                                       |
+| command                | action                                |
 |------------------------|---------------------------------------|
-| `SET RPn LOCKED`       | set unit `n` write locked               |
-| `SET RPn WRITEENABLED` | set unit `n` write enabled              |
+| `SET RPn LOCKED`       | set unit `n` write locked             |
+| `SET RPn WRITEENABLED` | set unit `n` write enabled            |
 | `SET RPn RM03`         | set type to `RM03` (same as `RM02`)   |
 | `SET RPn RM05`         | set type to `RM05`                    |
 | `SET RPn RM80`         | set type to `RM80`                    |
@@ -682,7 +683,6 @@ Error handling is as follows:
 | not attached | 1          | report error and stop       |
 |              | 0          | disk not ready              |
 |              |            |                             |
-|              |            |                             |
 | end of file  | x          | assume rest of disk is zero |
 |              |            |                             |
 | OS I/O error | x          | report error and stop       |
@@ -693,7 +693,7 @@ The magnetic tape simulator simulates an RH11 Massbus adapter with one
 TM02 formatter and up to eight TU45 drives. Magnetic tape options
 include the ability to make units write enabled or locked.
 
-|                        |                            |
+| command                | action                     |
 |------------------------|----------------------------|
 | `SET TUn LOCKED`       | set unit `n` write locked  |
 | `SET TUn WRITEENABLED` | set unit `n` write enabled |
@@ -701,7 +701,7 @@ include the ability to make units write enabled or locked.
 Magnetic tape units can be set to a specific reel capacity in MB, or
 to unlimited capacity:
 
-|                   |                                                 |
+| command           | action                                          |
 |-------------------|-------------------------------------------------|
 | `SET TUn CAPAC=m` | set unit `n` capacity to `m` MB (0 = unlimited) |
 | `SHOW TUn CAPAC`  | show unit `n` capacity in MB                    |
@@ -735,31 +735,33 @@ The magnetic tape controller implements these registers:
 Error handling is as follows:
 
 
-| error        | processed as                            |
-|--------------|-----------------------------------------|
-| not attached | tape not ready; if `STOP_IOE`, stop     |
-| end of file  | operation incomplete                    |
-| OS I/O       | error parity error; if `STOP_IOE`, stop |
+| error        | processed as                        |
+|--------------|-------------------------------------|
+| not attached | tape not ready; if `STOP_IOE`, stop |
+|              |                                     |
+| end of file  | operation incomplete                |
+|              |                                     |
+| OS I/O error | parity error; if `STOP_IOE`, stop   |
 
 ## LP20 DMA Line Printer (`LP20`)
 
 The `LP20` is a DMA-based line printer controller. There is one line
 printer option to clear the vertical forms unit (`VFU`):
 
-|                     |                                                        |
+| command             | action                                                 |
 |---------------------|--------------------------------------------------------|
 | `SET LP20 VFUCLEAR` | clear the vertical forms unit and<br>translation table |
 
 Additionally:
 
-|   |   |
-|---|---|
-| `SET LP20 VFUTYPE=DAVFU` | (Default) Printer has an electronic `VFU` |
-| `SET LP20 VFUTYPE=OPTICAL` | Printer has an optically-read paper tape `VFU` |
-| `SET LP20 VFUTYPE=OPTICAL=file` | Specifies an ASCII `VFU` file that defines the paper tape. |
-| `SET LP20 LPI={6-LPI\|8-LPI}` | Specifies the vertical pitch of the printer (6 is default) |
-| `SET LP20 TOPOFFORM` | Advances the `VFU` to the top-of-form channel, aligning it with the output. |
-| `SHOW VFU` | Displays the currently loaded `VFU` (electronic or optical) |
+| command                        | action                                                  |
+|--------------------------------|---------------------------------------------------------|
+| `SET LP20 VFUTYPE=DAVFU`       | (default) printer has an electronic `VFU`              |
+| `SET LP20 VFUTYPE=OPTICAL`     | printer has an optically-read paper tape `VFU`         |
+| `SET LP20 VFUTYPE=OPTICAL=file` | specifies an ASCII `VFU` file that defines the paper tape |
+| `SET LP20 LPI={6-LPI\|8-LPI}`  | specifies the vertical pitch of the printer (6 is default) |
+| `SET LP20 TOPOFFORM`           | advances the `VFU` to the top-of-form channel, aligning it with the output |
+| `SHOW VFU`                     | displays the currently loaded `VFU` (electronic or optical) |
 
 The default optical `VFU` file is the DEC standard tape for a 66 line,
 6LPI form with FORTRAN carriage control. There is no default `DAVFU`
@@ -850,7 +852,7 @@ Error handling is as follows:
 RX211 options include the ability to set units write enabled or write
 locked, single or double density, or autosized:
 
-|                        |                                       |
+| command                | action                                |
 |------------------------|---------------------------------------|
 | `SET RYn LOCKED`       | set unit `n` write locked             |
 | `SET RYn WRITEENABLED` | set unit `n` write enabled            |
@@ -890,6 +892,7 @@ Error handling is as follows:
 |--------------|------------|-----------------------|
 | not attached | 1          | report error and stop |
 |              | 0          | disk not ready        |
+|              |            |                       |
 
 `RX02` data files are buffered in memory; therefore, end of file and
 OS I/O errors cannot occur.
@@ -909,7 +912,7 @@ ASCII files. Card Image files can contain such interchange information
 as card-stock color, corner cuts, special artwork, as well as the
 binary punch data representing all 12 columns. Complete details on the
 format, as well as sample code, are available at Prof. Jones's site:
-<>https://www.cs.uiowa.edu/~jones/cards/>.
+<https://www.cs.uiowa.edu/~jones/cards/>.
 
 The card reader supports ASCII, card image, and column binary format
 card “decks.” When reading plain ASCII files, lines longer than 80
@@ -949,7 +952,7 @@ This command should be given after a deck is attached to the
 simulator. The mappings above are completely described at
 <https://www.cs.uiowa.edu/~jones/cards/codes.html>. Note that DEC
 typically used `029` or `026FTN` mappings. The 36-bit device drivers use
-those tables, however most card I/O is though the GALAXY Batch
+those tables, however most card I/O is through the GALAXY Batch
 subsystem, which uses the DECASCII translations. (These include codes
 for full 7-bit ASCII translation.)
 
@@ -1055,25 +1058,26 @@ act as a second status register during non-data transfer periods.
 The PDP-10 simulator implements symbolic display and input. Display is
 controlled by command line switches:
 
-|      |                                              |
-|------|----------------------------------------------|
-| `-a` | display as ASCII character                   |
-| `-c` | display as six sixbit packed characters      |
-| `-p` | display as five packed ASCII (7b) characters |
-| `-m` | display instruction mnemonics                |
-| `-v` | interpret address as virtual                 |
-| `-e` | force executive mode                         |
-| `-u` | force user mode                              |
+| switch | action                                      |
+|--------|---------------------------------------------|
+| `-a`   | display as ASCII character                  |
+| `-c`   | display as six six-bit packed characters    |
+| `-p`   | display as five packed ASCII (7b) characters |
+| `-m`   | display instruction mnemonics               |
+| `-v`   | interpret address as virtual                |
+| `-e`   | force executive mode                        |
+| `-u`   | force user mode                             |
 
-Input parsing is controlled by the first character typed in or by command line switches:
+Input parsing is controlled by the first character typed in or by
+command line switches:
 
-|             |                                   |
-|-------------|-----------------------------------|
-| `'` or `-a` | ASCII character                   |
-| `"` or `-c` | six sixbit packed characters      |
-| `#` or `-p` | five packed ASCII (7b) characters |
-| alphabetic  | instruction mnemonic              |
-| numeric     | octal number                      |
+| input       | parsed as                               |
+|-------------|-----------------------------------------|
+| `'` or `-a` | ASCII character                         |
+| `"` or `-c` | six six-bit packed characters           |
+| `#` or `-p` | five packed ASCII (7b) characters       |
+| alphabetic  | instruction mnemonic                    |
+| numeric     | octal number                            |
 
 Instruction input uses standard PDP-10 assembler syntax. There are
 three instruction classes: memory reference, memory reference with
@@ -1085,22 +1089,22 @@ Memory reference instructions have the format:
 memref {@}address{(index)}
 ```
 
-memory reference with `AC` instructions have the format:
+Memory reference with `AC` instructions have the format:
 
 ```
 memac ac,{@}address{(index)}
 ```
 
-and I/O instructions have the format:
+I/O instructions have the format:
 
 ```
 io device,{@}address{(index)}
 ```
 
 where `@` signifies indirect. The address is a signed octal number in
-the range 0 - 0777777. The `AC` and index are unsigned octal numbers
-in the range 0-17. The device is either a recognized device mnemonic
-(`APR`, `PI`, `TIM`) or an octal number in the range 0 - 0177.
+the range `0-0777777`. The `AC` and `index` are unsigned octal numbers
+in the range `0-17`. The device is either a recognized device mnemonic
+(`APR`, `PI`, `TIM`) or an octal number in the range `0-0177`.
 
 The simulator recognizes the standard `MACRO` alternate mnemonics
 (`CLEAR` for `SETZ`, `OR` for `IORI`), the individual definitions for
