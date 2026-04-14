@@ -20,6 +20,7 @@ contain proofreading errors:
 
 | filename                          | documentation contents      |
 |-----------------------------------|-----------------------------|
+| [altairz80_doc.md](docs/altairz80_doc.md) | Altair Z80 simulator |
 | [gri_doc.md](docs/gri_doc.md)     | GRI-909 simulator           |
 | [ka10_doc.md](docs/ka10_doc.md)   | DEC PDP-10 (KA10) simulator |
 | [ki10_doc.md](docs/ki10_doc.md)   | DEC PDP-10 (KI10) simulator |
@@ -47,7 +48,6 @@ is unlikely to be readable:
 
 | filename                          | status        |
 |-----------------------------------|---------------|
-| [altairz80_doc.md](docs/altairz80_doc.md) | ❌ raw pandoc |
 | [b5500_doc.md](docs/b5500_doc.md) | ❌ raw pandoc |
 | [h316_doc.md](docs/h316_doc.md)   | ❌ raw pandoc |
 | [h316_imp.md](docs/h316_imp.md)   | ❌ raw pandoc |
