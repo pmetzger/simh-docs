@@ -1,6 +1,6 @@
 # GRI-909/GRI-99 Simulator User's Guide
 
-Revised: 01-Dec-2008
+Revision of 01-Dec-2008
 
 **Copyright Notice**
 
@@ -11,27 +11,27 @@ X11-style open source license; the precise terms are available at:
 
 # Table of Contents
 
-[1 Simulator Files 3](#simulator-files)
+[1. Simulator Files](#simulator-files)
 
-[2 GRI-909 Features 3](#gri-909gri-99-features)
+[2. GRI-909/GRI-99 Features](#gri-909gri-99-features)
 
-[2.1 CPU 3](#cpu)
+[2.1 CPU](#cpu)
 
-[2.2 Programmed I/O Devices 5](#programmed-io-devices)
+[2.2 Programmed I/O Devices](#programmed-io-devices)
 
-[2.2.1 S42-004 High Speed Reader (HSR) 5](#s42-004-high-speed-reader-hsr)
+[2.2.1 S42-004 High Speed Reader (HSR)](#s42-004-high-speed-reader-hsr)
 
-[2.2.2 S42-006 High Speed Punch (HSP) 5](#s42-006-high-speed-punch-hsp)
+[2.2.2 S42-006 High Speed Punch (HSP)](#s42-006-high-speed-punch-hsp)
 
-[2.2.3 S42-001 Teletype Input (TTI) 6](#s42-001-teletype-input-tti)
+[2.2.3 S42-001 Teletype Input (TTI)](#s42-001-teletype-input-tti)
 
-[2.2.4 S42-002 Teletype Output (TTO) 6](#s42-002-teletype-output-tto)
+[2.2.4 S42-002 Teletype Output (TTO)](#s42-002-teletype-output-tto)
 
-[2.2.5 Real-Time Clock (RTC) 6](#real-time-clock-rtc)
+[2.2.5 Real-Time Clock (RTC)](#real-time-clock-rtc)
 
-[3 Symbolic Display and Input 7](#symbolic-display-and-input)
+[3. Symbolic Display and Input](#symbolic-display-and-input)
 
-This memorandum documents the GRI-909 simulator.
+This memorandum documents the GRI-909/GRI-99 simulator.
 
 # Simulator Files
 
@@ -51,7 +51,6 @@ This memorandum documents the GRI-909 simulator.
 |            | `sim_sock.c`    |
 |            | `sim_timer.c`   |
 |            | `sim_tmxr.c`    |
-|            |                 |
 | `sim/gri/` | `gri_defs.h`    |
 |            | `gri_cpu.c`     |
 |            | `gri_stddev.c`  |
@@ -59,18 +58,19 @@ This memorandum documents the GRI-909 simulator.
 
 # GRI-909/GRI-99 Features
 
-The GRI-909 is configured as follows:
+The GRI-909/GRI-99 simulator is configured as follows:
 
 | device name | simulates                                    |
 |-------------|----------------------------------------------|
 | `CPU`       | GRI-909/GRI-99 CPU with up to 32KW of memory |
 | `HSR`       | S42-004 high speed reader                    |
-| `HSP`       | S42-004 high speed punch                     |
+| `HSP`       | S42-006 high speed punch                     |
 | `TTI`       | S42-001 Teletype input                       |
 | `TTO`       | S42-002 Teletype output                      |
 | `RTC`       | real-time clock                              |
 
-The GRI-909 simulator implements the following unique stop conditions:
+The GRI-909/GRI-99 simulator implements the following unique stop
+conditions:
 
 - An unimplemented operator is referenced, and register `STOP_OPR` is set
 - An invalid interrupt request is made
@@ -87,29 +87,29 @@ location 200. The `DUMP` command is not supported.
 
 ## CPU
 
-The only CPU options are the presence of the extended arithmetic
-operator and the size of main memory.
+The CPU options include the model, the arithmetic operators, the
+general registers, byte swap/pack, and the size of main memory.
 
-| option            | description                          |
-|-------------------|--------------------------------------|
-| `SET CPU GRI909`  | set CPU model to GRI-909             |
-| `SET CPU GRI99`   | set CPU model to GRI-99              |
-| `SET CPU AO`      | enable extended arithmetic operator  |
-| `SET CPU EAO`     | disable arithmetic operator          |
-| `SET CPU EAO`     | enable extended arithmetic operator  |
-| `SET CPU NOEAO`   | disable extended arithmetic operator |
-| `SET CPU GPR`     | enable general registers             |
-| `SET CPU NOGPR`   | disable general registers            |
-| `SET CPU BSWPK`   | enable byte swap/pack                |
-| `SET CPU NOBSWPK` | disable byte swap/pack               |
-| `SET CPU 4K`      | set memory size = 4K                 |
-| `SET CPU 8K`      | set memory size = 8K                 |
-| `SET CPU 12K`     | set memory size = 12K                |
-| `SET CPU 16K`     | set memory size = 16K                |
-| `SET CPU 20K`     | set memory size = 20K                |
-| `SET CPU 24K`     | set memory size = 24K                |
-| `SET CPU 28K`     | set memory size = 28K                |
-| `SET CPU 32K`     | set memory size = 32K                |
+| option | description |
+|--------|-------------|
+| `SET CPU GRI909` | set CPU model to GRI-909 |
+| `SET CPU GRI99` | set CPU model to GRI-99 |
+| `SET CPU AO` | enable arithmetic operator |
+| `SET CPU NOAO` | disable arithmetic operator |
+| `SET CPU EAO` | enable extended arithmetic operator |
+| `SET CPU NOEAO` | disable extended arithmetic operator |
+| `SET CPU GPR` | enable general registers |
+| `SET CPU NOGPR` | disable general registers |
+| `SET CPU BSW-BPK` | enable byte swap/pack |
+| `SET CPU NOBSW-BPK` | disable byte swap/pack |
+| `SET CPU 4K` | set memory size = 4K |
+| `SET CPU 8K` | set memory size = 8K |
+| `SET CPU 12K` | set memory size = 12K |
+| `SET CPU 16K` | set memory size = 16K |
+| `SET CPU 20K` | set memory size = 20K |
+| `SET CPU 24K` | set memory size = 24K |
+| `SET CPU 28K` | set memory size = 28K |
+| `SET CPU 32K` | set memory size = 32K |
 
 If memory size is being reduced, and the memory being truncated
 contains non-zero data, the simulator asks for confirmation. Data in
@@ -153,7 +153,7 @@ the control registers for the interrupt system.
 
 ### S42-004 High Speed Reader (HSR)
 
-The paper tape reader (`HSR`) reads data from or a disk file. The `POS`
+The paper tape reader (`HSR`) reads data from a disk file. The `POS`
 register specifies the number of the next data item to be read. Thus,
 by changing `POS`, the user can backspace or advance the reader.
 
@@ -168,11 +168,10 @@ The paper tape reader implements these registers:
 | `TIME`     | 24   | time from I/O initiation to interrupt |
 | `STOP_IOE` | 1    | stop on I/O error                     |
 
-
 Error handling is as follows:
 
-| error        | STOP_IOE | processed as          |
-|--------------|----------|-----------------------|
+| error | STOP_IOE | processed as |
+|-------|----------|--------------|
 | not attached | 1        | report error and stop |
 |              | 0        | out of tape           |
 |              |          |                       |
@@ -201,8 +200,8 @@ The paper tape punch implements these registers:
 
 Error handling is as follows:
 
-| error        | STOP_IOE | processed as          |
-|--------------|----------|-----------------------|
+| error | STOP_IOE | processed as |
+|-------|----------|--------------|
 | not attached | 1        | report error and stop |
 |              | 0        | out of tape           |
 |              |          |                       |
@@ -238,17 +237,17 @@ implements these registers:
 The Teletype output (`TTO`) writes to the simulator console window. It
 implements these registers:
 
-| name | size | comments |
+| name   | size | comments                     |
 |--------|------|------------------------------|
-| `BUF` | 8 | last data item processed |
-| `ORDY` | 1 | device ready flag |
-| `IENB` | 1 | device interrupt enable flag |
-| `POS` | 32 | number of characters output |
-| `TIME` | 24 | time from I/O initiation to interrupt |
+| `BUF`  | 8    | last data item processed     |
+| `ORDY` | 1    | device ready flag            |
+| `IENB` | 1    | device interrupt enable flag |
+| `POS`  | 32   | number of characters output  |
+| `TIME` | 24   | time from I/O initiation to interrupt |
 
 ### Real-Time Clock (RTC)
 
-The real-time clock (`CLK`) implements these registers:
+The real-time clock (`RTC`) implements these registers:
 
 | name   | size | comments              |
 |--------|------|-----------------------|
@@ -261,24 +260,24 @@ or down so that the clock tracks actual elapsed time.
 
 # Symbolic Display and Input
 
-The GRI-909 simulator implements symbolic display and input. Display
-is controlled by command line switches:
+The GRI-909/GRI-99 simulator implements symbolic display and input.
+Display is controlled by command-line switches:
 
-| switch | description                            |
-|--------|----------------------------------------|
-| `-a`   | display as ASCII character             |
-| `-c`   | display as two packed ASCII characters |
-| `-m`   | display instruction mnemonics          |
+| switch | action |
+|--------|--------|
+| `-a` | display as ASCII character |
+| `-c` | display as two packed ASCII characters |
+| `-m` | display instruction mnemonics |
 
 Input parsing is controlled by the first character typed in or by
-command line switches:
+command-line switches:
 
-| input       | function                    |
-|-------------|-----------------------------|
-| `'` or `-a` | ASCII character             |
+| input | meaning |
+|-------|---------|
+| `'` or `-a` | ASCII character |
 | `"` or `-c` | two packed ASCII characters |
-| alphabetic  | instruction mnemonic        |
-| numeric     | octal number                |
+| alphabetic | instruction mnemonic |
+| numeric | octal number |
 
 Instruction input uses modified GRI-909 basic assembler syntax. There
 are thirteen different instruction formats. Operators, functions, and
@@ -335,7 +334,7 @@ Cond symbols:           NEVER,ALWAYS,ETZ,NEZ,LTZ,GEZ,LEZ,GTZ
 Example:                JC AX,LEZ,200
 
 Register to memory
-syntax:                 RM{I|D|ID} src,{bus op,}address
+Syntax:                 RM{I|D|ID} src,{bus op,}address
 Bus op symbols:         P1, L1, R1
 Example:                RMD AX,P1,1315
 
@@ -349,7 +348,7 @@ Syntax:                 MR{I|D|ID} address,{bus op,}dst
 Bus op symbols:         P1, L1, R1
 Example:                MRI 1405,GR6
 
-Memory to self:
+Memory to self
 Syntax:                 MS{I|D|ID} address{,bus op}
 Bus op symbols:         P1, L1, R1
 Example:                MS 3333,P1
