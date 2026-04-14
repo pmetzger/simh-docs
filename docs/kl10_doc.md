@@ -636,7 +636,7 @@ setting.
 
 | command | action |
 |---------|--------|
-| `SET DC LINES=n` | Set the number of lines on the front-end PDP-11, multiples of 16 |
+| `SET TTY LINES=n` | Set the number of lines on the front-end PDP-11, multiples of 16 |
 
 ## Network Devices
 
