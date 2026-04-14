@@ -1,56 +1,48 @@
-COPYRIGHT NOTICE
+# IBM 701 Simulator Usage
 
-The following copyright notice applies to both the SIMH source and binary:
+Revision of 25-Jul-2018
 
-Original code published in 1993-2007, written by Robert M Supnik
+**Copyright Notice**
 
-Copyright (c) 1993-2007, Robert M Supnik
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-IBM 701 simulator written by Richard Cornwell
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The IBM 701 simulator was written by Richard Cornwell.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+# Table of Contents
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK OR RICHARD CORNWELL BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Except as contained in this notice, the name of Robert M Supnik or Richard Cornwell shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from both Robert M Supnik and Richard Cornwell.
-
-[1. Introduction 3](#introduction)
-
-[2. Simulator Files 3](#simulator-files)
-
-[3. IBM 701 Features 4](#ibm-701-features)
-
-[3.1 CPU 4](#cpu)
-
-[3.2 I/O Channel (CH) 5](#io-channel-ch)
-
-[3.3 Peripherals 5](#peripherals)
-
-[3.3.1 711 Card Reader (CDR) 5](#card-reader-cdr)
-
-[3.3.2 721 Card Punch (CDP) 6](#card-punch-cdp)
-
-[3.3.3 716 Line Printer (LP) 6](#line-printer-lp)
-
-[3.3.4 729 Magnetic Tape (MT) 7](#magnetic-tape-mt)
-
-[2.3.4 733 Drum (DR) 7](#drum-dr)
-
-[4 Symbolic Display and Input 8](#symbolic-display-and-input)
-
-[5 Sim Load 8](#sim-load)
-
-[6 Character Codes 9](#character-codes)
+[1. Introduction](#introduction)
+[2. Simulator Files](#simulator-files)
+[3. IBM 701 Features](#ibm-701-features)
+[3.1 CPU](#cpu)
+[3.2 I/O Channel (CH)](#io-channel-ch)
+[3.3 Peripherals](#peripherals)
+[3.3.1 711 Card Reader (CDR)](#card-reader-cdr)
+[3.3.2 721 Card Punch (CDP)](#card-punch-cdp)
+[3.3.3 716 Line Printer (LP)](#line-printer-lp)
+[3.3.4 729 Magnetic Tape (MT)](#magnetic-tape-mt)
+[2.3.4 733 Drum (DR)](#drum-dr)
+[4 Symbolic Display and Input](#symbolic-display-and-input)
+[5 Sim Load](#sim-load)
+[6 Character Codes](#character-codes)
 
 # 1. Introduction
 
-The IBM 701 also know as "Defense Calculator" was introduced by IBM on April 7, 1953. This computer was start of IBM 700 and 7000 line. Memory was 2048 36 bit words. Each instruction could be signed plus or minus, plus would access memory as 18 bit words, minus as 36 bit words. There was a expansion option to add another 2048 words of memory, but I can't find documentation on how it worked. Memory cycle time was 12 microseconds. The 701 was withdrawn from the market October 1, 1954 replaced by 704 and 702. A total of 19 machines were installed.
+The IBM 701 also know as "Defense Calculator" was introduced by IBM on
+April 7, 1953. This computer was start of IBM 700 and 7000 line. Memory
+was 2048 36 bit words. Each instruction could be signed plus or minus,
+plus would access memory as 18 bit words, minus as 36 bit words. There
+was a expansion option to add another 2048 words of memory, but I can't
+find documentation on how it worked. Memory cycle time was 12
+microseconds. The 701 was withdrawn from the market October 1, 1954
+replaced by 704 and 702. A total of 19 machines were installed.
 
 # 2. Simulator Files
 
-To compile the IBM 701, you must define USE_INT64 and I701 as part of the compilation command line.
+To compile the IBM 701, you must define USE_INT64 and I701 as part of
+the compilation command line.
 
 |                    |              |                                         |
 |--------------------|--------------|-----------------------------------------|
@@ -90,13 +82,15 @@ The 701 simulator implements several unique stop condition:
 
 - write select of a write protected device
 
-The LOAD command will load a card binary image file into memory. An octal dump file, or a pseudo assembly code.
+The LOAD command will load a card binary image file into memory. An
+octal dump file, or a pseudo assembly code.
 
 ## 3.1 CPU
 
 Memory size is 2KW on a standard CPU.
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as the
+control registers for the interrupt system.
 
 | ***Name*** | ***Size*** | ***Comments***         |
 |------------|------------|------------------------|
@@ -110,7 +104,9 @@ CPU registers include the visible state of the processor as well as the control 
 | DVC        | 1          | Divide Check Indicator |
 | IOC        | 1          | I/O Check Indicator    |
 
-The CPU can maintain a history of the most recently executed instructions. This is controlled by the SET CPU HISTORY and SHOW CPU HISTORY commands:
+The CPU can maintain a history of the most recently executed
+instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
+HISTORY commands:
 
 |                    |                                      |
 |--------------------|--------------------------------------|
@@ -122,13 +118,17 @@ The CPU can maintain a history of the most recently executed instructions. This 
 
 ## 3.2 I/O Channel (CH)
 
-The channel device on the 701 is only used by simulator, and has no controls or registers.
+The channel device on the 701 is only used by simulator, and has no
+controls or registers.
 
 ## 3.3 Peripherals
 
 ### 3.3.1 711 Card Reader (CDR)
 
-The card reader (CDR) reads data from a disk file. Cards are simulated as ASCII lines with terminating newlines. Card reader files can either be text (one character per column) or column binary (two characters per column). The file type can be specified with a set command:
+The card reader (CDR) reads data from a disk file. Cards are simulated
+as ASCII lines with terminating newlines. Card reader files can either
+be text (one character per column) or column binary (two characters per
+column). The file type can be specified with a set command:
 
 |                       |                                     |
 |-----------------------|-------------------------------------|
@@ -165,7 +165,10 @@ OS I/O error report error and stop
 
 ### 3.3.2 721 Card Punch (CDP)
 
-The card reader (CDP) writes data to a disk file. Cards are simulated as ASCII lines with terminating newlines. Card punch files can either be text (one character per column) or column binary (two characters per column). The file type can be specified with a set command:
+The card reader (CDP) writes data to a disk file. Cards are simulated as
+ASCII lines with terminating newlines. Card punch files can either be
+text (one character per column) or column binary (two characters per
+column). The file type can be specified with a set command:
 
 |                       |                                     |
 |-----------------------|-------------------------------------|
@@ -192,14 +195,17 @@ OS I/O error report error and stop
 
 ### 3.3.3 716 Line Printer (LP)
 
-The line printer (LP) writes data to a disk file as ASCII text with terminating newlines. Currently set to handle standard signals to control paper advance.
+The line printer (LP) writes data to a disk file as ASCII text with
+terminating newlines. Currently set to handle standard signals to
+control paper advance.
 
 |                           |                                                 |
 |---------------------------|-------------------------------------------------|
 | SET LP NO/ECHO            | Sets echoing to console of line-printer output. |
 | SET LP LINESPERPAGE=*lpp* | Sets number of lines per page on printer.       |
 
-The Printer supports the following SPRA *n* selection pulses for controlling spacing (spacing occurs before the line is printed):
+The Printer supports the following SPRA *n* selection pulses for
+controlling spacing (spacing occurs before the line is printed):
 
 |        |                                                         |
 |--------|---------------------------------------------------------|
@@ -235,7 +241,8 @@ Each individual tape drive support several options: MTA used as an example.
 | SET MT*n* LOW         | Sets mag tape to low density.        |
 | SET MT*n* HIGH        | Sets mag tape to high density.       |
 
-Options: Density LOW/HIGH does not change format of how tapes are written. And is only for informational purposes only.
+Options: Density LOW/HIGH does not change format of how tapes are
+written. And is only for informational purposes only.
 
 Tape drives can be booted with:
 
@@ -245,7 +252,8 @@ Tape drives can be booted with:
 
 ### 2.3.4 733 Drum (DR)
 
-Up to 16 units can be attached to the CPU, all are on pseudo channel 0. Each drum is 2048K words in size. They are all stored in one file.
+Up to 16 units can be attached to the CPU, all are on pseudo channel 0.
+Each drum is 2048K words in size. They are all stored in one file.
 
 |                   |                                              |
 |-------------------|----------------------------------------------|
@@ -259,7 +267,9 @@ Drum unit 0 can be booted with:
 
 # 4 Symbolic Display and Input
 
-The IBM 701 simulator implements symbolic display and input. These are controlled by the following switches to the EXAMINE and DEPOSIT commands:
+The IBM 701 simulator implements symbolic display and input. These are
+controlled by the following switches to the EXAMINE and DEPOSIT
+commands:
 
 |     |                                     |
 |-----|-------------------------------------|
@@ -275,34 +285,17 @@ A negative address specifies the lower 18 bits of the given memory location.
 
 # 5 Sim Load
 
-The load command looks at the extension of the file to determine how to load the file.
+The load command looks at the extension of the file to determine how to
+load the file.
 
-<table>
-<colgroup>
-<col style="width: 17%" />
-<col style="width: 82%" />
-</colgroup>
-<tbody>
-<tr>
-<td>.crd</td>
-<td><p>Loads a card image file into memory.</p>
-<p>standard 709 format + 1 card loader.</p></td>
-</tr>
-<tr>
-<td>.oct</td>
-<td><p>Loads an octal deck:</p>
-<p>address &lt;blank&gt; octal &lt;blank&gt; octal...</p></td>
-</tr>
-<tr>
-<td>.sym</td>
-<td><p>Loads a 709 symbolic deck.</p>
-<p>address instruction..</p>
-<p>address BCD string</p>
-<p>address OCT octal</p>
-<p>octal</p></td>
-</tr>
-</tbody>
-</table>
+<table> <colgroup> <col style="width: 17%" /> <col style="width: 82%" />
+</colgroup> <tbody> <tr> <td>.crd</td> <td><p>Loads a card image file
+into memory.</p> <p>standard 709 format + 1 card loader.</p></td> </tr>
+<tr> <td>.oct</td> <td><p>Loads an octal deck:</p> <p>address
+&lt;blank&gt; octal &lt;blank&gt; octal...</p></td> </tr> <tr>
+<td>.sym</td> <td><p>Loads a 709 symbolic deck.</p> <p>address
+instruction..</p> <p>address BCD string</p> <p>address OCT octal</p>
+<p>octal</p></td> </tr> </tbody> </table>
 
 #  
 

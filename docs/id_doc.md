@@ -1,64 +1,36 @@
-**Interdata 16b/32b Simulator Usage**
+# Interdata 16b/32b Simulator Usage
 
-**12-Jul-2022**
+Revision of 12-Jul-2022
 
-**COPYRIGHT NOTICE**
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-> Original code published in 1993-2008, written by Robert M Supnik
->
-> Copyright (c) 1993-2008, Robert M Supnik
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
->
-> CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-> Except as contained in this notice, the name of Robert M Supnik shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Robert M Supnik.
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-[1 Simulator Files 3](#simulator-files)
+# Table of Contents
 
-[2 Interdata Features 3](#interdata-features)
-
-[2.1 CPU (16b) 4](#cpu-16b)
-
-[2.2 CPU (32b) 6](#cpu-32b)
-
-[2.3 Selector Channel (SELCH0, SELCH1, SELCH2, SELCH3) 8](#selector-channel-selch0-selch1-selch2-selch3)
-
-[2.4 Programmed I/O Devices 8](#programmed-io-devices)
-
-[2.4.1 Paper Tape Reader/Punch (PT) 8](#paper-tape-readerpunch-pt)
-
-[2.4.2 Console, Teletype Interface (TT) 9](#console-teletype-interface-tt)
-
-[2.4.3 Console, PASLA Interface (TTP) 10](#console-pasla-interface-ttp)
-
-[2.4.4 Line Printer (LPT) 11](#line-printer-lpt)
-
-[2.4.5 Line Frequency Clock (LFC) 12](#line-frequency-clock-lfc)
-
-[2.4.6 Programmable Interval Clock (PIC) 12](#programmable-interval-clock-pic)
-
-[2.4.7 Floppy Disk Controller (FD) 13](#floppy-disk-controller-fd)
-
-[2.4.8 Programmable Asynchronous Line Adapters (PAS, PASL) 13](#programmable-asynchronous-line-adapters-pas-pasl)
-
-[2.5 Cartridge Disk Controller (DP) 15](#cartridge-disk-controller-dp)
-
-[2.6 Mass Storage Module/Intelligent Disk Controller (DM) 16](#mass-storage-moduleintelligent-disk-controller-dm)
-
-[2.7 Magnetic Tape Controller (MT) 17](#magnetic-tape-controller-mt)
-
-[3 Symbolic Display and Input 18](#symbolic-display-and-input)
-
-[3.1 16b Instruction Input 18](#b-instruction-input)
-
-[3.2 32b Instruction Input 19](#b-instruction-input-1)
+[1 Simulator Files](#simulator-files)
+[2 Interdata Features](#interdata-features)
+[2.1 CPU (16b)](#cpu-16b)
+[2.2 CPU (32b)](#cpu-32b)
+[2.3 Selector Channel (SELCH0, SELCH1, SELCH2, SELCH3)](#selector-channel-selch0-selch1-selch2-selch3)
+[2.4 Programmed I/O Devices](#programmed-io-devices)
+[2.4.1 Paper Tape Reader/Punch (PT)](#paper-tape-readerpunch-pt)
+[2.4.2 Console, Teletype Interface (TT)](#console-teletype-interface-tt)
+[2.4.3 Console, PASLA Interface (TTP)](#console-pasla-interface-ttp)
+[2.4.4 Line Printer (LPT)](#line-printer-lpt)
+[2.4.5 Line Frequency Clock (LFC)](#line-frequency-clock-lfc)
+[2.4.6 Programmable Interval Clock (PIC)](#programmable-interval-clock-pic)
+[2.4.7 Floppy Disk Controller (FD)](#floppy-disk-controller-fd)
+[2.4.8 Programmable Asynchronous Line Adapters (PAS, PASL)](#programmable-asynchronous-line-adapters-pas-pasl)
+[2.5 Cartridge Disk Controller (DP)](#cartridge-disk-controller-dp)
+[2.6 Mass Storage Module/Intelligent Disk Controller (DM)](#mass-storage-moduleintelligent-disk-controller-dm)
+[2.7 Magnetic Tape Controller (MT)](#magnetic-tape-controller-mt)
+[3 Symbolic Display and Input](#symbolic-display-and-input)
+[3.1 16b Instruction Input](#b-instruction-input)
+[3.2 32b Instruction Input](#b-instruction-input-1)
 
 This memorandum documents the Interdata 16b and 32b simulators.
 
@@ -130,7 +102,12 @@ id16_sys.c \[id32_sys.c\]
 
 # Interdata Features
 
-The Interdata simulator includes simulators for a variety of 16b (I3, I4, I5, 70, 80, 7/16, 8/16, 8/16E) and 32b (7/32, 8/32) models. This is by no means a complete sampling of all the variations in the Interdata/Perkin-Elmer family. The 32b family included options for special communications instructions (7/32C, 8/32C), as well as a later extension for virtual memory (3200 series).
+The Interdata simulator includes simulators for a variety of 16b (I3,
+I4, I5, 70, 80, 7/16, 8/16, 8/16E) and 32b (7/32, 8/32) models. This is
+by no means a complete sampling of all the variations in the
+Interdata/Perkin-Elmer family. The 32b family included options for
+special communications instructions (7/32C, 8/32C), as well as a later
+extension for virtual memory (3200 series).
 
 The Interdata simulator is configured as follows:
 
@@ -180,19 +157,26 @@ The Interdata simulator implements two unique stop conditions:
 
 - Runaway carriage control tape in the line printer
 
-The LOAD command is used to load a carriage control tape for the line printer. The DUMP command is used to dump a contiguous portion of memory as a self-loading bootstrap paper tape. The syntax for the DUMP command is:
+The LOAD command is used to load a carriage control tape for the line
+printer. The DUMP command is used to dump a contiguous portion of memory
+as a self-loading bootstrap paper tape. The syntax for the DUMP command
+is:
 
 DUMP \<filename\> lowaddr-highaddr
 
 The low address must be greater than or equal to X'D0'.
 
-Devices are assigned their default device numbers, as documented in the Interdata literature. Device numbers can be changed by the command:
+Devices are assigned their default device numbers, as documented in the
+Interdata literature. Device numbers can be changed by the command:
 
 SET \<device\> DEVNO=num
 
-Device number conflicts are not checked until simulation starts. If there is a device number conflict, simulation stops immediately with an error message.
+Device number conflicts are not checked until simulation starts. If
+there is a device number conflict, simulation stops immediately with an
+error message.
 
-Selector channel devices are assigned by default to selector channel 0. Selector channel assignments can be changed by the command:
+Selector channel devices are assigned by default to selector channel 0.
+Selector channel assignments can be changed by the command:
 
 SET \<dev\> SELCH=num
 
@@ -248,7 +232,9 @@ SET CPU CONSINT assert console interrupt (7/16, 8/16,
 
 and 8/16E only)
 
-If memory size is being reduced, and the memory being truncated contains non-zero data, the simulator asks for confirmation. Data in the truncated portion of memory is lost. Initial memory size is 64KB.
+If memory size is being reduced, and the memory being truncated contains
+non-zero data, the simulator asks for confirmation. Data in the
+truncated portion of memory is lost. Initial memory size is 64KB.
 
 These switches are recognized when examining or depositing in CPU memory:
 
@@ -270,9 +256,12 @@ These switches are recognized when examining or depositing in CPU memory:
 
 -v interpret address as virtual
 
-Packed characters, halfwords, fullwords, and instructions must be aligned on a halfword (16b) boundary. If an odd address is specified, the low order bit is ignored.
+Packed characters, halfwords, fullwords, and instructions must be
+aligned on a halfword (16b) boundary. If an odd address is specified,
+the low order bit is ignored.
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as the
+control registers for the interrupt system.
 
 name size comments
 
@@ -320,15 +309,20 @@ most recent PC change first
 
 WRU 8 interrupt character
 
-The CPU detects when the simulator is idle. When idle, the simulator does not use any resources on the host system. Idle detection is controlled by the SET IDLE and SET NOIDLE commands:
+The CPU detects when the simulator is idle. When idle, the simulator
+does not use any resources on the host system. Idle detection is
+controlled by the SET IDLE and SET NOIDLE commands:
 
 SET CPU IDLE enable idle detection
 
 SET CPU NOIDLE disable idle detection
 
-Idle detection is disabled by default. The CPU is considered idle if the WAIT STATE flag is set in the PSW.
+Idle detection is disabled by default. The CPU is considered idle if the
+WAIT STATE flag is set in the PSW.
 
-The CPU can maintain a history of the most recently executed instructions. This is controlled by the SET CPU HISTORY and SHOW CPU HISTORY commands:
+The CPU can maintain a history of the most recently executed
+instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
+HISTORY commands:
 
 SET CPU HISTORY clear history buffer
 
@@ -374,7 +368,9 @@ SET CPU 1M set memory size = 1024KB
 
 SET CPU CONSINT assert console interrupt
 
-If memory size is being reduced, and the memory being truncated contains non-zero data, the simulator asks for confirmation. Data in the truncated portion of memory is lost. Initial memory size is 1024KB.
+If memory size is being reduced, and the memory being truncated contains
+non-zero data, the simulator asks for confirmation. Data in the
+truncated portion of memory is lost. Initial memory size is 1024KB.
 
 These switches are recognized when examining or depositing in CPU memory:
 
@@ -396,9 +392,12 @@ These switches are recognized when examining or depositing in CPU memory:
 
 -v interpret address as virtual
 
-Packed characters, halfwords, fullwords, and instructions must be aligned on a halfword (16b) boundary. If an odd address is specified, the low order bit is ignored.
+Packed characters, halfwords, fullwords, and instructions must be
+aligned on a halfword (16b) boundary. If an odd address is specified,
+the low order bit is ignored.
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as the
+control registers for the interrupt system.
 
 name size comments
 
@@ -452,15 +451,20 @@ most recent PC change first
 
 WRU 8 interrupt character
 
-The CPU detects when the simulator is idle. When idle, the simulator does not use any resources on the host system. Idle detection is controlled by the SET IDLE and SET NOIDLE commands:
+The CPU detects when the simulator is idle. When idle, the simulator
+does not use any resources on the host system. Idle detection is
+controlled by the SET IDLE and SET NOIDLE commands:
 
 SET CPU IDLE enable idle detection
 
 SET CPU NOIDLE disable idle detection
 
-Idle detection is disabled by default. The CPU is considered idle if the WAIT STATE flag is set in the PSW.
+Idle detection is disabled by default. The CPU is considered idle if the
+WAIT STATE flag is set in the PSW.
 
-The CPU can maintain a history of the most recently executed instructions. This is controlled by the SET CPU HISTORY and SHOW CPU HISTORY commands:
+The CPU can maintain a history of the most recently executed
+instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
+HISTORY commands:
 
 SET CPU HISTORY clear history buffer
 
@@ -476,7 +480,9 @@ The maximum length for the history is 65536 entries.
 
 ## Selector Channel (SELCH0, SELCH1, SELCH2, SELCH3)
 
-An Interdata system can have 1 to 4 selector channels (SELCH0, SELCH1, SELCH2, SELCH3). The default number of channels is 2. The number of channels can be changed with the command:
+An Interdata system can have 1 to 4 selector channels (SELCH0, SELCH1,
+SELCH2, SELCH3). The default number of channels is 2. The number of
+channels can be changed with the command:
 
 SET SELCH CHANNELS=num
 
@@ -512,9 +518,13 @@ channels 0 to 3
 
 ### Paper Tape Reader/Punch (PT)
 
-The paper tape reader and punch (PT units 0 and 1) read data from or write data to disk files. The RPOS and PPOS registers specify the number of the next data item to be read and written, respectively. Thus, by changing RPOS or PPOS, the user can backspace or advance these devices.
+The paper tape reader and punch (PT units 0 and 1) read data from or
+write data to disk files. The RPOS and PPOS registers specify the number
+of the next data item to be read and written, respectively. Thus, by
+changing RPOS or PPOS, the user can backspace or advance these devices.
 
-The paper tape reader supports the BOOT command. BOOT PTR copies the so-called '50 loader' into memory and starts it running.
+The paper tape reader supports the BOOT command. BOOT PTR copies the
+so-called '50 loader' into memory and starts it running.
 
 The paper tape controller implements these registers:
 
@@ -566,7 +576,10 @@ in,out OS I/O error x report error and stop
 
 ### Console, Teletype Interface (TT)
 
-The Teletype keyboard (TT0) reads from the console keyboard; the Teletype printer (TT1) writes to the simulator console window. The Teletype units (TT0, TT1) can be set to one of four modes, KSR, 7P, 7B, or 8B:
+The Teletype keyboard (TT0) reads from the console keyboard; the
+Teletype printer (TT1) writes to the simulator console window. The
+Teletype units (TT0, TT1) can be set to one of four modes, KSR, 7P, 7B,
+or 8B:
 
 mode input characters output characters
 
@@ -586,11 +599,14 @@ non-printing characters suppressed
 
 Changing the mode of either unit changes both. The default mode is KSR.
 
-The Teletype has a BREAK key, which is not present on today's keyboards. To simulate pressing the break key, stop the simulator and use the command:
+The Teletype has a BREAK key, which is not present on today's keyboards.
+To simulate pressing the break key, stop the simulator and use the
+command:
 
 SET TT BREAK
 
-Break status will be asserted, and will remain asserted for the interval specified by KTIME.
+Break status will be asserted, and will remain asserted for the interval
+specified by KTIME.
 
 The Teletype interface implements these registers:
 
@@ -624,7 +640,11 @@ CHP 1 input character pending
 
 ### Console, PASLA Interface (TTP)
 
-Later Interdata system connect the system console via the first PASLA interface rather than the Teletype interface. The PASLA console can be simulated with a Telnet session on the first PAS line. Alternately, the PASLA console can be attached to the simulator console window, using the TTP device in place of TT.
+Later Interdata system connect the system console via the first PASLA
+interface rather than the Teletype interface. The PASLA console can be
+simulated with a Telnet session on the first PAS line. Alternately, the
+PASLA console can be attached to the simulator console window, using the
+TTP device in place of TT.
 
 To switch the simulator console window to TTP, use the command:
 
@@ -632,19 +652,24 @@ SET TTP ENABLED or
 
 SET TT DISABLED
 
-Device TT is automatically disabled and device TTP is enabled. To switch the simulator console window back to TT, use the command:
+Device TT is automatically disabled and device TTP is enabled. To switch
+the simulator console window back to TT, use the command:
 
 SET TT ENABLED or
 
 SET TTP DISABLED
 
-Device TTP is automatically disabled and device TT is enabled. If TTP is enabled at its default device settings, the base address for the PAS multiplexer must be changed:
+Device TTP is automatically disabled and device TT is enabled. If TTP is
+enabled at its default device settings, the base address for the PAS
+multiplexer must be changed:
 
 SET PAS DEVNO=12
 
 Otherwise, a device number conflict occurs.
 
-The PASLA keyboard (TTP0) reads from the console keyboard; the PALSA printer (TTP1) writes to the simulator console window. The PASLA units (TTP0, TTP1) can be set to one of four modes, UC, 7P, 7B, or 8B:
+The PASLA keyboard (TTP0) reads from the console keyboard; the PALSA
+printer (TTP1) writes to the simulator console window. The PASLA units
+(TTP0, TTP1) can be set to one of four modes, UC, 7P, 7B, or 8B:
 
 mode input characters output characters
 
@@ -668,7 +693,8 @@ To simulate pressing the break key, stop the simulator and use the command:
 
 SET TTP BREAK
 
-Break status will be asserted, and will remain asserted for the interval specified by KTIME.
+Break status will be asserted, and will remain asserted for the interval
+specified by KTIME.
 
 The PASLA console interface implements these registers:
 
@@ -708,13 +734,23 @@ TIARM 1 output interrupt armed
 
 ### Line Printer (LPT)
 
-The line printer (LPT) writes data to a disk file. The POS register specifies the number of the next data item to be written. Thus, by changing POS, the user can backspace or advance the printer. The default position after ATTACH is to position at the end of an existing file. A new file can be created if you attach with the -N switch.
+The line printer (LPT) writes data to a disk file. The POS register
+specifies the number of the next data item to be written. Thus, by
+changing POS, the user can backspace or advance the printer. The default
+position after ATTACH is to position at the end of an existing file. A
+new file can be created if you attach with the -N switch.
 
-In addition, the line printer can be programmed with a carriage control tape. The LOAD command loads a new carriage control tape:
+In addition, the line printer can be programmed with a carriage control
+tape. The LOAD command loads a new carriage control tape:
 
 LOAD \<file\> load carriage control tape file
 
-The format of a carriage control tape consists of multiple lines. Each line contains an optional repeat count, enclosed in parentheses, optionally followed by a series of column numbers separated by commas. Column numbers must be between 0 and 7; column seven is by convention top of form. The following are all legal carriage control specifications:
+The format of a carriage control tape consists of multiple lines. Each
+line contains an optional repeat count, enclosed in parentheses,
+optionally followed by a series of column numbers separated by commas.
+Column numbers must be between 0 and 7; column seven is by convention
+top of form. The following are all legal carriage control
+specifications:
 
 \<blank line\> no punch
 
@@ -790,7 +826,8 @@ IARM 1 clock interrupt armed
 
 TIME 24 clock frequency
 
-The line frequency clock autocalibrates; the clock interval is adjusted up or down so that the clock tracks actual elapsed time.
+The line frequency clock autocalibrates; the clock interval is adjusted
+up or down so that the clock tracks actual elapsed time.
 
 ### Programmable Interval Clock (PIC)
 
@@ -816,11 +853,13 @@ IENB 1 clock interrupt enable
 
 IARM 1 clock interrupt armed
 
-If the interval requested is an exact multiple of 1 millisecond, the programmable clock auto-calibrates; if not, it counts instructions.
+If the interval requested is an exact multiple of 1 millisecond, the
+programmable clock auto-calibrates; if not, it counts instructions.
 
 ### Floppy Disk Controller (FD)
 
-Floppy disk options include the ability to make units write enabled or write locked.
+Floppy disk options include the ability to make units write enabled or
+write locked.
 
 SET FDn LOCKED set unit n write locked
 
@@ -828,7 +867,8 @@ SET FDn WRITEENABLED set unit n write enabled
 
 Units can also be set ENABLED or DISABLED.
 
-The floppy disk supports the BOOT command. BOOT FDn copies an autoload sequence into memory and starts it running.
+The floppy disk supports the BOOT command. BOOT FDn copies an autoload
+sequence into memory and starts it running.
 
 The floppy disk controller implements these registers:
 
@@ -870,17 +910,26 @@ not attached 1 report error and stop
 
 0 disk not ready
 
-Floppy disk data is buffered in memory; therefore, end of file and OS I/O errors cannot occur.
+Floppy disk data is buffered in memory; therefore, end of file and OS
+I/O errors cannot occur.
 
 ### Programmable Asynchronous Line Adapters (PAS, PASL)
 
-The Programmable Asynchronous Line Adapters (PAS and PASL) represent, indistinguishably, individual PASLA interfaces, 2 line asynchronous multiplexers, and 8 line asynchronous multiplexers, with a maximum of 32 lines. All the lines are modeled as a terminal multiplexer, with PAS as the multiplexer controller, and PASL as the individual lines. The PASLAs perform input and output through Telnet sessions connected to a user-specified port. The ATTACH command specifies the port to be used:
+The Programmable Asynchronous Line Adapters (PAS and PASL) represent,
+indistinguishably, individual PASLA interfaces, 2 line asynchronous
+multiplexers, and 8 line asynchronous multiplexers, with a maximum of 32
+lines. All the lines are modeled as a terminal multiplexer, with PAS as
+the multiplexer controller, and PASL as the individual lines. The PASLAs
+perform input and output through Telnet sessions connected to a
+user-specified port. The ATTACH command specifies the port to be used:
 
 ATTACH PAS \<port\> set up listening port
 
-where port is a decimal number between 1 and 65535 that is not being used for other TCP/IP activities.
+where port is a decimal number between 1 and 65535 that is not being
+used for other TCP/IP activities.
 
-Each line (each unit of PASL) can be set to one of four modes, UC, 7P, 7B, or 8B:
+Each line (each unit of PASL) can be set to one of four modes, UC, 7P,
+7B, or 8B:
 
 mode input characters output characters
 
@@ -898,13 +947,21 @@ non-printing characters suppressed
 
 8B no changes no changes
 
-Each line (each unit of PASL) can also be set for modem control with the command SET PASLn DATASET. The defaults are 7b mode and DATASET disabled. Finally, each line supports output logging. The SET PASLn LOG command enables logging on a line:
+Each line (each unit of PASL) can also be set for modem control with the
+command SET PASLn DATASET. The defaults are 7b mode and DATASET
+disabled. Finally, each line supports output logging. The SET PASLn LOG
+command enables logging on a line:
 
 SET PASLn LOG=filename log output of line n to filename
 
-The SET PASLn NOLOG command disables logging and closes the open log file, if any.
+The SET PASLn NOLOG command disables logging and closes the open log
+file, if any.
 
-Once PAS is attached and the simulator is running, the terminals listen for connections on the specified port. They assume that the incoming connections are Telnet connections. The connections remain open until disconnected either by the Telnet client, a SET PAS DISCONNECT command, or a DETACH PAS command.
+Once PAS is attached and the simulator is running, the terminals listen
+for connections on the specified port. They assume that the incoming
+connections are Telnet connections. The connections remain open until
+disconnected either by the Telnet client, a SET PAS DISCONNECT command,
+or a DETACH PAS command.
 
 Other special PASLA commands:
 
@@ -950,11 +1007,13 @@ name size comments
 
 TIME\[0:31\] 24 transmit time, lines 0 to 31
 
-The additional terminals do not support save and restore. All open connections are lost when the simulator shuts down or PAS is detached.
+The additional terminals do not support save and restore. All open
+connections are lost when the simulator shuts down or PAS is detached.
 
 ## Cartridge Disk Controller (DP)
 
-Cartridge disk options include the ability to make units write enabled or write locked, and to select the type of drive:
+Cartridge disk options include the ability to make units write enabled
+or write locked, and to select the type of drive:
 
 SET DPn LOCKED set unit n write locked
 
@@ -966,7 +1025,16 @@ SET DPn 5440 set unit n to 5440 (10MB)
 
 Units can also be set ENABLED or DISABLED.
 
-The cartridge disk supports the BOOT command. To boot OS16/32, the hex form of the operating system file's extension must be placed in locations 7E:7F. The disk bootstrap looks for a valid OS16/32 volume descriptor in block 0, and uses that to locate the volume directory. It then searches the directory for a filename of the form OS16xxxx.hhh or OS32xxxx.hhh, where the xxxx is ignored and hhh is the ASCII form of the extension from locations 7E:7F. The 32b bootstrap can also boot Wollongong UNIX; locations 7E:7F must be 0. The bootstrap normally boots from the first (removable) platter in a 5440; to boot from the second (fixed) platter, use BOOT -F.
+The cartridge disk supports the BOOT command. To boot OS16/32, the hex
+form of the operating system file's extension must be placed in
+locations 7E:7F. The disk bootstrap looks for a valid OS16/32 volume
+descriptor in block 0, and uses that to locate the volume directory. It
+then searches the directory for a filename of the form OS16xxxx.hhh or
+OS32xxxx.hhh, where the xxxx is ignored and hhh is the ASCII form of the
+extension from locations 7E:7F. The 32b bootstrap can also boot
+Wollongong UNIX; locations 7E:7F must be 0. The bootstrap normally boots
+from the first (removable) platter in a 5440; to boot from the second
+(fixed) platter, use BOOT -F.
 
 All drives have 256 8b bytes per sector. The other disk parameters are:
 
@@ -1024,7 +1092,8 @@ OS I/O error report error and stop
 
 ## Mass Storage Module/Intelligent Disk Controller (DM)
 
-MSM/IDC disk controller options include the ability to make units write enabled or write locked, and to select the type of drive:
+MSM/IDC disk controller options include the ability to make units write
+enabled or write locked, and to select the type of drive:
 
 SET DMn LOCKED set unit n write locked
 
@@ -1056,7 +1125,16 @@ SET DMn MSM330F set unit n to storage module, 330MB
 
 Units can also be set ENABLED or DISABLED.
 
-The MSM/IDC controller supports the BOOT command. To boot OS16/32, the hex form of the operating system file's extension must be placed in locations 7E:7F. The disk bootstrap looks for a valid OS16/32 volume descriptor in block 0, and uses that to locate the volume directory. It then searches the directory for a filename of the form OS16xxxx.hhh or OS32xxxx.hhh, where the xxxx is ignored and hhh is the ASCII form of the extension from locations 7E:7F. The 32b bootstrap can also boot Wollongong UNIX; locations 7E:7F must be 0. Note that only the MSM80 and MSM300 drives can be bootstrapped; the boot code does not recognize the other drives.
+The MSM/IDC controller supports the BOOT command. To boot OS16/32, the
+hex form of the operating system file's extension must be placed in
+locations 7E:7F. The disk bootstrap looks for a valid OS16/32 volume
+descriptor in block 0, and uses that to locate the volume directory. It
+then searches the directory for a filename of the form OS16xxxx.hhh or
+OS32xxxx.hhh, where the xxxx is ignored and hhh is the ASCII form of the
+extension from locations 7E:7F. The 32b bootstrap can also boot
+Wollongong UNIX; locations 7E:7F must be 0. Note that only the MSM80 and
+MSM300 drives can be bootstrapped; the boot code does not recognize the
+other drives.
 
 All drives have 256 8b bytes per sector. The other disk parameters are:
 
@@ -1128,13 +1206,15 @@ OS I/O error report error and stop
 
 ## Magnetic Tape Controller (MT)
 
-Magnetic tape options include the ability to make units write enabled or write locked.
+Magnetic tape options include the ability to make units write enabled or
+write locked.
 
 SET MTn LOCKED set unit n write locked
 
 SET MTn WRITEENABLED set unit n write enabled
 
-Magnetic tape units can be set to a specific reel capacity in MB, or to unlimited capacity:
+Magnetic tape units can be set to a specific reel capacity in MB, or to
+unlimited capacity:
 
 SET MTn CAPAC=m set unit n capacity to m MB (0 = unlimited)
 
@@ -1142,7 +1222,8 @@ SHOW MTn CAPAC show unit n capacity in MB
 
 Units can also be set ENABLED or DISABLED.
 
-The magnetic tape supports the BOOT command. BOOT MTn copies an autoload sequence into memory and starts it running.
+The magnetic tape supports the BOOT command. BOOT MTn copies an autoload
+sequence into memory and starts it running.
 
 The magnetic tape controller implements these registers:
 
@@ -1194,7 +1275,8 @@ OS I/O error set error flag; if STOP_IOE, stop
 
 # Symbolic Display and Input
 
-The Interdata simulator implements symbolic display and input. Display is controlled by command line switches:
+The Interdata simulator implements symbolic display and input. Display
+is controlled by command line switches:
 
 -a display byte as ASCII character
 
@@ -1202,7 +1284,8 @@ The Interdata simulator implements symbolic display and input. Display is contro
 
 -m display instruction mnemonics
 
-Input parsing is controlled by the first character typed in or by command line switches:
+Input parsing is controlled by the first character typed in or by
+command line switches:
 
 ' or -a ASCII character
 
@@ -1214,95 +1297,129 @@ numeric hexadecimal number
 
 ## 16b Instruction Input
 
-Instruction input uses standard Interdata assembler syntax. There are seven instruction classes: short branch, extended short branch, short immediate, register, register-register, memory, and register-memory.
+Instruction input uses standard Interdata assembler syntax. There are
+seven instruction classes: short branch, extended short branch, short
+immediate, register, register-register, memory, and register-memory.
 
 Short branch instructions have the format
 
 sbop mask,address
 
-where the mask is a hex (decimal) number between 0 and F (15), and the address is within +32 (forward branch) or -32 (backward branch) of the current location.
+where the mask is a hex (decimal) number between 0 and F (15), and the
+address is within +32 (forward branch) or -32 (backward branch) of the
+current location.
 
 Extended short branch instructions have the format
 
 sbxop address
 
-where the address is within +32 or -32 of the current location. For extended short branches, the simulator chooses the forward or backward direction automatically.
+where the address is within +32 or -32 of the current location. For
+extended short branches, the simulator chooses the forward or backward
+direction automatically.
 
 Short immediate instructions have the format
 
 siop regnum,immed
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15), and the immediate is a hex digit between 0 and F.
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15), and the immediate is a hex digit between 0
+and F.
 
 Register instructions have the format
 
 rop regnum
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15).
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15).
 
 Register-register instructions have the format
 
 rrop regnum,regnum
 
-where the register numbers are hex (decimal) numbers, optionally preceded by R, between 0 and F (15).
+where the register numbers are hex (decimal) numbers, optionally
+preceded by R, between 0 and F (15).
 
 Memory instructions have the format
 
 mop address{(index)}
 
-where address is a hex number between 0 and 0xFFFF, and the index register is a hex (decimal) number, optionally preceded by R, between 1 and F (15).
+where address is a hex number between 0 and 0xFFFF, and the index
+register is a hex (decimal) number, optionally preceded by R, between 1
+and F (15).
 
 Register-memory instructions have the format
 
 rmop regnum,address{(index)}
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15), the address is a hex number between 0 and 0xFFFF, and the index register is a hex (decimal) number, optionally preceded by R, between 1 and F (15).
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15), the address is a hex number between 0 and
+0xFFFF, and the index register is a hex (decimal) number, optionally
+preceded by R, between 1 and F (15).
 
 ## 32b Instruction Input
 
-Instruction input uses standard Interdata assembler syntax. There are nine instruction classes: short branch, extended short branch, short immediate, 16b immediate, 32b immediate, register, register-register, memory, and register-memory. Addresses, where required, can be specified as either absolute numbers or relative to the current location (.+n or .-n).
+Instruction input uses standard Interdata assembler syntax. There are
+nine instruction classes: short branch, extended short branch, short
+immediate, 16b immediate, 32b immediate, register, register-register,
+memory, and register-memory. Addresses, where required, can be specified
+as either absolute numbers or relative to the current location (.+n or
+.-n).
 
 Short branch instructions have the format
 
 sbop mask,address
 
-where the mask is a hex (decimal) number between 0 and F (15), and the address is within +32 (forward branch) or -32 (backward branch) of the current location.
+where the mask is a hex (decimal) number between 0 and F (15), and the
+address is within +32 (forward branch) or -32 (backward branch) of the
+current location.
 
 Extended short branch instructions have the format
 
 sbxop address
 
-where the address is within +32 or -32 of the current location. For extended short branches, the simulator chooses the forward or backward direction automatically.
+where the address is within +32 or -32 of the current location. For
+extended short branches, the simulator chooses the forward or backward
+direction automatically.
 
 Short immediate instructions have the format
 
 siop regnum,immed
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15), and the immediate is a hex digit between 0 and F.
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15), and the immediate is a hex digit between 0
+and F.
 
 16b immediate instructions have the format
 
 i16op regnum,immed16{(index)}
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15), the immediate is a hex number between 0 and 0xFFFF, and the index register is a hex (decimal) number, optionally preceded by R, between 1 and F (15).
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15), the immediate is a hex number between 0 and
+0xFFFF, and the index register is a hex (decimal) number, optionally
+preceded by R, between 1 and F (15).
 
 32b immediate instructions have the format
 
 i32op regnum,immed32{(index)}
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15), the immediate is a hex number between 0 and 0xFFFFFFFF, and the index register is a hex (decimal) number, optionally preceded by R, between 1 and F (15).
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15), the immediate is a hex number between 0 and
+0xFFFFFFFF, and the index register is a hex (decimal) number, optionally
+preceded by R, between 1 and F (15).
 
 Register instructions have the format
 
 rop regnum
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15).
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15).
 
 Register-register instructions have the format
 
 rrop regnum,regnum
 
-where the register numbers are hex (decimal) numbers, optionally preceded by R, between 0 and F (15).
+where the register numbers are hex (decimal) numbers, optionally
+preceded by R, between 0 and F (15).
 
 Memory instructions have the format
 
@@ -1310,7 +1427,9 @@ mop address{(index)} or
 
 mop address{(index1,index2)}
 
-where address is a hex number between 0 and 0xFFFF, and the index registers are hex (decimal) numbers, optionally preceded by R, between 1 and F (15).
+where address is a hex number between 0 and 0xFFFF, and the index
+registers are hex (decimal) numbers, optionally preceded by R, between 1
+and F (15).
 
 Register-memory instructions have the format
 
@@ -1318,6 +1437,11 @@ rmop regnum,address{(index)} or
 
 rmop regnum,address{(index1,index2)}
 
-where the register number is a hex (decimal) number, optionally preceded by R, between 0 and F (15), the address is a hex number between 0 and 0xFFFF, and the index registers are hex (decimal) numbers, optionally preceded by R, between 1 and F (15).
+where the register number is a hex (decimal) number, optionally preceded
+by R, between 0 and F (15), the address is a hex number between 0 and
+0xFFFF, and the index registers are hex (decimal) numbers, optionally
+preceded by R, between 1 and F (15).
 
-For memory operands, the simulator automatically chooses the format (RX1, RX2, RX3) that consumes the fewest bytes. If both RX1 and RX2 are feasible, the simulator chooses RX1.
+For memory operands, the simulator automatically chooses the format
+(RX1, RX2, RX3) that consumes the fewest bytes. If both RX1 and RX2 are
+feasible, the simulator chooses RX1.

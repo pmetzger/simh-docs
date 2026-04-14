@@ -1,68 +1,34 @@
-**SWTP 6800 Simulator Usage**
+# SWTP 6800 Simulator Usage
 
-**6-June-2022**
+Revision of 6-June-2022
 
-COPYRIGHT NOTICES
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-Original code published in 1993-2008, written by Robert M Supnik
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-Copyright (c) 1993-2008, Robert M Supnik
+The SWTP 6800 simulator was written by William A Beech.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# Table of Contents
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Except as contained in this notice, the name of Robert M Supnik shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Robert M Supnik.
-
-The following copyright notice applies to the SWTP 6800 source, binary, and documentation:
-
-Original code published in 2011, written by William A Beech
-
-Copyright (c) 2011, William A Beech
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL WILLIAM A BEECH BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Except as contained in this notice, the name of William A Beech shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from William A Beech.
-
-[1 Simulator Files 4](#simulator-files)
-
-[2 SWTP 6800 Features 4](#swtp-6800-features)
-
-[2.1 Motherboard 5](#motherboard)
-
-[2.2 MP-A CPU Card 5](#mp-a-cpu-card)
-
-[2.2.1 BOOTROM Device 6](#bootrom-device)
-
-[2.2.2 CPU Device 7](#cpu-device)
-
-[2.2.3 M6800 Registers 7](#m6800-registers)
-
-[2.3 MP-A2 CPU Card 7](#mp-a2-cpu-card)
-
-[2.3.1 BOOTROM Device 8](#bootrom-device-1)
-
-[2.3.2 I2716 Device 9](#i2716-device)
-
-[2.3.3 CPU Device 9](#cpu-device-1)
-
-[2.3.4 M6800 Registers 9](#m6800-registers-1)
-
-[2.4 Programmed I/O Devices 9](#programmed-io-devices)
-
-[2.4.1 MP-S Serial I/O Board 9](#mp-s-serial-io-board)
-
-[2.4.2 DC-4 Quad Double-Sided Single-/Double-Density 5-1/4” Floppy Disk Controller Board 10](#dc-4-quad-double-sided-single-double-density-5-14-floppy-disk-controller-board)
-
-[2.4.3 LFD-400 Quad Single-Density 5-1/4” Floppy Disk Controller Board 10](#lfd-400-quad-single-density-5-14-floppy-disk-controller-board)
+[1 Simulator Files](#simulator-files)
+[2 SWTP 6800 Features](#swtp-6800-features)
+[2.1 Motherboard](#motherboard)
+[2.2 MP-A CPU Card](#mp-a-cpu-card)
+[2.2.1 BOOTROM Device](#bootrom-device)
+[2.2.2 CPU Device](#cpu-device)
+[2.2.3 M6800 Registers](#m6800-registers)
+[2.3 MP-A2 CPU Card](#mp-a2-cpu-card)
+[2.3.1 BOOTROM Device](#bootrom-device-1)
+[2.3.2 I2716 Device](#i2716-device)
+[2.3.3 CPU Device](#cpu-device-1)
+[2.3.4 M6800 Registers](#m6800-registers-1)
+[2.4 Programmed I/O Devices](#programmed-io-devices)
+[2.4.1 MP-S Serial I/O Board](#mp-s-serial-io-board)
+[2.4.2 DC-4 Quad Double-Sided Single-/Double-Density 5-1/4” Floppy Disk Controller Board](#dc-4-quad-double-sided-single-double-density-5-14-floppy-disk-controller-board)
+[2.4.3 LFD-400 Quad Single-Density 5-1/4” Floppy Disk Controller Board](#lfd-400-quad-single-density-5-14-floppy-disk-controller-board)
 
 This memorandum documents the SWTP 6800 simulator.
 
@@ -166,7 +132,8 @@ LFD-400 SS-30 5-1/4” Dual Floppy disk controller
 
 MP-S SS-30 Serial I/O Port
 
-The simulator builds as two executable files, SWTP6800MP-A and SWTP6800MP-A2, one for each of the processor boards available.
+The simulator builds as two executable files, SWTP6800MP-A and
+SWTP6800MP-A2, one for each of the processor boards available.
 
 Most devices can be disabled or enabled, by the commands:
 
@@ -182,11 +149,17 @@ The SWTP 6800 simulator implements several unique stop conditions:
 
 - If an undefined interrupt occurs and ITRAP is enabled, a STOP_INST is set
 
-The LOAD command supports both S19 format and BIN format tapes. If the file extension is .S19, or the h switch is specified with LOAD, the file is assumed to be S19 format; if the file extension is .BIN, or the -b switch is specified, the file is assumed to be BIN format.
+The LOAD command supports both S19 format and BIN format tapes. If the
+file extension is .S19, or the h switch is specified with LOAD, the file
+is assumed to be S19 format; if the file extension is .BIN, or the -b
+switch is specified, the file is assumed to be BIN format.
 
 ## Motherboard
 
-The current simulator supports the MP-B2 motherboard. This board allows for inserting of the selected CPU, up to 6 MP-8M 8K byte memory boards, and one additional SS-50 board. It will allow the addition of up to 6 other SS-50 peripherals with the MP-S and DC-4.
+The current simulator supports the MP-B2 motherboard. This board allows
+for inserting of the selected CPU, up to 6 MP-8M 8K byte memory boards,
+and one additional SS-50 board. It will allow the addition of up to 6
+other SS-50 peripherals with the MP-S and DC-4.
 
 Addresses are fixed for each of the 6 MP-8M boards as shown below:
 
@@ -204,15 +177,20 @@ bd4 0A000H
 
 bd5 0C000H
 
-The simulator allows each board to be enabled or disabled individually to simulate the presence or absence of a particular board. This is the standard layout of memory in a SWTP 6800.
+The simulator allows each board to be enabled or disabled individually
+to simulate the presence or absence of a particular board. This is the
+standard layout of memory in a SWTP 6800.
 
-If the LFD-400 FDC is enabled, then the bd5 MP-8M must be disabled. The LFD-400 used CC00-CC0FH for its I/O address space.
+If the LFD-400 FDC is enabled, then the bd5 MP-8M must be disabled. The
+LFD-400 used CC00-CC0FH for its I/O address space.
 
 ## MP-A CPU Card
 
-The simulator for the SWTP 6800 MP-A uses several files. The simulator is depicted in Figure 1.
+The simulator for the SWTP 6800 MP-A uses several files. The simulator
+is depicted in Figure 1.
 
-<img src="mdbook/src/swtp6800_doc_assets/image1.png" style="width:6.66875in;height:5.57361in" />
+<img src="mdbook/src/swtp6800_doc_assets/image1.png"
+style="width:6.66875in;height:5.57361in" />
 
 **Figure 1. MP-A Simulator**
 
@@ -234,7 +212,8 @@ SET BOOTROM 2732 4K PROM
 
 SET BOOTROM 2764 8K PROM
 
-The BOOTROM device assigns the base of the ROM image to 0E000H of simulated memory.
+The BOOTROM device assigns the base of the ROM image to 0E000H of
+simulated memory.
 
 The BOOTROM image file is attached to the BOOTROM device as follows:
 
@@ -242,7 +221,8 @@ ATTACH BOOTROM SWTBUG.BIN
 
 ### CPU Device
 
-The CPU device allows setting the simulated behavior for interrupts and references to unimplemented memory.
+The CPU device allows setting the simulated behavior for interrupts and
+references to unimplemented memory.
 
 SET CPU ITRAP Trap interrupts
 
@@ -256,7 +236,8 @@ SET CPU HISTORY Enable the collection of history
 
 ### M6800 Registers
 
-The CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+The CPU registers include the visible state of the processor as well as
+the control registers for the interrupt system.
 
 name size comments
 
@@ -272,7 +253,8 @@ IX 16 index register
 
 CCR 8 condition code register
 
-The CPU display radix can be set for octal, decimal or hexadecimal. The commands are as follows:
+The CPU display radix can be set for octal, decimal or hexadecimal. The
+commands are as follows:
 
 SET CPU OCT
 
@@ -286,9 +268,11 @@ SHOW CPU RADIX
 
 ## MP-A2 CPU Card
 
-The simulator for the SWTP 6800 MP-A uses several files. The simulator is depicted in Figure 2.
+The simulator for the SWTP 6800 MP-A uses several files. The simulator
+is depicted in Figure 2.
 
-<img src="mdbook/src/swtp6800_doc_assets/image2.png" style="width:6.66875in;height:6.04722in" />
+<img src="mdbook/src/swtp6800_doc_assets/image2.png"
+style="width:6.66875in;height:6.04722in" />
 
 **Figure 2. MP-A2 Simulator**
 
@@ -310,7 +294,8 @@ SET BOOTROM 2732 4K PROM
 
 SET BOOTROM 2764 8K PROM
 
-The BOOTROM device assigns the base of the ROM image to 0E000H of simulated memory.
+The BOOTROM device assigns the base of the ROM image to 0E000H of
+simulated memory.
 
 The BOOTROM image file is attached to the BOOTROM device as follows:
 
@@ -318,7 +303,8 @@ ATTACH BOOTROM SWTBUG.BIN
 
 ### I2716 Device
 
-The i2716 device provides 4 units to simulate the 4 2716 ROM positions on the MP-A2 CPU board. They are i27160 to i27163.
+The i2716 device provides 4 units to simulate the 4 2716 ROM positions
+on the MP-A2 CPU board. They are i27160 to i27163.
 
 The i2716 ROM image file is attached to one of the i2716 devices as follows:
 
@@ -326,7 +312,8 @@ ATTACH I27160 FILE0.BIN
 
 ### CPU Device
 
-The CPU device allows setting the simulated behavior for interrupts and references to unimplemented memory.
+The CPU device allows setting the simulated behavior for interrupts and
+references to unimplemented memory.
 
 SET CPU ITRAP Trap interrupts
 
@@ -338,7 +325,8 @@ SET CPU NOMTRAP Don’t trap unimplemented memory
 
 ### M6800 Registers
 
-The CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+The CPU registers include the visible state of the processor as well as
+the control registers for the interrupt system.
 
 name size comments
 
@@ -354,7 +342,8 @@ IX 16 index register
 
 CCR 8 condition code register
 
-The CPU display radix can be set for octal, decimal or hexadecimal. The commands are as follows:
+The CPU display radix can be set for octal, decimal or hexadecimal. The
+commands are as follows:
 
 SET CPU OCT
 
@@ -370,7 +359,12 @@ SHOW CPU RADIX
 
 ### MP-S Serial I/O Board
 
-This driver simulates the MP-S serial I/O board for the console connection to the SWTP 6800. The console simulated is either an ANSI terminal or a Teletype Model 33 with paper tape reader and punch. The console functions work correctly but the paper tape functions do not. The simulator simulates the M6850 registers to the extent required to support the console.
+This driver simulates the MP-S serial I/O board for the console
+connection to the SWTP 6800. The console simulated is either an ANSI
+terminal or a Teletype Model 33 with paper tape reader and punch. The
+console functions work correctly but the paper tape functions do not.
+The simulator simulates the M6850 registers to the extent required to
+support the console.
 
 Console mode can be set as follows:
 
@@ -382,7 +376,10 @@ Current console status can be shown with the following command:
 
 SHOW MP-S
 
-The MP-S driver simulates the paper tape reader (PTR) and paper tape punch (PTP) devices. These devices need to be attached to files before use. If the file specified is not present, then a new file is created. The attach and detach commands are as follows:
+The MP-S driver simulates the paper tape reader (PTR) and paper tape
+punch (PTP) devices. These devices need to be attached to files before
+use. If the file specified is not present, then a new file is created.
+The attach and detach commands are as follows:
 
 ATTACH PTR TEST
 
@@ -400,9 +397,16 @@ SHOW PTR
 
 ### DC-4 Quad Double-Sided Single-/Double-Density 5-1/4” Floppy Disk Controller Board
 
-This driver simulates the DC-4 floppy disk controller board. Normally this board connects to a dual drive DSDD 5-1/4” floppy system. In this emulation, I have provided for 4 drives, the maximum the WD1797 can support and the emulated drive images are also increased in size to 1.44 MB. FLEX can handle this size drive with no problems.
+This driver simulates the DC-4 floppy disk controller board. Normally
+this board connects to a dual drive DSDD 5-1/4” floppy system. In this
+emulation, I have provided for 4 drives, the maximum the WD1797 can
+support and the emulated drive images are also increased in size to 1.44
+MB. FLEX can handle this size drive with no problems.
 
-The DC-4 simulator provides for four drive units. The units are DC-40 to DC-43. These devices need to be attached to files before use. If the file specified is not present, then a new file is created. The units can be attached and detached to files as follows:
+The DC-4 simulator provides for four drive units. The units are DC-40 to
+DC-43. These devices need to be attached to files before use. If the
+file specified is not present, then a new file is created. The units can
+be attached and detached to files as follows:
 
 ATTACH DC-40 BOOT.IMG
 
@@ -414,13 +418,20 @@ SHOW DC-4
 
 ### LFD-400 Quad Single-Density 5-1/4” Floppy Disk Controller Board
 
-This driver simulates the LFD-400 floppy disk controller board. Normally this board connects to a dual drive SSSD 5-1/4” floppy system. In this emulation, I have provided for 4 drives, the maximum the WD1791 can support.
+This driver simulates the LFD-400 floppy disk controller board. Normally
+this board connects to a dual drive SSSD 5-1/4” floppy system. In this
+emulation, I have provided for 4 drives, the maximum the WD1791 can
+support.
 
-The LDF-400 simulator provides for four drive units. The units are LDF-4000 to LDF-4003. The LDF-400 needs to be enabled before use as follows:
+The LDF-400 simulator provides for four drive units. The units are
+LDF-4000 to LDF-4003. The LDF-400 needs to be enabled before use as
+follows:
 
 SET LDS-400 ENABLE
 
-These devices need to be attached to files before use. If the file specified is not present, then a new file is created. The units can be attached and detached to files as follows:
+These devices need to be attached to files before use. If the file
+specified is not present, then a new file is created. The units can be
+attached and detached to files as follows:
 
 ATTACH LDF-4000 BOOT.IMG
 

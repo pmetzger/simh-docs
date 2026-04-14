@@ -1,42 +1,25 @@
-**LGP Simulator Usage**
+# LGP Simulator Usage
 
-**31-Mar-2011**
+Revision of 31-Mar-2011
 
-**COPYRIGHT NOTICE**
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-> Original code published in 1993-2011, written by Robert M Supnik
->
-> Copyright (c) 1993-2008, Robert M Supnik
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
->
-> CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-> Except as contained in this notice, the name of Robert M Supnik shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Robert M Supnik.
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-[1 Simulator Files 3](#simulator-files)
+# Table of Contents
 
-[2 LGP Features 3](#lgp-features)
-
-[2.1 CPU 3](#cpu)
-
-[2.2 Typewriter Input (TTI) 5](#typewriter-input-tti)
-
-[2.3 Typewriter Output (TTO) 6](#typewriter-output-tto)
-
-[2.4 High Speed Paper-Tape Reader (PTR) 6](#high-speed-paper-tape-reader-ptr)
-
-[2.5 High Speed Paper-Tape Punch (PTP) 7](#high-speed-paper-tape-punch-ptp)
-
-[3 Symbolic Display and Input 8](#symbolic-display-and-input)
-
-[4 Character Set 9](#character-set)
+[1 Simulator Files](#simulator-files)
+[2 LGP Features](#lgp-features)
+[2.1 CPU](#cpu)
+[2.2 Typewriter Input (TTI)](#typewriter-input-tti)
+[2.3 Typewriter Output (TTO)](#typewriter-output-tto)
+[2.4 High Speed Paper-Tape Reader (PTR)](#high-speed-paper-tape-reader-ptr)
+[2.5 High Speed Paper-Tape Punch (PTP)](#high-speed-paper-tape-punch-ptp)
+[3 Symbolic Display and Input](#symbolic-display-and-input)
+[4 Character Set](#character-set)
 
 This memorandum documents the LGP-30 simulator.
 
@@ -110,7 +93,8 @@ SET CPU LGP30 set LGP-30
 
 SET CPU LGP21 set LGP-21
 
-The default is the LGP-30. Memory size is fixed at 4096 words. Although memory is 32b wide, bit\<31\> (the low-order bit) is always zero.
+The default is the LGP-30. Memory size is fixed at 4096 words. Although
+memory is 32b wide, bit\<31\> (the low-order bit) is always zero.
 
 The following commands implement various front panel functions:
 
@@ -182,7 +166,8 @@ punch
 
 The defaults are 4-bit input mode, input and output assigned to the Typewriter.
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as the
+control registers for the interrupt system.
 
 name size comments
 
@@ -216,7 +201,12 @@ WRU 8 interrupt character
 
 ## Typewriter Input (TTI)
 
-The Typewriter input consists of two units: the keyboard (unit 0) and the paper-tape reader (unit 1). The keyboard is permanently associated with the console window. The paper-tape reader can be attached to a disk file. The RPOS register specifies the number of the next data item to be read. Thus, by changing RPOS, the user can backspace or advance the reader.
+The Typewriter input consists of two units: the keyboard (unit 0) and
+the paper-tape reader (unit 1). The keyboard is permanently associated
+with the console window. The paper-tape reader can be attached to a disk
+file. The RPOS register specifies the number of the next data item to be
+read. Thus, by changing RPOS, the user can backspace or advance the
+reader.
 
 The Typewriter input has the following options:
 
@@ -284,9 +274,13 @@ OS I/O error x report error and stop
 
 ## Typewriter Output (TTO)
 
-The Typewriter output consists of two units: the printer (unit 0) and the paper-tape punch (unit 1). The printer is permanently associated with the console window. The paper-tape punch can be attached to a
+The Typewriter output consists of two units: the printer (unit 0) and
+the paper-tape punch (unit 1). The printer is permanently associated
+with the console window. The paper-tape punch can be attached to a
 
-disk file. The PPOS register specifies the number of the next data item to be written. Thus, by changing PPOS, the user can backspace or advance the punch.
+disk file. The PPOS register specifies the number of the next data item
+to be written. Thus, by changing PPOS, the user can backspace or advance
+the punch.
 
 The Typewriter output has the following options:
 
@@ -298,7 +292,8 @@ SET TTO1 FLEX default tape file format is transposed Flex
 
 SET TTO1 FEED=n punch 'n' feed (0) characters
 
-Transposed Flex has the tape channels in this order: 6-1-2-3-4-5. The default is ASCII-encoded Flex.
+Transposed Flex has the tape channels in this order: 6-1-2-3-4-5. The
+default is ASCII-encoded Flex.
 
 The ATTACH command recognizes two switches:
 
@@ -334,7 +329,9 @@ OS I/O error x report error and stop
 
 ## High Speed Paper-Tape Reader (PTR)
 
-The paper tape reader (PTR) reads data from or a disk file. The POS register specifies the number of the next data item to be read. Thus, by changing POS, the user can backspace or advance the reader.
+The paper tape reader (PTR) reads data from or a disk file. The POS
+register specifies the number of the next data item to be read. Thus, by
+changing POS, the user can backspace or advance the reader.
 
 The paper-tape reader has the following options:
 
@@ -344,7 +341,8 @@ Flex
 
 SET PTR FLEX default tape file format is transposed Flex
 
-Transposed Flex has the tape channels in this order: 6-1-2-3-4-5. The default is ASCII-encoded Flex.
+Transposed Flex has the tape channels in this order: 6-1-2-3-4-5. The
+default is ASCII-encoded Flex.
 
 The ATTACH command recognizes two switches:
 
@@ -382,7 +380,9 @@ OS I/O error x report error and stop
 
 ## High Speed Paper-Tape Punch (PTP)
 
-The paper tape punch (PTP) writes data to a disk file. The POS register specifies the number of the next data item to be written. Thus, by changing POS, the user can backspace or advance the punch.
+The paper tape punch (PTP) writes data to a disk file. The POS register
+specifies the number of the next data item to be written. Thus, by
+changing POS, the user can backspace or advance the punch.
 
 The paper tape punch has the following options:
 
@@ -394,7 +394,8 @@ SET PTP FLEX default tape file format is transposed Flex
 
 SET PTP FEED=n punch 'n' feed (0) characters
 
-Transposed Flex has the tape channels in this order: 6-1-2-3-4-5. The default is ASCII-encoded Flex.
+Transposed Flex has the tape channels in this order: 6-1-2-3-4-5. The
+default is ASCII-encoded Flex.
 
 The ATTACH command recognizes two switches:
 
@@ -426,7 +427,8 @@ OS I/O error x report error and stop
 
 # Symbolic Display and Input
 
-The LGP simulator implements symbolic display and input. Display is controlled by command line switches:
+The LGP simulator implements symbolic display and input. Display is
+controlled by command line switches:
 
 -a display as character (tape files only)
 
@@ -444,7 +446,8 @@ The LGP simulator implements symbolic display and input. Display is controlled b
 
 (overrides SET CPU NORMAL)
 
-Input parsing is controlled by the first character typed in or by command line switches:
+Input parsing is controlled by the first character typed in or by
+command line switches:
 
 ' or -a Flex character
 
@@ -472,9 +475,12 @@ There is only instruction format:
 
 {-}op address
 
-'op' is always a single letter. A track/sector address (specified by SET CPU TRACK or switch -t) is two decimal numbers between 0 and 63, representing the track and sector. A linear address (specified by
+'op' is always a single letter. A track/sector address (specified by SET
+CPU TRACK or switch -t) is two decimal numbers between 0 and 63,
+representing the track and sector. A linear address (specified by
 
-SET CPU NORMAL or switch -n) is one decimal number between 0 and 4095. For example:
+SET CPU NORMAL or switch -n) is one decimal number between 0 and 4095.
+For example:
 
 sim\> d -n 64 10640
 
@@ -488,7 +494,9 @@ sim\> ex -mt 100
 
 # Character Set
 
-The LGP Typewriter was a Friden Flexowriter. Input was always upper case; output could be either upper case or lower case. The following table provides equivalences between LPG Typewriter coding and ASCII.
+The LGP Typewriter was a Friden Flexowriter. Input was always upper
+case; output could be either upper case or lower case. The following
+table provides equivalences between LPG Typewriter coding and ASCII.
 
 Typewriter Input LC output UC output
 
@@ -622,7 +630,9 @@ code (hex)
 
 77 illegal illegal illegal
 
-Certain characters on the Flexowriter keyboard don't exist in ASCII. The following table provides ASCII substitution characters for the unique Flexowriter characters (this is compatible with the coding in the LGP30
+Certain characters on the Flexowriter keyboard don't exist in ASCII. The
+following table provides ASCII substitution characters for the unique
+Flexowriter characters (this is compatible with the coding in the LGP30
 
 paper tape archive):
 
@@ -636,4 +646,6 @@ UC 1E pi ~
 
 UC 22 sigma \#
 
-Certain Flexowriter codes have no character equivalent of any kind. For paper-tape reader and punch files, these are encoded as !dd, where dd is a decimal number between 0 and 63.
+Certain Flexowriter codes have no character equivalent of any kind. For
+paper-tape reader and punch files, these are encoded as !dd, where dd is
+a decimal number between 0 and 63.

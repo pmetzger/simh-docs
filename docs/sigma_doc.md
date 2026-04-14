@@ -1,56 +1,32 @@
-**XDS Sigma 32b Simulator Usage**
+# XDS Sigma 32b Simulator Usage
 
-**27-Mar-2016**
+Revision of 27-Mar-2016
 
-**COPYRIGHT NOTICE**
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-> Original code published in 1993-2016, written by Robert M Supnik
->
-> Copyright (c) 1993-2016, Robert M Supnik
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ROBERT M SUPNIK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
->
-> CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-> Except as contained in this notice, the name of Robert M Supnik shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Robert M Supnik.
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-[1 Simulator Files 3](#simulator-files)
+# Table of Contents
 
-[2 XDS Sigma 32b Features 3](#xds-sigma-32b-features)
-
-[2.1 Central Processor (CPU) 4](#central-processor-cpu)
-
-[2.2 Memory Map (MAP) 5](#memory-map-map)
-
-[2.3 Interrupt System (INT) 6](#interrupt-system-int)
-
-[2.4 Channels (CHANA .. CHANH) 6](#channels-chana-..-chanh)
-
-[2.5 7012 Console Teletype (TT) 7](#console-teletype-tt)
-
-[2.6 7060 Paper Tape Reader (PT) 8](#paper-tape-reader-pt)
-
-[2.7 7440 or 7450 Line Printer (LP) 8](#or-7450-line-printer-lp)
-
-[2.8 Real-Time Clock (RTC) 9](#real-time-clock-rtc)
-
-[2.9 Character-Oriented Communications Subsystem (MUX) 10](#character-oriented-communications-subsystem-mux)
-
-[2.10 7240, 7270, 7260, 7265, 7275, and T3281 Moving Head Disk Controllers (DPA, DPB) 11](#and-t3281-moving-head-disk-controllers-dpa-dpb)
-
-[2.11 7250 Cartridge Disk Controller (DK) 12](#cartridge-disk-controller-dk)
-
-[2.12 7211/7212 or 7231/7232 Fixed Head Disk (RAD) 13](#or-72317232-fixed-head-disk-rad)
-
-[2.13 723X Nine-Track Magnetic Tape (MT) 13](#x-nine-track-magnetic-tape-mt)
-
-[3 Symbolic Display and Input 14](#symbolic-display-and-input)
+[1 Simulator Files](#simulator-files)
+[2 XDS Sigma 32b Features](#xds-sigma-32b-features)
+[2.1 Central Processor (CPU)](#central-processor-cpu)
+[2.2 Memory Map (MAP)](#memory-map-map)
+[2.3 Interrupt System (INT)](#interrupt-system-int)
+[2.4 Channels (CHANA .. CHANH)](#channels-chana-..-chanh)
+[2.5 7012 Console Teletype (TT)](#console-teletype-tt)
+[2.6 7060 Paper Tape Reader (PT)](#paper-tape-reader-pt)
+[2.7 7440 or 7450 Line Printer (LP)](#or-7450-line-printer-lp)
+[2.8 Real-Time Clock (RTC)](#real-time-clock-rtc)
+[2.9 Character-Oriented Communications Subsystem (MUX)](#character-oriented-communications-subsystem-mux)
+[2.10 7240, 7270, 7260, 7265, 7275, and T3281 Moving Head Disk Controllers (DPA, DPB)](#and-t3281-moving-head-disk-controllers-dpa-dpb)
+[2.11 7250 Cartridge Disk Controller (DK)](#cartridge-disk-controller-dk)
+[2.12 7211/7212 or 7231/7232 Fixed Head Disk (RAD)](#or-72317232-fixed-head-disk-rad)
+[2.13 723X Nine-Track Magnetic Tape (MT)](#x-nine-track-magnetic-tape-mt)
+[3 Symbolic Display and Input](#symbolic-display-and-input)
 
 This memorandum documents the SDS 940 simulator.
 
@@ -152,13 +128,15 @@ The XDS Sigma 32b simulator is configured as follows:
 >
 > MT 732X 9-track magnetic tape with up to 8 drives
 
-Most devices can be disabled or enabled with the SET \<dev\> DISABLED and SET \<dev\> ENABLED commands, respectively.
+Most devices can be disabled or enabled with the SET \<dev\> DISABLED
+and SET \<dev\> ENABLED commands, respectively.
 
 The LOAD and DUMP commands are not implemented.
 
 ## Central Processor (CPU)
 
-Central processor options include the CPU model, the CPU features, and the size of main memory.
+Central processor options include the CPU model, the CPU features, and
+the size of main memory.
 
 SET CPU SIGMA5 set CPU model to Sigma 5
 
@@ -212,9 +190,14 @@ SET CPU 512K set memory size = 512KW
 
 SET CPU 1M set memory size = 1024KW
 
-If memory size is being reduced, and the memory being truncated contains non-zero data, the simulator asks for confirmation. Data in the truncated portion of memory is lost. Initial configuration is Sigma 7 CPU, 4 channels, 128KW of memory, floating point, decimal, map and writelocks options enabled.
+If memory size is being reduced, and the memory being truncated contains
+non-zero data, the simulator asks for confirmation. Data in the
+truncated portion of memory is lost. Initial configuration is Sigma 7
+CPU, 4 channels, 128KW of memory, floating point, decimal, map and
+writelocks options enabled.
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as the
+control registers for the interrupt system.
 
 name size comments
 
@@ -250,11 +233,15 @@ REG 512 register blocks, 32 x 16
 
 WRU 8 interrupt character
 
-The CPU provides an address converter to display the byte (halfword, word, or doubleword) address equivalent of a byte (halfword, word, or doubleword) input address. Optionally, the input address can be run through memory relocation:
+The CPU provides an address converter to display the byte (halfword,
+word, or doubleword) address equivalent of a byte (halfword, word, or
+doubleword) input address. Optionally, the input address can be run
+through memory relocation:
 
 SHOW {-flags} CPU {BA,HA,WA,DA}=address
 
-BA, HA, WA, DA specify that the input address is a byte, halfword, word, or doubleword address, respectively. The flags are:
+BA, HA, WA, DA specify that the input address is a byte, halfword, word,
+or doubleword address, respectively. The flags are:
 
 -v input address is virtual
 
@@ -272,7 +259,9 @@ SHOW –B CPU WA=100
 
 Physical word 100: physical byte 400
 
-The CPU can maintain a history of the most recently executed instructions. This is controlled by the SET CPU HISTORY and SHOW CPU HISTORY commands:
+The CPU can maintain a history of the most recently executed
+instructions. This is controlled by the SET CPU HISTORY and SHOW CPU
+HISTORY commands:
 
 SET CPU HISTORY clear history buffer
 
@@ -288,7 +277,11 @@ The maximum length for the history is 1M entries.
 
 ## Memory Map (MAP)
 
-The memory map implements two distinct forms of protection: memory mapping and access protection on virtual addresses; and write lock protection on physical addresses. It also includes a skeleton implementation of the memory status registers from the Sigma 8 and 9, and the XDS 550 and 560. It implements these registers:
+The memory map implements two distinct forms of protection: memory
+mapping and access protection on virtual addresses; and write lock
+protection on physical addresses. It also includes a skeleton
+implementation of the memory status registers from the Sigma 8 and 9,
+and the XDS 550 and 560. It implements these registers:
 
 name size comments
 
@@ -304,7 +297,9 @@ SR1\[32\] 32 memory status register 1
 
 ## Interrupt System (INT)
 
-The Sigma series implements a complex, multi-level interrupts system, with a minimum of 32 distinct interrupts. The interrupt system can be expanded to up to 224 interrupt levels. It implements these registers:
+The Sigma series implements a complex, multi-level interrupts system,
+with a minimum of 32 distinct interrupts. The interrupt system can be
+expanded to up to 224 interrupt levels. It implements these registers:
 
 name size comments
 
@@ -324,11 +319,16 @@ S9_MARG 32 Sigma 9 margins registers
 
 S5X0_IREG\[0:31\] 32 5X0 internal registers (unused)
 
-The simulator supports a variable number of external interrupt blocks. The minimum number is one, the maximum is four (5X0) to thirty-two (Sigma 7). The user can change the number of external interrupt blocks with the SET INT EIBLKS command:
+The simulator supports a variable number of external interrupt blocks.
+The minimum number is one, the maximum is four (5X0) to thirty-two
+(Sigma 7). The user can change the number of external interrupt blocks
+with the SET INT EIBLKS command:
 
 SET INT EIBLKS=4 configure four external interrupt blocks
 
-Although the Sigma series supports configurable interrupt group priorities, the simulator uses a fixed priority arrangement, high to low as follows:
+Although the Sigma series supports configurable interrupt group
+priorities, the simulator uses a fixed priority arrangement, high to low
+as follows:
 
 - counters
 
@@ -344,7 +344,9 @@ Although the Sigma series supports configurable interrupt group priorities, the 
 
 ## Channels (CHANA .. CHANH)
 
-A Sigma 32b system has up to eight I/O channels, designated A, B, C, D, E, F, G, and H. The association between a device and a channel is displayed by the SHOW \<dev\> CHAN command and SHOW \<dev\> DVA command:
+A Sigma 32b system has up to eight I/O channels, designated A, B, C, D,
+E, F, G, and H. The association between a device and a channel is
+displayed by the SHOW \<dev\> CHAN command and SHOW \<dev\> DVA command:
 
 SHOW MT CHAN
 
@@ -354,7 +356,9 @@ SHOW MT DVA
 
 address=00
 
-The user can change the association with the SET \<dev\> CHAN=\<chan\> command, where \<chan\> is a channel letter, and with the SET \<dev\> DVA=\<addr\> command, where \<addr\> is a legal device address:
+The user can change the association with the SET \<dev\> CHAN=\<chan\>
+command, where \<chan\> is a channel letter, and with the SET \<dev\>
+DVA=\<addr\> command, where \<addr\> is a legal device address:
 
 SET MT CHAN=C
 
@@ -388,11 +392,14 @@ DPA chan C address 0
 
 DPB chan D address 1
 
-The user can display all the channel registers associated with a device with the SHOW \<dev\> CSTATE command:
+The user can display all the channel registers associated with a device
+with the SHOW \<dev\> CSTATE command:
 
 SHOW MT CSTATE
 
-Each channel has eight registers. The registers are arrays, with entry 1 for device \[0\], entry \[1\] for device 1, etc. A channel supports a maximum of 32 devices.
+Each channel has eight registers. The registers are arrays, with entry 1
+for device \[0\], entry \[1\] for device 1, etc. A channel supports a
+maximum of 32 devices.
 
 name size comments
 
@@ -414,7 +421,9 @@ CHSF\[0:31\] 8 channel simulator flags
 
 ## 7012 Console Teletype (TT)
 
-The console Teletype (TT) consists of two units. Unit 0 is for console input, unit 1 for console output. The console implements these registers:
+The console Teletype (TT) consists of two units. Unit 0 is for console
+input, unit 1 for console output. The console implements these
+registers:
 
 name size comments
 
@@ -426,7 +435,9 @@ TTIME 24 time from I/O initiation to interrupt
 
 PANEL 8 character code for panel interrupt
 
-The PANEL variable defaults to control-P. If the user types the control panel character, it is not echoed; instead, a control panel interrupt is generated.
+The PANEL variable defaults to control-P. If the user types the control
+panel character, it is not echoed; instead, a control panel interrupt is
+generated.
 
 The console can be set to one of two modes, 7P or UC:
 
@@ -438,11 +449,18 @@ to upper case to upper case
 
 7P non-printing characters suppressed
 
-The default mode is UC. The console character set is a subset of EBCDIC. By default, the console is assigned to channel A as device 1.
+The default mode is UC. The console character set is a subset of EBCDIC.
+By default, the console is assigned to channel A as device 1.
 
 ## 7060 Paper Tape Reader (PT)
 
-The paper tape controller implements two units. Unit 0 (PT0) is for paper tape input, unit 1 (PT1) for paper tape output. Paper tapes are simulated as disk files. For the reader, register RPOS specifies the number of the next data item to be read. For the punch, register PPOS specifies the number of the next data item to be written. Thus, by changing RPOS or PPOS, the user can backspace or advance the reader or punch.
+The paper tape controller implements two units. Unit 0 (PT0) is for
+paper tape input, unit 1 (PT1) for paper tape output. Paper tapes are
+simulated as disk files. For the reader, register RPOS specifies the
+number of the next data item to be read. For the punch, register PPOS
+specifies the number of the next data item to be written. Thus, by
+changing RPOS or PPOS, the user can backspace or advance the reader or
+punch.
 
 The paper tape controller implements these registers:
 
@@ -464,7 +482,8 @@ PTIME 24 time from punch I/O initiation to response
 
 PSTOP_IOE 1 punch stop on I/O error
 
-The paper-tape reader supports the BOOT command. BOOT PT0 simulates the standard console fill sequence.
+The paper-tape reader supports the BOOT command. BOOT PT0 simulates the
+standard console fill sequence.
 
 Reader error handling is as follows:
 
@@ -494,7 +513,9 @@ By default, the paper tape reader is assigned to channel A as device 5.
 
 ## 7440 or 7450 Line Printer (LP)
 
-The line printer (LPT) writes data to a disk file. The POS register specifies the number of the next data item to be written. Thus, by changing POS, the user can backspace or advance the printer.
+The line printer (LPT) writes data to a disk file. The POS register
+specifies the number of the next data item to be written. Thus, by
+changing POS, the user can backspace or advance the printer.
 
 The line printer implements these registers:
 
@@ -534,7 +555,11 @@ A carriage control tape can be loaded with the SET LP CCT command:
 
 SET LP CCT=\<file\> load carriage-control tape from \<file\>
 
-The format of a carriage control tape consists of multiple lines. Each line contains an optional repeat count, enclosed in parentheses, optionally followed by a series of column numbers separated by commas. Column numbers must be between 0 and 7. The following are all legal carriage control specifications:
+The format of a carriage control tape consists of multiple lines. Each
+line contains an optional repeat count, enclosed in parentheses,
+optionally followed by a series of column numbers separated by commas.
+Column numbers must be between 0 and 7. The following are all legal
+carriage control specifications:
 
 \<blank line\> no punch
 
@@ -562,7 +587,10 @@ By default, the line printer is assigned to channel A as device 2.
 
 ## Real-Time Clock (RTC)
 
-The Sigma 32b series implements four real-time clocks. Three of them can be set to a variety of frequencies, including off, 50Hz, 60Hz, 100Hz, and 500hz. The fourth always runs at 500Hz. The frequency of each clock can be can be adjusted as follows:
+The Sigma 32b series implements four real-time clocks. Three of them can
+be set to a variety of frequencies, including off, 50Hz, 60Hz, 100Hz,
+and 500hz. The fourth always runs at 500Hz. The frequency of each clock
+can be can be adjusted as follows:
 
 SET RTC {C1,C2,C3}=freq set clock 1/2/3 to specified frequency
 
@@ -576,17 +604,25 @@ The RTC can also show the state of all real-time events in the simulator:
 
 SHOW RTC EVENTS
 
-The real-time clocks autocalibrate; the clock interval is adjusted up or down so that the clock tracks actual elapsed time.
+The real-time clocks autocalibrate; the clock interval is adjusted up or
+down so that the clock tracks actual elapsed time.
 
 ## Character-Oriented Communications Subsystem (MUX)
 
-The character-oriented communications subsystem implements up to 64 asynchronous interfaces, with modem control. The subsystem has two controllers: MUX for the scanner, and MUXL for the individual lines. The terminal multiplexer performs input and output through Telnet sessions connected to a user-specified port. The ATTACH command specifies the port to be used:
+The character-oriented communications subsystem implements up to 64
+asynchronous interfaces, with modem control. The subsystem has two
+controllers: MUX for the scanner, and MUXL for the individual lines. The
+terminal multiplexer performs input and output through Telnet sessions
+connected to a user-specified port. The ATTACH command specifies the
+port to be used:
 
 ATTACH MUX \<port\> set up listening port
 
-where port is a decimal number between 1 and 65535 that is not being used for other TCP/IP activities.
+where port is a decimal number between 1 and 65535 that is not being
+used for other TCP/IP activities.
 
-Unlike the console, the MUX operates in ASCII. Each line (each unit of MUXL) supports four character processing modes: UC, 7P, 7B, and 8B.
+Unlike the console, the MUX operates in ASCII. Each line (each unit of
+MUXL) supports four character processing modes: UC, 7P, 7B, and 8B.
 
 mode input characters output characters
 
@@ -604,15 +640,21 @@ non-printing characters suppressed
 
 8B no changes no changes
 
-The default is UC. In addition, each line supports output logging. The SET MUXLn LOG command enables logging on a line:
+The default is UC. In addition, each line supports output logging. The
+SET MUXLn LOG command enables logging on a line:
 
 SET MUXLn filename log output of line n to filename
 
-The SET MUXLn NOLOG command disables logging and closes the open log file, if any.
+The SET MUXLn NOLOG command disables logging and closes the open log
+file, if any.
 
-Once MUX is attached and the simulator is running, the multiplexer listens for connections on the specified port. It assumes that the incoming connections are Telnet connections. The connections remain open until
+Once MUX is attached and the simulator is running, the multiplexer
+listens for connections on the specified port. It assumes that the
+incoming connections are Telnet connections. The connections remain open
+until
 
-disconnected either by the Telnet client, a SET MUX DISCONNECT command, or a DETACH MUX command.
+disconnected either by the Telnet client, a SET MUX DISCONNECT command,
+or a DETACH MUX command.
 
 Other special multiplexer commands:
 
@@ -644,11 +686,15 @@ name size comments
 
 TIME\[0:63\] 24 transmit time, lines 0 to 31
 
-The terminal multiplexer does not support save and restore. All open connections are lost when the simulator shuts down or MUX is detached. By default, the multiplexer is assigned to channel A as device 6.
+The terminal multiplexer does not support save and restore. All open
+connections are lost when the simulator shuts down or MUX is detached.
+By default, the multiplexer is assigned to channel A as device 6.
 
 ## 7240, 7270, 7260, 7265, 7275, and T3281 Moving Head Disk Controllers (DPA, DPB)
 
-The Sigma 32b series supports two moving head disk controllers (DPA, DPB). Each can be set to model one of six controllers (7240, 7270, 7260, 7265, 7275, or Telefile 3281):
+The Sigma 32b series supports two moving head disk controllers (DPA,
+DPB). Each can be set to model one of six controllers (7240, 7270, 7260,
+7265, 7275, or Telefile 3281):
 
 SET DP{A,B} 7240 set DPA (or DPB) to 7240
 
@@ -664,7 +710,10 @@ SET DP{A,B} T3281 set DPA (or DPB) to Telefile 3281
 
 The default for DPA is the 7270, for DPB, the 3T281.
 
-The 7240 and 7270 support up to 8 7242 and 7271 drives, respectively. The 7260, 7265, and 7275 support up to 15 7261, 7266, and 7276 drives, respectively. The T3281 supports up to 15 drives of three different types, which can be mixed:
+The 7240 and 7270 support up to 8 7242 and 7271 drives, respectively.
+The 7260, 7265, and 7275 support up to 15 7261, 7266, and 7276 drives,
+respectively. The T3281 supports up to 15 drives of three different
+types, which can be mixed:
 
 Model Cylinders Heads Sectors
 
@@ -682,9 +731,11 @@ The T3281 can also be set to autosize on ATTACH:
 
 SET DPn AUTO SET unit n to autosize on ATTACH
 
-Units can be set ENABLED or DISABLED. The DP controller supports the BOOT command.
+Units can be set ENABLED or DISABLED. The DP controller supports the
+BOOT command.
 
-The DP controllers implements the registers listed below. Registers suffixed with \[0:14\] are replicated per drive.
+The DP controllers implements the registers listed below. Registers
+suffixed with \[0:14\] are replicated per drive.
 
 name size comments
 
@@ -720,11 +771,13 @@ end of file x assume rest of disk is zero
 
 OS I/O error x report error and stop
 
-By default, DPA is assigned to channel C as device 0, and DPB is assigned to channel D as device 0.
+By default, DPA is assigned to channel C as device 0, and DPB is
+assigned to channel D as device 0.
 
 ## 7250 Cartridge Disk Controller (DK)
 
-The cartridge disk controller (DK) supports up to 8 drives. DK options include the ability to make drives write enabled or write locked:
+The cartridge disk controller (DK) supports up to 8 drives. DK options
+include the ability to make drives write enabled or write locked:
 
 SET DKn LOCKED set drive n write locked
 
@@ -754,7 +807,9 @@ not attached 1 report error and stop
 
 0 non-existent disk
 
-DK data files are buffered in memory; therefore, end of file and OS I/O errors cannot occur. By default, the cartridge disk controller is assigned to channel B as device 1.
+DK data files are buffered in memory; therefore, end of file and OS I/O
+errors cannot occur. By default, the cartridge disk controller is
+assigned to channel B as device 1.
 
 ## 7211/7212 or 7231/7232 Fixed Head Disk (RAD)
 
@@ -770,7 +825,8 @@ SET RAD 7211 set model to 7211/7212
 
 SET RAD 7231 set model to 7231/7232
 
-The fixed head disk controller supports four units (drives). Units can be set ENABLED or DISABLED.
+The fixed head disk controller supports four units (drives). Units can
+be set ENABLED or DISABLED.
 
 The fixed head disk controller implements these registers:
 
@@ -792,23 +848,29 @@ not attached 1 report error and stop
 
 0 non-existent disk
 
-RAD data files are buffered in memory; therefore, end of file and OS I/O errors cannot occur. By default, the fixed head disk is assigned to channel B as device 0.
+RAD data files are buffered in memory; therefore, end of file and OS I/O
+errors cannot occur. By default, the fixed head disk is assigned to
+channel B as device 0.
 
 ## 723X Nine-Track Magnetic Tape (MT)
 
-The magnetic tape controller supports up to eight units. MT options include the ability to make units write enabled or write locked.
+The magnetic tape controller supports up to eight units. MT options
+include the ability to make units write enabled or write locked.
 
 SET MTn LOCKED set unit n write locked
 
 SET MTn WRITEENABLED set unit n write enabled
 
-Magnetic tape units can be set to a specific reel capacity in MB, or to unlimited capacity:
+Magnetic tape units can be set to a specific reel capacity in MB, or to
+unlimited capacity:
 
 SET MTn CAPAC=m set unit n capacity to m MB (0 = unlimited)
 
 SHOW MTn CAPAC show unit n capacity in MB
 
-Units can also be set ENABLED or DISABLED. The magnetic tape controller supports the BOOT command. BOOT MTn simulates the standard console fill sequence for unit n.
+Units can also be set ENABLED or DISABLED. The magnetic tape controller
+supports the BOOT command. BOOT MTn simulates the standard console fill
+sequence for unit n.
 
 The magnetic tape implements these registers:
 
@@ -850,7 +912,8 @@ By default, the magnetic tape is assigned to channel A as device 0.
 
 # Symbolic Display and Input
 
-The Sigma 32b simulator implements symbolic display and input. Display is controlled by command line switches:
+The Sigma 32b simulator implements symbolic display and input. Display
+is controlled by command line switches:
 
 -a display as ASCII character (byte addressing)
 
@@ -866,7 +929,8 @@ The Sigma 32b simulator implements symbolic display and input. Display is contro
 
 -m display instruction mnemonics (word addressing)
 
-Input parsing is controlled by the first character typed in or by command line switches:
+Input parsing is controlled by the first character typed in or by
+command line switches:
 
 \# or -a ASCII character (byte addressing)
 
@@ -884,11 +948,15 @@ alphabetic instruction mnemonic (word addressing)
 
 numeric hexadecimal word (word addressing)
 
-Instruction input uses (more or less) standard XDS Sigma assembler syntax. All instructions are variants on the same basic form:
+Instruction input uses (more or less) standard XDS Sigma assembler
+syntax. All instructions are variants on the same basic form:
 
 mnemonic{,reg} {\*{address{,index}}}
 
-Mnemonics are symbolic names for instructions. Registers are decimal values between 0 and 15. ‘\*’ represents indirect addressing. Addresses are hexadecimal and can be signed if used as literals. Index registers are always less than 8 and thus can be considered decimal.
+Mnemonics are symbolic names for instructions. Registers are decimal
+values between 0 and 15. ‘\*’ represents indirect addressing. Addresses
+are hexadecimal and can be signed if used as literals. Index registers
+are always less than 8 and thus can be considered decimal.
 
 Examples:
 

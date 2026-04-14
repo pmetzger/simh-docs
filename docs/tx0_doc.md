@@ -1,48 +1,30 @@
-**TX-0 Simulator Usage**
+# TX-0 Simulator Usage
 
-**09-Nov-2012**
+Revision of 09-Nov-2012
 
-**COPYRIGHT NOTICE**
+**Copyright Notice**
 
-The following copyright notice applies to the SIMH source, binary, and documentation:
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
 
-> Original code published in 1993-2008, written by Robert M Supnik
->
-> TX-0 Simulator Copyright (c) 2009-2012, Howard M. Harte
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL HOWARD M HARTE BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
->
-> CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-> Except as contained in this notice, the name of Howard M Harte shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Howard M Harte.
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
-[1 Simulator Files 3](#simulator-files)
+The TX-0 simulator was written by Howard M. Harte.
 
-[2 TX-0 Features 3](#tx-0-features)
+# Table of Contents
 
-[2.1 CPU 4](#cpu)
-
-[2.2 I/O Devices 5](#io-devices)
-
-[2.2.1 Photoelectric Tape Reader (PETR) 5](#photoelectric-tape-reader-petr)
-
-[2.2.2 Paper Tape Punch (PTP) 5](#paper-tape-punch-ptp)
-
-[2.2.3 Console Typewriter Input (TTI), Output (TTO) 6](#console-typewriter-input-tti-output-tto)
-
-[2.2.4 Display (DPY) 6](#display-dpy)
-
-[2.2.5 Light Pen (PEN) 6](#light-pen-pen)
-
-[3 TX-0 Usage Examples 6](#tx-0-usage-examples)
-
-[3.1.1 Tic-Tac-Toe Game 7](#tic-tac-toe-game)
-
-[3.1.2 MOUSE Game 7](#mouse-game)
+[1 Simulator Files](#simulator-files)
+[2 TX-0 Features](#tx-0-features)
+[2.1 CPU](#cpu)
+[2.2 I/O Devices](#io-devices)
+[2.2.1 Photoelectric Tape Reader (PETR)](#photoelectric-tape-reader-petr)
+[2.2.2 Paper Tape Punch (PTP)](#paper-tape-punch-ptp)
+[2.2.3 Console Typewriter Input (TTI), Output (TTO)](#console-typewriter-input-tti-output-tto)
+[2.2.4 Display (DPY)](#display-dpy)
+[2.2.5 Light Pen (PEN)](#light-pen-pen)
+[3 TX-0 Usage Examples](#tx-0-usage-examples)
+[3.1.1 Tic-Tac-Toe Game](#tic-tac-toe-game)
+[3.1.2 MOUSE Game](#mouse-game)
 
 This memorandum documents the TX-0 simulator.
 
@@ -114,11 +96,15 @@ The LOAD commands has an optional argument to specify the load address:
 
 LOAD \<filename\> {\<starting address\>}
 
-The LOAD command loads a paper-tape bootstrap format file at the specified address. If no address is specified, loading starts at location 200. The DUMP command is not supported.
+The LOAD command loads a paper-tape bootstrap format file at the
+specified address. If no address is specified, loading starts at
+location 200. The DUMP command is not supported.
 
 ## CPU
 
-The TX-0 was upgraded over the years from the original 1956 “Standard” instruction set to a later “Extended” instruction set completed in 1962. In addition, the TX-0 CPU can operate in one of three operating modes:
+The TX-0 was upgraded over the years from the original 1956 “Standard”
+instruction set to a later “Extended” instruction set completed in 1962.
+In addition, the TX-0 CPU can operate in one of three operating modes:
 
 Read In Mode Instruction words are fetched from the tape.
 
@@ -126,7 +112,8 @@ Test Mode Instruction words are fetched from the TBR.
 
 Normal Mode Instruction words are fetched from memory.
 
-only CPU options are the presence of the extended arithmetic operator and the size of main memory.
+only CPU options are the presence of the extended arithmetic operator
+and the size of main memory.
 
 SET CPU TX0STD set CPU model to TX-0 “Standard.”
 
@@ -144,9 +131,13 @@ SET CPU 8K set memory size = 8K (T-Memory)
 
 SET CPU 64K set memory size = 64K (Core Memory)
 
-If memory size is being reduced, and the memory being truncated contains non-zero data, the simulator asks for confirmation. Data in the truncated portion of memory is lost. Initial memory size is 64K. The default configuration is a TX-0 with AO, EAO, and GPR.
+If memory size is being reduced, and the memory being truncated contains
+non-zero data, the simulator asks for confirmation. Data in the
+truncated portion of memory is lost. Initial memory size is 64K. The
+default configuration is a TX-0 with AO, EAO, and GPR.
 
-CPU registers include the visible state of the processor as well as the control registers for the interrupt system.
+CPU registers include the visible state of the processor as well as the
+control registers for the interrupt system.
 
 name size comments
 
@@ -178,11 +169,17 @@ LP 2 Light Pen / Light Gun flip-flops.
 
 ## I/O Devices
 
-The TX-0 includes several I/O devices, and unlike more modern machines, these devices are not memory or I/O mapped, but rather have specific CPU operate orders to access them.
+The TX-0 includes several I/O devices, and unlike more modern machines,
+these devices are not memory or I/O mapped, but rather have specific CPU
+operate orders to access them.
 
 ### Photoelectric Tape Reader (PETR)
 
-The PETR is a 250 line per minute Ferranti photoelectric paper tape reader using standard seven-hole Flexowriter tape that was modified to solid state circuitry. Lines without seventh hole punched are ignored by the PETR. As each line of the tape is read in, the data is stored into an 18-bit BUF register with bits mapped as follows:
+The PETR is a 250 line per minute Ferranti photoelectric paper tape
+reader using standard seven-hole Flexowriter tape that was modified to
+solid state circuitry. Lines without seventh hole punched are ignored by
+the PETR. As each line of the tape is read in, the data is stored into
+an 18-bit BUF register with bits mapped as follows:
 
 Tape BUF
 
@@ -198,11 +195,16 @@ Tape BUF
 
 6.  15
 
-Up to three lines of tape may be read into a single the single BUF register. Before subsequent lines are read, the BUF register is cycled one bit right.
+Up to three lines of tape may be read into a single the single BUF
+register. Before subsequent lines are read, the BUF register is cycled
+one bit right.
 
-The PETR reads data from or a disk file. The POS register specifies the number of the next data item to be read. Thus, by changing POS, the user can backspace or advance the reader.
+The PETR reads data from or a disk file. The POS register specifies the
+number of the next data item to be read. Thus, by changing POS, the user
+can backspace or advance the reader.
 
-The PETR supports the BOOT command. BOOT PETR switches the CPU to Read-In mode, and starts the processor running.
+The PETR supports the BOOT command. BOOT PETR switches the CPU to
+Read-In mode, and starts the processor running.
 
 The paper tape reader implements these registers:
 
@@ -216,7 +218,10 @@ POS 32 position in the input file
 
 ### Paper Tape Punch (PTP)
 
-The paper tape punch (PTP) punches standard seven-hole Flexowriter tape. The POS register specifies the number of the next data item to be written. Thus, by changing POS, the user can backspace or advance the punch.
+The paper tape punch (PTP) punches standard seven-hole Flexowriter tape.
+The POS register specifies the number of the next data item to be
+written. Thus, by changing POS, the user can backspace or advance the
+punch.
 
 The paper tape punch implements these registers:
 
@@ -228,7 +233,12 @@ POS 32 position in the output file
 
 ### Console Typewriter Input (TTI), Output (TTO)
 
-The Typewriter is a half-duplex electric Friden Flexowriter typewriter. The typewriter input (TTI) polls the console keyboard for input. The typewriter output (TTO) writes to the simulator console window. On input, TTI converts the ASCII character received from the keyboard to Flexowriter code. On output, the TTO converts the Flexowriter code to ASCII for display on the simulator console window.
+The Typewriter is a half-duplex electric Friden Flexowriter typewriter.
+The typewriter input (TTI) polls the console keyboard for input. The
+typewriter output (TTO) writes to the simulator console window. On
+input, TTI converts the ASCII character received from the keyboard to
+Flexowriter code. On output, the TTO converts the Flexowriter code to
+ASCII for display on the simulator console window.
 
 The typewriter input implements these registers:
 
@@ -262,15 +272,26 @@ TIME 24 time from I/O initiation to interrupt
 
 ### Display (DPY)
 
-In 1957, a 10 inch, electro-static deflection, cathode ray tube, having 512 by 512 addressable locations, in a 7 by 7 inch raster, point by point display system was installed on the TX-0. In simulation, the display is accomplished using a separate graphical display window.
+In 1957, a 10 inch, electro-static deflection, cathode ray tube, having
+512 by 512 addressable locations, in a 7 by 7 inch raster, point by
+point display system was installed on the TX-0. In simulation, the
+display is accomplished using a separate graphical display window.
 
-The display is accessed via the DIS order, with the coordinate specified in the AC. DIS will intensify a point with x and y coordinates where X is specified by AC digits 0-8, and Y is specified by AC digits 9-17. Bit 0 is the sign for X, and bit 9 is the sign for Y. The complement system is in effect when signs are negative.
+The display is accessed via the DIS order, with the coordinate specified
+in the AC. DIS will intensify a point with x and y coordinates where X
+is specified by AC digits 0-8, and Y is specified by AC digits 9-17. Bit
+0 is the sign for X, and bit 9 is the sign for Y. The complement system
+is in effect when signs are negative.
 
 ### Light Pen (PEN)
 
-In 1958, a Light-Pen, a solid state version of an idea being developed for the Sage System, was added to the TX-0. The light pen status is read using the PEN order, with light pen flip-flops 1 and 2 being read into AC positions 0 and 1 respectively.
+In 1958, a Light-Pen, a solid state version of an idea being developed
+for the Sage System, was added to the TX-0. The light pen status is read
+using the PEN order, with light pen flip-flops 1 and 2 being read into
+AC positions 0 and 1 respectively.
 
-In simulation, the light pen is implemented using a computer mouse or touch screen.
+In simulation, the light pen is implemented using a computer mouse or
+touch screen.
 
 # TX-0 Usage Examples
 
@@ -290,11 +311,18 @@ The tic-tac-toe game can be run using the tic.simh startup script:
 >
 > g
 
-In this game, you simply use the light pen (mouse) to select where you want to place the “X” (the TX-0 is “O.”). You must click right on top of or very close to the dot in the center of the square you want to place your “X” into.
+In this game, you simply use the light pen (mouse) to select where you
+want to place the “X” (the TX-0 is “O.”). You must click right on top of
+or very close to the dot in the center of the square you want to place
+your “X” into.
 
 ### MOUSE Game
 
-The MOUSE game, written by John E. Ward is a more complex game with requires involvement not only with the light pen, but also the TAC. In simulation, the TAC can be accessed by stopping the simulation and using the Deposit command to change the value of the TAC to select various modes.
+The MOUSE game, written by John E. Ward is a more complex game with
+requires involvement not only with the light pen, but also the TAC. In
+simulation, the TAC can be accessed by stopping the simulation and using
+the Deposit command to change the value of the TAC to select various
+modes.
 
 Here is the configuration file, mouse.simh:
 
@@ -328,7 +356,10 @@ Here is the configuration file, mouse.simh:
 >
 > boot petr
 
-When this game starts, it is in “Erase Wall” mode. Use this mode to create the maze, by using the computer mouse to erase unwanted walls from the grid. When done, press Control-E to get to the simulator command prompt, and change to “Write Cheese” mode:
+When this game starts, it is in “Erase Wall” mode. Use this mode to
+create the maze, by using the computer mouse to erase unwanted walls
+from the grid. When done, press Control-E to get to the simulator
+command prompt, and change to “Write Cheese” mode:
 
 > C:\\TX-0.exe mouse.simh
 >
@@ -342,4 +373,8 @@ When this game starts, it is in “Erase Wall” mode. Use this mode to create t
 >
 > sim\> g
 
-Next place the cheese with the computer mouse, and then repeat the procedure above to change the TAC to “do mouse” mode. The TX-0 should then solve the maze. Sometimes the mouse gets stuck and is not able to find the cheese. I tend to believe this is a bug in the simulation, but I have not been able to find it yet.
+Next place the cheese with the computer mouse, and then repeat the
+procedure above to change the TAC to “do mouse” mode. The TX-0 should
+then solve the maze. Sometimes the mouse gets stuck and is not able to
+find the cheese. I tend to believe this is a bug in the simulation, but
+I have not been able to find it yet.

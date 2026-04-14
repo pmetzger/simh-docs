@@ -1,12 +1,25 @@
-**Summary of I/O Commands for the Arpanet IMP**
+# Summary of I/O Commands for the Arpanet IMP
 
-***19 Nov 2013***
+Revision of 19-Nov-2013
+
+**Copyright Notice**
+
+The SIMH source code and documentation is made available under a
+X11-style open source license; the precise terms are available at:
+
+<https://github.com/open-simh/simh/blob/master/LICENSE.txt>
 
 **Background**
 
-This document will describe the I/O addresses, commands and interrupts as currently employed in the IMP 3050 listing from 9/16/1973. This summary is based on an analysis of the listing and other documents related to the structure of the IMP.
+This document will describe the I/O addresses, commands and interrupts
+as currently employed in the IMP 3050 listing from 9/16/1973. This
+summary is based on an analysis of the listing and other documents
+related to the structure of the IMP.
 
-The IMP is based on the Honeywell DDP516 processor. In addition to the usual complement of peripherals the IMP has been augmented with some specifically designed cards. At present it is believed that the IMP that supports the 3050 IMP listing included at least:
+The IMP is based on the Honeywell DDP516 processor. In addition to the
+usual complement of peripherals the IMP has been augmented with some
+specifically designed cards. At present it is believed that the IMP that
+supports the 3050 IMP listing included at least:
 
 - Honeywell DDP516 (or possibly 316) processor
 
@@ -43,7 +56,8 @@ The opcode may be one of:
 | SKS | 34 | Skip if ready line set |
 | SMK | 74 | Special Mask – transfer A to interrupt control register |
 
-Where the opcode in the table above is shown as two octal digits, but in a typical listing the opcode is broken across three octal digits.
+Where the opcode in the table above is shown as two octal digits, but in
+a typical listing the opcode is broken across three octal digits.
 
 **Device Addresses**
 
@@ -72,7 +86,9 @@ The following device addresses (octal) have been gleaned from the 3050 listing.
 
 *Teletype –*
 
-The teletype is device address ‘04’. The following are the macros used to access the TTY in the listing. It appears that there are provisions for two TTY units, but only TTY A is used.
+The teletype is device address ‘04’. The following are the macros used
+to access the TTY in the listing. It appears that there are provisions
+for two TTY units, but only TTY A is used.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
@@ -95,7 +111,12 @@ The TTY chart from the DDP519 Programmers’ Reference Manual (page D-3):
 
 *Interrupt Unit* –
 
-Device address ‘20’ is used to set interrupt masks per the SMK instruction. The function code controls which bank of interrupts is to be set from the A register. In addition to the standard interrupt level the IMP apparently includes the next interrupt level the IMP includes an extension to allow interrupts on lines 1-16. This probably is where the “task” interrupt enters the system.
+Device address ‘20’ is used to set interrupt masks per the SMK
+instruction. The function code controls which bank of interrupts is to
+be set from the A register. In addition to the standard interrupt level
+the IMP apparently includes the next interrupt level the IMP includes an
+extension to allow interrupts on lines 1-16. This probably is where the
+“task” interrupt enters the system.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
@@ -107,7 +128,13 @@ Device address ‘20’ is used to set interrupt masks per the SMK instruction. 
 
 *Watch Dog Timer and Status Light Box* –
 
-Presently the exact structure of this unit is unknown. It appears that the watch dog timer (WDT) generates an interrupt if it is not given an OCP pulse at periodic intervals (interval unknown). The light box appears to be 16 lights controlled by a register and is used to display modem and host status (see listing @3355). There is an SKS function at this address, which appears to be a bit that indicates the type of processor. This function is defined, but is not used in the code.
+Presently the exact structure of this unit is unknown. It appears that
+the watch dog timer (WDT) generates an interrupt if it is not given an
+OCP pulse at periodic intervals (interval unknown). The light box
+appears to be 16 lights controlled by a register and is used to display
+modem and host status (see listing @3355). There is an SKS function at
+this address, which appears to be a bit that indicates the type of
+processor. This function is defined, but is not used in the code.
 
 <table>
 <colgroup>
@@ -155,7 +182,11 @@ Presently the exact structure of this unit is unknown. It appears that the watch
 
 *Real Time Clock –*
 
-This appears to be a custom hardware that counts 100 usec pulses. From analysis of the code it appears that the RTC interrupt, CLOKIL, occurs on the carry of the eighth bit. This would correspond to 25.600 msec. It appears that the clock can only be read and that it is initialized to zero on power up. Not sure whether the clock counts up or down.
+This appears to be a custom hardware that counts 100 usec pulses. From
+analysis of the code it appears that the RTC interrupt, CLOKIL, occurs
+on the carry of the eighth bit. This would correspond to 25.600 msec. It
+appears that the clock can only be read and that it is initialized to
+zero on power up. Not sure whether the clock counts up or down.
 
 |                 |            |        |         |                               |
 |-----------------|------------|--------|---------|-------------------------------|
@@ -166,7 +197,9 @@ This appears to be a custom hardware that counts 100 usec pulses. From analysis 
 
 *Task Interrupt/IMP Number –*
 
-This appears to be a control pulse that can be used to set an external interrupt to indicate that a task has been posted to the task queue. The IMP number appears to be a hardwired number of the particular IMP.
+This appears to be a control pulse that can be used to set an external
+interrupt to indicate that a task has been posted to the task queue. The
+IMP number appears to be a hardwired number of the particular IMP.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
@@ -174,11 +207,15 @@ This appears to be a control pulse that can be used to set an external interrupt
 | 030041 | OCP | 00 | 41 | TASK – set task interrupt |
 | 131041 | INA | 10 | 41 | RDIMPN – probably hardwired IMP number |
 
-The RDIMPN instruction is a form of the INA instruction. If the IMP number is not available the code executes the next instruction. If the IMP number is available the next instruction is skipped. Presumably the IMP number is always available.
+The RDIMPN instruction is a form of the INA instruction. If the IMP
+number is not available the code executes the next instruction. If the
+IMP number is available the next instruction is skipped. Presumably the
+IMP number is always available.
 
 *Modem/Tip Configuration Flag –*
 
-Allows the code to determine if the machine is an IMP or a TIP (Multi-Line Controller).
+Allows the code to determine if the machine is an IMP or a TIP
+(Multi-Line Controller).
 
 <table>
 <colgroup>
@@ -218,9 +255,14 @@ Allows the code to determine if the machine is an IMP or a TIP (Multi-Line Contr
 
 *Host Interface –*
 
-As shown above the host device addresses are not sequential probably because there are other important Honeywell devices already assigned to this area. In the following x is the device number that may vary from 1 to 4. The actual device address is shown above. MIDAS macros on page 4 of the listing show the construction of host instructions.
+As shown above the host device addresses are not sequential probably
+because there are other important Honeywell devices already assigned to
+this area. In the following x is the device number that may vary from 1
+to 4. The actual device address is shown above. MIDAS macros on page 4
+of the listing show the construction of host instructions.
 
-It appears that these controls go to the host interface. Data for the host is transferred through DMC channels.
+It appears that these controls go to the host interface. Data for the
+host is transferred through DMC channels.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
@@ -238,7 +280,10 @@ It appears that these controls go to the host interface. Data for the host is tr
 
 *Modem Interface –*
 
-The following controls go to the modem (M1, M2, M3, M4, M5). The actual data is transferred through the DMC. Modem addresses are given in the table above. Instruction codes are examples for particular modems. Page 4 of the listing gives the macros used to generate the instructions.
+The following controls go to the modem (M1, M2, M3, M4, M5). The actual
+data is transferred through the DMC. Modem addresses are given in the
+table above. Instruction codes are examples for particular modems. Page
+4 of the listing gives the macros used to generate the instructions.
 
 |  |  |  |  |  |
 |----|----|----|----|----|
@@ -252,11 +297,19 @@ The following controls go to the modem (M1, M2, M3, M4, M5). The actual data is 
 
 **Interrupt Entry Point Addresses –**
 
-It appears that the interrupts vectors for the IMP peripherals have replaced those associated with the generic DDP 516. The basic interrupt structure of the DDP 516 is that there are 12 groups of four interrupt address, starting at 000064 and extending upward in block of four (probably this is related to packaging of the circuitry). There is a group “0” of four interrupts from 000060 to 000063, which are fixed. Here is a table from the Programmer’s Reference Manual related to the interrupt groups:
+It appears that the interrupts vectors for the IMP peripherals have
+replaced those associated with the generic DDP 516. The basic interrupt
+structure of the DDP 516 is that there are 12 groups of four interrupt
+address, starting at 000064 and extending upward in block of four
+(probably this is related to packaging of the circuitry). There is a
+group “0” of four interrupts from 000060 to 000063, which are fixed.
+Here is a table from the Programmer’s Reference Manual related to the
+interrupt groups:
 
 <img src="mdbook/src/IMP_IO_Device_Codes_assets/image4.png" style="width:6.49514in;height:3.99861in" />
 
-The IMP uses interrupt groups 1 through 4. As shown below.( these addresses have not all been verified.)
+The IMP uses interrupt groups 1 through 4. As shown below.( these
+addresses have not all been verified.)
 
 <table>
 <colgroup>
@@ -473,25 +526,43 @@ The IMP uses interrupt groups 1 through 4. As shown below.( these addresses have
 </ol>
 </section>
 
-Masking of the interrupts is as shown in the table below (from the Programmer’s Reference Manual). The IMP makes use only of the interrupt lines 1-16, shown in gray below.
+Masking of the interrupts is as shown in the table below (from the
+Programmer’s Reference Manual). The IMP makes use only of the interrupt
+lines 1-16, shown in gray below.
 
-Note that some interrupt locations are assigned to two different devices (e.g., H4OTIL = M4INIL). These are shown in gray shading above. Certain configurations of host and modems are not allowed, so these interrupts will go to the particular device configured. For example, four hosts and four modems do not appear to be an allowed combination. This allows the interrupt to be shared. Listing page 43 is probably an enumeration of allowed host/modem configurations.
+Note that some interrupt locations are assigned to two different devices
+(e.g., H4OTIL = M4INIL). These are shown in gray shading above. Certain
+configurations of host and modems are not allowed, so these interrupts
+will go to the particular device configured. For example, four hosts and
+four modems do not appear to be an allowed combination. This allows the
+interrupt to be shared. Listing page 43 is probably an enumeration of
+allowed host/modem configurations.
 
 **Dedicated Locations**
 
-The DDP516 has certain low memory locations that area dedicated as shown in the table below.
+The DDP516 has certain low memory locations that area dedicated as shown
+in the table below.
 
 <img src="mdbook/src/IMP_IO_Device_Codes_assets/image6.png" style="width:6.49861in;height:5.40347in" />
 
 **Interrupt Masks**
 
-Interrupts are organized into four banks. The first bank is standard and the following three banks are optional. The standard bank appears to be devoted to standard Honeywell peripherals. In the IMP the second bank is used to provide interrupts for the modems, host, program and timer. The table below shows the organization of the interrupt banks in reference to the set mask instructions that control each bank.
+Interrupts are organized into four banks. The first bank is standard and
+the following three banks are optional. The standard bank appears to be
+devoted to standard Honeywell peripherals. In the IMP the second bank is
+used to provide interrupts for the modems, host, program and timer. The
+table below shows the organization of the interrupt banks in reference
+to the set mask instructions that control each bank.
 
-Mask bits in the standard interrupt bank are applied according to the following table:
+Mask bits in the standard interrupt bank are applied according to the
+following table:
 
 <img src="mdbook/src/IMP_IO_Device_Codes_assets/image7.png" style="width:6.50556in;height:2.53819in" />
 
-The interrupts for the IMP specific devices are related to their device address as shown in the table of IMP special interrupts. Interrupts for a particular input are enabled if the bit is set to “0” they are disabled (“masked”) if the corresponding bit is set to 1.
+The interrupts for the IMP specific devices are related to their device
+address as shown in the table of IMP special interrupts. Interrupts for
+a particular input are enabled if the bit is set to “0” they are
+disabled (“masked”) if the corresponding bit is set to 1.
 
 |         |          |                          |
 |---------|----------|--------------------------|
@@ -513,7 +584,9 @@ The interrupts for the IMP specific devices are related to their device address 
 | 000102  | 15       | Real time clock          |
 | 000103  | 16       | Task ready               |
 
-Note that certain interrupts and interrupt addresses are shared between modems and hosts. This means that only certain configurations are allowed. Specifically:
+Note that certain interrupts and interrupt addresses are shared between
+modems and hosts. This means that only certain configurations are
+allowed. Specifically:
 
 - 5 Modems and 2 Hosts
 
@@ -525,13 +598,31 @@ Note that certain interrupts and interrupt addresses are shared between modems a
 
 **DMC Channel Numbers**
 
-The DDP516 supports 16 channels assignments according to the following table from the Programmer’s Reference. Normally, these would be allocated to various devices, like the tape, printer and disk. However, the IMP does not include any of these peripherals, so they channel assignments are freed up for use by the host and modems as shown following this table.
+The DDP516 supports 16 channels assignments according to the following
+table from the Programmer’s Reference. Normally, these would be
+allocated to various devices, like the tape, printer and disk. However,
+the IMP does not include any of these peripherals, so they channel
+assignments are freed up for use by the host and modems as shown
+following this table.
 
 <img src="mdbook/src/IMP_IO_Device_Codes_assets/image9.png" style="width:6.5in;height:4.87708in" />
 
-DMC pointers occur in pairs. For each DMC channel there are two consecutive words. The first word is the starting address for the channel and the second word is the ending address. For the modems and host attached to the IMP the address word pairs are stored as follows. For each device there is an input and output pointer designated as xx INBP and xxOTBP, respectively. The pointers for the modem and host DMC channels are defined on listing page 4 using MIDAS macros.
+DMC pointers occur in pairs. For each DMC channel there are two
+consecutive words. The first word is the starting address for the
+channel and the second word is the ending address. For the modems and
+host attached to the IMP the address word pairs are stored as follows.
+For each device there is an input and output pointer designated as xx
+INBP and xxOTBP, respectively. The pointers for the modem and host DMC
+channels are defined on listing page 4 using MIDAS macros.
 
-As with the interrupt address the DMC address for certain hosts and modems overlap. This is possible because the configurations are limited and conflicting host and modem configurations are not allowed. For example, there cannot be 4 hosts and 5 modems. Whether a channel represents an input or output channel is determined by the structure of the hardware and by the value of the high bit (bit 1) of the starting address. A value of “1” indicates the channel is setup for input. A value of “0” indicates the channel is setup for output.
+As with the interrupt address the DMC address for certain hosts and
+modems overlap. This is possible because the configurations are limited
+and conflicting host and modem configurations are not allowed. For
+example, there cannot be 4 hosts and 5 modems. Whether a channel
+represents an input or output channel is determined by the structure of
+the hardware and by the value of the high bit (bit 1) of the starting
+address. A value of “1” indicates the channel is setup for input. A
+value of “0” indicates the channel is setup for output.
 
 <table>
 <colgroup>
@@ -784,6 +875,10 @@ As with the interrupt address the DMC address for certain hosts and modems overl
 </tbody>
 </table>
 
-[^1]: Operation of this opcode is complex. The readiness of the device is tested before the device is read. If the device is not ready the next instruction is executed immediately. If the device is ready the data from the device is read into A and the next instruction is skipped. This allows the construction of simple ready wait loops.
+[^1]: Operation of this opcode is complex. The readiness of the device
+is tested before the device is read. If the device is not ready the next
+instruction is executed immediately. If the device is ready the data
+from the device is read into A and the next instruction is skipped. This
+allows the construction of simple ready wait loops.
 
 [^2]: Operation with respect to device ready is similar to above.
