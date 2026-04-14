@@ -1,6 +1,6 @@
 # SSEM Simulator User's Guide
 
-Revised: 14-May-2011
+Revision of 14-May-2011
 
 **Copyright Notice**
 
@@ -11,13 +11,13 @@ X11-style open source license; the precise terms are available at:
 
 # Table of Contents
 
-[1 Simulator Files 3](#simulator-files)
+[1. Simulator Files](#simulator-files)
 
-[2 SSEM Features 3](#ssem-features)
+[2. SSEM Features](#ssem-features)
 
-[2.1 CPU 3](#cpu)
+[2.1 CPU](#cpu)
 
-[3 Symbolic Display and Input 4](#symbolic-display-and-input)
+[3. Symbolic Display and Input](#symbolic-display-and-input)
 
 This memorandum documents the SSEM simulator.
 
@@ -48,37 +48,37 @@ This memorandum documents the SSEM simulator.
 
 The SSEM is configured as follows:
 
-| device names | simulates                        |
-|--------------|----------------------------------|
-| CPU          | SSEM CPU with 32 words of memory |
+| device name | simulates |
+|-------------|-----------|
+| `CPU` | SSEM CPU with 32 words of memory |
 
 The `LOAD` and `DUMP` commands are implemented. They use a binary file
 with the extension `.st` (“store”).
 
 ## CPU
 
-The CPU implements Manchester SSEM (Small Scale Experimental Machine):
+The CPU implements Manchester SSEM (Small Scale Experimental Machine).
 
-Memory size is fixed at 32 words. Memory is 32b wide.
+Memory size is fixed at 32 words, and memory is 32b wide.
 
 CPU registers include the visible state of the processor system.
 
-| name | size | comments            |
-|------|------|---------------------|
-| CI   | 5    | current instruction |
-| A    | 32   | accumulator         |
+| name | size | comments |
+|------|------|----------|
+| `CI` | 5 | current instruction |
+| `A` | 32 | accumulator |
 
 # Symbolic Display and Input
 
 The SSEM simulator implements symbolic display and input. Display is
 controlled by command line switches:
 
-| switch | description                                               |
-|--------|-----------------------------------------------------------|
-| `-h`   | display as hexadecimal                                    |
-| `-d`   | display as decimal                                        |
-| `-b`   | display as backwards binary. Least Significant Bit first. |
-| `-m`   | display instruction mnemonics                             |
+| switch | description |
+|--------|-------------|
+| `-h` | display as hexadecimal |
+| `-d` | display as decimal |
+| `-b` | display as backwards binary, least significant bit first |
+| `-m` | display instruction mnemonics |
 
 Input parsing is controlled by the first character typed in or by
 command line switches:
@@ -101,10 +101,11 @@ Programmer's Reference manual"
 
 <http://www.computer50.org/mark1/prog98/ssemref.html>
 
-'op' is one of the following `JMP`, `JRP`, `LDN`, `STO`, `SUB`, `CMP`,
-or `STOP`.
+`op` is one of the following: `JMP`, `JRP`, `LDN`, `STO`, `SUB`,
+`CMP`, or `STOP`.
 
-A linear address is one decimal number between `0` and `31`. For example:
+A linear address is a decimal number between `0` and `31`. For
+example:
 
 ```
 sim> d -m 31 LDN 21
