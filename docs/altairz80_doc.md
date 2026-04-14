@@ -570,7 +570,7 @@ C = Carry flag.
 | `IFF` | 8 | Interrupt flag (on Z80 only) |
 | `IR` | 8 | Interrupt register (on Z80 only) |
 | `SR` | 8 | The front panel switches (use `D SR 8` for 4k Basic). |
-| `WRU` | 8 | The interrupt character. This starts as 5 (Control-E) but some Altair software uses this keystroke so best to change this to something exotic such as 1D (which is Control‑\]). But make sure you can actually create this character via the keyboard. |
+| `WRU` | 8 | The interrupt character. This starts as 5 (Control-E) but some Altair software uses this keystroke so best to change this to something exotic such as 1D (which is Control-\]). But make sure you can actually create this character via the keyboard. |
 | `BANK` | 3 | The currently active memory bank (if banked memory is activated - see memory options above) |
 | `COMMON` | 16 | The starting address of common memory. Originally set to 0C000 (note this setting must agree with the value supplied to GENCPM for CP/M 3 system generation) |
 | `COMMONLOW` | 1 | When set to 1, the common area is in low RAM. When set to 0 (the default,) the common area is in high RAM. The OASIS operating system requires this set to 1. |
@@ -952,7 +952,7 @@ SET SIMH TIMEROFF Stop the periodic timer interrupts
 The following variables determine the behavior of the timer:
 
 TIMD This is the delay between consecutive interrupts in milliseconds.
-Use D TIMD 20 for a 50 Hz clock.
+Use D TIMD 20 for a 50 Hz clock.
 
 TIMH This is the address of the interrupt handler to call for a timer interrupt.
 
@@ -1024,8 +1024,8 @@ The only difference is that the simulated disks may be larger than the
 original ones: The original disk had 77 tracks while the simulated disks
 support up to 254 tracks (only relevant for CP/M). You can change the
 number of tracks per disk by setting the appropriate value in
-TRACKS\[..\]. For example "D TRACKS\[0\] 77" sets the number of tracks
-for disk 0 to the original number of 77. The command "D TRACKS\[0-7\]
+TRACKS\[..\]. For example "D TRACKS\[0\] 77" sets the number of tracks
+for disk 0 to the original number of 77. The command "D TRACKS\[0-7\]
 77" changes the highest track number for all disks to 77. The Mini-Disk
 support was added by Mike Douglas in May 2014.
 
@@ -2075,7 +2075,7 @@ One can also set a breakpoint once a certain instruction is executed. To
 set an instruction breakpoint enter
 
 ```
-sim> break –I <first byte of instruction>
+sim> break -I <first byte of instruction>
 ```
 
 Execution will stop whenever an instruction is executed which starts
@@ -2088,7 +2088,7 @@ suppose one wanted to determine what lead up to memory address 05C00
 being accessed:
 
 ```
-sim> break –m 5c00
+sim> break -m 5c00
 sim> set cpu history=32
 sim> g ff00
 Memory access breakpoint [05c00h], PC: 0FF29 (MOV M,A)
@@ -3017,9 +3017,7 @@ for up) and then do D and \<return\> and ^Z.
 the file with the procedure type in VT100GOTO. The change takes effect
 after restart: Type H at top level and "pascal" at E\> prompt.
 
-\
-Vector Graphic, Inc. Simulation
-===============================
+# Vector Graphic, Inc. Simulation
 
 Vector Graphic support was added by Howard M. Harte.
 
@@ -3104,8 +3102,8 @@ These devices can be enabled/disabled (installed/uninstalled) from the
 memory map with:
 
 ```
-sim> set <device> ena – to enable the device.
-sim> set <device> dis – to disable the device.
+sim> set <device> ena - to enable the device.
+sim> set <device> dis - to disable the device.
 ```
 
 If there is an I/O or memory map conflict when enabling a device, the
@@ -3205,9 +3203,7 @@ In the Telnet window, the 4.3 Monitor should sign on and at the `Mon>`
 prompt, you can boot from the disk controller by using the **B** (boot)
 command.
 
-\
-Notes on Simulated Hardware
----------------------------
+## Notes on Simulated Hardware
 
 The Vector HD-FD Controller supports four drives, one of which may be a
 Winchester (hard disk) drive. For the included VGBOOT.VGI disk image,
@@ -3216,7 +3212,7 @@ CP/M is configured such that the VFDHD0 is drive “B” and VFDHD1 is drive
 that whatever image is attached to VFDHD0 is a “Hard disk” image, so
 drive “B” using the VGBOOT.VGI disk image is not supported.
 
-##  Notes on the Vector Graphic Disk Image (VGI) File Format
+## Notes on the Vector Graphic Disk Image (VGI) File Format
 
 The Vector Graphic Disk Image (VGI) File Format uses a 275-byte sector
 format. This sector includes 256 bytes of User Data, and various other
@@ -3239,9 +3235,7 @@ The 275-byte sector format is as follows:
 | ECC | Four bytes of ECC code, generated and checked by the HD-FD Controller, but not used by the Micropolis FD Controller |
 | ECC_VALID | One byte that contains 0xAA if the ECC field is valid. Disks written by the HD-FD controller typically have this field set to 0xAA to indicate that the ECC field should contain valid data. For disk images created by the Micropolis FD controller, this field is 0x00, since ECC is not supported. For disk images that were generated using the CPT program, this field will be 0x00 because the ECC bytes were not recoverable from the original disk. For disk images originally written with the HD-FD Controller, and imaged with Catweasel/Vector Graphic (CWVG) this field will be set to whatever it was set to on the original disk. This should be 0xAA. |
 
-\
-IMSAI 8080 Simulation
-=====================
+# IMSAI 8080 Simulation
 
 IMSAI FIF Disk Controller support was added by Ernie Price.
 
@@ -3254,8 +3248,8 @@ intelligent controller including DMA transfer, which permits the
 computer to perform other tasks during disk operations.
 
 The FIF simulation can control up to eight disk drives. Commands
-in­clude Read Clock and Data Bits, Write Sector, Read Sector, Verify
-Sector, For­mat Track, Write Deleted Data Sector Mark, Write Protect,
+include Read Clock and Data Bits, Write Sector, Read Sector, Verify
+Sector, Format Track, Write Deleted Data Sector Mark, Write Protect,
 Write Enable and Restore Drive. Logical and physical track addresses may
 be different. Cyclic redundancy checks are performed automatically. When
 an error is detected in reading or writing, the logic automatically
