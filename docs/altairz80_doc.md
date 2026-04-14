@@ -16,167 +16,329 @@ Harte, Ernie Price, Mike Douglas, and Patrick Linstruth.
 # Table of Contents
 
 [1 Simulator Files](#simulator-files)
+
 [3 Background](#background)
+
 [4 Hardware](#hardware)
+
 [4.1 CPU](#cpu)
+
 [4.1.1 Registers for the 8080 and Z80](#registers-for-the-8080-and-z80)
+
 [4.1.2 Registers for the 8086](#registers-for-the-8086)
+
 [4.1.3 Registers for the MC68000](#registers-for-the-mc68000)
+
 [4.2 The Serial I/O Card (2SIO)](#the-serial-io-card-2sio)
+
 [4.3 MITS 88-2SIO Serial Adapter (M2SIO)](#mits-88-2sio-serial-adapter-m2sio)
+
 [4.3.1 Using the M2SIO device with serial ports](#using-the-m2sio-device-with-serial-ports)
+
 [4.3.2 Using the M2SIO device with sockets](#using-the-m2sio-device-with-sockets)
+
 [4.3.3 M2SIO limitations](#m2sio-limitations)
+
 [4.4 The SIMH pseudo device](#the-simh-pseudo-device)
+
 [4.5 The 88-DISK controller](#the-88-disk-controller)
+
 [4.6 The 88-HDSK controller](#the-88-hdsk-controller)
+
 [4.7 The simulated hard disk](#the-simulated-hard-disk)
+
 [4.8 The simulated network](#the-simulated-network)
+
 [5 Sample Software](#sample-software)
+
 [5.1 CP/M Version 2.2](#cpm-version-2.2)
+
 [5.2 CP/M Version 3 with banked memory](#cpm-version-3-with-banked-memory)
+
 [5.3 MP/M II with banked memory](#mpm-ii-with-banked-memory)
+
 [5.4 CP/NET](#cpnet)
+
 [5.5 CPNOS](#cpnos)
+
 [5.6 CP/M application software](#cpm-application-software)
+
 [5.7 MITS Disk Extended BASIC Version 4.1](#mits-disk-extended-basic-version-4.1)
+
 [5.8 Altair DOS Version 1.0](#altair-dos-version-1.0)
+
 [5.9 Altair Basic 3.2 (4k)](#altair-basic-3.2-4k)
+
 [5.10 Altair Basic 4.0 (4k)](#altair-basic-4.0-4k)
+
 [5.11 Altair 8k Basic](#altair-8k-basic)
+
 [5.12 Altair Basic 4.0](#altair-basic-4.0)
+
 [5.13 Altair Disk Extended Basic Version 300-5-C](#altair-disk-extended-basic-version-300-5-c)
+
 [5.14 Altair Disk Extended Basic Version 5.0](#altair-disk-extended-basic-version-5.0)
+
 [5.15 Altair Hard Disk Basic 300-5-C](#altair-hard-disk-basic-300-5-c)
+
 [5.16 Altair programming languages VTL-2 and MINOL](#altair-programming-languages-vtl-2-and-minol)
+
 [5.17 UCSD Pascal II.0](#ucsd-pascal-ii.0)
+
 [5.18 CP/M-68K](#cpm-68k)
+
 [6 Special simulator features](#special-simulator-features)
+
 [6.1 Memory access breakpoints (8080/Z80 only)](#memory-access-breakpoints-8080z80-only)
+
 [6.2 Instruction breakpoints (8080/Z80/8086)](#instruction-breakpoints-8080z808086)
+
 [6.3 Breakpoints and instruction history (8080/Z80 only)](#breakpoints-and-instruction-history-8080z80-only)
+
 [7 Brief summary of all major changes to the original Altair simulator](#brief-summary-of-all-major-changes-to-the-original-altair-simulator)
+
 [8 Appendix: Python script for converting MBL files to plain binary files](#appendix-python-script-for-converting-mbl-files-to-plain-binary-files)
+
 [9 Appendix: How to bring up UCSD Pascal II.0 on SIMH](#appendix-how-to-bring-up-ucsd-pascal-ii.0-on-simh)
+
 [10 Vector Graphic, Inc. Simulation](#vector-graphic-inc.-simulation)
+
 [10.1 Overview](#overview)
+
 [10.2 48K Vector MZ](#k-vector-mz)
+
 [10.3 56K Vector MZ](#k-vector-mz-1)
+
 [10.4 56K Vector with HD-FD Controller](#k-vector-with-hd-fd-controller)
+
 [10.5 Notes on Simulated Hardware](#notes-on-simulated-hardware)
+
 [10.6 Notes on the Vector Graphic Disk Image (VGI) File Format](#notes-on-the-vector-graphic-disk-image-vgi-file-format)
+
 [11 IMSAI 8080 Simulation](#imsai-8080-simulation)
+
 [11.1 Overview](#overview-1)
+
 [11.2 IMSAI 8080 with FIF Disk Controller](#imsai-8080-with-fif-disk-controller)
+
 [12 NorthStar MDS-A and MDS-AD FDC Simulation](#northstar-mds-a-and-mds-ad-fdc-simulation)
+
 [12.1 Overview](#overview-2)
+
 [12.2 MDS-A Single Density Disk Controller](#mds-a-single-density-disk-controller)
+
 [12.3 MDS-AD Double Density Disk Controller](#mds-ad-double-density-disk-controller)
+
 [13 Compupro 8-16 Simulation](#compupro-8-16-simulation)
+
 [13.1 Overview](#overview-3)
+
 [13.2 DISK1A High Performance Floppy Disk Controller](#disk1a-high-performance-floppy-disk-controller)
+
 [13.2.1 DISK1A Controller Parameters](#disk1a-controller-parameters)
+
 [13.2.2 DISK1A Controller Limitations](#disk1a-controller-limitations)
+
 [13.3 DISK2 Compupro Hard Disk Controller](#disk2-compupro-hard-disk-controller)
+
 [13.3.1 DISK2 Controller Parameters](#disk2-controller-parameters)
+
 [13.3.2 DISK2 Controller Configuration Registers](#disk2-controller-configuration-registers)
+
 [13.4 SELCHAN Compupro Selector Channel Controller](#selchan-compupro-selector-channel-controller)
+
 [13.4.1 DISK2 Controller Parameters](#disk2-controller-parameters-1)
+
 [13.5 DISK3 Viasyn ST-506 Hard Disk Controller](#disk3-viasyn-st-506-hard-disk-controller)
+
 [13.5.1 DISK3 Controller Parameters](#disk3-controller-parameters)
+
 [13.5.2 DISK3 Controller Configuration Registers](#disk3-controller-configuration-registers)
+
 [13.5.3 DISK3 Controller Limitations](#disk3-controller-limitations)
+
 [14 Compupro CPU-68K Simulation](#compupro-cpu-68k-simulation)
+
 [14.1 Overview](#overview-4)
+
 [14.2 M68K Registers Added](#m68k-registers-added)
+
 [14.3 M68K Additional Parameters](#m68k-additional-parameters)
+
 [15 Cromemco 4/16/64FDC and CCS-2422 FDC Simulation](#cromemco-41664fdc-and-ccs-2422-fdc-simulation)
+
 [15.1 Overview](#overview-5)
+
 [15.1.1 CROMFDC Controller Parameters](#cromfdc-controller-parameters)
+
 [15.1.2 CROMFDC Controller Configuration Registers](#cromfdc-controller-configuration-registers)
+
 [15.1.3 CROMFDC Controller Limitations](#cromfdc-controller-limitations)
+
 [16 Seattle Computer Products Simulation](#seattle-computer-products-simulation)
+
 [16.1 Overview](#overview-6)
+
 [16.2 SCP300F CPU Support Board](#scp300f-cpu-support-board)
+
 [16.2.1 SCP300F Parameters](#scp300f-parameters)
+
 [16.2.2 SCP300F Configuration Registers](#scp300f-configuration-registers)
+
 [16.2.3 SCP300F Limitations](#scp300f-limitations)
+
 [16.3 TDD – Tarbell Double-Density Controller](#tdd-tarbell-double-density-controller)
+
 [16.3.1 TDD Parameters](#tdd-parameters)
+
 [16.3.2 TDD Configuration Registers](#tdd-configuration-registers)
+
 [16.3.3 TDD Limitations](#tdd-limitations)
+
 [16.4 DJHDC – Morrow HDC / DMA Hard Disk Controller](#djhdc-morrow-hdc-dma-hard-disk-controller)
+
 [16.4.1 DJHDC Controller Parameters](#djhdc-controller-parameters)
+
 [16.4.2 DJHDC Controller Configuration Registers](#djhdc-controller-configuration-registers)
+
 [16.4.3 DJHDC Controller Limitations](#djhdc-controller-limitations)
+
 [17 Tarbell MDL-1011/2022 Floppy Disk Interface Simulation](#tarbell-mdl-10112022-floppy-disk-interface-simulation)
+
 [17.1 Overview](#overview-7)
+
 [17.1.1 TARBELL Controller Parameters](#tarbell-controller-parameters)
+
 [17.1.2 TARBELL Example Usage](#tarbell-example-usage)
+
 [17.1.3 TARBELL Controller Limitations](#tarbell-controller-limitations)
+
 [18 JADE Double D Floppy Disk Controller Simulation](#jade-double-d-floppy-disk-controller-simulation)
+
 [18.1 Overview](#overview-8)
+
 [18.1.1 JADE Double D Controller Parameters](#jade-double-d-controller-parameters)
+
 [18.1.2 JADEDD Example Usage](#jadedd-example-usage)
+
 [18.1.3 JADE Double D Controller Limitations](#jade-double-d-controller-limitations)
+
 [19 iCOM FD3712/FD3812 Flexible Disk System Simulation](#icom-fd3712fd3812-flexible-disk-system-simulation)
+
 [19.1 Overview](#overview-9)
+
 [19.1.1 iCOM FD3712/FD3812 Flexible Disk System Parameters](#icom-fd3712fd3812-flexible-disk-system-parameters)
+
 [19.1.2 iCOM Example Usage](#icom-example-usage)
+
 [20 Morrow DISK JOCKEY 2D Disk Controller Simulation](#morrow-disk-jockey-2d-disk-controller-simulation)
+
 [20.1 Overview](#overview-10)
+
 [20.1.1 DJ2D Parameters](#dj2d-parameters)
+
 [20.1.2 DJ2D Example Usage](#dj2d-example-usage)
+
 [20.1.3 DJ2D Simulator Limitations](#dj2d-simulator-limitations)
+
 [21 Advanced Digital Corporation Simulation](#advanced-digital-corporation-simulation)
+
 [21.1 ADC Super-Six Single-Board Computer](#adc-super-six-single-board-computer)
+
 [21.1.1 ADCS6 SBC Overview](#adcs6-sbc-overview)
+
 [21.1.2 ADCS6 SBC Parameters](#adcs6-sbc-parameters)
+
 [21.1.3 ADCS6 SBC Configuration Registers](#adcs6-sbc-configuration-registers)
+
 [21.1.4 ADCS6 SBC Limitations](#adcs6-sbc-limitations)
+
 [21.2 ADCHD – Advanced Digital HDC-1001 Hard Disk Controller](#adchd-advanced-digital-hdc-1001-hard-disk-controller)
+
 [21.2.1 ADCHD Controller Parameters](#adchd-controller-parameters)
+
 [21.2.2 ADCHD Controller Configuration Registers](#adchd-controller-configuration-registers)
+
 [21.2.3 ADCHD Controller Limitations](#adchd-controller-limitations)
+
 [22 N8VEM Single Board Computer Simulation](#n8vem-single-board-computer-simulation)
+
 [22.1 Overview](#overview-11)
+
 [22.1.1 N8VEM SBC Parameters](#n8vem-sbc-parameters)
+
 [22.1.2 N8VEM SBC Configuration Registers](#n8vem-sbc-configuration-registers)
+
 [22.1.3 N8VEM SBC Limitations](#n8vem-sbc-limitations)
+
 [23 Morrow Micro Decision (MD) Computer Simulation](#morrow-micro-decision-md-computer-simulation)
+
 [23.1 Overview](#overview-12)
+
 [23.1.1 Morrow MD Parameters](#morrow-md-parameters)
+
 [23.1.2 Morrow MD Configuration Registers](#morrow-md-configuration-registers)
+
 [23.1.3 Morrow MD Limitations](#morrow-md-limitations)
+
 [23.1.4 Morrow MD Example Usage](#morrow-md-example-usage)
+
 [24 Processor Technology Sol-20 Terminal Computer Simulation](#processor-technology-sol-20-terminal-computer-simulation)
+
 [24.1 Overview](#overview-13)
+
 [24.1.1 Sol-20 Parameters](#sol-20-parameters)
+
 [24.1.2 Sol-20 Configuration Registers](#sol-20-configuration-registers)
+
 [24.1.3 Sol-20 Keyboard](#sol-20-keyboard)
+
 [24.1.4 Sol-20 Example Usage](#sol-20-example-usage)
+
 [24.1.5 Sol-20 ENT Files](#sol-20-ent-files)
+
 [25 Josh Bensadon’s JAIR Single Board Computer Simulation](#josh-bensadons-jair-single-board-computer-simulation)
+
 [25.1 Overview](#overview-14)
+
 [25.1.1 JAIR Parameters](#jair-parameters)
+
 [25.1.2 JAIR Configuration Registers](#jair-configuration-registers)
+
 [25.1.3 JAIR Example Usage](#jair-example-usage)
+
 [25.1.4 JAIR Caveats](#jair-caveats)
+
 [25.1.5 JAIR File Repository](#jair-file-repository)
+
 [26 PMMI MM-103 MODEM and Communications Adapter](#pmmi-mm-103-modem-and-communications-adapter)
+
 [26.1 Overview](#overview-15)
+
 [26.1.1 PMMI Device Parameters](#pmmi-device-parameters)
+
 [26.1.2 PMMI Example Usage](#pmmi-example-usage)
+
 [26.1.3 PMMI and SIMH Timing](#pmmi-and-simh-timing)
+
 [27 Hayes Micromodem 100](#hayes-micromodem-100)
+
 [27.1 Overview](#overview-16)
+
 [27.1.1 HAYES Device Parameters](#hayes-device-parameters)
+
 [27.1.2 HAYES Example Usage](#hayes-example-usage)
+
 [27.1.3 HAYES and SIMH Timing](#hayes-and-simh-timing)
+
 [28 ImageDisk (IMD) Disk Image Support in SIMH](#imagedisk-imd-disk-image-support-in-simh)
+
 [28.1 Overview](#overview-17)
+
 [28.2 References](#references)
+
 [CP/M-68K Simulation](#cpm-68k-simulation)
+
 [2 Revision History](#revision-history)
 
 This memorandum documents the Altair 8800 Simulator.
@@ -301,19 +463,13 @@ Bus.
 We are simulating a fairly "loaded" Altair 8800 from about 1977, with
 the following configuration:
 
-**CPU** Altair 8800 with Intel 8080 CPU board 62KB of RAM, 2K of EPROM
-with start boot ROM.
-
-**SIO** MITS 88-2SIO Dual Serial Interface Board. Port 1 is assumed to
-be connected to a serial "glass TTY" that is your terminal running the
-simulator.
-
-**PTR** Paper Tape Reader attached to port 2 of the 2SIO board.
-
-**PTP** Paper Tape Punch attached to port 2 of the 2SIO board. This also
-doubles as a printer port.
-
-**DSK** MITS 88-DISK Floppy Disk controller with up to eight drives.
+| device name | simulates |
+|-------------|-----------|
+| `CPU` | Altair 8800 with Intel 8080 CPU board 62KB of RAM, 2K of EPROM with start boot ROM. |
+| `SIO` | MITS 88-2SIO Dual Serial Interface Board. Port 1 is assumed to be connected to a serial "glass TTY" that is your terminal running the simulator. |
+| `PTR` | Paper Tape Reader attached to port 2 of the 2SIO board. |
+| `PTP` | Paper Tape Punch attached to port 2 of the 2SIO board. This also doubles as a printer port. |
+| `DSK` | MITS 88-DISK Floppy Disk controller with up to eight drives. |
 
 ## CPU
 
@@ -323,129 +479,51 @@ sizes, but be aware that some sample software requires the full 64K
 (i.e. CP/M) and the MITS Disk Basic and Altair DOS require about a
 minimum of 24K.
 
-SET CPU 8080 Simulates the 8080 CPU (default)
-
-SET CPU Z80 Simulates the Z80 CPU. Note that some software (e.g. most
-original Altair software such as 4K Basic) requires an 8080 CPU and will
-not or not properly run on a Z80. This is mainly due to the use of the
-parity flag on the 8080 which has not always the same semantics on the
-Z80.
-
-SET CPU 8086 Simulates 8086 CPU. This also enables 1’024 KB of memory by
-default.
-
-SET CPU M68K Simulates Motorola M68000 CPU. This also enables 16 MB of
-memory by default. After the M68K CPU type has been selected, the
-specific variant can be set.
-
-SET CPU 68000 Sets the M68K CPU Variant to 68000.
-
-SET CPU 68010 Sets the M68K CPU Variant to 68010.
-
-SET CPU 68020 Sets the M68K CPU Variant to 68020.
-
-SET CPU 68030 Sets the M68K CPU Variant to 68030.
-
-SET CPU 68040 Sets the M68K CPU Variant to 68040.
-
-SET CPU ITRAP Causes the simulator to halt if an invalid opcode is
-detected (depending on the chosen CPU).
-
-SET CPU NOITRAP Does not stop on an invalid opcode. This is how the real
-8080 works. Note that some software such as 4K Basic apparently tries to
-execute nonexistent 8080 instructions. Therefore it is advisable in this
-case to SET CPU NOITRAP.
-
-SET CPU 4K
-
-SET CPU 8K
-
-SET CPU 12K
-
-SET CPU 16K
-
-… (in 4K steps)
-
-SET CPU 64K All these set various CPU memory configurations, resets all
-internal memory to 0 and also resets the Memory Management Unit (MMU)
-such that all memory pages are RAM.
-
-SET CPU MEMORY=\<nnn\>K Sets the memory to \<nnn\> kilo bytes, resets
-all internal memory to 0 and also resets the Memory Management Unit
-(MMU) such that all memory pages are RAM.
-
-SET CPU BANKED Enables the banked memory support. The simulated memory
-has eight banks with address range 0..’COMMON’ (see registers below) and
-a common area from ‘COMMON’ to 0FFFF which is common to all banks. The
-currently active bank is determined by register 'BANK' (see below). You
-can only switch to banked memory if the memory is set to 64K. The banked
-memory is used by CP/M 3.
-
-SET CPU NONBANKED Disables banked memory support.
-
-SET CPU CLEARMEMORY Resets all internal memory to 0 and also resets the
-Memory Management Unit (MMU) such that all memory pages are RAM. Note
-that resetting the CPU does only clear the CPU registers but not the
-memory nor the MMU.
-
-SET CPU RESIZEMEMORY=\<nnn\>K Resets all internal memory to 0 but does
-not reset the Memory Management Unit (MMU) such that all memory pages
-are RAM.
-
-SET CPU ALTAIRROM Enables the slightly modified but downwards compatible
-Altair boot ROM at addresses 0FF00 to 0FFFF. This is the default.
-
-SET CPU NOALTAIRROM Disables standard Altair ROM behavior.
-
-SET CPU MMU Enables the Memory Management Unit (MMU) and clock frequency
-support.
-
-SET CPU NOMMU Disables the Memory Management Unit (MMU) and clock
-frequency support. The simulator will run with maximum speed which can
-be more than twice the speed as with MMU enabled. This feature is only
-available for the Z80 and 8080 CPU using 64 KB.
-
-SET CPU AZ80 Sets the RAM type to AltairZ80 RAM for 8080 / Z80 / 8086.
-
-SET CPU HRAM Sets the RAM type to NorthStar HRAM for 8080 / Z80 / 8086.
-
-SET CPU VRAM Sets the RAM type to Vector RAM for 8080 / Z80 / 8086.
-
-SET CPU CRAM Sets the RAM type to Cromemco RAM for 8080 / Z80 / 8086.
-
-SET CPU SWITCHER Sets the CPU switcher port for 8080 / Z80 / 8086 from
-the CPU pseudo-register SWITCHERPORT.
-
-SET CPU NOSWITCHER Resets the CPU switcher port for 8080 / Z80 / 8086.
-
-SET CPU VERBOSE Enables warning messages to be printed when the CPU
-attempts to write into ROM or into non-existing memory. Also prints a
-warning message if the CPU attempts to read from non-existing memory.
-Also shows the status of the MMU.
-
-SET CPU QUIET Suppresses all warning messages.
-
-SET CPU PO Enable Port 0xFF Programmed Output messages.
-
-SET CPU NOPO Disable Port 0xFF Programmed Output messages.
-
-SET CPU STOPONHALT Z80 or 8080 CPU stops when HALT instruction is encountered.
-
-SET CPU LOOPONHALT Z80 or 8080 CPU does not stop when a HALT instruction
-is encountered but waits for an interrupt to occur.
-
-SET CPU HISTORY Clears CPU instruction history buffer (8080 and Z80).
-
-SET CPU HISTORY=0 Disables CPU instruction history (8080 and Z80).
-
-SET CPU HISTORY=\<n\> Enables CPU instruction history buffer with a size
-of \<n\> (8080 and Z80).
-
-SHOW CPU HISTORY Displays CPU instruction history buffer in CP/M DDT
-format (8080 and Z80).
-
-SHOW CPU HISTORY=\<n\> Displays last \<n\> entries of the CPU
-instruction history buffer in CP/M DDT format (8080 and Z80).
+| command | action |
+|---------|--------|
+| `SET CPU 8080` | Simulates the 8080 CPU (default) |
+| `SET CPU Z80` | Simulates the Z80 CPU. Note that some software (e.g. most original Altair software such as 4K Basic) requires an 8080 CPU and will not or not properly run on a Z80. This is mainly due to the use of the parity flag on the 8080 which has not always the same semantics on the Z80. |
+| `SET CPU 8086` | Simulates 8086 CPU. This also enables 1’024 KB of memory by default. |
+| `SET CPU M68K` | Simulates Motorola M68000 CPU. This also enables 16 MB of memory by default. After the M68K CPU type has been selected, the specific variant can be set. |
+| `SET CPU 68000` | Sets the M68K CPU Variant to 68000. |
+| `SET CPU 68010` | Sets the M68K CPU Variant to 68010. |
+| `SET CPU 68020` | Sets the M68K CPU Variant to 68020. |
+| `SET CPU 68030` | Sets the M68K CPU Variant to 68030. |
+| `SET CPU 68040` | Sets the M68K CPU Variant to 68040. |
+| `SET CPU ITRAP` | Causes the simulator to halt if an invalid opcode is detected (depending on the chosen CPU). |
+| `SET CPU NOITRAP` | Does not stop on an invalid opcode. This is how the real 8080 works. Note that some software such as 4K Basic apparently tries to execute nonexistent 8080 instructions. Therefore it is advisable in this case to `SET CPU NOITRAP`. |
+| `SET CPU 4K` |  |
+| `SET CPU 8K` |  |
+| `SET CPU 12K` |  |
+| `SET CPU 16K` |  |
+| `... (in 4K steps)` |  |
+| `SET CPU 64K` | All these set various CPU memory configurations, resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. |
+| `SET CPU MEMORY=\<nnn\>K` | Sets the memory to `<nnn>` kilo bytes, resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. |
+| `SET CPU BANKED` | Enables the banked memory support. The simulated memory has eight banks with address range 0..’COMMON’ (see registers below) and a common area from ‘COMMON’ to 0FFFF which is common to all banks. The currently active bank is determined by register 'BANK' (see below). You can only switch to banked memory if the memory is set to 64K. The banked memory is used by CP/M 3. |
+| `SET CPU NONBANKED` | Disables banked memory support. |
+| `SET CPU CLEARMEMORY` | Resets all internal memory to 0 and also resets the Memory Management Unit (MMU) such that all memory pages are RAM. Note that resetting the CPU does only clear the CPU registers but not the memory nor the MMU. |
+| `SET CPU RESIZEMEMORY=\<nnn\>K` | Resets all internal memory to 0 but does not reset the Memory Management Unit (MMU) such that all memory pages are RAM. |
+| `SET CPU ALTAIRROM` | Enables the slightly modified but downwards compatible Altair boot ROM at addresses 0FF00 to 0FFFF. This is the default. |
+| `SET CPU NOALTAIRROM` | Disables standard Altair ROM behavior. |
+| `SET CPU MMU` | Enables the Memory Management Unit (MMU) and clock frequency support. |
+| `SET CPU NOMMU` | Disables the Memory Management Unit (MMU) and clock frequency support. The simulator will run with maximum speed which can be more than twice the speed as with MMU enabled. This feature is only available for the Z80 and 8080 CPU using 64 KB. |
+| `SET CPU AZ80` | Sets the RAM type to AltairZ80 RAM for 8080 / Z80 / 8086. |
+| `SET CPU HRAM` | Sets the RAM type to NorthStar HRAM for 8080 / Z80 / 8086. |
+| `SET CPU VRAM` | Sets the RAM type to Vector RAM for 8080 / Z80 / 8086. |
+| `SET CPU CRAM` | Sets the RAM type to Cromemco RAM for 8080 / Z80 / 8086. |
+| `SET CPU SWITCHER` | Sets the CPU switcher port for 8080 / Z80 / 8086 from the CPU pseudo-register SWITCHERPORT. |
+| `SET CPU NOSWITCHER` | Resets the CPU switcher port for 8080 / Z80 / 8086. |
+| `SET CPU VERBOSE` | Enables warning messages to be printed when the CPU attempts to write into ROM or into non-existing memory. Also prints a warning message if the CPU attempts to read from non-existing memory. Also shows the status of the MMU. |
+| `SET CPU QUIET` | Suppresses all warning messages. |
+| `SET CPU PO` | Enable Port 0xFF Programmed Output messages. |
+| `SET CPU NOPO` | Disable Port 0xFF Programmed Output messages. |
+| `SET CPU STOPONHALT` | Z80 or 8080 CPU stops when HALT instruction is encountered. |
+| `SET CPU LOOPONHALT` | Z80 or 8080 CPU does not stop when a HALT instruction is encountered but waits for an interrupt to occur. |
+| `SET CPU HISTORY` | Clears CPU instruction history buffer (8080 and Z80). |
+| `SET CPU HISTORY=0` | Disables CPU instruction history (8080 and Z80). |
+| `SET CPU HISTORY=\<n\>` | Enables CPU instruction history buffer with a size of `<n>` (8080 and Z80). |
+| `SHOW CPU HISTORY` | Displays CPU instruction history buffer in CP/M DDT format (8080 and Z80). |
+| `SHOW CPU HISTORY=\<n\>` | Displays last `<n>` entries of the CPU instruction history buffer in CP/M DDT format (8080 and Z80). |
 
 The BOOT EPROM card starts at address 0FF00 if it has been enabled by
 'SET CPU ALTAIRROM'. Jumping to this address will boot drive 0 of the
@@ -457,11 +535,10 @@ crashes. This is historically accurate behavior.
 
 CPU registers include the following for the Z80 / 8080:
 
-**Name Size Comment**
-
-PC 20 The Program Counter for the 8080 and Z80
-
-AF 16 The accumulator (8 bits) and the flag register
+| name | size | comment |
+|------|------|---------|
+| `PC` | 20 | The Program Counter for the 8080 and Z80 |
+| `AF` | 16 | The accumulator (8 bits) and the flag register |
 
 F = S Z - AC - P/V N C
 
@@ -481,126 +558,61 @@ N = Internal sign flag
 
 C = Carry flag.
 
-BC 16 The BC register pair.
-
-Register B is the high 8 bits, C is the lower 8 bits
-
-DE 16 The DE register pair.
-
-Register D is the high 8 bits, E is the lower 8 bits.
-
-HL 16 The HL register pair.
-
-Register H is the high 8 bits, L is the lower 8 bits.
-
-AF1 16 The alternate AF register (on Z80 only)
-
-BC1 16 The alternate BC register (on Z80 only)
-
-DE1 16 The alternate DE register (on Z80 only)
-
-HL1 16 The alternate HL register (on Z80 only)
-
-IX 16 The IX index register (on Z80 only)
-
-IY 16 The IY index register (on Z80 only)
-
-IFF 8 Interrupt flag (on Z80 only)
-
-IR 8 Interrupt register (on Z80 only)
-
-SR 8 The front panel switches (use D SR 8 for 4k Basic).
-
-WRU 8 The interrupt character. This starts as 5 (Control-E) but some
-Altair software uses this keystroke so best to change this to something
-exotic such as 1D (which is Control‑\]). But make sure you can actually
-create this character via the keyboard.
-
-BANK 3 The currently active memory bank (if banked memory is activated - see memory options above)
-
-COMMON 16 The starting address of common memory. Originally set to 0C000
-(note this setting must agree with the value supplied to GENCPM for CP/M
-3 system generation)
-
-COMMONLOW 1 When set to 1, the common area is in low RAM. When set to 0
-(the default,) the common area is in high RAM. The OASIS operating
-system requires this set to 1.
-
-PCQ 16 x 64 Circular buffer of the last 64 PC jump targets. This can be
-viewed with “e pcq\[0-63\]”.
-
-PCQP 16 The head index of the circular buffer
-
-CLOCK 32 The clock speed of the simulated CPU (8080 / Z80) in kHz or 0
-to run at maximum speed. To set the clock speed for a typical 4 MHz Z80
-CPU, use D CLOCK 4000. The CP/M utility SPEED measures the clock speed
-of the simulated CPU.
-
-SLICE 16 The slice length in milliseconds for the clock speed
-simulation. The default is 10 ms.
-
-TSTATES 32 The number of executed t-states (8080 / Z80) – read only.
-
-CAPACITY 32 Capacity of the RAM – read only. Use the SET commands above
-to set the memory capacity.
-
-PREVCAP 32 The previous capacity of the RAM – read only.
-
-SWITCHERPORT The 8-bit port number of the CPU switcher port. The default is FD.
+| `BC` | 16 | The BC register pair.<br>Register B is the high 8 bits, C is the lower 8 bits |
+| `DE` | 16 | The DE register pair.<br>Register D is the high 8 bits, E is the lower 8 bits. |
+| `HL` | 16 | The HL register pair.<br>Register H is the high 8 bits, L is the lower 8 bits. |
+| `AF1` | 16 | The alternate AF register (on Z80 only) |
+| `BC1` | 16 | The alternate BC register (on Z80 only) |
+| `DE1` | 16 | The alternate DE register (on Z80 only) |
+| `HL1` | 16 | The alternate HL register (on Z80 only) |
+| `IX` | 16 | The IX index register (on Z80 only) |
+| `IY` | 16 | The IY index register (on Z80 only) |
+| `IFF` | 8 | Interrupt flag (on Z80 only) |
+| `IR` | 8 | Interrupt register (on Z80 only) |
+| `SR` | 8 | The front panel switches (use `D SR 8` for 4k Basic). |
+| `WRU` | 8 | The interrupt character. This starts as 5 (Control-E) but some Altair software uses this keystroke so best to change this to something exotic such as 1D (which is Control‑\]). But make sure you can actually create this character via the keyboard. |
+| `BANK` | 3 | The currently active memory bank (if banked memory is activated - see memory options above) |
+| `COMMON` | 16 | The starting address of common memory. Originally set to 0C000 (note this setting must agree with the value supplied to GENCPM for CP/M 3 system generation) |
+| `COMMONLOW` | 1 | When set to 1, the common area is in low RAM. When set to 0 (the default,) the common area is in high RAM. The OASIS operating system requires this set to 1. |
+| `PCQ` | 16 x 64 | Circular buffer of the last 64 PC jump targets. This can be viewed with `e pcq[0-63]`. |
+| `PCQP` | 16 | The head index of the circular buffer |
+| `CLOCK` | 32 | The clock speed of the simulated CPU (8080 / Z80) in kHz or 0 to run at maximum speed. To set the clock speed for a typical 4 MHz Z80 CPU, use `D CLOCK 4000`. The CP/M utility `SPEED` measures the clock speed of the simulated CPU. |
+| `SLICE` | 16 | The slice length in milliseconds for the clock speed simulation. The default is 10 ms. |
+| `TSTATES` | 32 | The number of executed t-states (8080 / Z80) – read only. |
+| `CAPACITY` | 32 | Capacity of the RAM – read only. Use the `SET` commands above to set the memory capacity. |
+| `PREVCAP` | 32 | The previous capacity of the RAM – read only. |
+| `SWITCHERPORT` | 8 | The 8-bit port number of the CPU switcher port. The default is FD. |
 
 ### Registers for the 8086
 
 CPU registers include the following for the 8086:
 
-**Name Size Comment**
-
-AX 16 AX general purpose register
-
-AL 8 low 8 bits of AX
-
-AH 8 high 8 bits of AX
-
-BX 16 BX general purpose register
-
-BL 8 low 8 bits of BX
-
-BH 8 high 8 bits of BX
-
-CX 16 CX general purpose register
-
-CL 8 low 8 bits of CX
-
-CH 8 high 8 bits of CX
-
-DX 16 DX general purpose register
-
-DL 8 low 8 bits of DX
-
-DH 8 high 8 bits of DX
-
-BP 16 Base Pointer
-
-SI 16 Source Index
-
-DI 16 Destination Index
-
-SP86 16 Stack Pointer
-
-CS 16 Code Segment
-
-DS 16 Data Segment
-
-ES 16 Extra Segment
-
-SS 16 Stack Segment
-
-PCX 20 virtual 20-bit program counter
-
-SPX 16 Stack Pointer
-
-IP 16 Instruction Pointer, read-only, to set use PCX which allows 20 bit addresses
-
-FLAGS 16 Flags
+| name | size | comment |
+|------|------|---------|
+| `AX` | 16 | AX general purpose register |
+| `AL` | 8 | low 8 bits of AX |
+| `AH` | 8 | high 8 bits of AX |
+| `BX` | 16 | BX general purpose register |
+| `BL` | 8 | low 8 bits of BX |
+| `BH` | 8 | high 8 bits of BX |
+| `CX` | 16 | CX general purpose register |
+| `CL` | 8 | low 8 bits of CX |
+| `CH` | 8 | high 8 bits of CX |
+| `DX` | 16 | DX general purpose register |
+| `DL` | 8 | low 8 bits of DX |
+| `DH` | 8 | high 8 bits of DX |
+| `BP` | 16 | Base Pointer |
+| `SI` | 16 | Source Index |
+| `DI` | 16 | Destination Index |
+| `SP86` | 16 | Stack Pointer |
+| `CS` | 16 | Code Segment |
+| `DS` | 16 | Data Segment |
+| `ES` | 16 | Extra Segment |
+| `SS` | 16 | Stack Segment |
+| `PCX` | 20 | virtual 20-bit program counter |
+| `SPX` | 16 | Stack Pointer |
+| `IP` | 16 | Instruction Pointer, read-only, to set use PCX which allows 20 bit addresses |
+| `FLAGS` | 16 | Flags |
 
 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00
 
@@ -628,43 +640,26 @@ CF = Carry Flag
 
 CPU registers include the following for the MC68000
 
-**Name Size Comment**
-
-M68K_D0 32 D0 – general purpose data register
-
-M68K_D1 32 D1 – general purpose data register
-
-M68K_D2 32 D2 – general purpose data register
-
-M68K_D3 32 D3 – general purpose data register
-
-M68K_D4 32 D4 – general purpose data register
-
-M68K_D5 32 D5 – general purpose data register
-
-M68K_D6 32 D6 – general purpose data register
-
-M68K_D7 32 D7 – general purpose data register
-
-M68K_A0 32 A0 – general purpose address register
-
-M68K_A1 32 A1 – general purpose address register
-
-M68K_A2 32 A2 – general purpose address register
-
-M68K_A3 32 A3 – general purpose address register
-
-M68K_A4 32 A4 – general purpose address register
-
-M68K_A5 32 A5 – general purpose address register
-
-M68K_A6 32 A6 – general purpose address register
-
-M68K_A7 32 A7 – general purpose address register
-
-M68K_PC 32 PC – program counter
-
-M68K_SR 32 SR – status register
+| name | size | comment |
+|------|------|---------|
+| `M68K_D0` | 32 | D0 – general purpose data register |
+| `M68K_D1` | 32 | D1 – general purpose data register |
+| `M68K_D2` | 32 | D2 – general purpose data register |
+| `M68K_D3` | 32 | D3 – general purpose data register |
+| `M68K_D4` | 32 | D4 – general purpose data register |
+| `M68K_D5` | 32 | D5 – general purpose data register |
+| `M68K_D6` | 32 | D6 – general purpose data register |
+| `M68K_D7` | 32 | D7 – general purpose data register |
+| `M68K_A0` | 32 | A0 – general purpose address register |
+| `M68K_A1` | 32 | A1 – general purpose address register |
+| `M68K_A2` | 32 | A2 – general purpose address register |
+| `M68K_A3` | 32 | A3 – general purpose address register |
+| `M68K_A4` | 32 | A4 – general purpose address register |
+| `M68K_A5` | 32 | A5 – general purpose address register |
+| `M68K_A6` | 32 | A6 – general purpose address register |
+| `M68K_A7` | 32 | A7 – general purpose address register |
+| `M68K_PC` | 32 | PC – program counter |
+| `M68K_SR` | 32 | SR – status register |
 
 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00
 
@@ -694,39 +689,23 @@ V = Overflow
 
 C = Carry
 
-M68K_SP 32 SP – stack pointer (located in A7)
-
-M68K_USP 32 USP – user stack pointer
-
-M68K_ISP 32 ISP – interrupt stack pointer
-
-M68K_MSP 32 MSP – master stack pointer
-
-M68K_SFC 32 SFC – source function code register
-
-M68K_DFC 32 DFC – destination function code register
-
-M68K_VBR 32 VBR – vector base register
-
-M68K_CACR 32 CACR – cache control register
-
-M68K_CAAR 32 CAAR – cache address register
-
-M68K_PREF_ADDR 32 last prefetch address
-
-M68K_PREF_DATA 32 last prefetch data
-
-M68K_PPC 32 PPC – previous value of program counter
-
-M68K_IR 32 IR – instruction register
-
-M68K_CPU_TYPE 32 CPU type (read only), 1 for MC68000
-
-MMIOBASE 24 Memory Mapped I/O Base Address
-
-MMIOSIZE 17 Memory Mapped I/O Size
-
-M68KVAR 17 M68K CPU Type
+| `M68K_SP` | 32 | SP – stack pointer (located in A7) |
+| `M68K_USP` | 32 | USP – user stack pointer |
+| `M68K_ISP` | 32 | ISP – interrupt stack pointer |
+| `M68K_MSP` | 32 | MSP – master stack pointer |
+| `M68K_SFC` | 32 | SFC – source function code register |
+| `M68K_DFC` | 32 | DFC – destination function code register |
+| `M68K_VBR` | 32 | VBR – vector base register |
+| `M68K_CACR` | 32 | CACR – cache control register |
+| `M68K_CAAR` | 32 | CAAR – cache address register |
+| `M68K_PREF_ADDR` | 32 | last prefetch address |
+| `M68K_PREF_DATA` | 32 | last prefetch data |
+| `M68K_PPC` | 32 | PPC – previous value of program counter |
+| `M68K_IR` | 32 | IR – instruction register |
+| `M68K_CPU_TYPE` | 32 | CPU type (read only), 1 for MC68000 |
+| `MMIOBASE` | 24 | Memory Mapped I/O Base Address |
+| `MMIOSIZE` | 17 | Memory Mapped I/O Size |
+| `M68KVAR` | 17 | M68K CPU Type |
 
 The CPU device supports the following debug flags (set with “SET CPU
 DEBUG=f1{;f}” or “SET CPU DEBUG” to enable all of them)
@@ -752,73 +731,36 @@ considered a simple stream of 8-bit bytes.
 
 The SIO can be configured in SIMH with the following commands:
 
-SET SIO ANSI Bit 8 is set to zero on console output
+| command | action |
+|---------|--------|
+| `SET SIO ANSI` | Bit 8 is set to zero on console output |
+| `SET SIO TTY` | Bit 8 is not touched on console output |
+| `SET SIO ALL` | Console input remain unchanged |
+| `SET SIO UPPER` | Console input is transformed to upper case characters only (This feature is useful for most Altair software). `SET SIO MAP` must also have been executed for this option to take effect - otherwise no mapping occurs. |
+| `SET SIO BS` | Map the delete character to backspace `SET SIO MAP` must also have been executed for this option to take effect - otherwise no mapping occurs. |
+| `SET SIO DEL` | Map the backspace character to delete `SET SIO MAP` must also have been executed for this option to take effect - otherwise no mapping occurs. |
+| `SET SIO QUIET` | Do not print warning messages |
+| `SET SIO VERBOSE` | Print warning messages (useful for debugging) The register `SIOWLEV` determines how often the same warning is displayed. The default is 3. |
+| `SET SIO MAP` | Enable mapping of characters (see also `SET SIO ALL/UPPER/BS/DEL`) |
+| `SET SIO NOMAP` | Disable mapping of characters (see also `SET SIO ALL/UPPER/BS/DEL`) |
+| `SET SIO BELL` | Displaying ^G (Control-G) sounds the bell |
+| `SET SIO NOBELL` | Do not display ^G (Control-G, bell character. This feature is useful when a simulated program makes excessive use of the bell character. Furthermore, the `SHOW` command prints more information. |
+| `SET SIO INTERRUPT` | Status port 0 creates an interrupt when a character becomes available. The handler is at SIO register `KEYBDH`. |
+| `SET SIO NOINTERRUPT` | Status port 0 does not create interrupts. |
+| `SET SIO SLEEP` | Sleeps for `SLEEP` milliseconds after a keyboard status check where no character was available. This is useful in many operating systems to avoid high real CPU usage in busy wait loops. Use “D SLEEP `<n>`” to change the number of milliseconds – the default value is 1. |
+| `SET SIO NOSLEEP` | Do not sleep after unsuccessful keyboard status checks. |
+| `SET SIO PORT=Port/Terminal/Read/NotRead/Write/Reset/Reset/Data` |  |
 
-SET SIO TTY Bit 8 is not touched on console output
-
-SET SIO ALL Console input remain unchanged
-
-SET SIO UPPER Console input is transformed to upper case characters only
-(This feature is useful for most Altair software). SET SIO MAP must also
-have been executed for this option to take effect - otherwise no mapping
-occurs.
-
-SET SIO BS Map the delete character to backspace SET SIO MAP must also
-have been executed for this option to take effect - otherwise no mapping
-occurs.
-
-SET SIO DEL Map the backspace character to delete SET SIO MAP must also
-have been executed for this option to take effect - otherwise no mapping
-occurs.
-
-SET SIO QUIET Do not print warning messages
-
-SET SIO VERBOSE Print warning messages (useful for debugging) The
-register SIOWLEV determines how often the same warning is displayed. The
-default is 3.
-
-SET SIO MAP Enable mapping of characters (see also SET SIO ALL/UPPER/BS/DEL)
-
-SET SIO NOMAP Disable mapping of characters (see also SET SIO ALL/UPPER/BS/DEL)
-
-SET SIO BELL Displaying ^G (Control-G) sounds the bell
-
-SET SIO NOBELL Do not display ^G (Control-G, bell character. This
-feature is useful when a simulated program makes excessive use of the
-bell character. Furthermore, the SHOW command prints more information.
-
-SET SIO INTERRUPT Status port 0 creates an interrupt when a character
-becomes available. The handler is at SIO register KEYBDH.
-
-SET SIO NOINTERRUPT Status port 0 does not create interrupts.
-
-SET SIO SLEEP Sleeps for SLEEP milliseconds after a keyboard status
-check where no character was available. This is useful in many operating
-systems to avoid high real CPU usage in busy wait loops. Use “D SLEEP
-\<n\>” to change the number of milliseconds – the default value is 1.
-
-SET SIO NOSLEEP Do not sleep after unsuccessful keyboard status checks.
-
-SET SIO PORT=Port/Terminal/Read/NotRead/Write/Reset/Reset/Data
-
-Port: two digit hex address of the new port
-
-Terminal: one digit decimal number of terminal line
-
-Read: two digit hex mask indicating the bit(s) set when a character is available
-
-NotRead: two digit hex mask indicating the bit(s) to set in case no
-character is available
-
-Write: two digit hex mask indicating the bits set when a character can
-be written
-
-Reset: T (port has reset command) or F (port has no reset command)
-
-Reset: two digit hex value of the reset command
-
-Data: T (port accepts OUT, i.e. is a data port) or F (port only has IN,
-i.e. is a status port).
+| field | meaning |
+|-------|---------|
+| `Port` | two digit hex address of the new port |
+| `Terminal` | one digit decimal number of terminal line |
+| `Read` | two digit hex mask indicating the bit(s) set when a character is available |
+| `NotRead` | two digit hex mask indicating the bit(s) to set in case no character is available |
+| `Write` | two digit hex mask indicating the bits set when a character can be written |
+| `Reset` | `T` (port has reset command) or `F` (port has no reset command) |
+| `Reset` | two digit hex value of the reset command |
+| `Data` | `T` (port accepts `OUT`, i.e. is a data port) or `F` (port only has `IN`, i.e. is a status port). |
 
 The standard setting for the console / keyboard port is equivalent to
 
@@ -850,11 +792,15 @@ VERBOSE All warning messages (currently: none)
 
 The PTP/PTR can be configured in SIMH with the following command:
 
-SET PTP PORT=StatusPort/DataPort or SET PTR PORT=StatusPort/DataPort
+| command | action |
+|---------|--------|
+| `SET PTP PORT=StatusPort/DataPort` |  |
+| `SET PTR PORT=StatusPort/DataPort` |  |
 
-StatusPort: two digit hex address of the new status port (originally 0x12)
-
-DataPort: two digit hex address of the new data port (originally 0x13)
+| field | meaning |
+|-------|---------|
+| `StatusPort` | two digit hex address of the new status port (originally 0x12) |
+| `DataPort` | two digit hex address of the new data port (originally 0x13) |
 
 The PTP device supports the following debug flags (set with “SET PTP
 DEBUG=f1{;f}” or “SET PTP DEBUG” to enable all of them)
@@ -903,63 +849,40 @@ SET M2SIO1 ENA Enable the second 88-2SIO port (replaces PTP and PTR ports).
 Once enabled, the M2SIO ports can be configured in SIMH with the
 following commands, where ‘x’ is 0 for port 0 and 1 for port 1:
 
-SET M2SIOx IOBASE Sets MITS 2SIO base I/O address.
-
-SET M2SIOx CONSOLE Port checks console for input.
-
-SET M2SIOx NOCONSOLE Port does not check console for input.
-
-SET M2SIOx DTR DTR follows RTS.
-
-SET M2SIOx NODTR DTR does not follow RTS (default).
-
-SET M2SIOx CTS Force CTS active low.
-
-SET M2SIOx NOCTS CTS follows status line (default).
-
-SET M2SIOx DCD Force DCD active low.
-
-SET M2SIOx NODCD DCD follows status line (default).
-
-SET M2SIOx BAUD=val Set baud rate (default=9600).
-
-SET M2SIOx DEBUG Enables debugging for device M2SIOx.
-
-SET M2SIOx NODEBUG Disables debugging for device M2SIOx.
+| command | action |
+|---------|--------|
+| `SET M2SIOx IOBASE` | Sets MITS 2SIO base I/O address. |
+| `SET M2SIOx CONSOLE` | Port checks console for input. |
+| `SET M2SIOx NOCONSOLE` | Port does not check console for input. |
+| `SET M2SIOx DTR` | DTR follows RTS. |
+| `SET M2SIOx NODTR` | DTR does not follow RTS (default). |
+| `SET M2SIOx CTS` | Force CTS active low. |
+| `SET M2SIOx NOCTS` | CTS follows status line (default). |
+| `SET M2SIOx DCD` | Force DCD active low. |
+| `SET M2SIOx NODCD` | DCD follows status line (default). |
+| `SET M2SIOx BAUD=val` | Set baud rate (default=9600). |
+| `SET M2SIOx DEBUG` | Enables debugging for device M2SIOx. |
+| `SET M2SIOx NODEBUG` | Disables debugging for device M2SIOx. |
 
 The M2SIO device implements these registers:
 
-**Name Size Comment**
-
-M2STAx 8 2SIO port x status register
-
-M2CTLx 8 2SIO port x control register
-
-M2RXDx 8 2SIO port x rx data buffer
-
-M2TXDx 8 2SIO port x tx data buffer
-
-M2TXPx 8 2SIO port x tx data pending
-
-M2CONx 1 2SIO port x connection status
-
-M2RIEx 1 2SIO port x receive interrupt enable
-
-M2TIEx 1 2SIO port x transmit interrupt enable
-
-M2RTSx 1 2SIO port x RTS status (active low)
-
-M2RDRFx 1 2SIO port x RDRF status
-
-M2TDREx 1 2SIO port x TDRE status
-
-M2DCDx 1 2SIO port x DCD status (active low)
-
-M2CTSx 1 2SIO port x CTS status (active low)
-
-M2OVRNx 1 2SIO port x OVRN status
-
-M2WAITx 32 2SIO port x wait cycles
+| name | size | comment |
+|------|------|---------|
+| `M2STAx` | 8 | 2SIO port x status register |
+| `M2CTLx` | 8 | 2SIO port x control register |
+| `M2RXDx` | 8 | 2SIO port x rx data buffer |
+| `M2TXDx` | 8 | 2SIO port x tx data buffer |
+| `M2TXPx` | 8 | 2SIO port x tx data pending |
+| `M2CONx` | 1 | 2SIO port x connection status |
+| `M2RIEx` | 1 | 2SIO port x receive interrupt enable |
+| `M2TIEx` | 1 | 2SIO port x transmit interrupt enable |
+| `M2RTSx` | 1 | 2SIO port x RTS status (active low) |
+| `M2RDRFx` | 1 | 2SIO port x RDRF status |
+| `M2TDREx` | 1 | 2SIO port x TDRE status |
+| `M2DCDx` | 1 | 2SIO port x DCD status (active low) |
+| `M2CTSx` | 1 | 2SIO port x CTS status (active low) |
+| `M2OVRNx` | 1 | 2SIO port x OVRN status |
+| `M2WAITx` | 32 | 2SIO port x wait cycles |
 
 ### Using the M2SIO device with serial ports
 
